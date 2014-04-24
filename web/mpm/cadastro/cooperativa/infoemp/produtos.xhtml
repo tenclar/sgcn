@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <p:fieldset id="panelProdutos" legend="Produtos Oferecidos no Mercado"   style="margin: 0 auto; " >
+        <h:panelGrid id="insPanelProdutos" columns="4"  >
+            <h:outputLabel value=" " />
+            <h:panelGrid columns="2">                                        
+                <h:outputLabel value="Produto:" />                                        
+                <p:message for="planolistaProdutos" display="icon"  />                                        
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value= "Valor: " />
+                <p:message for="planoValor" display="icon" />                                        
+            </h:panelGrid>                                     
+
+            <h:outputLabel value=" " />
+            <p:commandButton value="+" oncomplete="dlgProduto.show()" process="@this" action="#{produtoBean.newProduto}" update=":frmProduto" /> 
+            <p:selectOneMenu id="planolistaProdutos"  style="width: 240px" value="#{planoBean.produtos.produto}" converter="IndexedConverter"  required="true" label="Lista de Produto"  >
+                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                <f:selectItems value="#{produtoBean.selectItemsProduto}" />
+            </p:selectOneMenu>
+
+            <p:inputText id="planoValor" autocomplete="off" value="#{planoBean.produtos.valor}" onkeypress="mascara(this, valor)" size="5" rendered="true" label="Valor" >
+                <f:convertNumber pattern="##,##0.00#"  />
+
+            </p:inputText>
+
+            <p:commandButton value="Inserir" process="panelProdutos" update="insPanelProdutos dtProdutos :messages" actionListener="#{planoBean.addProduto}" />
+
+        </h:panelGrid>                               
+
+        <p:outputPanel id="dtProdutos" >
+
+            <p:dataTable  value="#{planoBean.listaProdutos}" var="item" emptyMessage="${msg.lista_vasia}" >
+                <p:column  headerText="Produto" >                                                     
+
+                    <h:outputText value="#{item.produto.nome}" />
+                </p:column>
+                <p:column  headerText="Valor" >                                                                      
+
+                    <h:outputText value="#{item.valor}"  >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="width: 80px;text-align: center" >
+                    <f:facet name="header">
+                        <h:outputText value="ações"/>
+                    </f:facet>                                        
+                    <p:commandButton icon="ui-icon ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabProd:dtProdutos"  >
+
+                        <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.produtos}"  />
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </p:outputPanel>        
+
+
+    </p:fieldset>
+
+
+
+
+</ui:component>
+

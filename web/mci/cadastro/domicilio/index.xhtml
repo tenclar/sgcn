@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mci.xhtml">
+
+  
+    <ui:define name="conteudo" >
+        <p:panel header="Domicílio" style=" min-height: 80%">
+            
+            <p:tabView id="tvDomicilio" dynamic="true" cache="true"   >  
+             <p:tab title="Moradia">
+                   <ui:include src="moradia/list.xhtml" />
+             </p:tab>
+             <p:tab title="Situação">
+                   <ui:include src="situacao/list.xhtml" />
+             </p:tab>
+             <p:tab title="construção">
+                   <ui:include src="construcao/list.xhtml" />
+             </p:tab>
+             <p:tab title="Escoamento">
+                   <ui:include src="escoamento/list.xhtml" />
+             </p:tab>
+              <p:tab title="Abastecimento">
+                   <ui:include src="abastecimento/list.xhtml" />
+             </p:tab>
+              <p:tab title="Iluminação">
+                   <ui:include src="iluminacao/list.xhtml" />
+             </p:tab>
+             <p:tab title="Pavimentação">
+                   <ui:include src="pavimentacao/list.xhtml" />
+             </p:tab>
+             <p:tab title="Coleta de Lixo">
+                   <ui:include src="coleta/list.xhtml" />
+             </p:tab>
+         </p:tabView>               
+        
+        
+       </p:panel>
+        
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <p:dialog header="Cadastro de Tipo de Moradia" widgetVar="dlgMoradia"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="moradia/insert.xhtml" />
+        </p:dialog>
+         <p:dialog header="Cadastro de Tipo de situação" widgetVar="dlgSituacao"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="situacao/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Cadastro de Tipo de Construção" widgetVar="dlgDomConstrucao"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="construcao/insert.xhtml" />           
+        </p:dialog>
+        <p:dialog header="Cadastro de Tipo de Ecoamento" widgetVar="dlgEscoamento"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="escoamento/insert.xhtml" />           
+        </p:dialog>
+        <p:dialog header="Cadastro de Tipo de Abastecimento" widgetVar="dlgAbastecimento"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="abastecimento/insert.xhtml" />           
+        </p:dialog>
+         <p:dialog header="Cadastro de Tipo de Iluminação" widgetVar="dlgIluminacao"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="iluminacao/insert.xhtml" />           
+        </p:dialog>
+        <p:dialog header="Cadastro de Coleta de Lixo" widgetVar="dlgColetaLixo"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="coleta/insert.xhtml" />           
+        </p:dialog>
+        <p:dialog header="Cadastro de Pavimentação" widgetVar="dlgPavimentacao"  resizable="true" modal="true" showEffect="slide" width="500">
+            <ui:include src="pavimentacao/insert.xhtml" />           
+        </p:dialog>
+    </ui:define>
+        
+</ui:composition>
+

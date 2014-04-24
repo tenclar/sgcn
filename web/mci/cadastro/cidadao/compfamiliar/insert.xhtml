@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form id="frmDep"  prependId="false">                
+        <p:fieldset legend="Identificação do Dependente ">
+
+            <h:panelGrid columns="5" > 
+                <h:panelGrid  columns="2">
+                    <h:outputLabel for="depnome"  value="Nome Completo:"  /><p:message for="depnome" display="icon"  />
+                </h:panelGrid>
+                <h:panelGroup>                            
+                    <h:outputLabel for="depgrau" value="Grau Parentesco: "  /><p:message for="depgrau" display="icon"  />
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:outputLabel for="depsexo" value="Sexo: " />
+                    <p:message for="depsexo" display="icon"  />
+                </h:panelGroup>
+                <h:panelGroup> 
+                    <h:outputLabel for="depdtnasc" value="Data Nascimento: " />
+                    <p:message for="depdtnasc" display="icon"  />
+                </h:panelGroup>
+                <h:panelGroup> 
+                    <h:outputLabel for="depIdade" value="Idade: " />
+                    
+                </h:panelGroup>
+
+                <p:inputText id="depnome" value="#{cidadaoBean.dependente.nome}" size="80"  tabindex="0"  required="true" label="Nome" onkeydown="this.value = this.value.toUpperCase();" 
+                             onkeyup="this.value = this.value.toUpperCase();"  />    
+                <h:panelGroup>
+                    <p:selectOneMenu id="depgrau" value="#{cidadaoBean.dependente.grau}" 
+                                     tabindex="1" converter="IndexedConverter" required="true" 
+                                     style="width: 120px"  filter="true" filterMatchMode="startsWith" >
+                        <f:selectItem itemLabel="selecione" noSelectionOption="true" />                            
+                        <f:selectItems value="#{parentescoBean.selectItems}" />                                                      
+                    </p:selectOneMenu>
+<!--                    <p:commandButton value="+" actionListener="# {parentescoBean.newParentesco}" oncomplete="dlgParentesco.show();" process="@this" update="panelParentescoInsert" />-->
+                </h:panelGroup>
+                <p:selectOneMenu id="depsexo" tabindex="2"
+                                 value="#{cidadaoBean.dependente.sexo}" 
+                                 required="true" >
+                    <f:selectItem  itemValue="M" itemLabel="M" />                         
+                    <f:selectItem  itemValue="F" itemLabel="F" />
+                </p:selectOneMenu>
+                <p:calendar id="depdtnasc" tabindex="3"  value="#{cidadaoBean.dependente.dataNascimento}"
+                            onkeyup="Formatadata(this,event)" locale="pt" 
+                            showButtonPanel="true" navigator="true" size="11" 
+                            required="true" showOn="button" 
+                            pattern="dd/MM/yyyy" >                     
+                     <p:ajax event="blur" update="depIdade" />
+                </p:calendar>
+                <p:inputText id="depIdade" tabindex="4" value="#{cidadaoBean.dependente.idade}" size="5" readonly="true" />
+            </h:panelGrid>
+
+            <p:panel>
+                <h:panelGrid columns="5" >
+                    <h:panelGroup >
+                        <h:outputLabel  value="Nescecidades Especiais:"  />
+                        <p:message for="depnecesp" display="icon"  />
+                    </h:panelGroup>
+                    <h:panelGroup >
+                        <h:outputLabel  value="Escolaridade: " />
+                        <p:message for="depesc" display="icon"  />
+                    </h:panelGroup>
+                    <h:panelGroup >
+                        <h:outputLabel  value="Ano: " />                        
+                        <p:message for="depAno" display="icon"  />
+                    </h:panelGroup>
+                     <h:panelGroup >
+                        <h:outputLabel  value="Instituição de Ensino: " />                        
+                        <p:message for="depInst" display="icon"  />
+                    </h:panelGroup>
+                    <h:panelGroup >
+                        <h:outputLabel  value="Frequenta: " />
+                        <p:message for="depfrec" display="icon"  />
+                    </h:panelGroup>
+
+                    
+                    <h:panelGroup>
+                        <p:selectOneMenu id="depnecesp" 
+                                         tabindex="5"
+                                         value="#{cidadaoBean.dependente.necEspecial}" 
+                                         required="true"  
+                                         converter="IndexedConverter" 
+                                         style="width: 120px"  
+                                          >
+                            
+                            <f:selectItem itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{cidadaoBean.selectItemsNecEspeciais}" />
+                        </p:selectOneMenu> 
+<!--                        <p:commandButton value="+" actionListener="# {necEspeciaisBean.newNecEspecial}" oncomplete="dlgNecEspecial.show();" process="@this" update=":frmNecessidade:panelNecEspecialInsert" />-->
+                    </h:panelGroup>
+
+                    <p:selectOneMenu id="depesc" tabindex="6"
+                                     style="width:120px" 
+                                     value="#{cidadaoBean.dependente.escolaridade}"
+                                     required="true" converter="IndexedConverter"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{cidadaoBean.selectItemsEscolaridade}" />
+                    </p:selectOneMenu>
+                    <p:inputText id="depAno" tabindex="7" size="5" value="#{cidadaoBean.dependente.ano}" onkeypress="mascara(this,Valor)"/>
+                    <p:inputText id="depInst" tabindex="8" size="60"
+                                 value="#{cidadaoBean.dependente.instituicao}" 
+                                 onkeydown="this.value = this.value.toUpperCase();" 
+                                 onkeyup="this.value = this.value.toUpperCase();" />
+                    <p:selectOneMenu id="depfrec" value="#{cidadaoBean.dependente.frequenta}"   style="width: 120px;"   >
+                        <f:selectItem itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItem itemValue="SIM" itemLabel="SIM" />
+                        <f:selectItem itemValue="NAO" itemLabel="NÂO" />                            
+                    </p:selectOneMenu> 
+
+                    
+
+                </h:panelGrid>
+                
+            </p:panel>
+            <p:panel>
+                
+                <h:panelGrid columns="1" >
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel  value="Naturalidade: " />                        
+                        <p:message for="depaNat" display="icon"  />
+                    </h:panelGrid>
+                    <h:panelGrid columns="4"  >
+                        <h:outputLabel  value="UF: " />
+
+                        <p:selectOneMenu id="depnatuf" style="width: 180px" 
+                                         value="#{cidadaoBean.dependente.naturalidade.estado}" 
+                                         converter="IndexedConverter" filter="true" filterMatchMode="startsWith" >
+                            <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{cidadaoBean.selectItemsEstado}" />                                
+                            <p:ajax update="depaNat" listener="#{cidadaoBean.handleEstadoDepChange}"  />                                
+                        </p:selectOneMenu>
+
+                        <h:outputLabel  value="Cidade: " />
+                        <p:selectOneMenu id="depaNat" style="width: 160px"
+                                         value="#{cidadaoBean.dependente.naturalidade}" 
+                                         required="true" converter="IndexedConverter" 
+                                         filter="true" filterMatchMode="startsWith" >
+                            <f:selectItem   itemLabel="selecione" noSelectionOption="true" />                                
+                            <f:selectItems value="#{cidadaoBean.selectItemsDepCidade}" />                                
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel id="panelEmpregodep"  >
+                <h:panelGrid columns="3" >
+                    <h:outputLabel  value="Local de Trabalho: "  />
+                    <h:outputLabel  value="Função: "  />
+                    <h:outputLabel  value="Remuneração: "  />
+                    <p:inputText value="#{cidadaoBean.dependente.localTrabalho}" size="30" onkeydown="this.value = this.value.toUpperCase();" 
+                                 onkeyup="this.value = this.value.toUpperCase();" />
+                    <p:inputText value="#{cidadaoBean.dependente.cargo}" size="20" onkeydown="this.value = this.value.toUpperCase();" 
+                                 onkeyup="this.value = this.value.toUpperCase();" />
+                    <p:inputText value="#{cidadaoBean.dependente.renda}" size="10" onkeypress="mascara(this, valor)"  >                                                                        
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </p:inputText>
+                </h:panelGrid>
+            </p:panel>   
+
+            <p:column colspan="2">
+                <p:commandButton  update="frmDep,:frmCid:tabView:tbDependente,:messages" oncomplete="if(!args.validationFailed){dlgDependente.hide();}"  actionListener="#{cidadaoBean.saveDependente}" value="Salvar"/>
+                <p:commandButton   oncomplete="dlgDependente.hide();" immediate="true"  value="Cancelar" action="#{cidadaoBean.cancelDependente}" />
+            </p:column>
+        </p:fieldset  >                        
+
+
+
+    </h:form>
+
+
+
+</ui:component>
+

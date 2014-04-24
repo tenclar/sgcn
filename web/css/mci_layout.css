@@ -1,0 +1,156 @@
+body{
+    
+    
+}
+.imcab{
+    margin: 0;
+    padding: 0;    
+    font-family: Arial,Helvetica,sans-serif;
+/*    font-size: 10px;
+    font-weight: bold;    */
+    background-image: url(../images/mci/header.jpg);
+    min-width: 1000px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;    
+    -webkit-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    -khtml-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+.barravermelhha{
+
+    width: 100%;    
+    height: 8px;
+
+    margin-top: 5px;
+    background-color: darkred;
+
+}
+.barramenu{
+    min-width: 1000px;
+    width: 99%;
+    height: 30px;
+    padding: 0;
+    margin: 2px auto;        
+    background-color: #D8E0A8;    
+/*    background-color:#1ABC9C;*/
+    border: 2px;       
+    border-style: solid;
+    border-color: #A8BB3C;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+
+}
+.barramenu .info{
+    width: 30%;
+    display: inline;
+    padding: 0;
+    margin-top: 1px;
+
+    color: #000;
+    
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+
+
+}
+
+
+.conteudo {
+    width: 100%;    
+    min-height: 100%;
+    margin: 0 auto;
+    /*    background-color: #FAFAF4;*/
+    /*    
+        border: 1px;
+        border-style: solid;
+        border-color: #A8BB3C;*/
+    
+    background-image: url(../images/fundo-verde.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%; 
+}
+.tabela{
+    margin: 30px auto;
+}
+
+.footer {
+
+    height: 63px;
+    padding: 10px 0;
+    position: relative;
+    background-image: url(../images/rodape.jpg);
+    background-repeat:repeat-x;
+    background-color: #DADADA;
+
+
+}
+.footer p{
+    padding: 10px 0;
+    font-family: "Verdana",Arial,Helvetica,sans-serif;
+    font-size: 10px;    
+    text-align: center;    
+    font-weight: bold;
+
+}
+
+.footer2{
+
+    height: 15px;
+    background-color: #000;
+    display: block;
+
+}
+.grid{
+    text-align: center;
+    margin: 0 auto;    
+    border: 2px;       
+    border-style: solid;
+    border-color: #A8BB3C;  
+
+
+
+}
+a.sair:link {
+    color:#414958;
+    text-decoration: underline; /* a não ser que você estilize seus links para que pareçam extremamente únicos, é melhor utilizar links sublinhados para uma identificação visual mais rápida. */
+}
+a.sair:visited {
+    color: #4E5869;
+    text-decoration: underline;
+}
+a.sair:hover, a.sair:active, a.sair:focus { /* esse grupo de seletores dará ao navegador que estiver usando um teclado a mesma experiência de hover do que uma pessoa usando um mouse. */
+    text-decoration: none;
+}
+.dados {
+    width: 100%;
+    border: 2px;
+    border-style:  solid;
+
+}
+.titulos {
+
+    font-weight: bold;
+}
+/*.ui-datatable-odd {
+   background-color:#C9D1F7;
+}
+
+.ui-datatable-even {
+   background-color:#DDE3FD;
+}*/
+
+.ui-datatable .ui-datatable-data .even-row{
+background: #ffedad;
+color: #000;
+/*border-right: solid 0px #4e6769;*/
+}
+
+.ui-datatable .ui-datatable-data .odd-row{
+/*background-color:#ffffff;*/
+/*border-right: solid 0px #4e6769;*/
+}

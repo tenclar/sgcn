@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+        <p:commandButton value ="Inserir" process="@this" actionListener="#{cidadaoBean.newCidBensDuraveis}" oncomplete="dlgCidBensDuraveis.show()" update=":frmCidBensDuraveis"  />                    
+        <p:outputPanel id="tbCidBensDuraveis" >
+            <p:dataTable value="#{cidadaoBean.cidadao.cidbensduraveis}" var="item" style="width: 500px"
+                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+
+                <p:column   headerText="Data" >
+                    <h:outputText value="#{item.dataadd}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <p:dataTable value="#{item.bensduraveis}" var="sub" >
+                        <p:column   headerText="Bem" >
+                            <h:outputText value="#{sub.bemDuravel.nome}" />
+                        </p:column>
+                        <p:column   headerText="Valor" >
+                            <h:outputText value="#{sub.valor}" >
+                                 <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:column>
+
+                <p:column style="width: 80px;text-align: center" >
+                    <f:facet name="header">
+                        <h:outputText value="ações"/>
+                    </f:facet>
+                    <p:commandButton icon="ui-icon-refresh" process="@this" oncomplete="dlgCidBensDuraveis.show()" actionListener="#{cidadaoBean.editBemDuravel}" update=":frmCidBensDuraveis"  >
+                        <f:setPropertyActionListener value="#{item}" target="#{cidadaoBean.cidBensDuraveis}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-close" update=":frmCid:tabView:tbCidBensDuraveis" process="@this"   >
+                        <p:collector value="#{item}" unique="true"  removeFrom="#{cidadaoBean.cidadao.cidbensduraveis}" />
+                    </p:commandButton> 
+                </p:column>
+
+            </p:dataTable>
+        </p:outputPanel>  
+    
+    </ui:component>
+

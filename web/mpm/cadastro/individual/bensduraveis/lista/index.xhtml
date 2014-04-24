@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    
+        <p:commandButton value ="Inserir" process="@this" actionListener="#{planoBean.newCidBensDuraveis}" oncomplete="dlgCidBensDuraveis.show()" update=":frmCidBensDuraveis"  />                    
+        <p:outputPanel id="tbCidBensDuraveis" >
+            <p:dataTable value="#{planoBean.plano.cidadao.cidbensduraveis}" var="item"   >
+
+                <p:column   headerText="Data" >
+                    <h:outputText value="#{item.dataadd}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <p:dataTable value="#{item.bensduraveis}" var="sub">
+                        <p:column   headerText="Bem" >
+                            <h:outputText value="#{sub.bemDuravel.nome}" />
+                        </p:column>
+                        <p:column   headerText="Valor" >
+                            <h:outputText value="#{sub.valor}" >
+                                 <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:column>
+
+                <p:column style="width: 80px;text-align: center" >
+                    <f:facet name="header">
+                        <h:outputText value="ações"/>
+                    </f:facet>
+                    <p:commandButton icon=" ui-icon-refresh" process="@this" oncomplete="dlgCidBensDuraveis.show()" actionListener="#{planoBean.editBemDuravel}" update=":frmCidBensDuraveis"  >
+                        <f:setPropertyActionListener value="#{item}" target="#{planoBean.cidBensDuraveis}"/>
+                    </p:commandButton>
+<!--                    <p:commandButton icon=" ui-icon-close" update="tbCidBensDuraveis" process="@this"   >
+                        <p:collector value="# {item}"  removeFrom="# {planoBean.plano.cidadao.cidbensduraveis}" />
+                    </p:commandButton> -->
+                </p:column>
+
+            </p:dataTable>
+        </p:outputPanel>  
+    
+</html>
+

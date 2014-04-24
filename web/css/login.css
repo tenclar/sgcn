@@ -1,0 +1,79 @@
+/* 
+    Document   : layout
+    Created on : 16/11/2011, 10:59:27
+    Author     : Tenclar Valus
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/* ~~ esse conteiner de largura fixa cerca todos os outros elementos ~~ */
+
+body {
+	font: 62.5% "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+	background: #FFF;
+	margin: 0;
+	padding: 0;
+	
+}
+.container {
+	width: 1000px;        
+        height: 648px;        
+	background: #FFF;
+	margin: 0 auto; /* o valor automático nos lados, combinado com a largura, centraliza o layout */
+        
+}
+.header {
+    background: #000;
+    height: 20px;
+}
+
+.content {
+        background-color: #DADADA;
+        margin-top: 0;
+	padding: 0;
+        height: 100%;
+        clear: both;
+}
+.footer {
+                
+        height: 63px;
+	padding: 10px 0;
+	position: relative;
+        background-image: url(../images/rodape.jpg);
+        background-repeat: no-repeat;
+        background-color: #DADADA;
+        
+  
+}
+.footer p{
+    padding: 10px 0;
+    font-family: "Verdana",Arial,Helvetica,sans-serif;
+    font-size: 10px;    
+    text-align: center;    
+    font-weight: bold;
+}
+
+.footer2{
+    
+   
+    height: 40px;
+    background-color: #000;
+    
+}
+
+.imgcabecalho {    
+     background-image: url(../images/cabecalho.jpg);
+    width: auto;
+    height: 87px;    
+    background-size:auto 87px;
+    background-repeat: no-repeat;
+    background-attachment: none;
+    background-position: center;
+    margin: 0px;
+    padding: 0px;   
+}

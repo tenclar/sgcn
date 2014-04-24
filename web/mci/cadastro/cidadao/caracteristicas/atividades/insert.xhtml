@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    
+          
+        <h:form id="frmatividade" prependId="false">
+                <h:panelGrid id="panelAtividadeInsert" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="atividadeNome" value="Nome:" />
+                    <p:inputText id="atividadeNome" value="#{atividadeBean.atividade.descricao}"   size="50" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                     <p:commandButton  update=":frmCid:tabView:tabViewCarac:cidlistaAtividades,:messages"  oncomplete="dlgAtividade.hide();" actionListener="#{atividadeBean.saveAtividade}" value="Salvar"/>
+                     <p:commandButton   oncomplete="dlgAtividade.hide();" immediate="true" actionListener="#{atividadeBean.cancelAtividade}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    
+</ui:component>
+

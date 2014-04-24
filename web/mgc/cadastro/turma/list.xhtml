@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+        <h:form prependId="false" id="frmBuscaTurma" >
+            
+            <h:outputText value="Busca: " /> 
+            <p:inputText id="turbusca" autocomplete="off" value="#{turmaBean.busca}" size="100" onkeyup="this.value = this.value.toUpperCase();"/>
+            <p:commandButton action="#{turmaBean.localiza}" label="Buscar" title="Buscar Turmas" update="frmBuscaTurma, tbTurma, :messages" icon="ui-icon-search" />
+            <p:separator />
+          
+            <p:outputPanel id="tbTurma">
+                <p:dataTable var="item" value="#{turmaBean.dataModelListaTurma}" 
+                             widgetVar="tbTurmas" style=" text-align: center;" rowKey="#{item.id}"
+                             
+                              emptyMessage="Efetue uma Consulta"
+                             selectionMode="single"
+                              rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <p:commandButton icon="ui-icon ui-icon-plus" title="Novo" process="@this" actionListener="#{turmaBean.newTurma}" update=":frmTurmaNew" oncomplete="dlgTurmaNew.show();"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon ui-icon-refresh"  process="@this" title="Editar" oncomplete="dlgTurmaNew.show();" update=":frmTurmaNew" action="#{turmaBean.editTurma}" />
+                    </p:column>
+                     <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Alunos"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Alunos" process="@this" title="alunos" oncomplete="dlgAlunosTurma.show();" update=":frmListaAlunosTurma" actionListener="#{turmaBean.editTurmaCidadao}"/>
+                    </p:column>
+                   
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Nome da Turma"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="Nome do Curso" >
+                      
+                        <h:outputText value="#{item.curso.nome}"/>
+                    </p:column> 
+                    <p:column style="text-align: center;" headerText="Inicio" >
+                        
+                        <h:outputText value="#{item.datainicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column> 
+                    <p:column style="text-align: center;" headerText="Fim" >                        
+                        <h:outputText value="#{item.datafim}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>
+                    </p:column> 
+                   
+                    
+                </p:dataTable>
+            </p:outputPanel >
+        </h:form>
+    
+</ui:component>
+

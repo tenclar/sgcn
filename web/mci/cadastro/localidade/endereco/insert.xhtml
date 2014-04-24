@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+        <h:form id="frmLoc" prependId="false" >
+            <h:panelGrid id="panelLocalidadeInsert" columns="2"   >                  
+                      
+                                           
+                        <h:outputLabel  value="UF: " />
+                        <h:selectOneMenu id="enduf" label="Estado" value="#{enderecoBean.endereco.bairro.cidade.estado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
+                            
+                            <f:selectItems value="#{enderecoBean.selectItemsEstado}" />
+                            <p:ajax update="endcid, endbairro" listener="#{enderecoBean.handleEstadoChange}" />
+                        </h:selectOneMenu>
+                        
+                        <h:outputLabel  value="Cidade: " />
+                        
+                        <h:selectOneMenu id="endcid" label="Cidade" value="#{enderecoBean.endereco.bairro.cidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                            
+                            <f:selectItems value="#{enderecoBean.selectItemsCidade}" />
+                            <p:ajax update="endbairro" listener="#{enderecoBean.handleCidadeChange}" />
+                        </h:selectOneMenu>
+                       
+                        <h:outputLabel  value="Bairro / Ramal: " />
+                        <h:panelGroup>
+                            
+                            <h:selectOneMenu id="endbairro" value="#{enderecoBean.endereco.bairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" 
+                                             converter="IndexedConverter"   >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{enderecoBean.selectItemsBairro}" />
+                            
+                        </h:selectOneMenu>  
+                            <p:commandButton value="+" process="@this, enduf, endcid" action="#{bairroBean.newBairroEnd(enderecoBean.endereco.bairro.cidade.estado,enderecoBean.endereco.bairro.cidade)}" update="enduf,endcid, :frmBairro, :messages" oncomplete="if(!args.validationFailed){dialogBairro.show();}" />    
+                        </h:panelGroup>                       
+                        <h:outputLabel  value="Logradouro: " />    
+                        <p:inputText id="endlog"  autocomplete="false" value="#{enderecoBean.endereco.logradouro}" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  size="80"  required="true" />                        
+                        <h:outputLabel  value="CEP: " />    
+                        <p:inputText id="endCep" autocomplete="false" value="#{enderecoBean.endereco.cep}"  size="16"  required="true" maxlength="8"/>                        
+                       
+                    </h:panelGrid>     
+             <h:panelGroup>
+                 <p:commandButton value="Salvar" update="@this, :tvLocalidade:frmListaEndereco:tbEndereco, panelLocalidadeInsert,:messages" actionListener="#{enderecoBean.saveEndereco}" oncomplete="if(!args.validationFailed){dlgEndereco.hide();}" />
+                 <p:commandButton  process="@this" value="Cancelar" oncomplete="dlgEndereco.hide();" immediate="true"   action="#{enderecoBean.cancelEndereco}" />
+                        </h:panelGroup>
+        </h:form>
+    
+    </ui:component>
+

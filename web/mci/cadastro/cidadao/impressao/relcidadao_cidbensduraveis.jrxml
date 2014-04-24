@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao_cidbensduraveis" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f3fddfa7-566f-4d34-b0a0-c2d38511f039">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[from CidBensDuraveis]]>
+	</queryString>
+	<field name="bensduraveis" class="java.util.List"/>
+	<field name="cidadao" class="entity.mci.Cidadao"/>
+	<field name="dataadd" class="java.util.Date"/>
+	<field name="id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e986c911-2b46-491f-a984-fb03f87112c5" mode="Opaque" x="0" y="0" width="555" height="26" backcolor="#ECEAEA"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Bens Duráveis]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="73" splitType="Stretch">
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="8dd7e07b-0105-4a02-a9ad-76e8c9f63b94" mode="Opaque" x="43" y="0" width="512" height="20" backcolor="#EEEDED"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataadd}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="34a7d1ad-8873-4a68-bc81-368326383272" x="0" y="21" width="555" height="52"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{bensduraveis})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_cidbensduraveis_bensduraveis.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement uuid="c32b908d-e277-4468-aca0-89b69f4cf497" mode="Opaque" x="0" y="0" width="43" height="20" backcolor="#EEEDED"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="10">
+			<break>
+				<reportElement uuid="7aeff78d-6fd6-4c7e-b372-23f9e9945666" x="0" y="1" width="100" height="1"/>
+			</break>
+		</band>
+	</pageFooter>
+</jasperReport>

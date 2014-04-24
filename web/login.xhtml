@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+  
+    
+    <h:head  >
+        <title>SGCN - Acesso</title>
+        <link href="css/stilo.css" rel="stylesheet"  />
+        
+        <!--  <script type="text/javascript" src="$ {request.contextPath}/jquery/jquery-1.7.1.min.js" />
+       <script type="text/javascript" src="$ {request.contextPath}/jquery/preloadCssImages.jQuery_v5.js" />
+         <script type="text/javascript" >
+         
+           $( document).ready(function(){
+                $.preloadCssImages();
+            }); 
+       </script> -->
+    </h:head>
+    <h:body  onload="MM_preloadImages('/imagens/circulos.png',
+                                     '/imagens/mci/header.jpg',
+                                     '/imagens/mpm/header.jpg',
+                                     '/imagens/mcv/header.jpg',
+                                     '/imagens/mgc/header.jpg',
+                                     '/imagens/mgc.jpg',
+                                     '/imagens/mac.jpg',
+                                     '/imagens/mcv.jpg',
+                                     '/imagens/mpm.jpg',
+                                     '/imagens/logogoverno.jpg',
+                                     '/imagens/negocios.jpg',
+                                     '/imagens/logosepn.jpg',
+                                     '/imagens/fundo-verde.jpg',
+                                     '/imagens/rodape.jpg',
+                                     '/imagens/user.jpg',
+                                     '/imagens/timer.jpg',
+                                     '/imagens/brasao.jpg')"  >
+        <div class="container">
+            <div class="header"><!-- end .header -->
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </div>
+            <div class="content">
+                <div class="fundo">
+                    <div class="logo3" ></div>
+                    <div class="logo2" ></div>
+                    <div class="logo1"> </div>
+                    <div class="meio">
+                        <div class="blocoverde">
+                            <div class="bloco">
+                                <div class="negocios"></div>
+                                <div class="login">
+                                    <form action="j_spring_security_check" method="post">
+                                        <table width="100%" border="0">
+                                            <tr>
+                                                <td ><div class="sgcn"> SGCN </div></td>
+                                                <td ><div class="sgcntexto">Sistema de Gestão e<br />
+                                                        Controle de Negócios</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" align="right" ><table width="70%" border="0">
+                                                        <tr>
+                                                            <td colspan="2" class="texto">Usuário</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">  <h:inputText id="j_username" required="true" styleClass="caixatexto" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" class="texto">Senha</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h:inputSecret id="j_password" required="true" styleClass="caixatexto" /></td>
+                                                            <td><h:commandButton value="Entrar" styleClass="botao" /></td>
+                                                        </tr>
+                                                    </table></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    <!-- end .login --> </div>
+
+                                <!-- end .bloco --> </div>
+                            <!-- end .blocoverde --> </div>
+                    </div>
+                    <center>
+                        <h:outputText value="Usuário ou senha incorretos! Motivo: ${SPRING_SECURITY_LAST_EXCEPTION.message}" rendered="#{param.erro}" style="color: darkred;background-color: white"/>
+                    </center>
+
+                    <div class="rodape">
+                        <p>Secretaria de Pequenos Negócios - Departamento de Planejamento - Divisão de Tecnologia da Informação <br/>
+                            Avenida Ceará, 1624 Centro - Rio Branco AC </p>
+                        <!-- end .rodape --></div>
+                    <!-- end .fundo --></div>
+                <!-- end .content --></div>
+            <div class="footer">
+                <p>&nbsp;</p>
+                <!-- end .footer --></div>
+            <!-- end .container --></div>
+
+    </h:body>
+</html>
+

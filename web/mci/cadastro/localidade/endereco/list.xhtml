@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form id="frmListaEndereco" prependId="false">
+        <p:outputPanel id="opBuscaEnd" >
+            <p:outputPanel id="opBuscaEndInsert" >
+                <h:panelGrid columns="4" >
+                    <h:outputLabel  value="UF: " />                    
+                    <h:outputLabel  value="Cidade: " />     
+                    <h:outputLabel  value="Bairro / Ramal: " />    
+                    <h:outputLabel  value="" />    
+
+
+                    <p:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
+                        <f:selectItems value="#{enderecoBean.selectItemsEstado}" />
+                        <p:ajax update="endbuscacid, endbuscabairro" listener="#{enderecoBean.handlePesquisaEstadoChange}" />
+                    </p:selectOneMenu>
+
+                    <p:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                        <f:selectItems value="#{enderecoBean.selectItemsCidade}" />
+                        <p:ajax update="endbuscabairro" listener="#{enderecoBean.handlePesquisaCidadeChange}" />
+                    </p:selectOneMenu>
+
+                    <p:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                                     converter="IndexedConverter"   >
+
+                        <f:selectItems value="#{enderecoBean.selectItemsBairro}" />                            
+                    </p:selectOneMenu> 
+                    <p:commandButton id="itBuscaend" tabindex="0" value="localizar"   process="opBuscaEnd" actionListener="#{enderecoBean.buscaEnderecoDetalhado}" global="false" update="opBuscaEndInsert, tbEndereco, :messages" icon="ui-icon-search" /> 
+                    <!--                    <p:commandButton process="@this" tabindex="2" value="+"  oncomplete="dlgEndereco.show()" update="panelLocalidadeInsert" actionListener=" # {enderecoBean.newEndereco}" />-->
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputText value="logradouro: " />  
+                    <p:inputText  value="#{enderecoBean.buscaendereco}"  style="width:360px" onkeyup="this.value = this.value.toUpperCase();" required="true"  requiredMessage="Campo em Branco" label="Campo de Busca" >
+                        <f:validateLength minimum="3" />
+                    </p:inputText>
+
+
+                </h:panelGrid>
+                <p:messages />
+            </p:outputPanel>
+        </p:outputPanel>
+        <p:separator />
+        <p:commandButton process="@this" value="Novo" oncomplete="dlgEndereco.show()" update=":frmLoc" actionListener="#{enderecoBean.newEndereco}" />
+        <p:outputPanel id="tbEndereco">
+            <p:dataTable  var="item" value="#{enderecoBean.dataModelListaEndereco}"  widgetVar="enderecoTable" style="width: 500px;height: auto; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="8" >
+
+                <p:column style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="Código" />
+                    </f:facet>
+                    <h:outputText value="#{item.id}" />
+                </p:column  >
+                <p:column style="text-align: center;"  headerText="Logradouro" >
+
+                    <h:outputText value="#{item.logradouro}"/>
+                </p:column>                       
+
+                <p:column style="text-align: center;"   >
+                    <f:facet name="header">
+                        <h:outputText value="Bairro"/>
+                    </f:facet>
+                    <h:outputText value="#{item.bairro.nome}"/>
+                </p:column> 
+                <p:column style="text-align: center;"   >
+                    <f:facet name="header">
+                        <h:outputText value="Cidade"/>
+                    </f:facet>
+                    <h:outputText value="#{item.bairro.cidade.nome}"/>
+                </p:column>
+                <p:column style="text-align: center;"   >
+                    <f:facet name="header">
+                        <h:outputText value="Estado"/>
+                    </f:facet>
+                    <h:outputText value="#{item.bairro.cidade.estado.nome}"/>
+                </p:column>
+                <p:column style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="Alterar"/>
+                    </f:facet>
+                    <p:commandButton process="@this" icon="ui-icon-refresh" actionListener="#{enderecoBean.editEndereco}" title="alterar"  update=":frmLoc" oncomplete="dlgEndereco.show()" />
+
+                </p:column>
+
+            </p:dataTable>
+
+        </p:outputPanel >
+    </h:form>
+
+</ui:component>
+

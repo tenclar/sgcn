@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="impplano_rendimentos" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="hql">
+		<![CDATA[from Rendimento order by daterend desc]]>
+	</queryString>
+	<field name="daterend" class="java.util.Date"/>
+	<field name="despesas" class="java.lang.Double"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="lucro" class="java.lang.Double"/>
+	<field name="outras" class="java.lang.Double"/>
+	<field name="plano" class="entity.mpm.Plano"/>
+	<field name="totalRenda" class="java.lang.Double"/>
+	<field name="vendas" class="java.lang.Double"/>
+	<variable name="first_year" class="java.util.Date" resetType="Group" resetGroup="year">
+		<variableExpression><![CDATA[$F{daterend}]]></variableExpression>
+	</variable>
+	<variable name="first_month" class="java.util.Date" resetType="Group" resetGroup="month">
+		<variableExpression><![CDATA[$F{daterend}]]></variableExpression>
+	</variable>
+	<variable name="vendasTotal" class="java.lang.Double" resetType="Group" resetGroup="month" calculation="Sum">
+		<variableExpression><![CDATA[$F{vendas}]]></variableExpression>
+	</variable>
+	<variable name="despesas_1" class="java.lang.Double" resetType="Group" resetGroup="month" calculation="Sum">
+		<variableExpression><![CDATA[$F{despesas}]]></variableExpression>
+	</variable>
+	<variable name="lucro_1" class="java.lang.Double" resetType="Group" resetGroup="month" calculation="Sum">
+		<variableExpression><![CDATA[$F{lucro}]]></variableExpression>
+	</variable>
+	<variable name="outras_1" class="java.lang.Double" resetType="Group" resetGroup="month" calculation="Sum">
+		<variableExpression><![CDATA[$F{outras}]]></variableExpression>
+	</variable>
+	<variable name="outras_2" class="java.lang.Double" resetType="Group" resetGroup="year" calculation="Sum">
+		<variableExpression><![CDATA[$F{outras}]]></variableExpression>
+	</variable>
+	<variable name="lucro_2" class="java.lang.Double" resetType="Group" resetGroup="year" calculation="Sum">
+		<variableExpression><![CDATA[$F{lucro}]]></variableExpression>
+	</variable>
+	<variable name="despesas_2" class="java.lang.Double" resetType="Group" resetGroup="year" calculation="Sum">
+		<variableExpression><![CDATA[$F{despesas}]]></variableExpression>
+	</variable>
+	<variable name="vendas_1" class="java.lang.Double" resetType="Group" resetGroup="year" calculation="Sum">
+		<variableExpression><![CDATA[$F{vendas}]]></variableExpression>
+	</variable>
+	<group name="year">
+		<groupExpression><![CDATA[$F{daterend}.getYear()]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField evaluationTime="Group" evaluationGroup="year" pattern="yyyy">
+					<reportElement mode="Transparent" x="0" y="0" width="555" height="20" backcolor="#F1ECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{first_year}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<textField>
+					<reportElement mode="Transparent" x="425" y="10" width="130" height="20" backcolor="#F1ECEC"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{outras_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="295" y="10" width="130" height="20" backcolor="#F1ECEC"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{lucro_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="165" y="10" width="130" height="20" backcolor="#F1ECEC"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{despesas_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="65" y="10" width="100" height="20" backcolor="#F1ECEC"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vendas_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="10" width="65" height="20" backcolor="#F1ECEC"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Ano]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="month">
+		<groupExpression><![CDATA[$F{daterend}.getMonth()]]></groupExpression>
+		<groupHeader>
+			<band height="46">
+				<textField evaluationTime="Group" evaluationGroup="month" pattern="MMMMM">
+					<reportElement x="0" y="0" width="555" height="20"/>
+					<box leftPadding="5">
+						<bottomPen lineWidth="2.0" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{first_month}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="26" width="65" height="20" backcolor="#EDECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dia]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="65" y="26" width="100" height="20" backcolor="#EDECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Vendas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="165" y="26" width="130" height="20" backcolor="#EDECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Despesas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="295" y="26" width="130" height="20" backcolor="#EDECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Lucro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="425" y="26" width="130" height="20" backcolor="#EDECEC"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="2.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Outras Rendas]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="65" y="5" width="100" height="20"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{vendasTotal}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="5" width="65" height="20"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[Total Mês]]></text>
+				</staticText>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="165" y="5" width="130" height="20"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{despesas_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="295" y="5" width="130" height="20"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{lucro_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="425" y="5" width="130" height="20"/>
+					<box rightPadding="5">
+						<topPen lineWidth="2.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{outras_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="26" backcolor="#FFFFFF"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acompanhamento Econômico]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd">
+				<reportElement x="0" y="0" width="65" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{daterend}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="65" y="0" width="100" height="20"/>
+				<box rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="165" y="0" width="130" height="20"/>
+				<box rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{despesas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="425" y="0" width="130" height="20"/>
+				<box rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{outras}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="295" y="0" width="130" height="20"/>
+				<box rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{lucro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="5" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

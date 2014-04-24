@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+
+              xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form prependId="false" id="frmMapaConvenio"  >
+          
+
+            <p:dataTable  var="item" value="#{convenioBean.listaGeral}"    
+                          style="text-align: center" paginatorPosition="bottom"  
+                          paginator="true"  paginatorAlwaysVisible="false" rows="6"
+                          
+                          >
+                <f:facet  name="header" >
+                    <h:outputText value="RESUMO ACOMPANHAMENTO DE CONVÊNIOS"/>
+                </f:facet>
+                <p:columnGroup type="header" >
+                    <p:row>
+                        <p:column rowspan="2"  headerText="Convênio"  />
+                        <p:column rowspan="2"  headerText="Tipo" />
+                        <p:column rowspan="2" headerText="SICONV"  />
+                        <p:column rowspan="2" headerText="Área" />
+                        <p:column rowspan="2" headerText="Ministério"  />
+                        <p:column rowspan="2" headerText="Objetivos"  />
+                        <p:column  colspan="3" headerText="Valores"  />
+                        <p:column rowspan="2" headerText="Liberação&nbsp;&lt;BR&gt;&nbsp;Contrapartida" />
+                        <p:column rowspan="2" headerText="Vigência" />
+                        <p:column rowspan="2" headerText="Aditivos"  />
+                        <p:column rowspan="2" headerText="Relatório de &nbsp;&lt;BR&gt;&nbsp;Monitoramento"  />
+                        <p:column rowspan="2" headerText="Prestação de &nbsp;&lt;BR&gt;&nbsp;Contas"  />
+                        <p:column rowspan="2" headerText="Contatos"  />
+                        
+
+
+                    </p:row>
+                    <p:row>
+                        <p:column  headerText="Ministério" style="width: 40px" />
+                        <p:column  headerText="Contrapartida" style="width: 40px" />
+                        <p:column  headerText="Total" style="width: 40px" />
+                    </p:row>
+                </p:columnGroup>
+                <p:column style="text-align: center; "  >
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column> 
+                <p:column style="text-align: center;"  >
+                    <h:outputText value="#{item.tipoconvenio}"/>
+                </p:column>  
+                <p:column style="text-align: center;" >
+
+                    <h:outputText value="#{item.siconv}"/>
+                </p:column> 
+                <p:column style="text-align: center;" >
+
+                    <h:outputText value="#{item.area}"/>
+                </p:column>
+                <p:column style="text-align: center;min-width: 200px"  >
+
+                    <h:outputText value="#{item.ministerio.nome}"/>
+                </p:column>
+                <p:column style="text-align: justify; min-width: 400px;" >
+
+                    <h:outputText value="#{item.objetivos}"/>
+                </p:column>
+
+                <p:column style="text-align: center;">
+
+                    <h:outputText value="#{item.valorministerio}">
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" >
+
+                    <h:outputText value="#{item.contrapartida}">
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;"  >
+
+                    <h:outputText value="#{item.total}">
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;"  >
+                    <h:outputText value="#{item.dataContraPartida}">
+                        <f:convertDateTime  parent="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;"  >
+                    <p:commandLink  oncomplete="dlgVigencia.show()" action="#{convenioBean.editConvenioView()}"
+                                    immediate="true" update=":formdlgVig" process="@this">
+                        <p:dataTable value="#{item.vigencias}" var="it" rows="1"  >
+                            <p:column >
+                                #{it.seq}
+                            </p:column>
+                            <p:column > 
+                                <h:outputText value="#{it.datavigencia}">
+                                    <f:convertDateTime  parent="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                        <f:setPropertyActionListener value="#{item}" target="#{convenioBean.convenio}" />
+                    </p:commandLink>                   
+                </p:column>
+                <p:column   >
+                    <p:commandLink process="@this" oncomplete="dlgAdtivo.show()" action="#{convenioBean.editConvenioView()}" update=":formdlgadt" >
+                        <p:dataTable value="#{item.aditivos}" var="it"  rows="1"  paginator="false"
+                                     paginatorPosition="top"  >
+                            <p:column >
+                                #{it.seq}
+                            </p:column>
+                            <p:column >
+                                <h:outputText value="#{it.dateaditivo}">
+                                    <f:convertDateTime  parent="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                        <f:setPropertyActionListener value="#{item}" target="#{convenioBean.convenio}" />
+                    </p:commandLink>
+
+                </p:column>
+<!--                styleClass="# {item.diasrelatorio le 30 ? 'vermelho':null}# {(item.diasrelatorio ge 31) or (item.diasrelatorio le 60) ? 'amarelo':null}# {(item.diasrelatorio ge 61) or (item.diasrelatorio le 90) ? 'verde':null}"-->
+                <p:column styleClass="#{item.diasrelatorio le 30 ? 'vermelho':null}#{(item.diasrelatorio ge 31) and (item.diasrelatorio le 60) ? 'amarelo':null}#{(item.diasrelatorio ge 61) and (item.diasrelatorio le 90) ? 'verde':null}"  >
+                    
+                    <h:outputText value="#{item.relMonitoramento}"  >
+                        <f:convertDateTime  parent="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;"  >
+                    <h:outputText value="#{item.presContas}">
+                        <f:convertDateTime  parent="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Contatos" >
+                    <p:dataTable value="#{item.contatos}" var="contato"    >
+                        <p:column  >
+                            #{contato.nome}   
+                        </p:column>                       
+                        
+                    </p:dataTable>
+
+                </p:column>
+                <!--                     <p:column style="text-align: center;" headerText="ação" >                       
+                                    <p:commandButton icon="ui-icon ui-icon-document-b"  title="visualizar"  process="@this"  />  
+                                    <p:commandButton  process="@this" update="frmConvenio tbConvenio" icon="ui-icon ui-icon-refresh" title="alterar" oncomplete="cadlist.close();cadCon.show();" actionListener="# {convenioBean.editConvenio}"  />
+                                    
+                                    <p:commandButton icon="ui-icon ui-icon-print"  title="Gera Impressão" ajax="false" process="@this" immediate="true" onclick="this.form.target='_blank'" />                      
+                                </p:column>-->
+            </p:dataTable>
+        
+    </h:form>
+</ui:component>
+
+

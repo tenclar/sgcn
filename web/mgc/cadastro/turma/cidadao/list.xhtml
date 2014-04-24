@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form prependId="false" id="frmListaAlunosTurma">
+
+        <h:panelGrid  columns="3"  >                               
+            <h:outputLabel for="turcursonome"  value="Curso: " styleClass="titulos"/>
+            <p:inputText id="turcursonome" value="#{turmaBean.turma.curso.nome}" size="50" label="Nome do Curso" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
+            <br/>
+            <h:outputLabel for="turnome"  value="Turma: " styleClass="titulos"/>
+            <p:inputText id="turnome" value="#{turmaBean.turma.nome}" size="50" label="Nome da Turma" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
+            <p:commandButton icon="ui-icon ui-icon-refresh" value="Editar Turma" process="@this" title="Editar Turma" oncomplete="dlgAlunosTurma.hide(); dlgTurmaNew.show();" update=":frmTurmaNew" action="#{turmaBean.editTurmaUnico}"/>
+            <h:outputLabel for="turdtinicio"  value="Início: " styleClass="titulos"/>
+            <h:panelGroup>
+                <p:inputText id="turdtinicio" value="#{turmaBean.turma.datainicio}" size="14" label="Data início" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputText>
+                <h:outputLabel for="turdtfim"  value="Fim: " styleClass="titulos"/>
+                <p:inputText id="turdtfim" value="#{turmaBean.turma.datafim}" size="14" label="Data Fim" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputText>
+            </h:panelGroup>
+            <br/>
+        </h:panelGrid>
+        <p:separator/>
+        <h:panelGrid  columns="2"  >                               
+            <p:commandButton icon="ui-icon ui-icon-plus" process="@this" action="#{turmaBean.clearListCidadao()}" update=":frmCidadaoTurma" value="Adicionar Individual" title="Adicionar Individual"  oncomplete="dlgCidadaoTurma.show();"   />
+            <p:commandButton icon="ui-icon ui-icon-plus" process="@this" action="#{turmaBean.clearListCidadao()}" update=":frmCidadaoTurma" value="Adicionar Coletivo"  title="Adicionar por Coletivo"  oncomplete="dlgCooperativaTurma.show();"  />
+        </h:panelGrid>
+
+        <!--            dlgAlunosTurma.hide(); 
+                    dlgAlunosTurma.hide();-->
+        <p:outputPanel id="oppAlunos">
+            <p:dataTable var="alunos" value="#{turmaBean.turma.turcidadaos}"
+                        
+                         paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false"
+                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" 
+                         rows="6" emptyMessage="Nenhum aluno cadastrado" >
+
+                <p:column headerText="CPF" style="text-align: center;width: 100px" > 
+                    <h:outputText value="#{alunos.cidadao.cpf}" />
+                </p:column>
+                <p:column headerText="Nome:" style="text-align: center;width: 100px" >
+                    <h:outputText value="#{alunos.cidadao.nome}"/>
+                </p:column> 
+                <p:column headerText="status:" style="text-align: center;width: 100px" >
+                    
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                           <h:outputText value="#{alunos.status}"/>
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <h:selectOneMenu  style="width: 130px"  value="#{alunos.status}"  required="true"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                  <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
+                                  <f:selectItems value="#{turmaBean.selectItemStatusCurso}" />
+                    </h:selectOneMenu>            
+                        </f:facet>  
+                    </p:cellEditor>  
+                      <p:rowEditor   />
+                </p:column>
+
+                <p:column style="text-align: center;width: 100px"  >
+                    <f:facet name="header">
+                        <h:outputText value="Ações"/>
+                    </f:facet>
+                    <p:commandButton icon="ui-icon ui-icon-close"  process="@this" oncomplete="confExcluir.show();" title="Remover" update=":frmListaAlunosTurma:oppAlunos">
+                        <!--                        <p:collector value="# {alunos}" removeFrom="# {turmaBean.turma.turcidadaos}"/>-->
+                        <f:setPropertyActionListener value="#{alunos}" target="#{turmaBean.turCidadaos}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+        <p:separator />
+        <p:commandButton process="@this"  update="frmListaAlunosTurma, :frmBuscaTurma, :messages" action="#{turmaBean.saveTurma}" oncomplete="if(!args.validationFailed){dlgAlunosTurma.hide();}" value="Salvar"/>
+    </h:form>
+
+
+</ui:component>
+

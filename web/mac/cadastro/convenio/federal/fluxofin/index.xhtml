@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mac.xhtml">
+
+
+    <ui:define name="conteudo" >
+      
+
+
+            <p:panel id="panelListFluxoRecursos" header="Lista de Recursos Federais  - Fluxo Financeiro" closeSpeed="0" widgetVar="panelListFluxoRecursos" closable="true" style="min-width: 900px;min-height:300px" >
+                <ui:include src="list.xhtml"/>
+            </p:panel>
+            <p:panel id="panelListFluxo" header="Lista de Fluxo Financeiro" visible="false" closeSpeed="0" widgetVar="panelListFluxo" closable="true" style="min-width: 900px;min-height:300px" >
+                <ui:include src="list_fluxo.xhtml"/>
+            </p:panel>
+<!--        <p:panel id="panelViewFluxo"  visible="false"  closeSpeed="0" widgetVar="panelViewFluxo" closable="true"  >
+                <ui:include src="view_fluxo.xhtml"/>
+            </p:panel>
+      -->
+
+
+    </ui:define>
+    <ui:define name="caixadialogo">
+
+
+        <p:dialog header="Inserir Fluxo Financeiro Concedente" widgetVar="dlgFluxofincon"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="insert_fluxo_concedente.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserir Fluxo Proponente" widgetVar="dlgFluxofinprop"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="insert_fluxo_proponente.xhtml" />
+        </p:dialog>
+        <p:confirmDialog id="confExcluir" message="Deseja Excluir ?"  
+                         header="Aviso" severity="alert" widgetVar="confExcluir">  
+            <h:form prependId="true">         
+
+                <p:commandButton id="confirm" value="sim"  oncomplete="confExcluir.hide();"   /> 
+                <p:commandButton id="decline" value="não" oncomplete="confExcluir.hide()"  />   
+            </h:form>
+        </p:confirmDialog> 
+        <p:confirmDialog id="confExcluirprop" message="Deseja Excluir ?"  
+                         header="Aviso" severity="alert" widgetVar="confExcluirprop">  
+            <h:form prependId="true">         
+
+                <p:commandButton id="confirm" value="sim"  oncomplete="confExcluirprop.hide();" update=":frmListFluxo:tabViewFluxo:opTabFluxoprop" action="#{fluxoFinBean.fluxofinpropremove()}"   /> 
+                <p:commandButton id="decline" value="não" oncomplete="confExcluirprop.hide()" action="#{fluxoFinBean.fluxofinpropcancel()}" />   
+            </h:form>
+        </p:confirmDialog> 
+         <p:confirmDialog id="confExcluirfincon" message="Deseja Excluir ?"  
+                         header="Aviso" severity="alert" widgetVar="confExcluirfincon">  
+             <h:form id="frmConfirExcluir" prependId="true">         
+
+                <p:commandButton id="confirm" value="sim"  oncomplete="confExcluirfincon.hide();" update=":frmListFluxo:tabViewFluxo:opTabFluxocon"  action="#{fluxoFinBean.fluxofinconremove()}"   /> 
+                <p:commandButton id="decline" value="não" oncomplete="confExcluirfincon.hide()" update=":frmListFluxo:tabViewFluxo:opTabFluxocon" action="#{fluxoFinBean.fluxofinconcancel()}" />   
+            </h:form>
+        </p:confirmDialog> 
+
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+    <h:form prependId="false" id="frmListFluxo" >
+        <p:panel   >  
+            <p:outputPanel >
+                <p:dataTable  var="item" value="#{fluxoFinBean.lista}"  
+                              style="text-align: center;" paginatorPosition="bottom"  
+                              paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+                    <f:facet  name="header" >
+                        <h:outputText value="RESUMO ACOMPANHAMENTO DE CONVÊNIOS"/>
+                    </f:facet>
+                    <p:columnGroup type="header" >
+                        <p:row>
+                            <p:column rowspan="2"  headerText="Convênio" style="width: 40px" />
+                            <p:column rowspan="2" headerText="SICONV" style="width: 40px" />
+                            <p:column rowspan="2" headerText="Área" style="width: 60px" />
+                            <p:column rowspan="2" headerText="Ministério" style="width: 40px" />
+                            
+                            <p:column  colspan="3" headerText="Valores" style="width: 160px" />
+                           
+                            
+
+
+                        </p:row>
+                        <p:row>
+                            <p:column  headerText="Ministério" style="width: 40px" />
+                            <p:column  headerText="Contrapartida" style="width: 40px" />
+                            <p:column  headerText="Total" style="width: 40px" />
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column style="text-align: center;" headerText="Convênio" >
+                        <h:outputText value="#{item.codigo}"/>
+                    </p:column>  
+                    <p:column style="text-align: center;" headerText="SICONV" >
+
+                        <h:outputText value="#{item.siconv}"/>
+                    </p:column> 
+                    <p:column style="text-align: center;" headerText="Área" >
+
+                        <h:outputText value="#{item.area}"/>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="Ministério" >
+
+                        <h:outputText value="#{item.ministerio.nome}"/>
+                    </p:column>
+                   
+
+                    <p:column style="text-align: center;" headerText="Valor Ministério" >
+
+                        <h:outputText value="#{item.valorministerio}">
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="Valor Contrapartida" >
+
+                        <h:outputText value="#{item.contrapartida}">
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="Valor total" >
+
+                        <h:outputText value="#{item.total}"  >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                   
+
+                </p:dataTable>
+            </p:outputPanel >
+        </p:panel>   
+        <p:separator />
+        <p:panel>
+
+            <p:outputPanel >
+                <p:dataTable  value="#{fluxoFinBean.convenio.investimentos}" var="item"
+                              rowKey="#{item.id}"
+                              rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                              rowIndexVar="rowIx" >
+                    <f:facet  name="header" >
+                        <h:outputText value="Composição do Investimento"/>
+                    </f:facet>
+                    <p:column headerText="Código" style="width: 40px;" >
+                        <h:outputText value="#{item.natDespesa.id}" />                        
+                    </p:column>
+                    <p:column headerText="Descrição" style="width: 170px" >
+                        <h:outputText value="#{item.natDespesa.descricao}" />
+                    </p:column>
+                    <p:column headerText="Proponente" style="width: 60px;text-align: right" >
+                        <h:outputText value="#{item.valorproponente}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Concedente"  style="width: 60px;text-align: right">
+                        <h:outputText value="#{item.valorconcedente}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Total" style="width: 40px;text-align: right" >
+                        <h:outputText value="#{item.valorconcedente + item.valorproponente}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Observação" style="width: 150px">
+                        <h:outputText value="#{item.complemento}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+        </p:panel>
+        <p:separator />
+        <p:panel header="Fluxo Financeiro" >
+            <p:tabView id="tabViewFluxo" >
+            <p:tab title="Proponente">
+                 <ui:include src="list_fluxo_proponente.xhtml"/>
+            </p:tab>
+            <p:tab title="Concedente">
+                <ui:include src="list_fluxo_concedente.xhtml"/>
+            </p:tab>
+        </p:tabView>
+            </p:panel>
+          <p:separator />
+         <h:panelGroup>
+<!--              oncomplete="panelListFluxo.close();panelViewFluxo.show();"-->
+<p:commandButton actionListener="#{fluxoFinBean.createPieModel()}" value="Visualizar"  process="@this"  onclick="this.form.target='_blank';"  ajax="false" update=":frmListConvFluxo"  action="gotoviewchart" />
+<p:commandButton value="Fechar"  process="@this"  update="frmListFluxo, :frmListConvFluxo"  oncomplete="panelListFluxo.close();panelListFluxoRecursos.show();"  action="#{fluxoFinBean.clearBean()}" />
+                    
+                </h:panelGroup>
+    </h:form>
+</ui:component>
+

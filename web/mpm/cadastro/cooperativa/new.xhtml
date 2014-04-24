@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+
+
+
+
+    <h:form id="frmPlanNew"  prependId="false">                
+        <p:fieldset legend="Identificação" id="panelPlanInsert" >
+            <h:outputLabel for="plandata" value="Data Cadastro:" />
+            <p:calendar id="plandata" showOn="button"  size="12" value="#{planoBean.plano.datacreated}" pattern="yyyy/MM/dd" >
+                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+            </p:calendar>
+            <fieldset>
+                <legend>Responsável Empreendimento </legend>
+                <h:panelGroup >
+                    <h:outputLabel for="planoNomeRespEmpr" value="Nome: "  />
+                    <p:inputText id="planoNomeRespEmpr" value="#{planoBean.plano.cidadao.nome}" size="80" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                                           
+                    <p:commandButton process="@this" value="localizar" icon="ui-icon-search" oncomplete="dlgRespEmp.show()" title="Busca" update=":frmBuscaResponsavel" action="#{cidadaoBuscaBean.clear}" /> 
+                    <p:message for="planoRespEmprHidden" showDetail="true" />
+                    <h:inputHidden  value="#{planoBean.plano.cidadao.nome}" required="true" id="planoRespEmprHidden" requiredMessage="Responsável não selecionado" />
+                </h:panelGroup>   
+            </fieldset>
+            <fieldset>
+                <legend>Empreendimento </legend>
+                <h:outputLabel for="planoNomeEmpr" value="Empreendimentento: "  />
+                <p:inputText id="planoNomeEmpr" value="#{planoBean.plano.nomeempreendimento}" size="80"  required="true"     />  
+                <p:message for="planoNomeEmpr" showDetail="true" />
+            </fieldset>
+            <p:separator />
+
+            <p:column colspan="2">
+                <p:commandButton  update="frmPlanNew, :frmPlano, :frmListPlano, :messages"   action="#{planoBean.savePlanoCoop}" 
+                                  oncomplete="handleCompletem(args)" value="Salvar"   />
+                <p:commandButton   oncomplete="dlgNewMon.hide();" update="frmPlanNew" immediate="true"  value="Cancelar" action="#{planoBean.cancelPlanoNew()}" />
+
+            </p:column>
+        </p:fieldset  >                        
+
+
+
+    </h:form>
+
+
+
+</ui:component>
+

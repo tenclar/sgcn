@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="termo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc02909f-dbca-43ad-84c1-4f073afc449e">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="11"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Nbprojetcts\\sgcn\\web\\mci\\beneficio\\impressao\\equipamentos\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[from Cidadao cid
+where cid.equipamentossecretarias.size > 1
+and cid.tipopessoa = 'CID'
+group by cid.endereco.bairro.cidade.nome, cid.nome
+order by cid.endereco.bairro.cidade.nome, cid.nome asc]]>
+	</queryString>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="apelido" class="java.lang.String"/>
+	<field name="associados" class="java.util.List"/>
+	<field name="atividade" class="java.lang.String"/>
+	<field name="atividadeTotal" class="java.lang.Double"/>
+	<field name="beneficioSocial" class="java.lang.String"/>
+	<field name="beneficiohabitacional" class="java.lang.String"/>
+	<field name="benstatus" class="entity.mci.enumerator.EnumStatusBeneficio"/>
+	<field name="cidAtividades" class="java.util.List"/>
+	<field name="cidBenHabits" class="java.util.List"/>
+	<field name="cidbBenSociais" class="java.util.List"/>
+	<field name="cidbensduraveis" class="java.util.List"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="cursos" class="java.util.List"/>
+	<field name="cursosSecretarias" class="java.util.List"/>
+	<field name="cursosecr" class="java.lang.String"/>
+	<field name="datacreated" class="java.util.Date"/>
+	<field name="datanasc" class="java.util.Date"/>
+	<field name="dataupdate" class="java.util.Date"/>
+	<field name="dependentes" class="java.util.List"/>
+	<field name="despesas" class="java.util.List"/>
+	<field name="despesasTotal" class="java.lang.Double"/>
+	<field name="endereco" class="entity.Endereco"/>
+	<field name="equipamento" class="java.lang.String"/>
+	<field name="equipamentosproprios" class="java.util.List"/>
+	<field name="equipamentossecretarias" class="java.util.List"/>
+	<field name="equipsecr" class="java.lang.String"/>
+	<field name="escolaridade" class="entity.mci.Escolaridade"/>
+	<field name="estadocivil" class="entity.mci.EstadoCivil"/>
+	<field name="etinia" class="java.lang.String"/>
+	<field name="expedidor" class="java.lang.String"/>
+	<field name="histdomicilio" class="java.util.List"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="idade" class="java.lang.Integer"/>
+	<field name="instituicao" class="java.lang.String"/>
+	<field name="naturalidade" class="entity.Cidade"/>
+	<field name="necespecial" class="entity.mci.NecEspecial"/>
+	<field name="nis" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="publico" class="entity.mci.Publico"/>
+	<field name="ramoempreendimento" class="entity.mci.RamoEmpreendimento"/>
+	<field name="representante" class="entity.mci.Cidadao"/>
+	<field name="resumo" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="statuscid" class="entity.mci.enumerator.EnumStatusCid"/>
+	<field name="telefones" class="java.util.List"/>
+	<field name="tempomorada" class="java.lang.String"/>
+	<field name="tipopessoa" class="entity.mci.enumerator.EnumTipoPessoa"/>
+	<field name="trabFuncao" class="java.lang.String"/>
+	<field name="trabLocal" class="java.lang.String"/>
+	<field name="trabRem" class="java.lang.Double"/>
+	<group name="cidade" isStartNewColumn="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<frame>
+					<reportElement uuid="df1d128b-cac4-40fb-8836-c4b29196eb06" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="38fccb1a-4db1-423a-8bd2-462a9dc8034c" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="4a781a2f-cbc2-4b97-b88b-b17c3acce90f" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="2"/>
+		</groupFooter>
+	</group>
+	<group name="cidadao">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="44935f90-f006-4c58-b645-0c6e03af30ea" style="Detail" x="47" y="1" width="394" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="b71c8249-96eb-4ea0-bd4d-1a216e42b627" style="Detail" x="477" y="1" width="78" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="40cb7948-764d-4733-ad14-33d770c52722" style="Column header" x="1" y="1" width="46" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6b29a755-a30f-43f5-ab68-e7ee9138b21f" style="Column header" x="441" y="1" width="36" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[CPF:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b8b19506-d59c-464d-b133-723888c77318" style="Column header" x="1" y="15" width="35" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[End.:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="49aa2086-e267-47ad-bab8-aab8062c61e4" style="Detail" x="36" y="16" width="275" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="23d4c149-a188-4e92-b78e-c1df9709ffed" style="Detail" x="328" y="15" width="27" height="15"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="1fca5172-2ffb-495d-b6c3-24fd61d4bbcc" style="Column header" x="355" y="15" width="45" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[Bairro:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="11d3da8e-2740-4264-af43-3982c7066840" style="Detail" x="401" y="15" width="151" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="1" y="31" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement uuid="d6d87dfc-9532-4416-b16a-290d316147d7" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement uuid="8a709c41-b11d-45b7-8366-779cc0dd191b" style="Column header" x="311" y="16" width="17" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[Nº]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="10"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<image>
+				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="10" y="4" width="64" height="64"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="0" y="5" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="0" y="21" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="0" y="37" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="0" y="53" width="555" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EQUIPAMENTOS DE BENEFICIÁRIOS INDIVIDUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="281280b1-8860-467f-a7c4-284ab300ccda" x="105" y="69" width="344" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POR CIDADE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch">
+			<line>
+				<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Immediate">
+			<subreport>
+				<reportElement uuid="7304d377-2dff-4567-ab20-34a6e9c1a0de" x="1" y="0" width="555" height="15"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{equipamentossecretarias})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_equipsecr.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="8639ab5c-68f3-47c4-b9f0-081fbaef9c20" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="82f5cc36-334b-4358-9be6-bfa4dda94dce" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="6268b16e-c0ff-4f3d-8acc-22a4f9fef54a" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="5b3477e0-289f-44b9-b44c-38f44f2cab2c" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="bb6020b0-a567-479f-baad-74d174997514" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

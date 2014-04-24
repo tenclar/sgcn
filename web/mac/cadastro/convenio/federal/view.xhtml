@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+
+              xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form prependId="false" id="frmViewConvenio"  >
+        <p:panel   >  
+
+            <p:dataTable  var="item" value="#{convenioBean.lista}"  
+                          style="text-align: center;" paginatorPosition="bottom"  
+                          paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+                <f:facet  name="header" >
+                    <h:outputText value="RESUMO ACOMPANHAMENTO DE CONVÊNIOS"/>
+                </f:facet>
+                <p:columnGroup type="header" >
+                    <p:row>
+                        <p:column rowspan="2"  headerText="Convênio" style="width: 40px" />
+                        <p:column rowspan="2" headerText="SICONV" style="width: 40px" />
+                        <p:column rowspan="2" headerText="Área" style="width: 60px" />
+                        <p:column rowspan="2" headerText="Ministério" style="width: 40px" />
+                        <p:column rowspan="2" headerText="Objetivos" style="width: 120px" />
+                        <p:column  colspan="3" headerText="Valores" style="width: 160px" />
+                        <p:column rowspan="2" headerText="Contatos" style="width: 40px" />
+                        <!--                            <p:column rowspan="2" headerText="Ações" style="width: 40px" />-->
+
+
+                    </p:row>
+                    <p:row>
+                        <p:column  headerText="Ministério" style="width: 40px" />
+                        <p:column  headerText="Contrapartida" style="width: 40px" />
+                        <p:column  headerText="Total" style="width: 40px" />
+                    </p:row>
+                </p:columnGroup>
+                <p:column style="text-align: center;" headerText="Convênio" >
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>  
+                <p:column style="text-align: center;" headerText="SICONV" >
+
+                    <h:outputText value="#{item.siconv}"/>
+                </p:column> 
+                <p:column style="text-align: center;" headerText="Área" >
+
+                    <h:outputText value="#{item.area}"/>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Ministério" >
+
+                    <h:outputText value="#{item.ministerio.nome}"/>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Objetivos" >
+
+                    <h:outputText value="#{item.objetivos}"/>
+                </p:column>
+
+                <p:column style="text-align: center;" headerText="Valor Ministério" >
+
+                    <h:outputText value="#{item.valorministerio}">
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Valor Contrapartida" >
+
+                    <h:outputText value="#{item.contrapartida}">
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Valor total" >
+
+                    <h:outputText value="#{item.total}"  >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Contatos" >
+                    <p:dataTable value="#{item.contatos}" var="contato"  >
+                        <p:column headerText="Nome"  >
+                            <p:commandLink id="btlinkaddcontato" value="#{contato.apelido}" oncomplete="dlgContatoView.show();" update=":formContatoView"  process="@this" action="#{convenioBean.viewContato()}" >
+                                <f:setPropertyActionListener value="#{contato}" target="#{convenioBean.contato}"  />
+                            </p:commandLink>
+                        </p:column>                       
+                    </p:dataTable>                    
+                </p:column> 
+
+            </p:dataTable>
+
+        </p:panel>   
+        <p:separator />
+
+        <p:panel>
+
+
+            <p:dataTable  value="#{convenioBean.convenio.investimentos}" var="item"
+                          rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                          rowIndexVar="rowIx" >
+                <f:facet  name="header" >
+                    <h:outputText value="Composição do Investimento"/>
+                </f:facet>
+                <p:column headerText="Código" style="width: 40px;" >
+                    <h:outputText value="#{item.natDespesa.id}" />                        
+                </p:column>
+                <p:column headerText="Descrição" style="width: 170px" >
+                    <h:outputText value="#{item.natDespesa.descricao}" />
+                </p:column>
+                <p:column headerText="Proponente" style="width: 60px;text-align: center" >
+                    <h:outputText value="#{item.valorproponente}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Concedente"  style="width: 60px;text-align: center">
+                    <h:outputText value="#{item.valorconcedente}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Total" style="width: 40px;text-align: center" >
+                    <h:outputText value="#{item.valorconcedente + item.valorproponente}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Observação" style="width: 150px">
+                    <h:outputText value="#{item.complemento}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+        <p:separator />
+        <p:panel>
+
+            <p:dataTable  value="#{convenioBean.convenio.contrapartidas}" var="contra" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                          rowIndexVar="rowIx"    >
+                <f:facet  name="header" >
+                    <h:outputText value="Contrapartida"/>
+                </f:facet>
+
+                <p:column headerText="ordem" style="width: 20px" >
+                    <h:outputText value="#{contra.ordem}" />                                                            
+                </p:column>
+                <p:column headerText="Data" >                  
+                    <h:outputText value="#{contra.datacontra}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    </h:outputText>                     
+                </p:column>
+                <p:column headerText="Descrição" >
+                    <h:outputText value="#{contra.descricao}" />                                                            
+                </p:column>
+                <p:column headerText="Status" >
+                    <h:outputText value="#{contra.status}" />                                                            
+                </p:column>
+
+
+            </p:dataTable>
+
+
+        </p:panel>
+        <p:separator />
+        <p:panel>
+
+            <p:dataTable value="#{convenioBean.convenio.historicos}" var="hist" >
+                <f:facet  name="header" >
+                    <h:outputText value="Histórico Externo"/>
+                </f:facet>
+                <p:column headerText="Data"   style="width: 20px; text-align: center;" >
+                    <h:outputText value="#{hist.datainc}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Descrição" style="width: 450px;" >
+                    <h:outputText value="#{hist.descricao}"   />
+                </p:column>
+                <p:column headerText="Anexo"   style="width: 170px;" >
+                    <p:dataTable value="#{hist.anexos}" var="an"    >
+                        <p:column style="width: 30px;text-align: center;"  >
+                            <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" title="download" 
+                                             process="@this" immediate="true" update="dw"  ajax="false"                                                         
+                                             style="width: 16px;height: 16px;"
+                                             >
+                                <p:fileDownload value="#{an.file}"   />   
+                            </p:commandButton>  
+                            <p:commandButton  icon="ui-icon-document-b" title="view" 
+                                              process="@this" immediate="true" update="dw"  ajax="false"  
+                                              onclick="this.form.target = '_blank'"
+                                              style="width: 16px;height: 16px;"
+                                              >
+                                <p:fileDownload value="#{an.file}"  contentDisposition="inline"  />   
+                            </p:commandButton>  
+                        </p:column>
+                        <p:column    >
+                            <h:outputText value="#{an.descricao}"  />
+                        </p:column>
+
+
+                    </p:dataTable>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+        <p:separator />
+
+        <p:panel>
+
+            <p:dataTable value="#{convenioBean.convenio.historicoInternos}" var="hist" >
+                <f:facet  name="header" >
+                    <h:outputText value="Histórico Interno"/>
+                </f:facet>
+                <p:column headerText="Data"   style="width: 20px;text-align: center;" >
+                    <h:outputText value="#{hist.datainc}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Descrição" style="width: 450px;" >
+                    <h:outputText value="#{hist.descricao}"  />
+                </p:column>
+                <p:column headerText="Anexo" style="width: 170px;"    >
+                    <p:dataTable value="#{hist.arquivos}" var="an"    >
+                        <p:column  style="width: 30px;text-align: center;" >
+                            <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" style="width: 16px;height: 16px;" title="download" 
+                                             process="@this" immediate="true" update="dw"  ajax="false"                                                         
+                                             >
+                                <p:fileDownload value="#{an.file}"   />   
+                            </p:commandButton>  
+                            <p:commandButton  icon="ui-icon-document-b" title="view" 
+                                              process="@this" immediate="true" update="dw"  ajax="false"  
+                                              onclick="this.form.target = '_blank'"
+                                              style="width: 16px;height: 16px;"
+                                              >
+                                <p:fileDownload value="#{an.file}"  contentDisposition="inline"  />   
+                            </p:commandButton>  
+                        </p:column>
+                        <p:column   >
+                            <h:outputText value="#{an.descricao}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+        <p:separator />
+        <p:panel>
+            
+                <p:commandButton value="editar" update=":frmConvenio" process="@this"  oncomplete="cadView.close();cadCon.show()" rendered="#{p:ifGranted('ROLE_ADMIN')}" action="#{convenioBean.editConvenioView()}" />
+                <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{convenioBean.imprimirDetalhado()}" title="imprimir" />
+                <p:commandButton id="btfecharview" value="fechar" update="frmViewConvenio" process="@this"  oncomplete="cadView.close();cadlist.show()" />
+            
+        </p:panel>    
+        <p:panel></p:panel>
+
+
+    </h:form>
+</ui:component>
+
+

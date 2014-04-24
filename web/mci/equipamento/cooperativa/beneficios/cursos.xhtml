@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:panel style="margin: 0 auto; "   > 
+        <p:fieldset legend="Equipamentos da Secretaria">
+            <p:outputPanel id="panelInsCursosSecr" >
+                <h:panelGrid columns="3" id="insCursos" >
+                    <h:outputLabel value=" " />
+                    <h:outputLabel value="Curso:" styleClass="titulos" />
+
+                    <h:outputLabel value=" "/>
+                    <p:commandButton value="+" process="@this" update="paneEquipamentoInsert" actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show()"/>                                    
+                    <h:selectOneMenu id="cidlistaCurso" style="width: 150px"  value="#{beneficiadoBean.cursosSecretaria.curso}" converter="IndexedConverter" label="Lista Curso" required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                        <f:selectItem   itemLabel="selecione"  noSelectionOption="true"/>                                                                      
+                        <f:selectItems value="#{cursoBean.selectItemsCurso}" />
+                    </h:selectOneMenu>
+
+
+
+
+                    <p:commandButton value="Inserir" process="panelInsCursosSecr" update="insCursos,tbcursosecr, messages"  />
+                </h:panelGrid>
+            </p:outputPanel>
+            <p:outputPanel id="tbcursosecr" > 
+                <p:dataTable value="#{beneficiadoBean.cidadao.cursosSecretarias}"  var="at"  >
+                    <p:column  headerText="Equipamento" >
+                        <h:outputText value="#{at.curso.nome}" />
+                    </p:column>                                
+
+                    <p:column style="width: 30px;text-align: center" headerText="excluir" >                 
+
+                        <p:commandButton icon="ui-icon-close" update="tbcursosecr" process="@this"   >
+                            <p:collector value="#{at}"  unique="true" removeFrom="#{beneficiadoBean.cidadao.cursosSecretarias}" />
+                        </p:commandButton>                                        
+
+
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+        </p:fieldset>
+    </p:panel>
+
+
+
+
+</html>
+

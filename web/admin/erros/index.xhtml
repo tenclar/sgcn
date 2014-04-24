@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                
+                template="/templates/main.xhtml">
+
+
+    <ui:define name="conteudo" >        
+
+        <p:panel header="Erros" >
+            
+            <h:form   >
+                
+                <p:commandButton  value="throw runtime exception on ajax request"
+                                  process="@form" update="@form"   action="#{exceptionBean.throwRuntimeException}">
+                    
+                </p:commandButton>
+                   
+            </h:form>
+            
+            <h:form >
+                <h:commandButton value="throw runtime exception on ajax request" action="#{exceptionBean.throwRuntimeException}">
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandButton>
+            </h:form>
+            <h:form>
+                <h:commandButton value="throw runtime exception on normal request" action="#{exceptionBean.throwRuntimeException}" />
+            </h:form>
+            <h:form>
+                <h:commandButton value="throw SQL exception on ajax request" action="#{exceptionBean.throwSQLException}">
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandButton>
+            </h:form>
+            <h:form>
+                <h:commandButton value="throw SQL exception on normal request" action="#{exceptionBean.throwSQLException}" />
+            </h:form>
+        </p:panel>
+    </ui:define>
+         
+</ui:composition>
+

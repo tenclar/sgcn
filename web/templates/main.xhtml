@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>SGCN - SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS</title>        
+
+        <link type="text/css" href="${request.contextPath}/temas/theme/theme.css" rel="stylesheet" />
+        <link type="text/css" href="${request.contextPath}/css/layout.css" rel="stylesheet" />
+        <script  type="text/javascript" src="${request.contextPath}/js/mascaras.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/js/util.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/js/primefaces.js"></script>
+
+
+
+
+    </h:head>
+    <h:body          >
+        <div class="containers"> 
+            <f:loadBundle basename="Messages" var="msg"/>  
+            <p:growl id="messages" showDetail="true"   />  
+
+            <p:layout fullPage="true"   >    
+                   <p:layoutUnit position="north" size="60" style="margin: 0; padding: 0; border: 0;" >
+                    <div style="min-width: 1100px; width: 100%;height: 55px; background: #42413C;">
+                        <div  class="barramenu" style="float: right;margin-top: 10px;padding-bottom: 5px" > 
+                            <table class="info"  border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td  > 
+                                        <h:form prependId="false">
+                                            <p:menubar  style="width:350px; height: 20px; font-size: 10px"  >  
+                                                <p:menuitem icon="ui-icon ui-icon-home" value="SGCN"  url="${request.contextPath}/../" />  
+                                                <p:submenu label="Administração " icon="ui-icon ui-icon-bookmark" rendered="#{p:ifGranted(msg.perm_view)}" >                                               
+                                                    <p:menuitem value="Usuário" url="${request.contextPath}/../admin/usuario/" />  
+                                                    <p:menuitem value="permissao" url="${request.contextPath}/../admin/permissao/" />  
+                                                </p:submenu>  
+                                                
+                                              
+                                                
+                                            </p:menubar>
+                                        </h:form> 
+
+                                    </td>
+
+                                    <td width="5%" align="left">&nbsp;</td>
+                                    <td width="5%" ><h:form prependId="false">
+                                            <p:menubar  style="width:130px; height: 20px; font-size: 10px"  >  
+
+                                                <p:submenu label="#{usuarioLoginBean.usersec.login}" icon="ui-icon ui-icon-person"  >                                               
+                                                    <p:menuitem icon="ui-icon ui-icon-clock" value=" #{usuarioLoginBean.usersec.dataloginold.date}/#{usuarioLoginBean.usersec.dataloginold.month+1}/#{usuarioLoginBean.usersec.dataloginold.year-100} #{usuarioLoginBean.usersec.dataloginold.hours}:#{usuarioLoginBean.usersec.dataloginold.minutes}" url="#" />
+
+
+                                                    <p:menuitem icon="ui-icon ui-icon-locked" value="Alterar Senha" process="@this"  update=":frmUsenha" action="#{usuarioLoginBean.alterarSenha}" oncomplete="dlgSenha.show()" />  
+                                                    <p:menuitem icon="ui-icon ui-icon-closethick" value="Sair" url="${request.contextPath}/j_spring_security_logout" />  
+                                                </p:submenu>  
+
+                                            </p:menubar>
+                                        </h:form></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 60px; position: absolute;" > 
+                            <div class="sgcn"> SGCN </div> 
+
+                        </div>
+
+                        <div style="padding-top: 7px;padding-left: 110px;width: 140px; position: inherit" > 
+                            <div class="sgcntexto">Sistema de Gestão e
+                                <br />Controle de Negócios</div>
+                        </div>
+
+
+
+                    </div>
+
+<!--                    <div class="barravermelhha"/>-->
+                </p:layoutUnit>
+                <p:layoutUnit position="center"   style="padding: 0; margin: 0; border: 0;"   > 
+
+                    <div class="conteudo">
+
+                        <ui:insert name="conteudo"/> 
+                    </div>
+
+
+
+                </p:layoutUnit>  
+                <p:layoutUnit position="south" size="20" collapsible="false" resizable="false"  style="padding: 0; margin: 0; border:0;" >  
+                    <div style="text-align: center; font-size: 10px;" > Secretaria de Pequenos Negócios - Departamento de Planejamento - Divisão de Tecnologia da Informação
+                        Avenida Ceará, 1624 Centro - Rio Branco AC </div>           
+                </p:layoutUnit>   
+            </p:layout>     
+            <ui:include src="senha.xhtml"/>
+            <ui:insert name="caixadialogo"/> 
+        </div>
+    </h:body>
+</html>
+

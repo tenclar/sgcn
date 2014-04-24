@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+    <p:panel>
+        <h:form id="formFluxofincon" prependId="false"   >
+            <h:panelGrid >
+                <h:outputLabel value="Data :" />
+                <p:calendar  value="#{fluxoFinBean.fluxofincon.datavalor}" locale="pt" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" showOn="button" maxlength="10" size="10"   >
+                  
+                </p:calendar>
+                 <h:outputLabel value="Valor " />
+                 <p:inputText  onkeypress="mascara(this,valor)" size="10" value="#{fluxoFinBean.fluxofincon.valor}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </p:inputText>
+                <p:separator />
+                <h:outputLabel value="Descrição: " />
+                <p:inputTextarea value="#{fluxoFinBean.fluxofincon.descricao}" rows="8" cols="60" autoResize="false"   />
+                <p:separator />
+                <h:panelGroup>
+                    <p:commandButton action="#{fluxoFinBean.fluxofinconadd()}" value="salvar"  update="formFluxofincon, :frmListFluxo:tabViewFluxo:opTabFluxocon, :messages"  oncomplete="dlgFluxofincon.hide();"  />
+                    <p:commandButton  action="#{fluxoFinBean.fluxofinconcancel()}" value="cancelar" process="@this" update="formFluxofincon"  oncomplete="dlgFluxofincon.hide();" />
+                </h:panelGroup>
+            </h:panelGrid>
+
+        </h:form>
+    </p:panel>
+</ui:component>
+

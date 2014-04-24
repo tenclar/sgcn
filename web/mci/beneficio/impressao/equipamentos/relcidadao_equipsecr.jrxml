@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao_equipsecr" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="dafa8473-eddf-4779-abd8-4f4dec117461">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<queryString language="hql">
+		<![CDATA[from EquipamentosSecretaria]]>
+	</queryString>
+	<field name="cidadao" class="entity.mci.Cidadao"/>
+	<field name="codgrp" class="java.lang.String"/>
+	<field name="dataentrega" class="java.util.Date"/>
+	<field name="equipamento" class="entity.mci.Equipamento"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="patrimonio" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="tipoequipamento" class="entity.mci.enumerator.EnumTipoEquipamento"/>
+	<field name="valor" class="java.lang.Double"/>
+	<variable name="totalValor" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Double" resetType="Page" incrementType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$V{totalValor}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="16">
+			<staticText>
+				<reportElement uuid="e6bf4743-de47-4089-8261-e322c7b023b4" style="Column header" x="53" y="0" width="57" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[GRP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="06445071-241f-4b4f-af71-88427b37fa20" style="Column header" x="382" y="0" width="21" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[QTD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="33d339dc-ebc3-45c3-a007-c3bb1d729b4a" style="Column header" x="509" y="0" width="45" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a4f3d00-7dec-4e56-a1d3-690ba87c3897" style="Column header" x="110" y="0" width="223" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74cead7d-b2e1-4f14-adb6-0b1bdd602281" style="Column header" x="474" y="0" width="35" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7a82224-1bd7-46d6-b0e0-599153c007a3" style="Column header" x="1" y="0" width="52" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Patromônio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9adcd4e-1211-48a6-b740-5e063194b779" style="Column header" x="333" y="0" width="49" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="29223f45-03bb-4627-b5e3-92ac3877181d" style="Column header" x="403" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="663c9676-ded7-45c6-aab1-323d348209a5" style="Detail" stretchType="RelativeToBandHeight" x="382" y="0" width="21" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="84ee8e37-05af-474f-92b6-ea9e91d178df" style="Detail" stretchType="RelativeToBandHeight" x="110" y="0" width="223" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equipamento}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="bca48b1a-8e04-479b-b266-e1d7463574d4" style="Detail" stretchType="RelativeToBandHeight" x="53" y="0" width="57" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codgrp}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e0162269-5537-462c-9b93-16a1f40b45dd" style="Detail" stretchType="RelativeToBandHeight" x="1" y="0" width="52" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patrimonio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="fac852bc-52af-43e1-8160-06068f25f92a" style="Detail" stretchType="RelativeToBandHeight" x="509" y="0" width="45" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement uuid="c565101c-191f-453b-bb48-c9299ae433f5" style="Detail" stretchType="RelativeToBandHeight" x="333" y="0" width="49" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataentrega}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b0272a0e-6c2a-4287-9450-7080aac15b74" style="Detail" stretchType="RelativeToBandHeight" x="474" y="0" width="35" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b3a5260f-88f3-46a3-bbe3-3536d9ad30cc" style="Detail" stretchType="RelativeToBandHeight" x="403" y="0" width="71" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoequipamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement uuid="ab043bd9-8e16-4cac-8c1b-d7812d7c84ea" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="724d0a04-51a3-4abd-bd4b-fdea6cc8abc7" style="Column header" x="443" y="1" width="49" height="15" forecolor="#736343"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="6f2734cf-e357-4761-9c54-ff22fa1635c7" stretchType="RelativeToBandHeight" x="492" y="1" width="63" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalValor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

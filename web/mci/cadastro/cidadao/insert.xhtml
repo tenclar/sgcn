@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"     
+
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:form id="frmCid" prependId="false"   binding="#{cidadaoBean.formCid}"     >    
+         
+        <p:tabView   id="tabView"  widgetVar="tabView"    >
+            
+            <p:tab title="Dados Pessoais" id="tabDadosPessoais" >
+
+                <ui:include src="dadospessoais/index.xhtml"  />                     
+                <p:commandButton value="próximo" process="@this, :frmCid:tabView:fieldIdent, :frmCid:tabView:fieldEndereco, :frmCid:tabView:panelEmprego" update=":frmCid:tabView, :frmCid:tabView:fieldIdent, :frmCid:tabView:fieldEndereco, :frmCid:tabView:panelEmprego,  :messages" oncomplete="if(!args.validationFailed){tabView.select(1);tabViewCarac.select(0);}" action="#{cidadaoBean.salva}" />                       
+
+            </p:tab>
+            <p:tab title="Caracteríticas" id="tabcaracteristicas" disabled="#{cidadaoBean.inserircid}"  >
+                <ui:include src="caracteristicas/index.xhtml"  />                     
+
+            </p:tab>
+
+            <p:tab title="Informações da Composição Familiar" id="tabdependentes">
+                <ui:include src="compfamiliar/index.xhtml"  /> 
+                <h:panelGroup >
+                    <p:commandButton value="voltar" process="@this" immediate="true"  update=":frmCid:tabView" action="#{cidadaoBean.salva}" oncomplete="tabView.select(1);tabViewCarac.select(4);" />                        
+                    <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}" oncomplete="tabView.select(3)" />                                                  
+                </h:panelGroup> 
+            </p:tab>
+            <p:tab title="Despesas com Domicílio" id="tabdespdom" >      
+
+
+                <ui:include src="domicilio/despesas/index.xhtml"  /> 
+                <h:panelGroup >
+                    <p:commandButton value="voltar"  process="@this" immediate="true" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(2)" />                        
+                    <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(4)" />                                                  
+                </h:panelGroup> 
+            </p:tab>
+            <p:tab title="Caracteríticas do Domicílio" id="tabcaracdom" >  
+                <ui:include src="domicilio/caracteristicas/index.xhtml"  /> 
+                <h:panelGroup >
+                    <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(3)" />                        
+                    <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(5)" />                                                  
+                </h:panelGroup> 
+            </p:tab>  
+            <p:tab title="bens duráveis" id="tabbensduraveis" >
+                <ui:include src="bensduraveis/list.xhtml"  />                    
+                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(4)" />                        
+                <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(6)" />                                                  
+            </p:tab>
+            <p:tab title="Cursos Secretaria" id="tabbeneficios">   
+                <ui:include src="beneficiosecretaria/list.xhtml"  />                    
+                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(5)" />                        
+                <p:commandButton value="próximo" process="@this" update=":messages, :frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(7)" />                                                  
+            </p:tab>  
+            <p:tab title="Resumo" id="tabresumos"> 
+
+                <ui:include src="resumo/index.xhtml"   /> 
+
+                <p:separator  />
+                <h:panelGroup >
+                    <!--                    :tabView:selRadioAtiv, selRadioCursos,selRadioEquip, selRadioBen, selRadioBenHabit,  , tabView:fieldIdent, fieldEndereco, panelEmprego,-->
+                    <!--tabView:fieldident, tabView:pResumo,-->
+                    <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(6)" />                        
+                    <p:commandButton id="btsalvarcidadao" value="salvar" process="@this
+                                     tabresumos" 
+                                     update=":frmCid,  :frmBuscaCid,  :messages"
+                                     oncomplete="if(!args.validationFailed){cadlist.show();cadins.close();confImprimir.show();}" 
+                                     actionListener="#{cidadaoBean.saveCidadao}" /> 
+                    <!--                                            <p:commandButton   value="Salvar" process="@this, tabDadosPessoais,  panelDomicilio,  selRadioAtiv, selRadioCursos, 
+                                                                                   selRadioEquip, selRadioBen, selRadioBenHabit, tabresumos" 
+                                                                                   oncomplete="if(!args.validationFailed){cadlist.show();cadins.close();confImprimir.show()" 
+                                                                                   update="fieldident panelEmprego panelDomicilio panelGridDomicilio pResumo frmBuscaCid frmCid cptabela :messages"  
+                                                                                      actionListener="# {cidadaoBean.save}"  />   -->
+
+                    <p:commandButton  value="imprimir" process="@this" onclick="this.form.target = '_blank'"  immediate="true" ajax="false"   action="#{cidadaoBean.saveImprimir}" /> 
+
+
+                </h:panelGroup>
+            </p:tab> 
+        </p:tabView>
+
+        <p:commandButton value="Cancelar"   immediate="true"   update="frmCid, :frmBuscaCid" oncomplete="cadlist.show();cadins.close();"   actionListener="#{cidadaoBean.cancelCidadao()}" /> 
+    </h:form>
+
+</ui:component>
+

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/main.xhtml" >
+
+
+    <ui:define name="conteudo">
+
+
+
+    </ui:define>
+    <ui:define name="caixadialogo"  >
+        
+        <p:dialog header="Login" visible="true"  closable="false" draggable="false" modal="true" resizable="false" width="420">
+            <h2>Spring Security</h2><hr/>
+            <p style="color: yellow; font-size: 14px" >Acesso negado. O usuário não tem permissão.</p>
+            <p>Remote user....:  ${request.getRemoteUser()}</p>
+            <!-- <p>User principal....: $ {request.getUserPrincipal()}</p> -->
+            <a href="${request.contextPath}">Voltar...</a>
+            <a href="../j_spring_security_logout">Logout</a><br/>  
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

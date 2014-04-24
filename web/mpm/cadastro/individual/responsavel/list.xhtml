@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+  
+        <h:form id="frmBuscaResp" prependId="false">
+            <p:outputPanel>  
+                <h:selectOneRadio value="#{cidadaoBuscaBean.tipoBusca}"  >
+                    <f:selectItem itemValue="cpf"  itemLabel="CPF" />                
+                    <!--            <f:selectItem itemValue="nomeresp"  itemLabel="Nome do Responsável"  />-->
+                    <f:selectItem itemValue="nome"  itemLabel="Nome"  />
+
+                </h:selectOneRadio>
+                <h:outputText value="Argumento: " />  
+                <p:inputText  value="#{cidadaoBuscaBean.campoPesquisa}"  style="width:150px" onkeyup="this.value = this.value.toUpperCase();" required="true"  requiredMessage="Campo em Branco" /> 
+                <p:commandButton actionListener="#{cidadaoBuscaBean.localizaCidNaoAssoc()}"
+                                 update=":frmListaResp, :messages"
+                                 icon="ui-icon-search" /> 
+
+            </p:outputPanel> 
+
+        </h:form>
+    <h:form id="frmListaResp" prependId="false">
+            
+                <p:dataTable id="listaresp" var="item" value="#{cidadaoBuscaBean.lista}"  
+                             style="width: 500px;height: auto; text-align: center;"  
+                             paginatorAlwaysVisible="false" rows="8"    
+                             rowKey="#{item.id}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                             rowIndexVar="rowIx" paginatorPosition="bottom"
+                             selectionMode="single"  pageLinks="5"
+                              paginator="true"                   
+
+                             >
+                    <p:column  headerText="#" style=" text-align: center;" >     
+
+                        <p:commandButton icon=" ui-icon-refresh"  value="Selecionar" process="@this"  title="Selecionar" action="#{planoBean.selectCid()}" oncomplete="dlgRespEmp.hide();" update=":frmPlano:tabGeral:tabIdent, :frmPlanNew"    >
+                            <f:setPropertyActionListener value="#{item}" target="#{planoBean.plano.cidadao}" />
+                        </p:commandButton>                                                                         
+
+
+                    </p:column>
+                    <p:column style="text-align: center; width: 80px" headerText="CPF" >                                                    
+                        <h:outputText value="#{item.cpf}" />
+                    </p:column  >
+                    <p:column style="text-align: center;width: 80px" headerText="RG" >                      
+                        <h:outputText value="#{item.rg}"/>
+                    </p:column>                       
+                    <p:column style="text-align: center;width: 120px" headerText="nome" >                       
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column> 
+                    
+
+                </p:dataTable>
+            
+        </h:form>
+    
+</ui:component>
+

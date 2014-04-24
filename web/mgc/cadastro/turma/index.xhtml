@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+
+                template="/templates/mgc.xhtml">
+    <ui:define name="conteudo" >
+        <div class="conteudo"> 
+
+            <p:panel  header="Lista de Turmas Cadastradas" closeSpeed="0" widgetVar="cadlist" closable="true"  >
+                <ui:include src="list.xhtml"/>
+            </p:panel>
+            <!--            <p:panel  header="Cadastro de Turma" closeSpeed="0" widgetVar="cadnew" visible="false" closable="true" style="min-width: 900px;height: 530px" >
+                            <ui:include src="new.xhtml" /> 
+                        </p:panel>-->
+
+        </div>
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <p:dialog header="Localizar Endereço" widgetVar="dlgBuscaEnd"  resizable="true" modal="true" position="top"  width="700"   > 
+            <ui:include src="endereco/list.xhtml" />
+        </p:dialog>
+        <p:dialog header="Adicionar Endereço" widgetVar="dlgEndereco"  resizable="true" modal="true"  width="600" >
+
+            <ui:include src="endereco/endereco/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Cadastro de Bairro" widgetVar="dialogBairro"  resizable="true" modal="true"  width="600">
+
+            <ui:include src="endereco/bairro/insert.xhtml" />
+
+        </p:dialog>
+        <p:dialog header="Cadastro de Turma" widgetVar="dlgTurmaNew" resizable="true" modal="true"  width="1100" > 
+            <ui:include src="new.xhtml" /> 
+        </p:dialog>
+
+        <p:dialog header="Cadastro de Cursos" widgetVar="dlgCurso"  resizable="true" modal="true" width="1000">
+            <ui:include src="curso.xhtml" />
+        </p:dialog>
+        <p:dialog header="Cadastro de Insituição" widgetVar="dlgTurmaLocal"  resizable="true" modal="true" width="1000">
+            <ui:include src="instituicao.xhtml" />
+        </p:dialog>
+        <p:dialog header="Lista de Alunos da Turma" widgetVar="dlgAlunosTurma" position="top" resizable="true" modal="true"  width="800">
+            <ui:include src="cidadao/list.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserção de Alunos na Turma" widgetVar="dlgCidadaoTurma" position="top" resizable="true" modal="true"  width="800" height="650">
+            <ui:include src="cidadao/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserção de Alunos na Turma Por Cooperativa" widgetVar="dlgCooperativaTurma" position="top" resizable="true" modal="true"  width="1000">
+            <ui:include src="cooperativa/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserção de Alunos, da cooperativa, na Turma" widgetVar="dlgCidCoopTurma" position="top" resizable="true" modal="true"  width="800">
+            <ui:include src="cooperativa/cidadao/insert.xhtml" />
+        </p:dialog>
+
+        <p:confirmDialog id="confExcluir" message="Deseja Excluir ?"  
+                         header="Aviso" severity="alert" widgetVar="confExcluir">  
+            <h:form prependId="true">         
+
+                <p:commandButton id="confirm" value="sim"  oncomplete="confExcluir.hide();"  action="#{turmaBean.delCidadao()}" /> 
+                <p:commandButton id="decline" value="não" oncomplete="confExcluir.hide()"  />   
+            </h:form>
+        </p:confirmDialog>  
+    </ui:define>
+</ui:composition>

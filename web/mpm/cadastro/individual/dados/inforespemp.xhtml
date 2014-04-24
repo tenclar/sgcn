@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+              
+              xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:panelGroup id="planResp1" >
+
+        <fieldset>
+            <legend>Responsável Empreendimento </legend>
+
+
+            <h:panelGrid columns="2">
+                <p:fieldset legend="Dados Pessoais" >
+                    <h:panelGrid >
+                        <h:panelGroup >
+                            <h:outputLabel for="planoRespcpf" value="CPF: " styleClass="titulos"  />
+                            <p:inputText id="planoRespcpf" value="#{planoBean.plano.cidadao.cpf}" size="8" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                            <h:outputLabel for="planoResprg" value="RG: " styleClass="titulos"  />
+                            <p:inputText id="planoResprg" value="#{planoBean.plano.cidadao.rg}/#{planoBean.plano.cidadao.expedidor}" size="15" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                            <h:outputLabel for="planoRespEmp1" value="Nome: " styleClass="titulos"  />
+                            <p:inputText id="planoRespEmp1" value="#{planoBean.plano.cidadao.nome}" size="60" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                            <h:outputLabel for="planoRespApelido" value="Apelido: "  styleClass="titulos" />
+                            <p:inputText id="planoRespApelido" value="#{planoBean.plano.cidadao.apelido}" size="10" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:outputLabel for="planoRespnis" value="NIS " styleClass="titulos" />
+                            <p:inputText id="planoRespnis" value="#{planoBean.plano.cidadao.nis}" size="11" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                            <h:outputLabel for="planoRespcivil" value="Estado Civil " styleClass="titulos" />
+                            <p:inputText id="planoRespcivil" value="#{planoBean.plano.cidadao.estadocivil.descricao}" size="25" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                       
+                            <h:outputLabel for="planoRespnasc" value="Data Nascimento: " styleClass="titulos"  />
+                            <p:calendar id="planoRespnasc" value="#{planoBean.plano.cidadao.datanasc}" size="8" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      >
+                                <f:convertDateTime pattern="dd/MM/yyyy"  />
+                            </p:calendar>
+                        </h:panelGroup> 
+                    </h:panelGrid>
+                    <p:message for="planoRespEmpHidden1" showDetail="true" />
+                    <h:inputHidden  value="#{planoBean.plano.cidadao.nome}" required="true" id="planoRespEmpHidden1" requiredMessage="Responsável não selecionado" />
+                </p:fieldset>
+
+                <p:fieldset legend="Telefones">
+
+                    <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: auto;">
+                        <p:outputPanel id="opPanel">
+                            <p:dataTable id="dtTel" var="item" style="width: 240px" value="#{planoBean.plano.cidadao.telefones}">
+                                <p:column >
+                                    <h:outputText value="#{item}" />
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </div>                        
+
+                </p:fieldset>
+            </h:panelGrid>
+        </fieldset>
+
+        <p:tabView id="tabInfoResp" widgetVar="tabInfoResp"  rendered="#{not empty planoBean.plano.cidadao.nome}"   >
+            <p:tab title="Caracteríticas do Domicílio" id="tabcaracdom" >  
+                <ui:include src="../domicilio/lista/index.xhtml"  /> 
+                <p:separator />
+                <h:panelGroup >
+                    <!--                    <p:commandButton value="voltar" process="@this" immediate="true"  update="tabIdent" oncomplete="tabIdent.select(0);" />                        -->
+                    <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" oncomplete="tabInfoResp.select(1);" />                                                  
+                </h:panelGroup> 
+            </p:tab>  
+            <p:tab title="bens duráveis" id="tabbensduraveis" >
+                <ui:include src="../bensduraveis/lista/index.xhtml"  />                    
+                <p:commandButton value="voltar" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" immediate="true" oncomplete="tabInfoResp.select(0);" />                                                                     
+                <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" oncomplete="tabInfoResp.select(2);" />                                                  
+            </p:tab>
+            <p:tab title="Benefícios" id="tabbeneficios"   >   
+                <p:tabView id="tabPlanBenef" widgetVar="tabPlanBenef"  >
+                    <p:tab title="Cursos">
+                        <ui:include src="../beneficiosecretaria/curso.xhtml"  />  
+                        <p:separator />
+                        <p:commandButton value="voltar" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" immediate="true" oncomplete="tabInfoResp.select(1);" />                                                                     
+                        <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp:tabPlanBenef" oncomplete="tabPlanBenef.select(1);" />                                                  
+                    </p:tab>
+                    <p:tab title="Equipamentos" >
+                        <ui:include src="../beneficiosecretaria/equipamento.xhtml"  />                    
+
+                        <p:commandButton value="voltar" process="@this" immediate="true"  update="tabPlanBenef" oncomplete="tabPlanBenef.select(0);" />                        
+                        <p:commandButton value="avançar" process="@this"   update=":frmPlano:tabGeral:tabIdent" oncomplete="tabIdent.select(1);" />                        
+
+                    </p:tab>
+                </p:tabView>
+            </p:tab>
+
+        </p:tabView>
+    </h:panelGroup> 
+</ui:component>
+

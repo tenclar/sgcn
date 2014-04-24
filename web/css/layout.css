@@ -1,0 +1,273 @@
+
+body {
+    /*font: 10px "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;*/
+    background: #42413C; 
+
+    margin: 0;
+    padding: 0;
+
+    font-size: 10px;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+
+
+}
+.container {
+    width: auto;        
+    height: 600px;        
+    /*background: #DADADA;*/
+    margin: 0 auto; /* o valor automático nos lados, combinado com a largura, centraliza o layout */
+
+}
+
+.header {
+    /*    background: #023401;*/
+    background: #063839;
+    height: 100px;
+    background:-webkit-gradient(linear,top 10%, 60% 30%, from(#023401), to(#fff));
+    background: -moz-linear-gradient(top, #023401 80%, #fff 90%); 
+}
+
+.header .imgcabecalho { 
+
+    background-image: url(../images/cabecalho.jpg);
+    min-width: 1000px;
+
+    height: 50px;    
+    /*background-size:auto ; */
+    background-repeat: no-repeat;
+    background-attachment: none;
+    background-position: center;
+
+
+}
+.imcab{
+    margin: 0;
+    padding: 0;    
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    font-weight: bold;    
+    /*    background-image: url(../images/mci/header.jpg);*/
+    background-image: url(../images/cabecalho.jpg);
+    min-width: 1000px;
+
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;    
+    -webkit-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    -khtml-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+.barravermelhha{
+
+    width: 100%;    
+    height: 8px;
+
+    margin-top: 5px;
+    background-color: darkred;
+
+}
+.barramenu{
+
+    width: 80%;
+    height: 30px;
+    padding: 0;
+    margin: 2px auto;        
+    background-color: #D8E0A8;    
+    border: 2px;       
+    border-style: solid;
+    border-color: #A8BB3C;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+
+}
+.barramenu .info{
+    width: 30%;
+    display: inline;
+    padding: 0;
+    margin-top: 0;
+
+    color: #000;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    font-weight: bold; 
+
+
+}
+
+.content {
+
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    background: #DADADA;
+
+    /*
+    background-color: #DADADA;
+    margin: 0 auto;
+    padding: 0; */
+
+
+
+}
+.conteudo {
+
+    height: 100%;/*
+
+    margin: 0 auto;
+    padding: 0;
+/*        background-color: #FAFAF4;*/
+        
+        border: 0;
+/*        border-style: solid;
+        border-color: #A8BB3C;*/
+    font-size: 10px;
+    background-image: url(../images/fundo-verde.jpg) !important;;
+    background-repeat: no-repeat;
+    background-position: center;
+   background-size: 100% 100%;
+}
+
+.tabela{
+    margin: 0px auto;
+    padding: 60px;
+}
+
+.footer {
+
+    height: 63px;
+    padding: 10px 0;
+    position: relative;
+    background-image: url(../images/rodape.jpg);
+    background-repeat:repeat-x;
+    background-color: #DADADA;
+
+
+}
+.footer p{
+    padding: 10px 0;
+    font-family: "Verdana",Arial,Helvetica,sans-serif;
+    font-size: 10px;    
+    text-align: center;    
+    font-weight: bold;
+
+}
+
+.footer2{
+
+    height: 15px;
+    background-color: #000;
+    display: block;
+
+}
+.grid{
+    text-align: center;
+    margin: 0 auto;    
+    border: 2px;       
+    border-style: solid;
+    border-color: #A8BB3C;  
+
+
+
+}
+a.sair:link {
+    color:#414958;
+    text-decoration: underline; /* a não ser que você estilize seus links para que pareçam extremamente únicos, é melhor utilizar links sublinhados para uma identificação visual mais rápida. */
+}
+a.sair:visited {
+    color: #4E5869;
+    text-decoration: underline;
+}
+a.sair:hover, a.sair:active, a.sair:focus { /* esse grupo de seletores dará ao navegador que estiver usando um teclado a mesma experiência de hover do que uma pessoa usando um mouse. */
+    text-decoration: none;
+}
+.dados {
+    width: 100%;
+    border: 2px;
+    border-style:  solid;
+
+}
+
+.titulos {
+
+    font-weight: bold;
+}
+
+.sgcn {
+    font-family: Impact;
+    font-size: 45px;
+    font-style: italic;
+    color: #FFF;
+
+
+
+
+}
+.sgcntexto {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-top-style: solid;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-left-style: none;
+    border-top-color: #F90;
+    border-right-color: #F90;
+    border-bottom-color: #F90;
+    border-left-color: #F90;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 2px;
+}
+
+
+.ui-layout-north {
+    z-index:20 !important;
+    overflow:visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+}
+/*.ui-layout-unit-top {
+    z-index:20 !important;
+    overflow:visible !important;;
+}
+
+.ui-layout-unit-top .ui-layout-bd {
+    overflow:visible !important;
+}*/
+.ui-menubar{
+      background: #D8E0A8; 
+}
+.wijmo-wijmenu {
+    background: #D8E0A8; 
+}
+/*.ui-datatable-odd {
+background-color:#C9D1F7;
+}
+
+.ui-datatable-even {
+background-color:#DDE3FD;
+}*/
+
+.ui-datatable .ui-datatable-data .even-row td{
+    background-color: #ffedad;
+    color: #000;
+    border-right: solid 0px #4e6769;
+}
+
+.ui-datatable .ui-datatable-data .odd-row td{
+    /*background-color:#ffffff;*/
+    border-right: solid 0px #4e6769;
+}
+.datatablecolunas {
+   text-align: center;
+   alignment-adjust: central;
+   
+}

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+
+
+    <p:outputPanel id="opTabFluxoprop" >
+        <p:dataTable value="#{fluxoFinBean.convenio.listafluxofinproponente}" var="dados" 
+                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+            <p:column  style="width: 80px; text-align: center;" >
+                <f:facet name="header">
+                    <p:commandButton icon="ui-icon-plus"  process="@this" update=":formFluxofinprop" oncomplete="dlgFluxofinprop.show()"  action="#{fluxoFinBean.fluxofinpronew()}" />
+                </f:facet>
+                <p:commandButton icon="ui-icon-refresh" title="alterar" process="@this" update=":formFluxofinprop" oncomplete="dlgFluxofinprop.show()"  >
+                    <f:setPropertyActionListener value="#{dados}" target="#{fluxoFinBean.fluxofinprop}"  />                                    
+                </p:commandButton>  
+                <p:commandButton icon="ui-icon-close" title="excluir" process="@this" update=":frmListFluxo:tabViewFluxo:opTabFluxoprop" oncomplete="confExcluirprop.show()" >
+                    <f:setPropertyActionListener value="#{dados}" target="#{fluxoFinBean.fluxofinprop}"  />   
+                </p:commandButton>
+            </p:column>
+            <p:column headerText="Data" footerText=""  style="width: 80px; text-align: center;" >
+                <h:outputText value="#{dados.datavalor}"  >
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+
+            </p:column>
+            <p:column headerText="Valor"   style="width: 120px; text-align: right;"  >
+                <h:outputText value="#{dados.valor}" >
+                    <f:convertNumber pattern="##,##0.00#"  />
+                </h:outputText>
+                <f:facet name="footer" >
+                      <h:outputText value="#{fluxoFinBean.convenio.totalFluxoFinProp}" >
+                    <f:convertNumber pattern="##,##0.00#"  />
+                </h:outputText>
+                    
+                </f:facet>
+            </p:column>
+            <p:column headerText="Descrição" footerText="" style="width: 500px;" >
+                <h:outputText value="#{dados.descricao}" />
+            </p:column>
+            
+                   
+              
+        </p:dataTable>
+    </p:outputPanel>
+
+
+
+</ui:component>
+

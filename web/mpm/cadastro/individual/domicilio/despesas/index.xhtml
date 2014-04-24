@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+        
+         <p:panel id="panelCidDespesa" >
+                        <h:panelGrid columns="4" id="insCidDespesa" >
+                            <h:outputLabel value=" " />
+                            <h:outputLabel  value="Tipo de Despesa: "  />
+                            <h:outputLabel  value ="R$: "/>
+                            <h:outputLabel value=" "/>                            
+                            <p:commandButton value="+" process="@this" update="panelDespesaInsert"  oncomplete="dlgDespesa.show()"  actionListener="#{despesaBean.newDespesa}" />                                    
+                            <h:selectOneMenu id="cidtipodespesa" value="#{cidadaoBean.cidDespesas.despesa}" converter="IndexedConverter" label="Tipo de Despesa" required="true" style="width: 130px"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                <f:selectItem   itemLabel="selecione"  noSelectionOption="true"/>                                    
+                                <f:selectItems value="#{cidadaoBean.selectItemsDespesas}" />
+                            </h:selectOneMenu>                            
+                            <p:inputText size="10" value="#{cidadaoBean.cidDespesas.valor}" >
+                                <f:convertNumber pattern="##,##0.00#"  />
+                            </p:inputText>
+                            <p:commandButton value="Adicionar" process="panelCidDespesa" actionListener="#{cidadaoBean.newDespesa}" update="insCidDespesa,tbDespesa,:messages"  />                                                       
+                        </h:panelGrid>                   
+                        <p:outputPanel id="tbDespesa">
+
+                            <p:dataTable value="#{cidadaoBean.cidadao.despesas}" var="item"    >
+                                <f:facet name="header">
+                                    <h:outputText value="Lista de Despesas"/>
+                                </f:facet>
+                                <p:column headerText="Descrição" >
+
+                                    <h:outputText value="#{item.despesa.descricao}" />
+                                </p:column>
+                                <p:column headerText="Valor" style="width: 80px;" >
+
+                                    <h:outputText value="#{item.valor}" >
+                                        <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column style="width: 80px;text-align: center" headerText="ações" >                              
+
+                                    <p:commandButton icon=" ui-icon-close" update="tbDespesa" process="@this"   >
+                                        <p:collector value="#{item}"  unique="true" removeFrom="#{cidadaoBean.cidadao.despesas}" />
+                                    </p:commandButton>
+                                </p:column>
+                                <p:columnGroup type="footer">
+                                    <p:row>
+                                        <p:column footerText=""/>
+                                        <p:column footerText="#{cidadaoBean.cidadao.despesasTotal}"/>
+                                        <p:column footerText=""/>
+                                    </p:row> 
+                                </p:columnGroup>
+
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </p:panel>
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:panel id="pequipamento"  > 
+        <p:fieldset legend="Equipamentos da Secretaria">
+            <p:commandButton value="adicionar" process="@this" update="frmNewEquip" oncomplete="dlgEquipNew.show()" action="#{beneficiadoBean.equipSecrNew()}" />
+        
+            <p:outputPanel id="tbEquip" >                 
+<!--                  <p:message for="ih"  showDetail="true"  /> 
+        <h:inputHidden id="ih" value="# {beneficiadoBean.cidadao.equipamentossecretarias.size()}" rendered="true" label="lista de Associados" validatorMessage="nenhum equipamanto incluido"  >
+            <f:validateLongRange minimum="1" />
+        </h:inputHidden>            -->
+                <p:dataTable value="#{beneficiadoBean.cidadao.equipamentossecretarias}"  var="at"  >
+                    <p:column style="width: 250px"  headerText="Equipamento" >                                
+                        <p:cellEditor>
+                            <f:facet name="output">                                
+                                <h:outputText value="#{at.equipamento.nome}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu   value="#{at.equipamento}" converter="IndexedConverter" label="Lista Equipamentos" required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                    <f:selectItem   itemLabel="selecione"  noSelectionOption="true"/>                                                                      
+                                    <f:selectItems value="#{equipamentoBean.selectItemsEquipamentos}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+
+                    </p:column>
+                    <p:column  style="width: 80px" headerText="Patrimônio" >                                
+                        <p:cellEditor>
+                            <f:facet name="output">                                
+                                <h:outputText value="#{at.patrimonio}" />                                                              
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{at.patrimonio}"/>
+                            </f:facet>
+                        </p:cellEditor>
+
+                    </p:column>
+                    <p:column  style="text-align: center;width: 80px" headerText="Estado" >                                
+                        <p:cellEditor>
+                            <f:facet name="output">                                
+                                <h:outputText value="#{at.estado}"  />                                                                 
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu style="width: 150px"   value="#{at.estado}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Estado"  >
+                                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                                    <f:selectItem  itemLabel="ÓTIMO" itemValue="OTIMO"  />
+                                    <f:selectItem  itemLabel="BOM" itemValue="BOM"  />
+                                    <f:selectItem  itemLabel="REGULAR" itemValue="REGULAR"  />
+                                    <f:selectItem  itemLabel="INSERVÍVEL" itemValue="INSERVIVEL"  />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+
+                    </p:column>
+                    <p:column  style="text-align: center;width: 80px" headerText="Valor" >                                
+                        <p:cellEditor>
+                            <f:facet name="output">                                
+                                <h:outputText value="#{at.valor}"  >                            
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{at.valor}" style="text-align: center;" >
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="editar" style="text-align: center;width: 20px" >
+                        <p:rowEditor  />                        
+                    </p:column>    
+                    <p:column style="text-align: center;width: 20px" headerText="excluir" >            
+                        <p:commandButton icon="ui-icon-close"  immediate="true"  oncomplete="confirmation.show()"    >
+                            <f:setPropertyActionListener value="#{at}" target="#{beneficiadoBean.equipamentosecretaria}" />
+                        </p:commandButton>                                                                                       
+                    </p:column>
+                    <!--                            <p:columnGroup type="footer"> 
+                                                    <p:row>  
+                                                        <p:column footerText="Total:" style="text-align: right"  />  
+                                                        <p:column footerText="" /> 
+                                                        <p:column />  
+                                                    </p:row>
+                                                </p:columnGroup>-->
+                </p:dataTable>
+            </p:outputPanel>
+        </p:fieldset>
+    </p:panel>
+
+
+
+
+</html>
+

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"    >
+
+    <p:dialog  header="Alterar Senha " widgetVar="dlgSenha"   modal="true"  resizable="true"  showEffect="slide" width="500">
+        <h:form prependId="false" id="frmUsenha" >
+            <p:panel>
+                <h:panelGrid id="panelUsenhaInsert" columns="2" >
+                    <h:outputLabel for="uLogin" value="Login:" />
+                    <h:panelGrid columns="2">
+                        <p:inputText id="uLogin"  value="#{usuarioLoginBean.usuario.login}" onkeydown="this.value = this.value.toLowerCase();" onkeyup="this.value = this.value.toLowerCase();" size="30"  readonly="true" disabled="true" styleClass="ui-inputfield ui-widget  ui-corner-all"  />
+                    </h:panelGrid >
+                    <h:outputLabel for="uSenha" value="Senha:" />
+                    <h:panelGrid columns="2">
+                        <h:inputSecret id="uSenha" label="Campo Senha"  value="#{usuarioLoginBean.usuario.senha}" onkeydown="this.value = this.value.toLowerCase();" onkeyup="this.value = this.value.toLowerCase();" size="30"  required="true" styleClass="ui-inputfield ui-widget  ui-corner-all"  />
+                        <p:message for="uSenha" />
+                    </h:panelGrid >
+
+                </h:panelGrid>
+                <p:column colspan="2">
+                    <p:commandButton  update="panelUsenhaInsert, :messages " oncomplete="if(!args.validationFailed){dlgSenha.hide()}"    actionListener="#{usuarioLoginBean.updateUsuario()}" value="Salvar"/>
+                    <p:commandButton   update="frmUsenha, :messages" oncomplete="dlgSenha.hide();"  immediate="true"  action="#{usuarioLoginBean.cancelUsuario}" value="Cancelar"/>
+                </p:column>
+            </p:panel>
+        </h:form>
+
+    </p:dialog>
+
+
+</ui:component>
+

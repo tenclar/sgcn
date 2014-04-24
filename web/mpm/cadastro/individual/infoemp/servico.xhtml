@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    
+        
+         
+
+                <p:fieldset id="panelServicos" legend="Serviços Oferecidos no Mercado"  style="margin: 0 auto; " >
+                    <h:panelGrid id="insPanelServicos" columns="4"  >
+                        <h:outputLabel value=" " />
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Servico:" />                                        
+                            <p:message for="planolistaServicos" display="icon"  />                                        
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value= "Valor: " />
+                            <p:message for="planoServicoValor" display="icon" />                                        
+                        </h:panelGrid>                                     
+
+                        <h:outputLabel value=" " />
+                        <p:commandButton value="+" oncomplete="dlgServico.show()" process="@this" actionListener="#{servicoBean.newServico}" update=":frmServico" /> 
+                        <h:selectOneMenu id="planolistaServicos"  style="width: 200px" value="#{planoBean.servicos.servico}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista de Serviços"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{servicoBean.selectItemsServico}" />
+                        </h:selectOneMenu>
+
+                        <p:inputText id="planoServicoValor" onkeypress="mascara(this, valor)" autocomplete="off" value="#{planoBean.servicos.valor}" size="5" rendered="true" label="Valor" >
+                           
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </p:inputText>
+
+                        <p:commandButton value="Inserir" process="panelServicos" update="tabProd:dtServicos, insPanelServicos :messages" action="#{planoBean.addServico}" >
+                            <p:collector value="#{planoBean.servicos}" unique="true" addTo="#{planoBean.plano.servicos}"  />
+                        </p:commandButton>
+
+                    </h:panelGrid>                               
+
+                    <p:outputPanel id="dtServicos" >
+                        <p:dataTable  value="#{planoBean.plano.servicos}" var="item" emptyMessage="${msg.lista_vasia}"  >
+                            <p:column  headerText="Serviço" >                                                     
+                                <h:outputText value="#{item.servico.nome}" />
+                            </p:column>
+                            <p:column  headerText="Valor" >                                                                     
+                                <h:outputText value="#{item.valor}" >
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" >
+                                <f:facet name="header">
+                                    <h:outputText value="ações"/>
+                                </f:facet>                                        
+                                <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabProd:dtServicos"  >
+                                    <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.servicos}"  />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>  
+                </p:fieldset>  
+                <p:separator />                
+                     <p:commandButton value="voltar" update="tabProd, :messages" process="@this" immediate="true"  oncomplete="tabProd.select(0)" />
+                    <p:commandButton value="avançar" update="tabProd,:frmPlano:tabGeral :messages" process="@this"  oncomplete="if(!args.validationFailed){tabGeral.select(2)}" />
+         
+    
+</ui:component>
+

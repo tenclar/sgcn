@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition         xmlns="http://www.w3.org/1999/xhtml"
+                        xmlns:p="http://primefaces.org/ui"
+                        xmlns:h="http://java.sun.com/jsf/html"
+                        xmlns:ui="http://java.sun.com/jsf/facelets"
+                        xmlns:f="http://java.sun.com/jsf/core"
+                        template="/templates/mci.xhtml">
+
+
+    <ui:define name="conteudo" >
+        <!--        <div class="conteudo">     </div>-->
+        <!--            <p:outputPanel id="opCoop" >
+                           </p:outputPanel>-->
+        <p:panel id="panelCoopIns" header="Cadastro Pessoa Jurídica"  visible="false" closeSpeed="0"   widgetVar="coopins" closable="true" style="min-width: 1000px"   >             
+            <ui:include src="insert.xhtml"  />    
+        </p:panel>
+        <p:panel id="panelcadlist" header="Lista de Empresas"  widgetVar="cooplist" closable="true" closeSpeed="0"   >
+            <ui:include src="list.xhtml"  />    
+        </p:panel>
+
+
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <p:dialog header="Cadastro " widgetVar="dlgCoopNew" resizable="true"  modal="true"  width="800"   > 
+            <ui:include src="new.xhtml" /> 
+        </p:dialog>
+        <p:dialog header="Localizar Endereço" widgetVar="dlgBuscaEnd"  resizable="true" modal="true" position="top"  width="700"   > 
+            <ui:include src="endereco/list.xhtml" />
+        </p:dialog>
+        <p:dialog header="Adicionar Endereço" widgetVar="dlgEndereco"  resizable="true" modal="true" position="top" width="600" >
+
+            <ui:include src="endereco/endereco/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Cadastro de Bairro" widgetVar="dialogBairro"  resizable="true" modal="true"  width="500">
+
+            <ui:include src="endereco/bairro/insert.xhtml" />
+
+        </p:dialog>
+
+        <p:dialog header="Localiza Cidadão" widgetVar="dlgCid"  position="top"  resizable="true" modal="true" showEffect="slide" width="800">            
+            <ui:include src="associados/index.xhtml" />            
+        </p:dialog>
+        <p:dialog header="Localiza Representante" widgetVar="dlgRepresentante"  position="top"  resizable="true" modal="true" showEffect="slide" width="800">            
+            <ui:include src="representante/list.xhtml" />            
+        </p:dialog>
+        <p:confirmDialog id="confImprimir" message="Deseja Imprimir ?"  
+                         header="Impressão" severity="alert" widgetVar="confImprimir">  
+            <h:form prependId="true">         
+
+                <p:commandButton id="confirm" value="sim"  onclick="confImprimir.hide();
+                        document.getElementById('cbBusca').focus();
+                        this.form.target = '_blank'"  immediate="true" ajax="false"   action="#{cooperativaBean.imprimiritem()}" /> 
+                <p:commandButton id="decline" value="não" onclick="confImprimir.hide()" type="button" />   
+            </h:form>
+        </p:confirmDialog> 
+
+
+    </ui:define>
+</ui:composition>

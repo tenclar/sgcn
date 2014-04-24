@@ -1,0 +1,177 @@
+/* 
+    Document   : layout
+    Created on : 16/11/2011, 10:59:27
+    Author     : Tenclar Valus
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/* ~~ esse conteiner de largura fixa cerca todos os outros elementos ~~ */
+
+body {
+	font: 10px "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+	background: #DADADA;
+	margin: 0;
+	padding: 0;
+        
+	
+        
+}
+.containers {
+	width: 1000px;        
+        height: 90%;       
+	margin: 0 auto; /* o valor automático nos lados, combinado com a largura, centraliza o layout */
+        
+}
+.header {
+    background: #063839;
+    /*background:-webkit-gradient(linear, 100% 0%, 60% 100%, from(#063839), to(#fff));*/
+	/*background: -moz-linear-gradient(top, #063839 80%, #fff 90%); */
+    height: 120px;
+}
+
+.header .imgcabecalho { 
+   padding-top: 15px;
+  
+     background-image: url(../images/cabecalho.jpg);
+    width: auto;
+    height: 87px;    
+    /*background-size:auto ; */
+    background-repeat: no-repeat;
+    background-attachment: none;
+    background-position: center;
+   
+       
+}
+.barravermelhha{
+    
+    width: 100%;    
+    height: 10px;
+    margin-top: 5px;
+    background-color: darkred;
+    
+    
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 3px;
+    border-bottom-width: 10px;
+    border-top-color: white;
+    border-bottom-color: white;
+    border-left-style: none;
+    border-right-style: none;
+}
+.imcab{
+    
+     background-image: url(../images/cabecalho.jpg);
+    width: auto;
+    height: 100px;    
+    /*background-size:auto ; */
+    background-repeat: no-repeat;
+    background-attachment: none;
+    background-size: 100%;
+    
+    
+}
+
+.barramenu{
+    width: 98%;
+    height: 40px;
+    padding: 0;
+    margin: 3px auto;        
+    background-color: #D8E0A8;    
+    border: 2px;       
+    border-style: solid;
+    border-color: #A8BB3C;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+     
+    
+}
+.barramenu .info{
+    
+    width: 25%;
+    display: inline;
+     padding: 0;
+     margin-top: 0;
+   
+    
+    /* position: relative;  */
+    
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold; 
+    
+    
+}
+
+.content {
+        background-color:#DADADA ;
+        margin: 0 auto;
+	padding: 0;
+        height: 100%;
+        
+}
+.conteudo {
+    width: 100%;    
+    height: 380px;
+    margin: 30px auto;
+
+}
+.tabela{
+    margin: 0 auto;
+}
+
+.footer {
+                
+        height: 63px;
+	padding: 10px 0;
+	position: relative;
+        background-image: url(../images/rodape.jpg);
+        background-repeat: repeat-x;
+        background-color: #DADADA;
+        
+  
+}
+.footer p{
+    padding: 10px 0;
+    font-family: "Verdana",Arial,Helvetica,sans-serif;
+    font-size: 10px;    
+    text-align: center;    
+    font-weight: bold;
+    background-color: #fff;
+    
+}
+
+.footer2{
+  
+    height: 4px;
+    background-color: #000;
+    display: block;
+    
+}
+.grid{
+    text-align: center;
+    margin: 0 auto;    
+    border: 2px;       
+    border-style: solid;
+     border-color: #A8BB3C;  
+
+    
+
+}
+   a.sair:link {
+	color:#414958;
+	text-decoration: underline; /* a não ser que você estilize seus links para que pareçam extremamente únicos, é melhor utilizar links sublinhados para uma identificação visual mais rápida. */
+}
+a.sair:visited {
+	color: #4E5869;
+	text-decoration: underline;
+}
+a.sair:hover, a.sair:active, a.sair:focus { /* esse grupo de seletores dará ao navegador que estiver usando um teclado a mesma experiência de hover do que uma pessoa usando um mouse. */
+	text-decoration: none;
+}

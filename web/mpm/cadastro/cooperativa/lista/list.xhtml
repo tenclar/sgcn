@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    
+        <h:form id="frm" prependId="false">
+            
+
+            <p:outputPanel id="dtLista">
+                <p:dataTable var="item" value="#{planoBean.listaPlanos}"  
+                             style="heighbt: auto; text-align: center;" paginatorPosition="bottom"
+                             selectionMode="single"  pageLinks="5"
+                             rowSelectMode="dblClickSelect"
+                               paginator="true"  paginatorAlwaysVisible="false" rows="8" >
+                     <p:ajax event="rowSelect" update=":frmPlano:tabGeral:planoEnd,:frmPlano:tabGeral:planoEnd2" oncomplete="dlgBuscaEnd.hide()" />  
+                    <p:column style="text-align: center;" headerText="Empresa">                                                    
+                        <h:outputText value="#{item.cidadao.nome}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" headerText="Empreendimento" >                      
+                        <h:outputText value="#{item.nomeempreendimento}"/>
+                    </p:column>                       
+                    
+                    <p:column style="text-align: center;" headerText="ações" styleClass="actions" >                       
+                        <p:commandButton id="selectBt"   update=":frmPlano"  oncomplete="plancad.show();cadlist.close();dlgNewMon.hide();dlgMon.hide();"    
+                        
+                                         actionListener="#{planoBean.editPlano}" value="selecionar" process="@this"   title="View"  >  
+                           
+                        </p:commandButton>  
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="novo" process="@this"   update=":frmPlanNew frm :frmPlano :frmListPlano :messages"   action="#{planoBean.savePlanoCoop}"  oncomplete="dlgMon.hide();dlgNewMon.hide(); cadlist.close(); plancad.show();" />
+                <p:commandButton value="fechar" process="@this"  update="frm" oncomplete="dlgMon.hide()" />
+            </p:outputPanel >
+        </h:form>
+    
+</ui:component>
+

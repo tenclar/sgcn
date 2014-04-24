@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:commandButton value ="Inserir" process="@this" actionListener="#{cidadaoBean.newDependente}" oncomplete="dlgDependente.show()" update=":frmDep"  />                    
+    
+        <!--            <p:message for="ih"  showDetail="true"  /> 
+                    <h:inputHidden id="ih" value="# {cidadaoBean.cidadao.dependentes.size()}" rendered="true" label="lista de Composição Familiar" validatorMessage="nenhum incluido"  >
+                        <f:validateLongRange minimum="1" />
+                    </h:inputHidden>            -->
+<p:outputPanel  >
+        <p:dataTable  id="tbDependente" value="#{cidadaoBean.listaCompFamiliar}" var="item" 
+                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+
+            <f:facet name="header">
+                <h:outputText value="Dependentes"/>
+            </f:facet>
+            <p:column    >
+
+                <p:rowToggler />
+            </p:column>
+
+            <p:column   headerText="Grau Parentesco" >
+
+                <h:outputText value="#{item.grau.nome}" />
+            </p:column>
+            <p:column headerText="Nome" >
+
+                <h:outputText value="#{item.nome}" />
+            </p:column>
+            <p:column  headerText="Sexo" >
+
+                <h:outputText value="#{item.sexo}" />
+            </p:column>
+            <p:column headerText="Naturalidade"  >
+
+                <h:outputText value="#{item.naturalidade.nome}-#{item.naturalidade.estado.sigla}" />
+            </p:column>
+            <p:column  headerText=" Nasc." >
+
+                <h:outputText value="#{item.dataNascimento}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+            <p:column  headerText="Especiais" >                                    
+
+                <h:outputText value="#{item.necEspecial.descricao}" />
+            </p:column>                               
+            <p:rowExpansion >
+                <p:panel>
+                    <h:panelGrid  columns="7" >
+                        <h:outputText value="Frequenta"/>                                    
+                        <h:outputText value="Grau Instrução"/>
+                        <h:outputText value="Ano"/>                                    
+                        <h:outputText value="Instituição de Ensino"/>   
+                        <h:outputText value="Local de Tabalho"/>
+                        <h:outputText value="Função"/>
+                        <h:outputText value="Renda"/>
+
+                        <h:outputText value="#{item.frequenta}" />
+                        <h:outputText value="#{item.escolaridade.grau}" />
+                        <h:outputText value="#{item.ano}" />  
+                        <h:outputText value="#{item.instituicao}" />  
+                        <h:outputText value="#{item.localTrabalho}" />
+                        <h:outputText value="#{item.cargo}" />
+                        <h:outputText value="#{item.renda}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+
+                    </h:panelGrid> 
+                </p:panel>
+
+            </p:rowExpansion>
+            <p:column style="width: 80px;text-align: center" >
+                <f:facet name="header">
+                    <h:outputText value="ações"/>
+                </f:facet>
+                <p:commandButton icon="ui-icon-refresh" process="@this" oncomplete="dlgDependente.show()" actionListener="#{cidadaoBean.editDependente}" update=":frmDep"  >
+
+                </p:commandButton>
+                <p:commandButton icon="ui-icon-close" update="tbDependente, :messages" process="@this" action="#{cidadaoBean.save(actionEvent)}"  >
+                    <p:collector value="#{item}" unique="true"  removeFrom="#{cidadaoBean.cidadao.dependentes}" />
+                </p:commandButton> 
+
+            </p:column>
+
+        </p:dataTable>
+    </p:outputPanel>                   
+
+
+</ui:composition>

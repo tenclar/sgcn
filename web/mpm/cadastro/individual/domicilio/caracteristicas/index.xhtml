@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+        <h:form id="frmDomicilio" >
+        <p:fieldset legend="Histórico Domicílio">
+         <p:panel id="panelDomicilio" >
+                        <h:panelGrid id ="panelGridDomicilio" columns="6"   >
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domDataIns" value="Data: " styleClass="titulos" />
+                                <p:message for="domDataIns" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelMoradia" value="Tipo de Moradia: " styleClass="titulos" />
+                                <p:message for="domSelMoradia" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >                            
+                                <h:outputLabel for="domSelComodo" value="Cômodos: " styleClass="titulos" />
+                                <p:message for="domSelComodo" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelSituacao" value="Situação: " styleClass="titulos"  />
+                                <p:message for="domSelSituacao" display="icon"  /> 
+                            </h:panelGrid>
+
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelConst" value="Tipo de Construção: " styleClass="titulos" />
+                                <p:message for="domSelConst" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelLocalBanheiro" value="Local Banheiro: " styleClass="titulos" />
+                                <p:message for="domSelLocalBanheiro" display="icon"  /> 
+                            </h:panelGrid>
+                            
+                            <p:calendar id="domDataIns"  size="12" value="#{planoBean.domicilio.dataadd}" pattern="yyyy/MM/dd" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar>
+                            <h:selectOneMenu id="domSelMoradia" label="moradia" value="#{planoBean.domicilio.moradia}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                                <f:selectItems value="#{cidadaoBean.selectItemsMoradia}" />
+                            </h:selectOneMenu>
+                            <p:inputText label="Cômodos" size="10" id="domSelComodo" value="#{planoBean.domicilio.comodo}" />
+                            <h:selectOneMenu label="Situação" id="domSelSituacao" value="#{planoBean.domicilio.situacao}" converter="IndexedConverter" required="true" style="width:120px"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                <f:selectItem itemLabel="selecione" noSelectionOption="true" />                            
+                                <f:selectItems value="#{cidadaoBean.selectItemsSituacao}" />
+                            </h:selectOneMenu>       
+                            <h:selectOneMenu label="tipo de Construção" id="domSelConst"  value="#{planoBean.domicilio.construcao}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                                <f:selectItems value="#{cidadaoBean.selectItemsConstrucao}" />
+                            </h:selectOneMenu>                         
+                            <h:selectOneMenu label="Local banheiro" id="domSelLocalBanheiro"   value="#{planoBean.domicilio.localbanheiro}"  required="true" style="width:120px" styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                                <f:selectItem  itemValue="Externo" itemLabel="Externo" />
+                                <f:selectItem  itemValue="Interno" itemLabel="Interno" />                            
+                            </h:selectOneMenu>                      
+
+                             
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="6" >
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelEsc" value="Tipo de Escoamento: " styleClass="titulos" />
+                                <p:message for="domSelEsc" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelAb" value="Abastecimento água: " styleClass="titulos" />
+                                <p:message for="domSelAb" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel  for="domSelAb" value="Pavimentação: " styleClass="titulos" />
+                                <p:message for="domSelAb" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelCol"  value="Coleta de Lixo: " styleClass="titulos" />
+                                <p:message for="domSelCol" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelIlu"  value="Tipo Iluminação " styleClass="titulos" />
+                                <p:message for="domSelIlu" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2"  >
+                                <h:outputLabel for="domSelIlup" value="Iluminação Pública: " styleClass="titulos" />
+                                <p:message for="domSelIlup" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:selectOneMenu label="escoamento" id="domSelEsc" value="#{planoBean.domicilio.escoamento}" required="true" converter="IndexedConverter" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                                <f:selectItems value="#{cidadaoBean.selectItemsEscoamento}" />
+                            </h:selectOneMenu>
+                            <h:selectOneMenu label="abastecimento" id="domSelAb" value="#{planoBean.domicilio.abastecimento}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                                <f:selectItems value="#{cidadaoBean.selectItemsAbastecimento}" />
+                            </h:selectOneMenu>
+                            <h:selectOneMenu label="pavimentacao" id="domSelPav" value="#{planoBean.domicilio.pavimentacao}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                                <f:selectItems value="#{cidadaoBean.selectItemsPavimentacao}" />
+                            </h:selectOneMenu>
+                            <h:selectOneMenu label="Coleta de Lixo" id="domSelCol" value="#{planoBean.domicilio.coletalixo}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                                <f:selectItems value="#{cidadaoBean.selectItemsColetaLixo}" />
+                            </h:selectOneMenu>
+                            <h:selectOneMenu label="iluminacao" id="domSelIlu" value="#{planoBean.domicilio.iluminacao}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                                <f:selectItems value="#{cidadaoBean.selectItemsIluminacao}" />
+                            </h:selectOneMenu>
+                            <h:selectOneRadio label="iluminacao publica" id="domSelIlup" value="#{planoBean.domicilio.iluminacaopublica}"  style="width:120px" required="true" >
+                                <f:selectItem itemValue="SIM" itemLabel="Sim"  />
+                                <f:selectItem itemValue="NAO" itemLabel="Não" />
+                            </h:selectOneRadio>
+
+                        </h:panelGrid>
+                    </p:panel>
+                     <p:column colspan="2">
+                         <p:commandButton  update="frmDomicilio,:frmPlano:tabGeral:tabIdent:tabInfoResp:tbhistDom,:messages" oncomplete="if(!args.validationFailed){dlgDomicilio.hide();}"  actionListener="#{planoBean.saveDomicilio}" value="Salvar"/>
+                         <p:commandButton   oncomplete="dlgDomicilio.hide();" process="@this" immediate="true"  value="Cancelar" action="#{planoBean.cancelDomicilio}" />
+                </p:column>
+            </p:fieldset>
+            </h:form>
+    </h:body>
+</html>
+

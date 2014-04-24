@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+
+              xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:form prependId="false" id="frmConvenio"  >
+
+        <p:tabView id="tabGeral"  widgetVar="tabGeral">
+            <p:tab title="Dados" id="tabDados" >
+
+
+
+                <p:panel style="height: 300px;"  >  
+                    <h:panelGrid id="panelDados"  >
+                        <h:panelGrid columns="4">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Convênio:&ensp;" />
+                                <p:message for="convcodigo" />
+                            </h:panelGrid>
+                            <p:inputText id="convcodigo" label="Código: " value="#{convenioBean.convenio.codigo}" required="true"  />                          
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="3" >
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Liberação Contrapartida:&ensp;" />
+                                <p:message for="convlibcontra" />
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Relatório Monitoramento:&ensp;" />
+                                <p:message for="convmon" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Prestação de Contas:&ensp;" />
+                                <p:message for="convprestacao" />
+                            </h:panelGrid>
+                            <p:calendar id="convlibcontra" onkeyup="Formatadata(this,event)" onchange="validaDat(this,this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.dataContraPartida}" pattern="yyyy/MM/dd" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar>
+
+                            <p:calendar id="convmon" onkeyup="Formatadata(this,event)" onchange="validaDat(this,this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.relMonitoramento}" showOn="button" pattern="yyyy/MM/dd" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar>
+                            <p:calendar id="convprestacao" onkeyup="Formatadata(this,event)" onchange="validaDat(this,this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.presContas}" showOn="button" pattern="yyyy/MM/dd" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar>
+                        </h:panelGrid>   
+
+                    </h:panelGrid>
+                    <table style="min-width: 90%" border="0">
+                        <tr>
+                            <td>Objetivo: </td>
+                            <td >Contatos:</td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <p:outputPanel id="opObjetivo" >
+                                    <p:inputTextarea id="convobjetivo"  cols="50" rows="5" required="true" label="Objetivo:" autoResize="false"  value="#{convenioBean.convenio.objetivos}" />
+                                    <p:message for="convobjetivo" />
+                                </p:outputPanel>
+                            </td>
+                            <td  style="vertical-align: top;" >
+
+                                <p:outputPanel id="opContato">
+                                    <h:panelGroup id="pgContato" >
+                                        <h:outputLabel value="descrição:&nbsp;" />
+                                        <p:inputText  id="convcontato" value="#{convenioBean.contato.descricao}" size="22" label="Contato" />                                        
+                                        <p:commandButton value="+" process="@this, opContato" update="pgContato, opDataTableContatos" 
+                                                         action="#{convenioBean.insertContato}" />
+                                        <p:message for="convcontato"/>
+                                    </h:panelGroup>
+                                </p:outputPanel>
+                                <p:outputPanel id="opDataTableContatos">
+                                    <div style=" overflow: auto ; WIDTH: 100%; HEIGHT: 120px" >
+                                        <p:dataTable value="#{convenioBean.convenio.contatos}" var="contato" >
+                                            <p:column>
+                                                <h:outputText value="#{contato.descricao}" />
+                                            </p:column>
+                                            <p:column style="width: 30px" >
+                                                <p:commandButton process="@this" icon="ui-icon-close" immediate="true" update="opDataTableContatos" >
+                                                    <p:collector value="#{contato}" unique="true" removeFrom="#{convenioBean.convenio.contatos}"   />
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+
+                                </p:outputPanel>
+                            </td>
+                        </tr>
+                    </table>
+
+                </p:panel>   
+
+
+                <p:panel  >
+                    <table border="0" style="min-width: 100%" >
+                        <tr>
+                            <td style="vertical-align: top;" >                             
+                                <p:outputPanel id="pgvig">
+                                    <h:panelGrid columns="3"  >
+                                        <h:outputLabel value="Sequência:&ensp;" />
+                                        <h:outputLabel value="Vigência:&ensp;" />
+                                        <h:outputLabel value="" />
+                                        <p:inputText value="#{convenioBean.vigencia.seq}" size="4" />
+
+                                        <p:calendar id="convigencia" label="Vigência" onkeyup="Formatadata(this,event)" required="true" value="#{convenioBean.vigencia.datavigencia}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />   
+
+                                        </p:calendar> 
+                                        <p:commandButton value="+" process="pgvig" update="pgvig tbvig" action="#{convenioBean.vigenciaAdd()}" />
+                                    </h:panelGrid>
+                                    <p:message for="convigencia" />
+                                </p:outputPanel>
+                                <p:outputPanel id="tbvig">
+                                    <p:dataTable  value="#{convenioBean.convenio.vigencias}" var="vig" style="width: 350px"  >
+                                        <p:column headerText="Seq" style="width: 20px" >
+
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{vig.seq}" />                                                            
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <h:inputText size="4" value="#{vig.seq}" onkeypress="mascara(this,soNumeros)" />
+
+                                                </f:facet>  
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column headerText="Data" >
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{vig.datavigencia}" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                                    </h:outputText>
+                                                </f:facet>  
+                                                <f:facet name="input">                                                          
+                                                    <p:calendar  onkeyup="Formatadata(this,event)" required="true" value="#{vig.datavigencia}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />   
+
+                                                    </p:calendar> 
+                                                </f:facet>  
+                                            </p:cellEditor>
+
+                                        </p:column>
+                                        <p:column headerText="editar" >
+                                            <p:rowEditor />
+                                        </p:column>
+
+                                    </p:dataTable>
+                                </p:outputPanel>
+
+                            </td><td  style="vertical-align: top;" >
+
+
+                                <p:outputPanel id="pgaditivo"  >
+                                    <h:panelGrid columns="3"   >       
+                                        <h:outputLabel value="Seq:&ensp;" />
+                                        <h:outputLabel value="Aditivo:&ensp;" />
+                                        <h:outputLabel value="" />
+                                        <p:inputText value="#{convenioBean.aditivo.seq}" size="4" />
+                                        <p:calendar id="convaditivo" label="Aditivo" onkeyup="Formatadata(this,event)" required="true" value="#{convenioBean.aditivo.dateaditivo}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                        </p:calendar>
+                                        <p:commandButton value="+" process="pgaditivo" update="pgaditivo dtaditivo" action="#{convenioBean.aditivoAdd()}" />
+                                    </h:panelGrid>
+                                    <p:message for="convaditivo" />
+
+                                </p:outputPanel>
+                                <p:outputPanel id="dtaditivo" >
+                                    <p:dataTable  value="#{convenioBean.convenio.aditivos}" var="ad" style="width: 350px"   >
+                                        <p:column headerText="seq"  style="width: 20px">
+
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{ad.seq}" />                                                     
+                                                </f:facet>  
+                                                <f:facet name="input">                                                          
+                                                    <h:inputText size="4" value="#{ad.seq}" onkeypress="mascara(this,soNumeros)" />                                                        
+                                                </f:facet>  
+                                            </p:cellEditor>
+
+                                        </p:column>
+                                        <p:column headerText="Data:" >
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{ad.dateaditivo}" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                                                    </h:outputText>
+                                                </f:facet>  
+                                                <f:facet name="input">                                                          
+                                                    <p:calendar  onkeyup="Formatadata(this,event)" required="true" value="#{ad.dateaditivo}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />   
+                                                    </p:calendar> 
+                                                </f:facet>  
+                                            </p:cellEditor>
+
+                                        </p:column>
+                                        <p:column headerText="editar" >
+                                            <p:rowEditor />
+                                        </p:column>
+
+                                    </p:dataTable>
+                                </p:outputPanel>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </p:panel>
+
+                <p:separator />
+                <p:commandButton value="avançar" process="@this, panelDados, opObjetivo" update="tabGeral messages" action="#{convenioBean.save()}" oncomplete="if(!args.validationFailed){tabGeral.select(1);}else{tabGeral.select(0);}" />
+                <p:spacer width="50" />
+                <p:commandButton value="fechar" update="tbConvenio, messages" process="@this"  oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show()}" />
+
+            </p:tab>
+            <p:tab title="Composição do Investimento" >
+                <p:panel>
+                    <p:commandButton value="inserir" process="@this" update="formInvestimento" action="#{convenioBean.investNew}" oncomplete="dlgComInvestimento.show();" />
+                    <p:outputPanel id="opTabInvest">
+                        <p:dataTable  value="#{convenioBean.convenio.investimentos}" var="item"
+                                      rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                                      rowIndexVar="rowIx" >
+                            <p:column headerText="Código" style="width: 40px" >
+                                <h:outputText value="#{item.natDespesa.id}" />                        
+                            </p:column>
+                            <p:column headerText="Descrição" style="width: 170px" >
+
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{item.natDespesa.descricao}" />  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <h:selectOneMenu  style="width: 130px"  value="#{item.natDespesa}" converter="IndexedConverter" required="true"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                                            <f:selectItems value="#{natDespesaBean.selectItems}" />     
+                                        </h:selectOneMenu> 
+                                    </f:facet>  
+                                </p:cellEditor>  
+                            </p:column>
+                            <p:column headerText="Proponente" style="width: 60px" >
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{item.valorproponente}" >
+                                            <f:convertNumber pattern="##,##0.00#"  />
+                                        </h:outputText> 
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <h:inputText value="#{item.valorproponente}" onkeypress="mascara(this,valor)" >
+                                            <f:convertNumber pattern="##,##0.00#"  />
+                                        </h:inputText>
+                                    </f:facet>  
+                                </p:cellEditor>
+
+                            </p:column>
+                            <p:column headerText="Concedente"  style="width: 60px">
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{item.valorconcedente}" >
+                                            <f:convertNumber pattern="##,##0.00#"  />
+                                        </h:outputText> 
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <h:inputText value="#{item.valorconcedente}" onkeypress="mascara(this,valor)" >
+                                            <f:convertNumber pattern="##,##0.00#"  />
+                                        </h:inputText>
+                                    </f:facet>  
+                                </p:cellEditor>
+
+                            </p:column>
+                            <p:column headerText="Total" style="width: 40px" >
+                                <h:outputText value="#{item.valorconcedente + item.valorproponente}" >
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Obs." style="width: 150px">
+                                <p:cellEditor>  
+                                    <f:facet name="output">  
+                                        <h:outputText value="#{item.complemento}" />  
+                                    </f:facet>  
+                                    <f:facet name="input">  
+                                        <p:inputTextarea rows="5" cols="15" value="#{item.complemento}" autoResize="false" />  
+                                    </f:facet>  
+                                </p:cellEditor>  
+                                <h:outputText value="#{item.complemento}" />
+                            </p:column>
+                            <p:column headerText="ações" style="width: 40px" >                                                               
+                                <p:rowEditor />
+                                <p:commandButton icon="ui-icon-close" update="opTabInvest" process="@this" >
+                                    <p:collector unique="true" removeFrom="#{convenioBean.convenio.investimentos}" value="#{item}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:panel>
+                <p:separator />
+                <h:panelGroup>
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(0);" />
+                    <p:commandButton value="avançar" process="@this" update="tabGeral messages" oncomplete="if(!args.validationFailed){tabGeral.select(2);}else{tabGeral.select(1);}" action="#{convenioBean.save()}" />
+                    <p:commandButton value="fechar" update="tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}"  />
+                </h:panelGroup>
+
+            </p:tab>
+            <p:tab title="Histórico">
+                <p:panel>
+                    <p:commandButton value="inserir" process="@this" update="formHistorico" oncomplete="dlgHistorico.show()" action="#{convenioBean.histNew()}" />
+                    <p:outputPanel id="opTabHist" >
+                        <p:dataTable value="#{convenioBean.convenio.historicos}" var="hist" >
+                            <p:column headerText="data"   style="width: 100px" >
+                                <h:outputText value="#{hist.datainc}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+
+                            </p:column>
+                            <p:column headerText="descrição" >
+                                <h:outputText value="#{hist.descricao}" />
+                            </p:column>
+                            <p:column headerText="anexo" style="width: 70px">
+                                <p:dataTable  var="an" value="#{hist.anexos}" >
+                                    <p:column >
+                                        <h:outputText value="#{an.descricao}" />
+                                    </p:column>
+                                    <p:column >
+                                        <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" title="download" 
+                                                         process="@this" immediate="true" update="dw"  ajax="false"                                                         
+                                                         >
+                                            <p:fileDownload value="#{an.file}"   />   
+                                        </p:commandButton>                                          
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:column>
+                            <p:column headerText="ações" style="width: 80px; text-align: center;" >
+                                <p:commandButton icon="ui-icon-refresh" process="@this" update="formHistorico" oncomplete="dlgHistorico.show()" action="#{convenioBean.histEdit()}" >
+                                    <f:setPropertyActionListener value="#{hist}" target="#{convenioBean.historico}"  />                                    
+                                </p:commandButton>  
+                                <p:commandButton icon="ui-icon-close" process="@this" update="opTabHist" >
+                                    <p:collector value="#{hist}" unique="true" removeFrom="#{convenioBean.convenio.historicos}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:panel>
+                <p:separator />
+                <h:panelGroup>
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(1);" />                  
+                    <p:commandButton value="Salvar" update="tbConvenio frmConvenio messages" process="@this" actionListener="#{convenioBean.saveConvenio}" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show()}" />
+                    <p:commandButton value="fechar" update="tbConvenio frmConvenio messages" process="@this" actionListener="#{convenioBean.saveConvenio}" immediate="true" oncomplete="cadCon.close();cadlist.show()" />
+                </h:panelGroup>
+
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</ui:component>
+
+

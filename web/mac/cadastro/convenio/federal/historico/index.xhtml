@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+    <p:panel  >
+
+        <h:form id="formHistorico" prependId="false"  enctype="multipart/form-data"  >
+
+            <h:panelGrid >
+                <h:panelGroup>
+                    <p:outputLabel for="cData" value="Data :" />
+                    <p:message for="cData" />
+                </h:panelGroup>
+                <p:calendar id="cData"  locale="pt" showButtonPanel="true" navigator="true" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)"  maxlength="10" size="10" value="#{convenioBean.historico.datainc}"  required="true" >
+                 
+                </p:calendar>
+<!--                   <f:convertDateTime  pattern="yyyy/MM/dd" /> -->
+                <h:panelGroup>
+                    <p:outputLabel for="txtHist" value="Descrição: " />
+                    <p:message for="txtHist" />
+                </h:panelGroup>
+                <p:inputTextarea  required="true" minQueryLength="10" id="txtHist" rows="8" cols="60" autoResize="false" value="#{convenioBean.historico.descricao}"  />
+
+
+            </h:panelGrid>
+
+            <h:panelGrid>
+
+                <h:outputLabel value="Anexos "  />
+
+                <!--                <p:fileUpload  label="Localizar"    
+                                               fileUploadListener="# {convenioBean.handleFileUpload}" 
+                
+                
+                                               multiple="true"   
+                                               update=":messages, dtAnexos"  
+                
+                                               allowTypes="*.pdf"/>  -->
+                <p:fileUpload fileUploadListener="#{convenioBean.handleFileUpload}"
+                              mode="advanced" dragDropSupport="false"  
+                              update=":messages" sizeLimit="100000000"
+                              cancelLabel="Cancelar"
+                              label="Selecionar"
+                              multiple="true"
+                              required="true"
+                              fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />  
+
+                
+            </h:panelGrid>
+
+            <p:separator />
+            <p:outputPanel id="dtAnexos">
+                <p:dataTable  var="anexo" value="#{convenioBean.historico.anexos}"   >
+
+                    <p:column headerText="Arquivos"  >
+                        <h:outputText value="#{anexo.descricao}" />
+                    </p:column>
+                    <p:column headerText="Ações" style="width: 50px" >
+                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" />
+                        <p:commandButton icon="ui-icon-close" />
+                    </p:column>
+                </p:dataTable>
+                <h:inputHidden id="ihAn"  value="#{convenioBean.historico.anexos.size()}"  validatorMessage="Nenhum item na lista"  >
+                    <f:validateLongRange minimum="1" />
+                </h:inputHidden>
+                <p:message for="ihAn" showDetail="true" />
+            </p:outputPanel>
+
+
+
+            <p:separator />
+
+
+
+            <h:panelGroup>
+                <p:commandButton value="salvar"  update="formHistorico,:frmConvenio:tabGeral:opTabHist, :messages"  oncomplete="if(!args.validationFailed){dlgHistorico.hide();}" action="#{convenioBean.histAdd}" />
+                <p:commandButton value="cancelar"  update="formHistorico" immediate="true" oncomplete="dlgHistorico.hide();" action="#{convenioBean.histCancel()}" />
+            </h:panelGroup>
+
+        </h:form>
+    </p:panel>
+</ui:component>
+

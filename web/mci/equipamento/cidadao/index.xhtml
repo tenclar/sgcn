@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mci.xhtml">
+    <ui:define name="conteudo" >        
+        <p:panel id="panelCadBenInd" header="Inclusão Benefíciado"  visible="false" closeSpeed="0"  widgetVar="cadBenInd" closable="true" style="min-width: 1000px"   >             
+            <ui:include src="insert.xhtml"  />   
+        </p:panel>             
+        <p:panel id="panelBenList" header="Lista de Cidadãos Beneficiados"  widgetVar="litBenInd" closable="true" closeSpeed="0" style="min-width: 900px;height: 300px"   >
+            <ui:include src="list.xhtml"  />   
+        </p:panel>        
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <!--        <p:dialog header="Novo Beneficiado" widgetVar="dlgBenNew"  resizable="true" modal="true" showEffect="slide" width="600" >
+                    <ui:include src="new.xhtml" />
+                </p:dialog>-->
+        <p:dialog header="Localiza Cidadão" widgetVar="dlgBuscaCid"  resizable="true" modal="true" showEffect="slide" width="700" >
+            <ui:include src="localizacid/list.xhtml" />
+        </p:dialog>
+        <p:dialog header="Novo Equipamento" widgetVar="dlgEquipamento"  resizable="true" modal="true"  width="600" >
+            <ui:include src="/mci/cadastro/equipamento/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Novo Beneficiado" widgetVar="dlgEquipNew"  resizable="true" modal="true" showEffect="slide" width="600" >
+            <ui:include src="beneficios/equipamentoinserir.xhtml" />
+        </p:dialog>
+        <p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir?"  
+                         header="Initiating destroy process" severity="alert" widgetVar="confirmation">  
+            <h:form prependId="true">         
+                <p:commandButton id="confirm" value="sim" update="tbEquip" oncomplete="confirmation.hide()" action="#{beneficiadoBean.equipRemove}"  >                   
+                    <p:collector value="#{beneficiadoBean.equipamentosecretaria}" unique="true" removeFrom="#{beneficiadoBean.cidadao.equipamentossecretarias}" />
+                </p:commandButton>  
+                <p:commandButton id="decline" value="não" onclick="confirmation.hide()" type="button" />   
+            </h:form>
+        </p:confirmDialog>  
+    </ui:define>
+</ui:composition>
+

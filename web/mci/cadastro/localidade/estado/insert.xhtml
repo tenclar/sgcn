@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Cadastro de Estado</title>
+    </h:head>
+    <h:body>
+          
+        <h:form id="frmEstado" prependId="false">
+                <h:panelGrid id="panelEstado" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="EstadoSigla" value="Sigla Estado:" />
+                    <p:inputText id="EstadoSigla" autocomplete="false" value="#{estadoBean.estado.sigla}" size="4" required="true" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();" validatorMessage="Campo Requerido"/>
+                    <h:outputLabel for="EstadoNome" value="Sigla Estado:" />
+                    <p:inputText id="EstadoNome"  autocomplete="false" value="#{estadoBean.estado.nome}" required="true" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();" validatorMessage="Campo Requerido"/>
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                        <p:commandButton update="panelEstado, :tvLocalidade:frmListaEstado:tabelaUf"  oncomplete="dialogGerUf.hide();" actionListener="#{estadoBean.saveEstado}" value="Salvar"/>
+                        <p:commandButton   oncomplete="dialogGerUf.hide();" immediate="true" actionListener="#{estadoBean.cancelEstado}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+

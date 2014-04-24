@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+    <h:form prependId="false" id="frmListConvenios" >
+        
+            <h:panelGroup>
+                <h:outputText value="Busca: " />  
+                <p:inputText   value="#{convenioBean.busca}"  size="60" />  <p:commandButton update="frmListConvenios" value="Localizar" action="#{convenioBean.localiza}" icon="ui-icon-search" /> 
+            </h:panelGroup>
+            <p:commandButton icon="ui-icon ui-icon-print" process="@this"  title="Todos" ajax="false" immediate="true" onclick="this.form.target='_blank'" action="#{convenioBean.imprimeTodos()}" />
+        
+        <p:separator />
+
+        
+   
+        <p:outputPanel id="tbConvenio">
+            <p:dataTable  var="item" value="#{convenioBean.listaConveniosFederal}"  style="text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+
+                <p:columnGroup type="header" >
+                    <p:row>
+                        <p:column rowspan="2"  headerText="Convênio"  />
+                        <p:column rowspan="2" headerText="SICONV"  />
+                        <p:column rowspan="2" headerText="Área" />
+                        <p:column rowspan="2" headerText="Ministério"  />
+                        <p:column rowspan="2" headerText="Objetivos"  />
+                        <p:column  colspan="3" headerText="Valores"  />
+                        <p:column rowspan="2" headerText="Contatos"  />
+                        <p:column rowspan="2" headerText="Ações"  />
+
+
+                    </p:row>
+                    <p:row>
+                        <p:column  headerText="Ministério" style="width: 40px" />
+                        <p:column  headerText="Contrapartida" style="width: 40px" />
+                        <p:column  headerText="Total" style="width: 40px" />
+                    </p:row>
+                </p:columnGroup>
+                <p:column style="text-align: center;" headerText="Convênio" >
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>  
+                <p:column style="text-align: center;" headerText="SICONV" >
+
+                    <h:outputText value="#{item.siconv}"/>
+                </p:column> 
+                <p:column style="text-align: center;" headerText="Área" >
+
+                    <h:outputText value="#{item.area}"/>
+                </p:column>
+                <p:column style="text-align: left;" headerText="Ministério" >
+
+                    <h:outputText value="#{item.ministerio.nome}"/>
+                </p:column>
+                <p:column style="text-align: justify; width: 300px" headerText="Objetivos" >
+
+                    <h:outputText value="#{item.objetivos}"/>
+                </p:column>
+
+                <p:column style="text-align: center;" headerText="Valor Ministério" >
+
+                    <h:outputText value="#{item.valorministerio}">
+                         <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Valor Contrapartida" >
+
+                    <h:outputText value="#{item.contrapartida}">
+                         <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Valor total" >
+
+                    <h:outputText value="#{item.total}">
+                         <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Contatos" >
+                    <p:dataList value="#{item.contatos}" var="contato"  >
+                        #{contato.descricao}
+                    </p:dataList>
+                    
+                </p:column>
+                <p:column style="text-align: center;" headerText="ação" >                       
+                    <p:commandButton icon="ui-icon ui-icon-document-b"  title="visualizar" update="frmViewConvenio tbConvenio"  process="@this" oncomplete="cadlist.close();cadView.show();" actionListener="#{convenioBean.editConvenio}"  />
+                  
+<!--                    <p:commandButton  process="@this" update="frmConvenio tbConvenio" icon="ui-icon ui-icon-refresh" title="alterar" oncomplete="cadlist.close();cadCon.show();" actionListener="# {convenioBean.editConvenio}" rendered="# {p:ifGranted('ROLE_ADMIN')}"  />-->
+                    
+                    
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel >
+    </h:form>
+</ui:component>
+

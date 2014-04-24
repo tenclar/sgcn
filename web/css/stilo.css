@@ -1,0 +1,266 @@
+
+body {
+	/*font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif; */
+        font: 62.5% "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+         background: -webkit-radial-gradient(60% 90%, #AFB300, #063839 50%);
+	background: -moz-radial-gradient(60% 90%, #AFB300, #063839 50%);
+}
+/* ~~ Seletores de elementos/tag ~~ */
+    ul, ol, dl { /* Devido a variações entre navegadores, é recomendado zerar o padding e a margem nas listas. É possível especificar as quantidades aqui ou nos itens da lista (LI, DT, DD) que eles contêm. Lembre-se: o que você fizer aqui ficará em cascata para a lista de navegação a não ser que você escreva outro seletor mais específico. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* ao remover a margem superior, as margens podem escapar das suas containing div. A margem inferior restante vai mantê-la afastada de qualquer elemento que se segue. */
+	padding-right: 15px;
+	padding-left: 15px; /* adicionando o padding para os lados dos elementos dentro dos divs, ao invés dos próprios divs o livra de qualquer combinação de modelo de caixa. Um div aninhado com padding lateral também pode ser usado como método alternativo. */
+}
+a img { /* esse seletor remove a borda azul padrão exibida em alguns navegadores ao redor de uma imagem circundada por um link. */
+	border: none;
+}
+/* ~~ A estilização dos links do seu site deve permanecer nesta ordem – incluindo o grupo de seletores que criam o efeito hover. ~~ */
+    a:link {
+	color:#414958;
+	text-decoration: underline; /* a não ser que você estilize seus links para que pareçam extremamente únicos, é melhor utilizar links sublinhados para uma identificação visual mais rápida. */
+}
+a:visited {
+	color: #4E5869;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* esse grupo de seletores dará ao navegador que estiver usando um teclado a mesma experiência de hover do que uma pessoa usando um mouse. */
+	text-decoration: none;
+}
+/* ~ esse contêiner envolve todos os outros divs dando a eles uma largura com base em porcentagem ~~ */
+    .container {
+	
+	/*max-width: 1258px;/* uma largura máxima pode ser desejável para evitar que esse layout fique muito largo num monitor grande. Isso torna o comprimento da linha mais legível. O IE6 não concorda com essa declaração. */
+	min-width: 1000px;/* uma largura mínima pode ser desejável para evitar que esse layout fique muito estreito. Isso torna o comprimento da linha mais legível nas colunas laterais. O IE6 não concorda com essa declaração. */
+	background: #FFF;
+	margin: 0 auto; /* o valor automático nos lados, combinado com a largura, centraliza o layout. Não é necessário definir a largura do contêiner para 100%. */
+	/*background: -moz-linear-gradient(bottom, #b6ebf7, #fff 50%); 
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #b6ebf7), color-stop(0.20, #fff)); 
+        background: radial-gradient(top left, #fff, #f66); */
+        background: -webkit-radial-gradient(60% 90%, #AFB300, #063839 50%);
+	background: -moz-radial-gradient(60% 90%, #AFB300, #063839 50%);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#AFB300, endColorstr=#063839); /* IE6 & IE7 */ 
+        -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=60, startColorstr=#AFB300, endColorstr=#063839);  /* IE8 */
+}
+/* ~~o cabeçalho não tem uma largura. Ele pode ocupar toda a largura do layout. Possui um alocador de espaço de imagem que deve ser substituído pelo seu logotipo com link~~ */
+    
+    .header {
+	background: #333;
+}
+/* ~~ Informações sobre o layout. ~~ 
+    
+    1) O padding é posto somente na parte superior e inferior do div. Os elementos nesse div têm padding nos seus lados impedindo o modelo tipo caixa. Lembre-se: ao adicionar qualquer padding lateral ou  bordas no próprio div, ele será adicionado à largura que você define para criar a largura *total*. Também é necessário remover o padding no elemento do div e estabelecer um segundo div, sem largura e o padding necessário para o seu design.
+    
+    */
+    .content {
+	padding: 2px 0;
+	height:100%;
+        
+}
+.content .fundo {
+	width:auto;
+	height:100%;
+	background-image: url(../images/circulos.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.content .blocoverde {
+	background-color:#063839;
+	width:100%;
+	height:100%;
+	/* [disabled]opacity:0.65; */
+	/* [disabled]-moz-opacity: 0.65; */
+	/* [disabled]filter: alpha(opacity=65); */
+
+	position: relative;
+	background-image: url(../images/circulos.png);
+	background-size: auto 490px ;
+	background-repeat: no-repeat;
+	background-position: 8px -180px;
+}
+.bloco {
+	float:none;
+	position: relative;
+	z-index: 1;
+}
+
+ .login {
+	height: 220px;
+	width: 450px;
+	padding-left:15px;
+	padding-top:10px;
+
+
+}
+.sgcn {
+	font-family: Impact;
+	font-size: 56px;
+	font-style: italic;
+	color: #FFF;
+
+	text-align: right;
+	padding-right: 20px;
+
+}
+.texto{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #E0F29A;
+	font-style: italic;
+}
+.caixatexto{
+        padding-left: 10px;
+	width:150px;
+	height:25px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+	border: 1px solid #699;
+	-moz-border-radius: 10px;
+        border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+.botao {
+	font-family: "Arial", Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: #89A41D;
+	border: medium solid #FFF;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	height: 30px;
+	width: 70px;
+	cursor:pointer;
+	}	
+hover.botao{
+	cursor:pointer;
+}
+.sgcntexto {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFF;
+	border-top-width: medium;
+	border-right-width: medium;
+	border-bottom-width: medium;
+	border-left-width: medium;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #F90;
+	border-right-color: #F90;
+	border-bottom-color: #F90;
+	border-left-color: #F90;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+        padding-bottom: 5px;
+        padding-top: 2px;
+}
+ .content .fundo .meio  .negocios {
+	background-image: url(../images/negocios.png);
+	height: 228px;
+	width: 450px;
+	padding-top:30px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+	float: right;
+}
+.content .meio {
+	border-top-width: medium;
+	border-bottom-width: medium;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	border-bottom-color: #FFF;
+	border-left-color: #FFF;
+	height: 250px;
+	width: auto;
+}
+.content .rodape {
+	width:100%;
+	height:90px;
+	background-size:auto 87px;
+	background-image: url(../images/rodape.png);
+	background-repeat: repeat-x;
+	vertical-align: bottom;
+	background-position: center;
+	margin-top: 40px;
+}
+.content .rodape p {
+	padding-top: 26px;
+        
+	text-align: center;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000;
+}
+/* ~~ Este seletor agrupado fornece as listas dentro do espaço da área de conteúdo ~~ */
+    .content ul, .content ol {
+	padding: 0 15px 15px 40px; /* esse padding espelha o padding direito nos cabeçalhos e regra de parágrafo acima. O padding foi colocado na parte inferior para obter espaço entre outros elementos das listas e à esquerda para criar o recuo. Estes podem ser ajustados como desejar. */
+}
+.container .content .logo1 {
+	background-image: url(../images/brasao2.png);
+	background-repeat: no-repeat;
+	padding-bottom:55px;
+	padding-left:20px;
+	margin-left:20px;
+        width: auto;
+	height: 120px; 
+        
+}
+.container .content .logo2 {
+	margin-top:20px;
+	background-image: url(../images/logosepn.png);
+	background-repeat: no-repeat;
+	height: 86px;
+	width: 200px;
+	position: relative;
+	float:right;
+}
+.container .content .logo3 {
+	margin-top:20px;
+        
+	margin-right: 10px;
+	background-image: url(../images/logogoverno.png);
+	background-repeat: no-repeat;
+	height: 80px;
+	width: 220px;
+	position: relative;
+	float:right;
+}
+/* ~~ O rodapé ~~ */
+    .footer {
+        margin-top: 10px;
+	padding: 3px 0;
+	background-color: #000;
+        height: 2px;
+}
+/* ~~ flutuações diversas/limpeza de classes ~~ */
+    .fltrt {  /* essa classe pode ser usada para flutuar um elemento à direita da página. O elemento flutuado deve preceder o elemento e ser o próximo da página. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* essa classe pode ser usada para flutuar um elemento à esquerda da página. O elemento flutuado deve preceder o elemento e deve ser o próximo da página. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* essa classe pode ser colocada em um <br /> ou em um div vazio como o elemento final que segue o último div flutuado (no #contêiner) caso o rodapé seja removido ou retirado do contêiner. */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}

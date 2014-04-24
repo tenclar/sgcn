@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    
+    <application>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>pt_BR</supported-locale>
+            
+        </locale-config>
+        <message-bundle>Messages</message-bundle>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
+    </application>
+    
+    <factory>
+        <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
+        <exception-handler-factory>org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory</exception-handler-factory>		
+    </factory>
+    
+    <navigation-rule>
+        <from-view-id>/mci/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gotocidadao</from-outcome>
+            <to-view-id>/mci/cadastro/cidadao/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gotoLocalidade</from-outcome>
+            <to-view-id>/mci/cadastro/localidade/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/mci/cadastro/cidadao/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gotoindex</from-outcome>
+            <to-view-id>/mci/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gotocadins</from-outcome>
+            <to-view-id>/mci/cadastro/cidadao/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>impressao</from-outcome>
+            <to-view-id>/mci/cadastro/cidadao/impressao/imprimir.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+    
+    <navigation-rule>
+        <from-view-id>/mci/cadastro/cooperativa/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gotoindex</from-outcome>
+            <to-view-id>/mci/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gotocadins</from-outcome>
+            <to-view-id>/mci/cadastro/cooperativa/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/mci/cadastro/localidade/index.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>gotoindex</from-outcome>
+            <to-view-id>/mci/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+        <from-view-id>/templates/mci.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>sair</from-outcome>
+            <to-view-id>/j_spring_security_logout</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+        <from-view-id>/mci/consulta/beneficiario/listagem/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gotorelatorio</from-outcome>
+            <to-view-id>/mci/consulta/beneficiario/listagem/relatorio.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>
+     <navigation-rule>
+        <from-view-id>/mac/cadastro/convenio/federal/fluxofin/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gotoviewchart</from-outcome>
+            <to-view-id>/mac/cadastro/convenio/federal/fluxofin/view_fluxo.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>
+    
+    
+    
+    
+</faces-config>

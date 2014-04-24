@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+
+    <p:panel  >
+        <h:form id="formHistInterno" prependId="false"  enctype="multipart/form-data"  >
+            <h:panelGrid >
+                <h:outputLabel value="Data :" />                
+                <p:calendar  label="Data" onkeyup="Formatadata(this, event);" locale="pt_BR" onchange="validaDat(this, this.value)" showOn="button"  required="true" value="#{planoBean.historicovisita.data}" maxlength="10" size="10"  pattern="dd/MM/yyyy" >
+                    
+                </p:calendar>
+                <h:outputLabel value="Descrição: " />
+                <p:inputTextarea rows="8" cols="60" autoResize="false" value="#{planoBean.historicovisita.descricao}"  />
+            </h:panelGrid>
+            <p:separator />
+            <h:panelGroup>
+                <p:commandButton value="salvar"  update="formHistInterno, :frmPlano:tabGeral:opTabHistInterno"  oncomplete="dlgHistorico.hide()" action="#{planoBean.histAdd()}" />
+                <p:commandButton value="cancelar"  update="formHistInterno" immediate="true" oncomplete="dlgHistorico.hide();" action="#{planoBean.histCancel()}" />
+            </h:panelGroup>
+
+        </h:form>
+    </p:panel>
+</ui:component>
+

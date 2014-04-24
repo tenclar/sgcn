@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+  
+        <h:form id="frmListCurso" prependId="false">
+
+            <p:outputPanel>  
+                <h:outputText value="Busca: " />  
+                <p:inputText value="#{cursoBean.argumento}" onkeyup="this.value = this.value.toUpperCase();"  style="width:200px" />  
+                <p:commandButton  icon="ui-icon-search" action="#{cursoBean.localizaCurso()}" update="tbCurso" /> 
+                 <p:commandButton action="#{cursoBean.imprimeRelatorioWebTodos()}" value="Imprimir" icon="ui-icon ui-icon-print" process="@this"  title="Todos" ajax="false" immediate="true" onclick="this.form.target='_blank'" />
+            </p:outputPanel>  
+      
+            <p:outputPanel id="tbCurso">
+                <p:dataTable  var="item" value="#{cursoBean.listaCursos}" widgetVar="tbCursos" style="width: 500px;height: auto; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="8" >
+
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <p:commandButton process="@this" icon="ui-icon ui-icon-plus" actionListener="#{cursoBean.newCurso}"  update=":frmCurso" oncomplete="dlgCurso.show()"/>
+                        </f:facet>
+                        <p:commandButton  process="@this" update=":frmCurso" icon="ui-icon ui-icon-refresh" actionListener="#{cursoBean.updateCurso}" title="alterar"  oncomplete="dlgCurso.show()"/>
+                    </p:column>
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Código" />
+                        </f:facet>
+                        <h:outputText value="#{item.id}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>                                                                
+
+                </p:dataTable>
+            </p:outputPanel >
+      
+</ui:component>
+

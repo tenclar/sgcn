@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+
+    <h:form prependId="false" id="frmBuscaCoop" >         
+        <p:focus for="cbBusca"   />       
+        <h:selectOneRadio value="#{cooperativaBean.tipoBusca}"  >
+            <f:selectItem itemValue="nome"  itemLabel="nome"  />
+            <f:selectItem itemValue="cpf"  itemLabel="CNPJ" />                
+        </h:selectOneRadio>
+
+        <h:outputText value="Busca: " />  
+        <p:inputText id="cbBusca" autocomplete="off"  value="#{cooperativaBean.busca}"  size="100" onkeyup="this.value = this.value.toUpperCase();"  required="true"  requiredMessage="Campo em Branco" /> 
+        <p:spacer width="20" /> <p:commandButton    actionListener="#{cooperativaBean.localiza}"  update="frmBuscaCoop" icon="ui-icon-search"   /> 
+        <p:messages id="mes" showDetail="true" />
+        <p:separator   />    
+
+
+
+
+
+        <p:dataTable id="cptabela" var="item" 
+                     value="#{cooperativaBean.dataModelListaCoop}"  
+                     paginator="true"  
+                     paginatorAlwaysVisible="false" rows="8"  
+                     emptyMessage="Efetue uma Consulta"
+                     selectionMode="single"
+                     rowKey="#{item.id}"
+                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+            <p:column  >       
+                <f:facet name="header" >
+                    <p:commandButton  value="Adicionar" process="@this"  actionListener="#{cooperativaBean.newCoop}" oncomplete="dlgCoopNew.show()"  update=":frmCoopNew"   />                         
+                </f:facet>
+                <p:commandButton icon="ui-icon-refresh"  value="editar" process="@this"  title="editar" oncomplete="coopins.show();cooplist.close();tbView.select(0);" update=":frmCoop"  actionListener="#{cooperativaBean.editCoop}" />                        
+                <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{cooperativaBean.imprimir}" title="imprimir" />
+            </p:column>
+
+            <p:column headerText="id" >                    
+                <h:outputText value="#{item.id}" />
+            </p:column>
+            <p:column headerText="CNPJ" >                    
+                <h:outputText value="#{item.cpf}" style="text-align: center;" />
+            </p:column>
+            <p:column headerText="Nome" style="width: 400px; text-align: center;" >
+
+                <h:outputText value="#{item.nome}"/>
+            </p:column>                                                                              
+            <p:column headerText="Empreendimento" style="width: 40px;text-align: center;"  >
+
+                <h:outputText value="#{item.ramoempreendimento.nome}" style="text-align: center;"  />
+            </p:column>    
+            <p:column headerText="Status Benefício" style="width: 80px; text-align: center;" >
+
+                <h:outputText value="#{item.benstatus}"/>
+            </p:column>
+
+            <p:column  headerText="Associados"  style="text-align: center;">                                           
+                <h:outputText value="#{item.associados.size()}"/>
+            </p:column>  
+            <p:column  headerText="Equipamentos" style="text-align: center;" >                                           
+                <h:outputText value="#{item.equipamentossecretarias.size()}"/>
+            </p:column>  
+
+        </p:dataTable>
+
+
+
+    </h:form>
+</ui:component>
+

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    <h:body>
+        <h:form id="frmListaDespesa" prependId="false">
+            <p:commandButton value="Novo" process="@this" actionListener="#{despesaBean.newDespesa}"  update=":frmDespesa:panelDespesaInsert" oncomplete="dlgDespesa.show()"/>
+        
+            <p:outputPanel id="tbDespesa">
+                <p:dataTable  var="item" value="#{despesaBean.listaDespesas}" widgetVar="tbCursos" style="width: 500px;height: auto; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="8" >
+                    <f:facet name="header">  
+                         <p:outputPanel>  
+                                 <h:outputText value="Busca: " />  
+                                    <p:inputText   style="width:150px" />  <p:commandButton type="button" onclick="tbDespesa.filter()" icon="-search" /> 
+                      </p:outputPanel>  
+                    </f:facet>
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Código" />
+                        </f:facet>
+                        <h:outputText value="#{item.id}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descricao}"/>
+                    </p:column>                                                                
+
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Alterar"/>
+                        </f:facet>
+                        <p:commandButton  update=":frmDespesa:panelDespesaInsert" process="@this" icon="ui-icon-refresh" actionListener="#{despesaBean.editDespesa}" title="alterar"  oncomplete="dlgDespesa.show()"/>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:outputPanel >
+        </h:form>
+    </h:body>
+</ui:component>
+

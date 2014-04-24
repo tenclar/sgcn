@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:tabView id="tabViewCarac" widgetVar="tabViewCarac"  >
+        
+
+        <p:tab  title="Atividades" id="atividades" >
+            <p:fieldset legend="Atividades para Complementação de Renda" style=" margin: 0 auto; "   >
+
+                <h:panelGrid columns="2" id="selRadioAtiv">
+                    <h:outputLabel  value="Atividades: " styleClass="titulos" />
+                    <h:selectOneRadio id="cidbtematividade"  value="#{cidadaoBean.cidadao.atividade}">                                   
+                        <f:selectItem itemValue="false" itemLabel="Não" />
+                        <f:selectItem itemValue="true" itemLabel="Sim"  />
+                        <p:ajax update="panelAtividades" listener="#{cidadaoBean.handleSelectItemAtividade}" />
+                    </h:selectOneRadio>
+
+                </h:panelGrid>
+                <p:outputPanel id="panelAtividades" >
+                    <p:panel    binding="#{cidadaoBean.panelAtividade}" rendered="false"   >    
+                        <h:panelGrid columns="4" id="insAtividade" >
+                            <h:outputLabel value=" " />
+                            <h:panelGrid columns="2">                                        
+                                <h:outputLabel value="Atividade: "  styleClass="titulos" />                                        
+                                <p:message for="cidlistaAtividades" display="icon"  />                                        
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">                                        
+                                <h:outputLabel value="Renda "  styleClass="titulos" />                                        
+                                <p:message for="cidatvrenda" display="icon"  />                                        
+                            </h:panelGrid>
+
+                            <h:outputLabel value=" "/>
+                            <p:commandButton value="+" process="@this" 
+                                             update=":frmatividade" 
+                                             actionListener="#{atividadeBean.newAtividade}"
+                                             oncomplete="dlgAtividade.show()"/>                                    
+                            <p:selectOneMenu id="cidlistaAtividades" 
+                                             filter="true" filterMatchMode="startsWith"
+                                             value="#{cidadaoBean.cidatividade.atividade}" 
+                                             style="width: 170px;"
+                                             converter="IndexedConverter" 
+                                             label="Lista Atividades" required="true"  >
+                                <f:selectItem   itemLabel="Selecione"  noSelectionOption="true"/>                                                                      
+                                <f:selectItems value="#{cidadaoBean.selectItemsAtividades}" />
+                            </p:selectOneMenu>
+                            <p:inputText id="cidatvrenda"
+                                         value="#{cidadaoBean.cidatividade.renda}"  
+                                         onkeypress="mascara(this, valor)" 
+                                         required="true" size="6" >
+                                <f:convertNumber pattern="##,##0.00#"  />
+                            </p:inputText>
+                            <p:commandButton value="Inserir" process="panelAtividades" update="insAtividade,tbAtividade, :messages" actionListener="#{cidadaoBean.newAtividade}" />
+                        </h:panelGrid>
+                        <p:outputPanel id="tbAtividade" > 
+                            <!--                                <p:message for="ihAtividade"  showDetail="true"  /> 
+                                                            <h:inputHidden id="ihAtividade" value="# {cidadaoBean.cidadao.cidAtividades.size()}" rendered="true" label="lista de Atividades" validatorMessage="nenhuma atividade incluida"  >
+                                                                <f:validateLongRange minimum="1" />
+                                                            </h:inputHidden>            -->
+                            <p:dataTable value="#{cidadaoBean.cidadao.cidAtividades}" 
+                                         var="at" 
+                                         rowKey="#{at.id}"
+                                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                                         rowIndexVar="rowIx">
+                                <p:column style="width: 250px">
+                                    <f:facet name="header">
+                                        <h:outputText value="descrição"/>
+                                    </f:facet>
+                                    <h:outputText value="#{at.atividade.descricao}" />
+                                </p:column>
+                                <p:column  style="width: 80px;text-align: center" >
+                                    <f:facet name="header">
+                                        <h:outputText value="remuneração"  />
+                                    </f:facet>
+                                    <h:outputText value="#{at.renda}" >
+                                        <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column style="width: 80px;text-align: center" headerText="ações" >
+                                    <p:commandButton icon="ui-icon-close" 
+                                                     update=":frmCid:tabView:tabViewCarac:tbAtividade" 
+                                                     process="@this"   >
+                                        <p:collector value="#{at}" unique="true" 
+                                                     removeFrom="#{cidadaoBean.cidadao.cidAtividades}" />
+                                    </p:commandButton>                                        
+                                </p:column>
+                                <p:columnGroup type="footer"> 
+                                    <p:row>  
+                                        <p:column footerText="Total:" style="text-align: right"  />  
+                                        <p:column footerText="R$ #{cidadaoBean.cidadao.atividadeTotal}"  />
+                                        <p:column    />  
+                                    </p:row>
+                                </p:columnGroup>
+                            </p:dataTable>
+                        </p:outputPanel>
+
+                    </p:panel>
+                </p:outputPanel>
+            </p:fieldset>
+            <h:panelGroup >
+                <p:commandButton id="btatvant" value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" oncomplete="tabView.select(0);" update="@this, :frmCid:tabView" />                        
+                <p:commandButton value="próximo" process="@this selRadioAtiv" update="tabViewCarac tbAtividade :messages" action="#{cidadaoBean.salva}"  oncomplete="tabViewCarac.select(1);" />                                                  
+            </h:panelGroup> 
+        </p:tab>
+        <p:tab title="Cursos" id="cursos"  >
+            <p:fieldset legend="Participação em Cursos" style=" margin: 0 auto; "   >
+
+                <h:panelGrid columns="2" id="selRadioCursos">
+                    <h:outputLabel  value="Possui cursos? " styleClass="titulos" />
+                    <h:selectOneRadio id="cidcursos" value="#{cidadaoBean.cidadao.curso}"   >
+                        <f:selectItem itemValue="false" itemLabel="Não" />
+                        <f:selectItem itemValue="true" itemLabel="Sim"  />                            
+                        <p:ajax update="panelCursos"  listener="#{cidadaoBean.handleSelectItemCurso}" />
+                    </h:selectOneRadio>
+                </h:panelGrid>
+
+                <p:panel id="panelCursos"  binding="#{cidadaoBean.panelCursos}"  visible="#{cidadaoBean.cidadao.curso}"   >
+                    <h:panelGrid id="insPanelCursos" columns="4" >
+                        <h:outputLabel value=" " />
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Curso:" />                                        
+                            <p:message for="cidlistacursos" display="icon"  />                                        
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value= "Horas: " /><p:message for="cidhoras" display="icon" />                                        
+                        </h:panelGrid>                                     
+
+                        <h:outputLabel value=" " />
+                        <p:commandButton value="+" oncomplete="dlgCurso.show()" process="@this" action="#{cursoBean.newCurso}" update=":frmcadcurso:panelCursoInsert" /> 
+                        <p:selectOneMenu id="cidlistacursos" 
+                                         filter="true" filterMatchMode="startsWith"
+                                         value="#{cidadaoBean.cursos.curso}" 
+                                         converter="IndexedConverter" 
+                                         required="true" label="Lista de Curso"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{cidadaoBean.selectItemsCurso}" />
+                        </p:selectOneMenu>
+
+                        <p:inputText id="cidhoras" value="#{cidadaoBean.cursos.hora}" size="5" rendered="true" label="Carga Horária" onkeypress="mascara(this, soNumeros)" >
+                            <f:validateLongRange minimum="1" maximum="99999" />
+                        </p:inputText>
+
+                        <p:commandButton value="Inserir" process="panelCursos" update="dtCursos insPanelCursos :messages" action="#{cidadaoBean.addCurso}" />
+
+                    </h:panelGrid>                               
+
+                    <p:outputPanel id="dtCursos" >
+                        <!--                            <p:message for="ihCursos"  showDetail="true"  /> 
+                                                    <h:inputHidden id="ihCursos" value="# {cidadaoBean.cidadao.cursos.size()}" rendered="true" label="lista Cursos" validatorMessage="$ {msg.nenhumitem}"  >
+                                                        <f:validateLongRange minimum="1" />
+                                                    </h:inputHidden> -->
+                        <p:dataTable   value="#{cidadaoBean.cidadao.cursos}" var="dados" 
+                                       rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+
+                            <p:column  headerText="Curso" >                                                     
+
+                                <h:outputText value="#{dados.curso.nome}" />
+                            </p:column>
+                            <p:column  headerText="Carga" style="width:100px" >                                                                      
+
+                                <h:outputText value="#{dados.hora}"  />
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" >
+                                <f:facet name="header">
+                                    <h:outputText value="ações"/>
+                                </f:facet>                                        
+                                <p:commandButton icon="ui-icon-close"  process="@this"  update=":frmCid:tabView:tabViewCarac:dtCursos"  >
+
+                                    <p:collector value="#{dados}" unique="true" removeFrom="#{cidadaoBean.listaCursos}"  />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:outputPanel>
+
+                </p:panel>
+
+            </p:fieldset>
+            <h:panelGroup >
+                <p:commandButton value="voltar" immediate="true" action="#{cidadaoBean.salva}" update="tabViewCarac"  oncomplete="tabViewCarac.select(0);" />                               
+                <p:commandButton id="btproxcurso" value="próximo" process="@this, selRadioCursos" update="tabViewCarac dtCursos :messages" action="#{cidadaoBean.salva}"  oncomplete="tabViewCarac.select(2);" />                                                  
+            </h:panelGroup> 
+        </p:tab>
+        <p:tab title="Equipamentos" id="equip" >
+            <p:fieldset legend="Equipamentos">
+                <h:panelGrid columns="2" id="selRadioEquip">
+                    <h:outputLabel  value="Possui equipamentos ? " styleClass="titulos" />
+                    <h:selectOneRadio id="cidequipamentos" value="#{cidadaoBean.cidadao.equipamento}"  >
+                        <f:selectItem itemValue="false" itemLabel="Não" />
+                        <f:selectItem itemValue="true" itemLabel="Sim"  />                            
+                        <p:ajax update="panelEquip"  listener="#{cidadaoBean.handleSelectItemEquip}" />
+                    </h:selectOneRadio>
+                </h:panelGrid>  
+                <p:panel id="panelEquip" binding="#{cidadaoBean.panelEquip}"  visible="#{cidadaoBean.cidadao.equipamento}" >
+                    <h:panelGrid id="insPanelEquipamento" columns="4"  >
+
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Equipamento: " />                                        
+                            <p:message for="planolistaEquipamento" display="icon"  />                                        
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value= "Estado: " />
+                            <p:message for="planoEstadoEquip" display="icon" />                                        
+                        </h:panelGrid>                                    
+
+
+                        <h:outputLabel value=" " />
+                        <h:outputLabel value=" " />
+
+                        <p:selectOneMenu id="planolistaEquipamento"  filter="true"
+                                         filterMatchMode="startsWith" style="width: 100px;"
+                                         value="#{cidadaoBean.equipamentosproprios.equipamento}" 
+                                         converter="IndexedConverter" required="true"   label="Equipamento"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{equipamentoBean.selectItemsEquipamentos}" />
+                        </p:selectOneMenu>
+                        <h:selectOneMenu id="planoEstadoEquip" 
+                                         value="#{cidadaoBean.equipamentosproprios.estado}"                                          
+                                         required="true" label="Estado"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItem  itemLabel="ÓTIMO" itemValue="OTIMO"  />
+                            <f:selectItem  itemLabel="BOM" itemValue="BOM"  />
+                            <f:selectItem  itemLabel="REGULAR" itemValue="REGULAR"  />
+                            <f:selectItem  itemLabel="INSERVÍVEL" itemValue="INSERVIVEL"  />
+                        </h:selectOneMenu>
+
+                        <p:commandButton value="Inserir" process="panelEquip" update="insPanelEquipamento dtEquipPro  :messages" action="#{cidadaoBean.addEquipPro}" />
+                        <p:commandButton value="+" oncomplete="dlgEquipamento.show()" process="@this" action="#{equipamentoBean.newEquipamento}" update=":frmEquipamento:panelEquipamentoInsert" /> 
+                    </h:panelGrid>                                                      
+                    <p:outputPanel id="dtEquipPro" >
+                        <!--                            <p:message for="ihEquipPro"  showDetail="true"  /> 
+                                                    <h:inputHidden id="ihEquipPro" value="# {cidadaoBean.cidadao.equipamentosproprios.size()}" rendered="true" label="lista Equipamentos" validatorMessage="$ {msg.nenhumitem}"  >
+                                                        <f:validateLongRange minimum="1" />
+                                                    </h:inputHidden> -->
+                        <p:dataTable  value="#{cidadaoBean.cidadao.equipamentosproprios}" var="item" emptyMessage="${msg.lista_vasia}" 
+                                      rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+                            <f:facet name="header">
+                                <h:outputText value="Lista de Equipamentos Próprios" />
+                            </f:facet>
+                            <p:column  headerText="Equipamento" >                                               
+
+                                <h:outputText value="#{item.equipamento.nome}" />
+                            </p:column>
+                            <p:column  headerText="Estado" >                                                                     
+                                <h:outputText value="#{item.estado}" />
+                            </p:column>
+                            <!--                                    <p:column  headerText="uso" >                                                                      
+                                                                    <h:outputText value="# {item.tempo}" />
+                                                                </p:column>-->
+                            <p:column style="width: 80px;text-align: center" >
+                                <f:facet name="header">
+                                    <h:outputText value="ações"/>
+                                </f:facet>                                        
+                                <p:commandButton icon="ui-icon-close"  process="@this"  update=":frmCid:tabView:tabViewCarac:dtEquipPro"  >
+                                    <p:collector value="#{item}" unique="true" removeFrom="#{cidadaoBean.cidadao.equipamentosproprios}"  />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:outputPanel>  
+
+                </p:panel>
+            </p:fieldset>  
+            <h:panelGroup >
+                <p:commandButton value="voltar" immediate="true" action="#{cidadaoBean.salva}" update="tabViewCarac"   oncomplete="tabViewCarac.select(1);" />                        
+                <p:commandButton value="próximo" process="@this selRadioEquip" update="tabViewCarac" action="#{cidadaoBean.salva}"  oncomplete="tabViewCarac.select(3);" />                                                  
+            </h:panelGroup> 
+        </p:tab>       
+        <p:tab title="Beneficios Sociais" id="bsociais"  >
+            <p:fieldset legend="Benefícios Sociais" style="  margin: 0 auto; "  >
+                <h:panelGrid columns="2" id="selRadioBen">
+                    <h:outputLabel  value="Possui Benefícios ? " styleClass="titulos" />
+                    <h:selectOneRadio id="cidbensociais" value="#{cidadaoBean.cidadao.beneficioSocial}"    >
+                        <f:selectItem itemValue="false" itemLabel="Não"  />
+                        <f:selectItem itemValue="true" itemLabel="Sim"  />              
+                        <p:ajax update="panelBeneficioSocial" listener="#{cidadaoBean.handleSelectItemBeneficioSocial}" />
+                    </h:selectOneRadio>
+                </h:panelGrid>
+
+                <p:panel  id="panelBeneficioSocial" binding="#{cidadaoBean.panelBenSocial}" visible="#{cidadaoBean.cidadao.beneficioSocial}"   >
+                    <h:panelGrid id="insBenSoc" columns="5" >
+                        <h:outputLabel value=" " />
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Benefício: " />                                        
+                            <p:message for="somItemBenSocial" display="icon"  />                                        
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Número: " />                                        
+                            <p:message for="somItemBenSocial" display="icon"  />                                        
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Renda: " />                                        
+                            <p:message for="cidbenrsocialrenda" display="icon"  />                                        
+                        </h:panelGrid>
+
+
+                        <h:outputLabel value=" "/>
+                        <p:commandButton value="+"  process="@this"  
+                                         action="#{beneficioSocialBean.newBeneficioSocial}" 
+                                         oncomplete="dlgBenSocial.show()" 
+                                         update=":frminsertbensoc:panelBeneficioSocialInsert" />
+
+                        <p:selectOneMenu id="somItemBenSocial" 
+                                         filter="true" filterMatchMode="startsWith"
+                                         value="#{cidadaoBean.cidBenSocial.beneficioSocial}" 
+                                         converter="IndexedConverter"  label="Lista Benefícios Sociais"
+                                          required="true" >
+                            <f:selectItem   itemLabel="selecione"  noSelectionOption="true"/>
+                            <f:selectItems value="#{cidadaoBean.selectItemsBeneficioSocial}" />
+
+                        </p:selectOneMenu>
+                        <p:inputText id="cidBensocialnis" size="20"
+                                     onkeypress="mascara(this, soNumeros)" 
+                                     value="#{cidadaoBean.cidBenSocial.nis}" 
+                                     label="Número Identificação Social"  >
+
+                        </p:inputText>
+                        <p:inputText size="8" id="cidbenrsocialrenda" 
+                                     value="#{cidadaoBean.cidBenSocial.renda}" 
+                                     onkeypress="mascara(this, valor)"  
+                                     label="Valor "  >
+                            <f:convertNumber pattern="##,##0.00#"  />
+
+                        </p:inputText>
+                        <p:commandButton id="btinsbensoc" value="Inserir" process="panelBeneficioSocial"  update="tbBenSoc, insBenSoc,:messages" actionListener="#{cidadaoBean.newBenSocial}" />
+                    </h:panelGrid>
+                    <p:outputPanel  >
+
+                        <p:dataTable id="tbBenSoc" value="#{cidadaoBean.cidadao.cidbBenSociais}" var="item" 
+                                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+                            <p:column headerText="Benefício">
+                                <h:outputText value="#{item.beneficioSocial.nome}" />
+                            </p:column>
+                            <p:column  headerText="Número" style="width:100px" >                                                                      
+                                <h:outputText value="#{item.nis}" />                                                      
+
+                            </p:column>
+                            <p:column  headerText="Remuneração" style="width:100px"  >                                                                      
+                                <h:outputText value="#{item.renda}" >
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" headerText="Ações" >                                        
+                                <p:commandButton icon="ui-icon-close" update=":frmCid:tabView:tabViewCarac:tbBenSoc" process="@this"   >
+                                    <p:collector value="#{item}" unique="true"  removeFrom="#{cidadaoBean.cidadao.cidbBenSociais}" />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:outputPanel>
+
+                </p:panel>
+            </p:fieldset>
+            <h:panelGroup >
+                <p:commandButton value="voltar" immediate="true" action="#{cidadaoBean.salva}" update="tabViewCarac"  oncomplete="tabViewCarac.select(2);" />                        
+                <p:commandButton value="próximo" process="@this selRadioBen" update="tabViewCarac" action="#{cidadaoBean.salva}"  oncomplete="tabViewCarac.select(4);" />                                                  
+            </h:panelGroup>     
+        </p:tab>
+        <p:tab title="Benefícios Habitacionais" id="bhabit" >
+            <p:fieldset legend="Benefícios Habitacionais" style=";margin: 0 auto; "  >
+                <h:panelGrid columns="2" id="selRadioBenHabit">
+                    <h:outputLabel  value="Possui Benefícios ? " styleClass="titulos" />
+                    <h:selectOneRadio id="cidbenhabit" value="#{cidadaoBean.cidadao.beneficiohabitacional}" required="true" >                            
+                        <f:selectItem itemValue="false" itemLabel="Não" />
+                        <f:selectItem itemValue="true" itemLabel="Sim"  />
+                        <p:ajax update="panelBeneficioHabitacional" listener="#{cidadaoBean.handleSelectItemBeneficioHabitacional}" />
+                    </h:selectOneRadio>
+                </h:panelGrid>
+                <p:panel id="panelBeneficioHabitacional"  binding="#{cidadaoBean.panelBenHabit}" visible="#{cidadaoBean.cidadao.beneficiohabitacional}"   >
+
+                    <h:panelGrid columns="4" id="insBenHab"   >
+                        <h:outputLabel value=" " />
+                        <h:outputLabel value="Benefício:" />
+                        <h:outputLabel  value ="Valor: "/>
+                        <h:outputLabel value=" "/>
+
+                        <p:commandButton value="+" process="@this" oncomplete="dlgBenHabit.show()" action="#{beneficioHabitacionalBean.newBeneficioHabitacional}" update=":frmBenHabits:panelBeneficioHabitacionalInsert" />
+
+                        <p:selectOneMenu id="cidlistabenshabit"  
+                                         style="width: 110px"  
+                                         filter="true" filterMatchMode="startsWith"
+                                         value="#{cidadaoBean.cidBenHabit.beneficioHabitacional}" 
+                                         converter="IndexedConverter" 
+                                         label="Lista Benefícios Habitacionais" required="true" >
+                            <f:selectItem   itemLabel=" selecione "  noSelectionOption="true"/>                                   
+                            <f:selectItems value="#{cidadaoBean.selectItemsBeneficioHabitacional}" />
+                        </p:selectOneMenu>
+                        <p:inputText value="#{cidadaoBean.cidBenHabit.valor}" 
+                                     onkeypress="mascara(this, valor)" 
+                                     required="true" size="10" > 
+                            <f:convertNumber pattern="##,##0.00#"  />
+                            <f:validateDoubleRange minimum="1.0" />
+                        </p:inputText>                                     
+
+                        <p:commandButton value="Inserir" process="panelBeneficioHabitacional" update="insBenHab,tbBenHab,:messages"   actionListener="#{cidadaoBean.newBenHabit}" />
+
+
+                    </h:panelGrid>
+                    <p:outputPanel id="tbBenHab">
+                        <!--                              <p:message for="ihBenH"  showDetail="true"  /> 
+                                                    <h:inputHidden id="ihBenH" value="# {cidadaoBean.cidadao.cidBenHabits.size()}" rendered="true" label="lista Benefícios Habitacionais" validatorMessage="${msg.nenhumitem}"  >
+                                                        <f:validateLongRange minimum="1" />
+                                                    </h:inputHidden> -->
+                        <p:dataTable  value="#{cidadaoBean.cidadao.cidBenHabits}" var="item"   >
+                            <p:column headerText="Benefício" > 
+
+                                <h:outputText value="#{item.beneficioHabitacional.nome}" />
+                            </p:column>
+                            <p:column  headerText="Valor" style="width:100px" >                                                                     
+                                <h:outputText value="#{item.valor}" >
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" headerText="ações" >                                        
+                                <p:commandButton icon="ui-icon-close" update=":frmCid:tabView:tabViewCarac:tbBenHab" process="@this"   >
+                                    <p:collector value="#{item}" unique="true"  removeFrom="#{cidadaoBean.cidadao.cidBenHabits}" />
+                                </p:commandButton>                                        
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:panel> 
+            </p:fieldset>
+            <h:panelGroup >
+                <p:commandButton value="voltar" immediate="true" action="#{cidadaoBean.salva}" update="tabViewCarac"  oncomplete="tabViewCarac.select(3);" />                        
+                <p:commandButton value="próximo" process="@this, selRadioBenHabit" update="cidbenhabit, :messages, :frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(2);" />                                                  
+            </h:panelGroup> 
+        </p:tab>
+    </p:tabView>                      
+
+
+
+</ui:composition>

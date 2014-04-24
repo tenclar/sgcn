@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+        <p:commandButton value ="Inserir" process="@this" actionListener="#{planoBean.newDomicilio}" oncomplete="dlgDomicilio.show()" update=":frmDomicilio"  />                    
+                    <p:outputPanel id="tbhistDom" >
+                        <p:dataTable value="#{planoBean.plano.cidadao.histdomicilio}" var="item"   >
+
+                            <f:facet name="header">
+                                <h:outputText value="Histórico do Domiíclio"/>
+                            </f:facet>
+                            
+                            <p:column   headerText="Tipo" >
+
+                                <h:outputText value="#{item.moradia.descricao}" />
+                            </p:column>
+                            <p:column headerText="Cômodos" >
+
+                                <h:outputText value="#{item.comodo}" />
+                            </p:column>
+                            <p:column  headerText="Situação" >
+
+                                <h:outputText value="#{item.situacao.nome}" />
+                            </p:column>
+                            <p:column headerText="Construção"  >
+
+                                <h:outputText value="#{item.construcao.nome}" />
+                            </p:column>
+                            <p:column  headerText="Local &lt;br &frasl;&gt;  Banheiro" >
+
+                                <h:outputText value="#{item.localbanheiro}" >
+                                    
+                                </h:outputText>
+                            </p:column>
+                            <p:column  headerText="Tipo &lt;br &frasl;&gt;Escoamento" >                                    
+
+                                <h:outputText value="#{item.escoamento.nome}" />
+                            </p:column>                               
+                            <p:column headerText="Abastecimento &lt;br &frasl;&gt;de Água"  >
+
+                                <h:outputText value="#{item.abastecimento.nome}" />
+                            </p:column>
+                            <p:column headerText="Construção"  >
+
+                                <h:outputText value="#{item.construcao.nome}" />
+                            </p:column>
+                            <p:column headerText="Pavimentação"  >
+
+                                <h:outputText value="#{item.pavimentacao.nome}" />
+                            </p:column>
+                            <p:column headerText="Coleta Lixo"  >
+
+                                <h:outputText value="#{item.coletalixo.nome}" />
+                            </p:column>
+                            <p:column headerText="Tipo &lt;br &frasl;&gt; Iluminação"  >
+
+                                <h:outputText value="#{item.iluminacao.nome}" />
+                            </p:column>
+                            <p:column headerText="Iluminação &lt;br &frasl;&gt; Pública"  >
+
+                                <h:outputText value="#{item.iluminacaopublica}" />
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" >
+                                <f:facet name="header">
+                                    <h:outputText value="ações"/>
+                                </f:facet>
+                                <p:commandButton icon=" ui-icon-refresh" process="@this" oncomplete="dlgDomicilio.show()" actionListener="#{planoBean.editDomicilio}" update=":frmDomicilio"  >
+                                    <f:setPropertyActionListener value="#{item}" target="#{planoBean.domicilio}"/>
+                                </p:commandButton><!--                                </p:commandButton>rendered="# {p:ifGranted(msg.perm_view)}"-->
+
+                                <p:commandButton icon=" ui-icon-close" update=":frmPlano:tabGeral:tabIdent:tabInfoResp:tbhistDom" process="@this"  >
+                                    <p:collector value="#{item}" unique="true"  removeFrom="#{planoBean.plano.cidadao.histdomicilio}" />
+                                </p:commandButton> 
+                             
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:outputPanel>                   
+        
+    </h:body>
+</html>
+

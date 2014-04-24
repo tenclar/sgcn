@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form id="frmCadNew"  prependId="false">                
+        <p:fieldset legend="Identificação" id="panelCidInsert" >
+
+            <h:panelGrid  columns="2" style="margin-bottom:10px">
+                 <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="cidnewanodemanda"  value="Ano Demanda: " styleClass="titulos" />
+                    <p:message for="cidnewanodemanda" display="icon"   />
+                </h:panelGrid> 
+                <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="cidnewdata"  value="Data de Cadastro: " styleClass="titulos" />
+                    <p:message for="cidnewdata" display="icon"   />
+                </h:panelGrid> 
+                <p:inputText id="cidnewanodemanda" autocomplete="off"  value="#{cidadaoBean.cidadao.anodemanda}" size="8" required="true" label="Ano Demanda" maxlength="4" onkeypress="mascara(this, soNumeros)"  >
+                   
+                </p:inputText>
+                <p:calendar id="cidnewdata" locale="pt" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{cidadaoBean.cidadao.datacreated}" pattern="dd/MM/yyyy" required="true" >
+                    
+                </p:calendar>
+
+            </h:panelGrid>
+            <h:panelGrid  columns="2" style="margin-bottom:10px">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="cidnewcpf"  value="CPF: "  />
+                    <p:message for="cidnewcpf" display="icon"  showDetail="false"  />
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="cidnewnome" value="Nome Completo: "  />
+                    <p:message for="cidnewnome" display="icon"  showDetail="false" />
+                </h:panelGrid>
+
+                <p:inputText id="cidnewcpf" autocomplete="off"  value="#{cidadaoBean.cidadao.cpf}" size="16" required="true" label=" CPF" maxlength="11" onkeypress="mascara(this, soNumeros)"  >
+                    <f:validator validatorId="cpfvalidator"  />
+                </p:inputText>
+                <p:inputText id="cidnewnome" value="#{cidadaoBean.cidadao.nome}" autocomplete="off" size="70"   required="true" label="Nome" 
+                             onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase();"  />                                       
+            </h:panelGrid>
+
+
+            <p:column colspan="2">
+
+<p:commandButton update=":messages :frmCid"   actionListener="#{cidadaoBean.saveCidadaoNew}" 
+                                   value="Salvar"  oncomplete="handleComplete(args)"   />
+                <p:commandButton   oncomplete="dlgCidNew.hide();" immediate="true"  value="Cancelar" action="#{cidadaoBean.cancelCidadao}" />
+
+            </p:column>
+        </p:fieldset  >                        
+    </h:form>  
+</ui:component>
+

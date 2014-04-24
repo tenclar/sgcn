@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:fieldset legend="Identificação" id="fieldIdent" >
+        <p:panel>
+
+            <h:outputLabel for="cidviewcpf" value="CNPJ: " styleClass="titulos" />              
+            <p:inputText readonly="true" disabled="true" id="cidviewcpf"  value="#{beneficiadoBean.cidadao.cpf}" style="background: #e8e1b5; color: #023401;text-align: center;" />                        
+            
+            
+            <h:outputLabel for="cidviewnome" value="Nome: " styleClass="titulos" /> 
+            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 200px"   />    
+            <p:commandButton process="@this" icon="ui-icon-search" oncomplete="dlgBuscaCid.show()" action="#{cidadaoBuscaBean.clear()}" update=":frmBuscaCid" />
+            <p:message showDetail="true" for="ihNome" />
+            <h:inputHidden id="ihNome" value="#{beneficiadoBean.cidadao.nome}" required="true" />
+        </p:panel>
+        <h:panelGrid columns="2" style="width: 100%" >
+            <p:fieldset legend="Dados" style="height: 180px"   >
+                <h:panelGrid   >
+                    <h:panelGroup >
+                                <h:outputLabel for="cidviewrg" value="IE: " styleClass="titulos" />      
+                                <h:outputText id="cidviewrg" value="#{beneficiadoBean.cidadao.rg}"  />
+                        
+                    </h:panelGroup>
+                    <h:panelGroup>
+<!--                        <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: 100px;">
+                            </div> -->
+                                <p:dataTable id="dtTel" var="item" style="width: 240px" value="#{beneficiadoBean.cidadao.telefones}">
+                                    <p:column headerText="Telefones" >
+                                        <h:outputText value="#{item.numero}" />
+                                    </p:column>
+                                </p:dataTable>
+                           
+                       
+                    </h:panelGroup>
+                </h:panelGrid>
+
+            </p:fieldset>           
+            <p:fieldset legend="Endereço" style="height: 180px" >            
+                <h:panelGrid columns="2" id="cidviewEnd" styleClass="end" >
+                    <h:outputLabel  value="Logradouro: " styleClass="titulos" />                                    
+                    <h:panelGroup>                    
+                        <h:outputText id="cidviewlogr"   value="#{beneficiadoBean.cidadao.endereco.logradouro}"  />                    
+                        <h:outputLabel  value="Nº / Lote: " styleClass="titulos" />
+                        <h:outputText id="cidviewnum"    value="#{beneficiadoBean.cidadao.numero}"   />               
+                    </h:panelGroup>
+
+                    <h:outputLabel  value="Bairro / Ramal: " styleClass="titulos" />
+                    <h:outputText id="cidviewbairro" value="#{beneficiadoBean.cidadao.endereco.bairro.nome}"    />
+                    <h:outputLabel  value="Cidade: " styleClass="titulos" />
+                    <h:panelGroup>                    
+                        <h:outputText id="cidviewcid"    value="#{beneficiadoBean.cidadao.endereco.bairro.cidade.nome}"  />                    
+                        <h:outputLabel  value="UF: " styleClass="titulos" />
+                        <h:outputText id="cidviewuf"     value="#{beneficiadoBean.cidadao.endereco.bairro.cidade.estado.sigla}" />
+                    </h:panelGroup>                                                     
+                    <h:outputLabel  value="Zona:" styleClass="titulos" />  
+                    <h:panelGroup>                                                     
+                        <h:outputText id="cidviewzona"   value="#{beneficiadoBean.cidadao.endereco.bairro.zona}"  />                      
+                        <h:outputLabel  value="Tempo Moradia:" styleClass="titulos"  />                                                                                                                                                                                               
+                        <h:outputText id="cidviewtpmor"  value="#{beneficiadoBean.cidadao.tempomorada}" />   
+                    </h:panelGroup>                                                     
+
+                </h:panelGrid>
+            </p:fieldset>
+        </h:panelGrid>  
+
+<!--        <p:panel    visible="# {beneficiadoBean.cidadao.beneficioSocial}"   >
+            <p:dataTable value="# {beneficiadoBean.cidadao.cidbBenSociais}" var="item" emptyMessage=" Benefício Social Necessário"   >
+                <p:column headerText="Benefício Social"  style="width: auto" >                                        
+                    <h:outputText value="# {item.beneficioSocial.nome}" />                                    
+                </p:column>
+                <p:column  headerText="Código" >                                                                    
+                    <h:outputText value="# {item.nis}" style="text-align: center" />
+                </p:column>
+                <p:column  headerText="valor" >                                                                    
+                    <h:outputText value="# {item.renda}" style="text-align: center" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:panel>-->
+
+    </p:fieldset  >   
+
+
+
+</ui:component>
+

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:form   id="frmInsCursos" >
+     <h:panelGrid id="insPanelCursoSrc" columns="3"  >
+
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Curso: " />                                        
+                        <p:message for="cidListaCursoSrc" display="icon"  />                                        
+                    </h:panelGrid>
+                    <h:outputLabel value=" " />                                                      
+                    <h:outputLabel value=" " />                               
+                    <h:selectOneMenu id="cidListaCursoSrc"  style="width: 230px" value="#{planoBean.cursossecretaria.curso}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Equipamento Secretaria"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{cursoBean.selectItemsCurso}" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton value="Inserir"  update=":frmPlano:tabGeral:tabIdent:tabInfoResp:tabPlanBenef:dtCursosSecr, insPanelCursoSrc :messages" action="#{planoBean.addCursoSec}"  oncomplete="if(!args.validationFailed){dlgCursoSecr.hide();}" />                                
+                    <p:commandButton value="+" oncomplete="dlgCurso.show()" process="@this" action="#{cursoBean.newCurso}" update=":frmCurso" />                               
+
+
+                </h:panelGrid> 
+        </h:form>
+</ui:component>
+

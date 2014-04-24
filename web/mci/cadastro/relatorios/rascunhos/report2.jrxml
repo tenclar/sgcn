@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="84eacf4c-cdea-4cd2-9f8c-ec84a2305e69">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+     cidadao.`id` AS cidadao_id,
+     cidadao.`apelido` AS cidadao_apelido,
+     cidadao.`benstatus` AS cidadao_benstatus,
+     cidadao.`cpf` AS cidadao_cpf,
+     cidadao.`datacreated` AS cidadao_datacreated,
+     cidadao.`nome` AS cidadao_nome,
+     cidadao.`rg` AS cidadao_rg,
+     cidadao.`sexo` AS cidadao_sexo,
+     cidadao.`tipopessoa` AS cidadao_tipopessoa,
+     cidadao.`nis` AS cidadao_nis,
+     endereco.`cep` AS endereco_cep,
+     bairro.`nome` AS bairro_nome,
+     bairro.`zona` AS bairro_zona,
+     endereco.`logradouro` AS endereco_logradouro,
+     cidade.`id` AS cidade_id,
+     cidade.`cep` AS cidade_cep,
+     cidade.`nome` AS cidade_nome,
+     cidade.`estado_id` AS cidade_estado_id,
+     cidadao.`numero` AS cidadao_numero
+
+FROM
+     `bairro` bairro INNER JOIN `endereco` endereco ON bairro.`id` = endereco.`bairro_id`
+     INNER JOIN `cidadao` cidadao ON endereco.`id` = cidadao.`endereco_id`
+	  INNER JOIN `cidade` cidade ON bairro.`cidade_id` = cidade.`id`
+WHERE
+      cidade.`estado_id` = 1
+/* AND bairro.`zona` = 'RURAL' */
+ AND cidadao.ramoempreendimento_id = 14
+/* AND cidadao.publico_id = 3 */
+ AND cidadao.`tipopessoa` = 'CID'
+
+
+ORDER BY
+     cidade.nome ASC]]>
+	</queryString>
+	<field name="cidadao_id" class="java.lang.Integer"/>
+	<field name="cidadao_apelido" class="java.lang.String"/>
+	<field name="cidadao_benstatus" class="java.lang.String"/>
+	<field name="cidadao_cpf" class="java.lang.String"/>
+	<field name="cidadao_datacreated" class="java.sql.Date"/>
+	<field name="cidadao_nome" class="java.lang.String"/>
+	<field name="cidadao_rg" class="java.lang.String"/>
+	<field name="cidadao_sexo" class="java.lang.String"/>
+	<field name="cidadao_tipopessoa" class="java.lang.String"/>
+	<field name="cidadao_nis" class="java.lang.Long"/>
+	<field name="bairro_nome" class="java.lang.String"/>
+	<field name="bairro_zona" class="java.lang.String"/>
+	<field name="endereco_logradouro" class="java.lang.String"/>
+	<field name="cidade_cep" class="java.lang.String"/>
+	<field name="cidade_nome" class="java.lang.String"/>
+	<field name="cidadao_numero" class="java.lang.String"/>
+	<group name="cidade_nome">
+		<groupExpression><![CDATA[$F{cidade_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement uuid="126605ea-d3d4-4769-85b3-cbc4b7c57699" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="251b61b2-f267-44fd-930b-4cafc78857b5" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="b91fa09d-bedb-4c38-b5cf-33b2e85df43b" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cidade_nome}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="38" y="8" width="64" height="64"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="136" y="58" width="278" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MCI - MÓDULO DE CADASTRO INDIVIDUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="143" y="9" width="265" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="143" y="25" width="265" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="136" y="41" width="278" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="136" y="78" width="296" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BENEFICIÁRIOS POR ZONA RURAL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="e8e65ec8-1331-4ce9-bdd1-bf2d35a28283" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="7f629f79-1e10-4c7a-b166-e3cb8b886054" style="Column header" x="0" y="0" width="83" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="04d46bca-fdb8-4c26-a3ef-6449babbcea8" style="Column header" x="83" y="0" width="69" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d5308a-6f1b-4275-ab5e-32c14aed379b" style="Column header" x="152" y="0" width="58" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fba63cff-8b6e-49da-8b77-e799afc39ca6" style="Column header" x="210" y="0" width="130" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2725d50-ab29-4dd4-8a52-45c00198161d" style="Column header" x="340" y="0" width="92" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[NIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="41390f65-4ee9-45c4-b759-0c7bc17a9757" style="Column header" x="442" y="0" width="113" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="08ef45e9-fc78-4fe1-9856-317109627dcc" style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0afb6b80-10bf-4a90-a0df-283c7f758d5d" style="Detail" x="0" y="0" width="79" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_cpf}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yy">
+					<reportElement uuid="ec25a764-d4bc-4080-b76d-97024e9e0e1a" style="Detail" x="152" y="0" width="58" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_datacreated}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="f1116e66-1f6f-4783-b7dd-48a4d673d213" style="Detail" x="210" y="0" width="130" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="867596d4-018d-40e8-855e-4015e6039ff7" style="Detail" x="340" y="0" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_nis}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="fa5db45b-6933-4abd-a484-7273fc42004d" style="Detail" x="442" y="0" width="113" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{endereco_logradouro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="830d8594-0bbd-45d2-808c-a15089328fcd" style="Detail" x="79" y="0" width="73" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_benstatus}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="c69d6f5c-929a-438a-a75f-4401495aeebc" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="7e397c10-5208-416e-8612-5fc3804ca888" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="2220f7dd-f891-4014-8e13-a374d04174dc" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="259891da-914d-43cc-8a06-92f69ffffc28" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="ad90c299-7cf6-4408-bd5d-6ec3f74591c9" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

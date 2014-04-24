@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+        <h:form prependId="false" id="frmCooperativaTurma">
+            <h:panelGrid  columns="4"  >                               
+                <h:outputLabel for="turcoopcursonome"  value="Curso: " styleClass="titulos"/>
+                <p:inputText id="turcoopcursonome" value="#{turmaBean.turma.curso.nome}" size="50" label="Nome do Curso" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
+                <h:outputLabel for="turcoopnome"  value="Turma: " styleClass="titulos"/>
+                <p:inputText id="turcoopnome" value="#{turmaBean.turma.nome}" size="50" label="Nome da Turma" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
+                <h:outputLabel for="turcoopdtinicio"  value="Início: " styleClass="titulos"/>
+                <p:inputText id="turcoopdtinicio" value="#{turmaBean.turma.datainicio}" size="14" label="Data início" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputText>
+                <h:outputLabel for="turcoopdtfim"  value="Fim: " styleClass="titulos"/>
+                <p:inputText id="turcoopdtfim" value="#{turmaBean.turma.datafim}" size="14" label="Data Fim" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputText>
+            </h:panelGrid>
+            <p:separator/>
+            
+            <h:selectOneRadio value="#{turmaBean.tipoBuscaCidadao}" >
+                <f:selectItem itemValue="nome" itemLabel="Nome" />
+                <f:selectItem itemValue="cpf" itemLabel="CNPJ" /> 
+            </h:selectOneRadio>
+            <h:outputLabel value="Busca: " for="coopBusca" styleClass="titulos"/>
+            <p:inputText id="coopBusca" autocomplete="off" value="#{turmaBean.buscaCidadao}" size="100" onkeyup="this.value = this.value.toUpperCase();"/> 
+            <p:commandButton actionListener="#{turmaBean.localizaCooperativas}" title="Buscar Cooperativas" label="Buscar" update="frmCooperativaTurma, tbcooperativa, :messages" icon="ui-icon-search" /> 
+            <p:outputPanel id="tbcooperativa" >
+                <p:dataTable var="item" value="#{turmaBean.dataModelListaCid}" 
+                             paginator="true" 
+                             paginatorAlwaysVisible="false" 
+                             rows="8"                             
+                             rowKey="#{item.id}"
+                             paginatorPosition="bottom" 
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" 
+                             emptyMessage="Efetue uma Consulta">
+                    <p:column headerText="id" style="width: 40px"> 
+                        <h:outputText value="#{item.id}"  />
+                    </p:column>
+                    <p:column headerText="CNPJ" style="width: 100px" > 
+                        <h:outputText value="#{item.cpf}"  />
+                    </p:column>
+                    <p:column headerText="Nome:" style="width: 200px" >
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column> 
+                     
+                    <p:column headerText="ações" style=" text-align: center; width: 220px" >
+                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Associados" title="Adicionar Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgCidCoopTurma.show();" update="frmCidCoopTurma" actionListener="#{turmaBean.selectCooperativa}"/>
+                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Adicionar Todos" title="Adicionar Todos Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgAlunosTurma.show();" update="frmListaAlunosTurma" actionListener="#{turmaBean.addCooperativa}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel>
+            <p:commandButton value="Voltar" title="Voltar" oncomplete="dlgCooperativaTurma.hide(); dlgAlunosTurma.show();" immediate="true"/>
+        </h:form>
+    
+</ui:component>
+

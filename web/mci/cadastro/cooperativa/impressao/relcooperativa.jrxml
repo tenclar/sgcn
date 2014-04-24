@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcooperativa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5acb32ac-019b-43bf-b564-e678dfbe2051">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="197"/>
+	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<pen lineWidth="1.0"/>
+		<box leftPadding="2">
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+		<paragraph leftIndent="1" rightIndent="1"/>
+	</style>
+	<style name="fields" backcolor="#000000" hAlign="Left" vAlign="Middle">
+		<box leftPadding="2" bottomPadding="0" rightPadding="0">
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+		<paragraph leftIndent="1" rightIndent="1"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E3E3E3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[from Cidadao]]>
+	</queryString>
+	<field name="associados" class="java.util.List"/>
+	<field name="atividade" class="java.lang.String"/>
+	<field name="benstatus" class="entity.mci.enumerator.EnumStatusBeneficio"/>
+	<field name="cidbensduraveis" class="java.util.List"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="datacreated" class="java.util.Date"/>
+	<field name="datanasc" class="java.util.Date"/>
+	<field name="dataupdate" class="java.util.Date"/>
+	<field name="endereco" class="entity.Endereco"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="publico" class="entity.mci.Publico"/>
+	<field name="ramoempreendimento" class="entity.mci.RamoEmpreendimento"/>
+	<field name="resumo" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="statuscid" class="entity.mci.enumerator.EnumStatusCid"/>
+	<field name="telefones" class="java.util.List"/>
+	<field name="tipopessoa" class="entity.mci.enumerator.EnumTipoPessoa"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70">
+			<rectangle>
+				<reportElement uuid="155ab706-c05b-4d67-b840-17f07acfc5ae" x="0" y="0" width="555" height="70"/>
+			</rectangle>
+			<image>
+				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="9" y="1" width="64" height="64"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="142" y="1" width="265" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="142" y="17" width="265" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="135" y="33" width="278" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="135" y="50" width="278" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MCI - MÓDULO DE CADASTRO INDIVIDUAL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c70ffb88-205c-4bcb-ba08-af728dfa7299" x="0" y="3" width="555" height="17"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE CADASTRO COOPERATIVA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="92a88cc4-5577-4030-88d7-a190535f2ff4" style="columnHeader" x="0" y="56" width="555" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1506daa5-01de-49d3-8b5a-cea6b1271d11" style="fields" x="0" y="71" width="555" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<elementGroup>
+				<staticText>
+					<reportElement uuid="de9552eb-9c2f-4cf5-941b-d05d5326599c" style="columnHeader" x="0" y="26" width="135" height="15"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+						<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[Data Cadastro:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement uuid="22d3b357-0089-442d-b7e6-a4e2a5974f51" style="fields" x="0" y="41" width="135" height="15" backcolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{datacreated}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<staticText>
+				<reportElement uuid="1cf93809-3984-4981-9840-362979deef82" style="columnHeader" x="345" y="26" width="210" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[IE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7eb870ee-eb3f-48a4-bb9e-f30f83c46230" style="fields" x="345" y="41" width="210" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c576a770-b6d9-4989-ae25-5531401e0da2" style="fields" x="135" y="41" width="210" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="28f9680b-4b75-4d31-a466-cc8f93f6f6e5" style="columnHeader" x="135" y="26" width="210" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ab996fbe-faae-4008-9881-d50eec6f8354" style="fields" x="340" y="100" width="47" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3b0038c5-fa37-47f1-b5ab-76fa287b771c" style="fields" x="0" y="100" width="340" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="81bdb7b5-6560-4483-a276-6dd2fb9dd40a" style="columnHeader" x="340" y="86" width="47" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="622f0d1c-1525-45ba-b4ba-765fd8f0cd71" style="columnHeader" x="0" y="86" width="340" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4230f92b-cdd3-4553-b7ac-36da19fdd744" style="fields" x="421" y="130" width="34" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getEstado().getSigla()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a7ca40e0-1b7d-4bec-83e8-59f871fd6eb7" style="columnHeader" x="421" y="115" width="34" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bb9cc76a-03dc-4451-8794-fe0e0355581d" style="fields" x="387" y="100" width="168" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1ca86ba2-1ed9-4f31-8c28-a4e88ea3d5f0" style="columnHeader" x="198" y="115" width="223" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b1cdc71b-b87f-4bfb-8c87-a474fe518d5c" style="fields" x="198" y="130" width="223" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ed188c98-3a15-44b7-9b0d-c060e56b3299" style="fields" x="455" y="130" width="100" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{endereco}.getCep()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fd3dffd2-70eb-4907-99a2-9ddff29f0618" style="columnHeader" x="455" y="115" width="100" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[CEP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fa2345c9-8bd0-46c3-84ed-5da0ce88600f" style="columnHeader" mode="Opaque" x="0" y="0" width="555" height="26" backcolor="#ECEAEA"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Identificação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dead030a-a73b-41bf-8dd5-58fc757bcda0" style="columnHeader" x="387" y="86" width="168" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Bairro / Ramal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e4783ee9-ed28-4554-b8eb-33f8d682f456" style="columnHeader" x="0" y="115" width="198" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Complemento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="40d4a33b-3166-4bbb-8a74-8688843fd725" style="fields" x="0" y="130" width="198" height="15" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band>
+			<subreport>
+				<reportElement uuid="5eb2e685-e05a-48f1-92d8-4a99d984ea8a" x="0" y="0" width="555" height="0"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_telefones.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band>
+			<subreport>
+				<reportElement uuid="060c70e7-47a8-4fce-8926-985d17db6fe8" x="0" y="0" width="555" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{associados})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcooperativa_associados.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e4f0b7d1-af97-45d8-80dd-472c7d8ac62d" x="0" y="0" width="555" height="16"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Secretaria de Pequenos Negócios - Avenida Ceará, 1624 Centro - Rio Branco AC]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

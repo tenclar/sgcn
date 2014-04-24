@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html         xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition  template="/templates/mci.xhtml">
+
+
+        <ui:define name="conteudo" >
+           
+                <p:panel header="Relatórios de Equipamentos"  widgetVar="cadlist" closable="true" >
+                    <h:form>
+                        
+                    <p:menu>  
+
+                        
+                        <p:submenu label="Equipamentos">  
+                            <p:menuitem value="Pessoa Física" ajax="false"  process="@this" target="blank" action="#{beneficiadoBean.imprimirequipind()}"   icon="ui-icon-disk" />  
+                            <p:menuitem value="Pessoa Jurídica" ajax=" false" process="@this" target="_blank"  action="#{beneficiadoBean.imprimirequipcol()}" icon="ui-icon-arrowrefresh-1-w"/>  
+                        </p:submenu>  
+                        <!--        <p:submenu label="Navigations">  
+                                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>  
+                                    <p:menuitem value="Internal" outcome="/mobile/index" icon="ui-icon-star"/>  
+                                </p:submenu>  -->
+                    </p:menu>  
+                
+<!--                        <p:commandButton icon="ui-icon-print" value="Cidadão" process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true" action="# {beneficiadoBean.imprimirequipind()}"  title="Imprimir" />
+                        <p:commandButton icon="ui-icon-print" value="Cooperativas / Associações" process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true" action="# {beneficiadoBean.imprimirequipcol()}"  title="Imprimir" />-->
+                    </h:form>
+                </p:panel>
+
+           
+        </ui:define>
+        <ui:define name="caixadialogo">
+
+
+        </ui:define>
+    </ui:composition>
+</html>

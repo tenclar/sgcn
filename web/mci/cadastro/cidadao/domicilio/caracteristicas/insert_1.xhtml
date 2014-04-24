@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form id="frmDomicilio" prependId="false" >
+        <p:fieldset legend="Histórico Domicílio">
+            <p:panel id="panelDomicilio" >
+                <h:panelGrid id ="panelGridDomicilio" columns="6"   >
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domDataIns" value="Data: " styleClass="titulos" />
+                        <p:message for="domDataIns" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelMoradia" value="Tipo de Moradia: " styleClass="titulos" />
+                        <p:message for="domSelMoradia" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >                            
+                        <h:outputLabel for="domSelComodo" value="Cômodos: " styleClass="titulos" />
+                        <p:message for="domSelComodo" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelSituacao" value="Situação: " styleClass="titulos"  />
+                        <p:message for="domSelSituacao" display="icon"  /> 
+                    </h:panelGrid>
+
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelConst" value="Tipo de Construção: " styleClass="titulos" />
+                        <p:message for="domSelConst" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelLocalBanheiro" value="Local Banheiro: " styleClass="titulos" />
+                        <p:message for="domSelLocalBanheiro" display="icon"  /> 
+                    </h:panelGrid>
+
+                    <p:calendar id="domDataIns"  onkeyup="Formatadata(this, event)" 
+                                locale="pt_BR"  timeZone="GMT-4" onchange="validaDat(this, this.value)"
+                                maxlength="10"  size="12" showButtonPanel="true" navigator="true"
+                                value="#{cidadaoBean.domicilio.dataadd}" 
+                                pattern="dd/MM/yyyy" showOn="button" >
+
+                    </p:calendar>
+                    <h:panelGroup>
+                        <h:selectOneMenu id="domSelMoradia" label="moradia" value="#{cidadaoBean.domicilio.moradia}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                            <f:selectItems value="#{cidadaoBean.selectItemsMoradia}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmMoradia" oncomplete="dlgMoradia.show();" actionListener="#{domMoradiaBean.newDomMoradia}" />
+                    </h:panelGroup>
+                    <p:inputText label="Cômodos" size="10" id="domSelComodo" value="#{cidadaoBean.domicilio.comodo}" />
+                    <h:panelGroup>
+                        <h:selectOneMenu label="Situação" id="domSelSituacao" value="#{cidadaoBean.domicilio.situacao}" converter="IndexedConverter" required="true" style="width:120px"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                            <f:selectItem itemLabel="selecione" noSelectionOption="true" />                            
+                            <f:selectItems value="#{cidadaoBean.selectItemsSituacao}" />
+                        </h:selectOneMenu> 
+                        <p:commandButton value="+" process="@this" update=":frmSituacao" oncomplete="dlgSituacao.show();" actionListener="#{domSituacaoBean.newDomSituacao}" />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <p:selectOneMenu label="tipo de Construção" id="domSelConst"  
+                                         value="#{cidadaoBean.domicilio.construcao}" 
+                                         converter="IndexedConverter" required="true" 
+                                         style="width:120px"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                            <f:selectItems value="#{cidadaoBean.selectItemsConstrucao}" />
+                        </p:selectOneMenu>   
+                        <p:commandButton value="+" process="@this" update=":frmConstrucao" oncomplete="dlgDomConstrucao.show();" actionListener="#{domConstrucaoBean.newDomConstrucao}" />
+                    </h:panelGroup>
+                    <p:selectOneMenu label="Local banheiro" id="domSelLocalBanheiro"  
+                                     value="#{cidadaoBean.domicilio.localbanheiro}" 
+                                     required="true" style="width:80px"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItem  itemValue="Externo" itemLabel="Externo" />
+                        <f:selectItem  itemValue="Interno" itemLabel="Interno" />                            
+                    </p:selectOneMenu>                      
+
+
+
+                </h:panelGrid>
+                <h:panelGrid columns="6" >
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelEsc" value="Tipo de Escoamento: " styleClass="titulos" />
+                        <p:message for="domSelEsc" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelAb" value="Abastecimento água: " styleClass="titulos" />
+                        <p:message for="domSelAb" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel  for="domSelAb" value="Pavimentação: " styleClass="titulos" />
+                        <p:message for="domSelAb" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelCol"  value="Coleta de Lixo: " styleClass="titulos" />
+                        <p:message for="domSelCol" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelIlu"  value="Tipo Iluminação " styleClass="titulos" />
+                        <p:message for="domSelIlu" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2"  >
+                        <h:outputLabel for="domSelIlup" value="Iluminação Pública: " styleClass="titulos" />
+                        <p:message for="domSelIlup" display="icon"  /> 
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <h:selectOneMenu label="escoamento" id="domSelEsc" value="#{cidadaoBean.domicilio.escoamento}" required="true" converter="IndexedConverter" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                            <f:selectItems value="#{cidadaoBean.selectItemsEscoamento}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmEscoamento" oncomplete="dlgEscoamento.show();" actionListener="#{domEscoamentoBean.newDomEscoamento}"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:selectOneMenu label="abastecimento" id="domSelAb" value="#{cidadaoBean.domicilio.abastecimento}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                            <f:selectItems value="#{cidadaoBean.selectItemsAbastecimento}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmAbast" oncomplete="dlgAbastecimento.show();" actionListener="#{domAbastecimentoBean.newDomAbastecimento}"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:selectOneMenu label="pavimentacao" id="domSelPav" value="#{cidadaoBean.domicilio.pavimentacao}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                            <f:selectItems value="#{cidadaoBean.selectItemsPavimentacao}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmPav" oncomplete="dlgPavimentacao.show();" actionListener="#{domPavimentacaoBean.newDomPavimentacao}"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:selectOneMenu label="Coleta de Lixo" id="domSelCol" value="#{cidadaoBean.domicilio.coletalixo}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                            <f:selectItems value="#{cidadaoBean.selectItemsColetaLixo}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmColeta" oncomplete="dlgColetaLixo.show();" actionListener="#{domColetaLixoBean.newDomColetaLixo}"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:selectOneMenu label="iluminacao" id="domSelIlu" value="#{cidadaoBean.domicilio.iluminacao}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                                        
+                            <f:selectItems value="#{cidadaoBean.selectItemsIluminacao}" />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" process="@this" update=":frmilum" oncomplete="dlgIluminacao.show();" actionListener="#{domIluminacaoBean.newDomIluminacao}"  />
+                    </h:panelGroup>
+                    <h:selectOneMenu label="iluminacao pública" id="domSelIlup" value="#{cidadaoBean.domicilio.iluminacaopublica}"  style="width:60px" required="true" styleClass="ui-inputfield ui-widget ui-corner-all" >
+                        <f:selectItem itemValue="SIM" itemLabel="Sim"  />
+                        <f:selectItem itemValue="NAO" itemLabel="Não" />
+                    </h:selectOneMenu>
+
+
+                </h:panelGrid>
+            </p:panel>
+            <p:column colspan="2">
+                <p:commandButton  update="frmDomicilio,:frmCid:tabView:tbhistDom,:messages" oncomplete="if(!args.validationFailed){dlgDomicilio.hide();}"  actionListener="#{cidadaoBean.saveDomicilio}" value="Salvar"/>
+                <p:commandButton   oncomplete="dlgDomicilio.hide();" process="@this" immediate="true"  value="Cancelar" action="#{cidadaoBean.cancelDomicilio}" />
+            </p:column>
+        </p:fieldset>
+    </h:form>
+</ui:component>
+

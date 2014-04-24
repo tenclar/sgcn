@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              template="/templates/mci.xhtml">
+
+
+        <ui:define name="conteudo" >
+            <div class="conteudo"> 
+                
+                           
+                    <p:panel id="panelcadlist" header="Lista de Cadastro"  widgetVar="cadlist" closable="true" closeSpeed="0" style="min-width: 900px;min-height: 300px"   >
+                        <ui:include src="list.xhtml"  />    
+                    </p:panel>
+                <p:panel id="panelcad" header="Cadastro Individual"   visible="false" closeSpeed="0"  widgetVar="cadins" closable="true" style="min-width: 1000px"    >             
+                        <ui:include src="insert.xhtml"  />    
+                    </p:panel>     
+                    <!--                     <p:panel id="panelview" header="Imprimir"  widgetVar="cadview" visible="false"  closable="true" closeSpeed="0" style="min-width: 900px;"   >
+                                            <ui:include src="impressao/imprimir.xhtml"  />    
+                                        </p:panel>-->
+                
+            </div>
+        </ui:define>
+        
+        
+        
+        <ui:define name="caixadialogo">
+            <p:dialog header="Cadastro Individual" widgetVar="dlgCidNew" resizable="true"  modal="true" showEffect="slide" width="900"   > 
+                <ui:include src="/mci/cadastro/cidadao/new.xhtml" /> 
+            </p:dialog>
+            <p:dialog header="Localizar Endereço" widgetVar="dlgBuscaEnd"  resizable="true" modal="true" position="top"  width="700"   > 
+                <ui:include src="endereco/list.xhtml" />
+            </p:dialog>
+            <p:dialog header="Adicionar Endereço" widgetVar="dlgEndereco"  resizable="true" modal="true"  width="600" >
+
+                <ui:include src="endereco/endereco/insert.xhtml" />
+            </p:dialog>
+              <p:dialog header="Cadastro de Bairro" widgetVar="dialogBairro"  resizable="true" modal="true"  width="500">
+
+                <ui:include src="endereco/bairro/insert.xhtml" />
+
+            </p:dialog>
+
+            <p:dialog header="Novo Benefício Social" widgetVar="dlgBenSocial" modal="true" width="500">
+                <ui:include src="caracteristicas/social/insert.xhtml" />
+
+            </p:dialog>
+<!--             <p:dialog header="Cadastro de Público" widgetVar="dlgPublico"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="/mci/cadastro/publico/insert.xhtml" />
+
+            </p:dialog>-->
+            <p:dialog header="Cadastro de Cursos" widgetVar="dlgCurso"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="caracteristicas/curso/insert.xhtml" />
+
+            </p:dialog>
+            <p:dialog header="Cadastro de Benefício Habitacional" widgetVar="dlgBenHabit"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="caracteristicas/habits/insert.xhtml" />
+
+            </p:dialog>
+          
+<!--            <p:dialog header="Cadastro de Nescessidades Especiais" widgetVar="dlgNecEspecial"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="/mci/cadastro/necessidade/insert.xhtml" />
+
+            </p:dialog>-->
+            <p:dialog header="Cadastro de Atividades" widgetVar="dlgAtividade"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="caracteristicas/atividades/insert.xhtml" />
+
+            </p:dialog>
+            <p:dialog header="Cadastro de Despesa" widgetVar="dlgDespesa"  resizable="true" modal="true" showEffect="slide" width="500">
+
+                <ui:include src="domicilio/despesas/insert.xhtml" />
+
+            </p:dialog>
+            <p:dialog header="Composição Familiar" widgetVar="dlgDependente"  resizable="true" modal="true" showEffect="slide" position="top" width="1200" >
+
+                <ui:include src="compfamiliar/insert.xhtml" />
+
+            </p:dialog>
+            <p:dialog header="Novo Equipamento" widgetVar="dlgEquipamento"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+                <ui:include src="extra/equip.xhtml" />
+            </p:dialog>
+            <p:dialog header="Histórico Domicílio" widgetVar="dlgDomicilio"  resizable="true" modal="true" showEffect="slide" width="1000" >
+
+                <ui:include src="domicilio/caracteristicas/insert.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Novo Bem Durável" widgetVar="dlgBemDuravel"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+                <ui:include src="bensduraveis/add.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Lista de Bens Duráveis" widgetVar="dlgCidBensDuraveis"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+                <ui:include src="bensduraveis/insert.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Ramo de Empreendimento" widgetVar="dlgRamoEmpreendimento"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+                <ui:include src="extra/ramo.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Parentescos" widgetVar="dlgParentesco"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="extra/parentesco.xhtml" />
+            </p:dialog>
+                       
+            <p:dialog header="Cadastro de Tipo de Moradia" widgetVar="dlgMoradia"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/moradia/insert.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Tipo de situação" widgetVar="dlgSituacao"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/situacao/insert.xhtml" />
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Tipo de Construção" widgetVar="dlgDomConstrucao"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/construcao/insert.xhtml" />           
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Tipo de Ecoamento" widgetVar="dlgEscoamento"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/escoamento/insert.xhtml" />           
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Tipo de Abastecimento" widgetVar="dlgAbastecimento"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/abastecimento/insert.xhtml" />           
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Tipo de Iluminação" widgetVar="dlgIluminacao"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/iluminacao/insert.xhtml" />           
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Coleta de Lixo" widgetVar="dlgColetaLixo"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/coleta/insert.xhtml" />           
+            </p:dialog>
+
+            <p:dialog header="Cadastro de Pavimentação" widgetVar="dlgPavimentacao"  resizable="true" modal="true" showEffect="slide" width="500">
+                <ui:include src="domicilio/caracteristicas/pavimentacao/insert.xhtml" />           
+            </p:dialog>
+                        
+
+            
+
+            <p:confirmDialog id="confImprimir" message="Deseja Imprimir ?"  
+                             header="Impressão" severity="alert" widgetVar="confImprimir">  
+                <h:form prependId="true">         
+
+                    <p:commandButton id="confirm" value="sim"  onclick="confImprimir.hide();document.getElementById('cbBusca').focus();this.form.target='_blank'"  immediate="true" ajax="false"   action="#{cidadaoBean.saveImprimir}" /> 
+                    <p:commandButton id="decline" value="não" onclick="confImprimir.hide()" type="button" />   
+                </h:form>
+            </p:confirmDialog>   
+
+        </ui:define>
+    </ui:composition>

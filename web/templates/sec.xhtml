@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+
+
+<!--        <link type="text/css" href="${request.contextPath}/css/layout.css" rel="stylesheet" />	-->
+        <link type="text/css" href="${request.contextPath}/temas/theme/theme.css" rel="stylesheet" />	
+<!--         <script type="text/javascript" src="${request.contextPath}/js/util.js"  ></script>-->
+
+
+    </h:head>
+    <h:body style="font-size: 10px" >
+        <p:layout fullPage="true"   >                         
+            <p:layoutUnit position="center" styleClass="conteudo" > 
+                <div class="imcab" ></div>
+
+                <div class="barramenu" >
+                    <table class="info"  border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td > 
+                                <h:form>
+<!--                                   <p:menubar style="width: 200px; font-size: 12px" >  
+                                         <p:menuitem icon="ui-icon ui-icon-home" value="SGCN"  url="${request.contextPath}/../" />  
+                                        <p:submenu label="Administração" icon="ui-icon ui-icon-bookmark" rendered="#{p:ifGranted('ROLE_ADMIN')}" >                                               
+                                            <p:menuitem value="Usuário" url="${request.contextPath}/../admin/usuario/" />  
+                                            <p:menuitem value="permissao" url="${request.contextPath}/../admin/permissao/" />  
+                                        </p:submenu>  
+
+                                    </p:menubar>-->
+                                </h:form>
+                            </td>
+<!--                            <td width="5%" align="center" ><img src="${request.contextPath}/images/user.jpg"  align="center" width="16" height="16" /></td>
+                            <td width="5%" align="left"><h:outputText value="#{usuarioLoginBean.usersec.login}" /></td>
+                            <td width="5%" align="center"><img src="${request.contextPath}/images/timer.jpg" align="center" width="16" height="16" /></td>
+                            <td width="80%" align="left" >Último Acesso: <h:outputText value="#{usuarioLoginBean.usersec.dataloginold}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" locale="pt_BR" timeZone="GMT-4" /> 
+                                </h:outputText></td>
+                            <td width="5%" ><a href="${request.contextPath}/j_spring_security_logout" class="sair">sair</a></td>-->
+                        </tr>
+                    </table>
+                </div>
+                <h2 id="contentTitle"><ui:insert name="contentTitle">#{page.current.title}</ui:insert></h2>
+                <ui:insert name="conteudo" />
+
+
+
+
+            </p:layoutUnit>  
+            <p:layoutUnit position="south" size="37"   >  
+                <p style="text-align: center; font-size: 10px;" > Secretaria de Pequenos Negócios - Departamento de Planejamento - Divisão de Tecnologia da Informação
+                    Avenida Ceará, 1624 Centro - Rio Branco AC </p>           
+            </p:layoutUnit>   
+        </p:layout>     
+
+
+        <ui:insert name="caixadialogo"/> 
+
+
+    </h:body>
+</html>
+

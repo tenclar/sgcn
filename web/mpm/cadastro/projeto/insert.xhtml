@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Cadastro de Projeto</title>
+    </h:head>
+    <h:body>
+          
+        <h:form id="frmProjeto" prependId="false">
+                <h:panelGrid id="panelProjetoInsert" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="projetoNome" value="Nome:" />
+                    <p:inputText id="projetoNome" autocomplete="off" value="#{projetoBean.projeto.nome}" size="60" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                     <p:commandButton  update="frmProjeto,:frmListaProjeto:tbProjeto,:messages"  oncomplete="dlgProjeto.hide();" actionListener="#{projetoBean.saveProjeto}" value="Salvar"/>
+                     <p:commandButton   oncomplete="dlgProjeto.hide();" immediate="true" actionListener="#{projetoBean.cancelProjeto}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+

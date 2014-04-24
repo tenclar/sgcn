@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+   
+    
+    <h:body>
+         
+
+        
+
+        <h:form prependId="false" id="frmBuscaBen" >         
+            <p:focus for="cbBusca" />       
+            <h:selectOneRadio value="#{beneficiadoBean.tipoBusca}"  >
+                <f:selectItem itemValue="nome"  itemLabel="NOME"   />
+                <f:selectItem itemValue="cpf"  itemLabel="CNPJ" />                
+            </h:selectOneRadio>
+            
+            <h:outputText value="Busca: " />  
+            <p:inputText id="cbBusca" label="Campo Busca" autocomplete="off"  value="#{beneficiadoBean.campoPesquisa}"  size="100" onkeyup="this.value = this.value.toUpperCase();"  required="true"  /> 
+            <p:spacer height="10px" />
+            <p:commandButton    actionListener="#{beneficiadoBean.localizaCol}"  update=":frmBuscaBen" icon="ui-icon-search"   /> 
+            <p:messages id="msg" />
+            <p:separator  />
+            
+       <br />
+            <br />
+            <p:outputPanel id="cptabela" >
+                <p:dataTable  var="item" value="#{beneficiadoBean.lista}"  paginator="true"  
+                              paginatorAlwaysVisible="false" rows="8"   selectionMode="single" 
+                              rowKey="#{item.id}" pageLinks="5"
+                rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+                     <p:column   style=" text-align: center; width: 40px" >     
+                         <f:facet name="header">
+                             <p:commandButton  icon="ui-icon-plus" process="@this"  actionListener="#{beneficiadoBean.novoBeneficiado}" oncomplete="cadBenInd.show();litBenInd.close();"  update=":frmBen"   />                  
+                         </f:facet>
+                        <p:commandButton icon="ui-icon-refresh"   process="@this"  title="editar" oncomplete="cadBenInd.show();litBenInd.close();" update=":frmBen, :frmBuscaBen" actionListener="#{beneficiadoBean.editBen}"  >
+                           
+                        </p:commandButton>                                                                         
+<!--                        <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true" action="# {cidadaoBean.imprimir}" title="imprimir" />-->
+                       
+                    </p:column>
+                    
+                    <p:column headerText="CNPJ" >                    
+                        <h:outputText value="#{item.cpf}" style="width: 40px" />
+                    </p:column>
+                    <p:column headerText="NOME"   >
+
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>                       
+
+                    
+                    
+                   
+
+                </p:dataTable>
+            </p:outputPanel>
+        </h:form>
+    </h:body>
+</html>
+

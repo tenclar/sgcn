@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:panel id="panelMetaPes" >
+        <h:panelGrid columns="2" >
+            <h:outputLabel value="Data Monitoramento: " />
+            <p:message for="planoMetaDataEmpMon" display="icon"  />
+        </h:panelGrid>
+        <p:calendar id="planoMetaDataEmpMon" size="8"
+                    showButtonPanel="true" navigator="true"
+                    pattern="dd/MM/yyyy" locale="pt_BR"  autocomplete="off" value="#{planoBean.metaspessoais.datamon}" required="true"  >
+
+
+        </p:calendar>
+
+        <h:panelGrid  columns="5"  >
+            <h:outputLabel value=" " />
+            <h:panelGrid columns="2">                                        
+                <h:outputLabel value="Metas: " />                                        
+                <p:message for="planoListaMetaPes" display="icon"  />                                        
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value= "Prazo: " />
+                <p:message for="planoMetaPesPrazo" display="icon" />                                        
+            </h:panelGrid>                                    
+            <h:panelGrid columns="2">
+                <h:outputLabel value= "Realizado: " />
+                <p:message for="planoMetaPesRealizado" display="icon" />                                        
+            </h:panelGrid>                                   
+
+            <h:outputLabel value=" " />
+            <p:commandButton value="+" oncomplete="dlgMeta.show()" process="@this" action="#{metaBean.newMeta}" update=":frmMeta" /> 
+            <p:selectOneMenu id="planoListaMetaPes"  style="width: 230px" 
+                             value="#{planoBean.metaspessoais.meta}"
+                             converter="IndexedConverter" 
+                             filter="true" filterMatchMode="startsWith"
+                             required="true" label="Meta"  >
+                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                <f:selectItems value="#{metaBean.selectItems}" />
+            </p:selectOneMenu>
+            <p:selectOneMenu id="planoMetaPesPrazo"   value="#{planoBean.metaspessoais.prazo}"  required="true" label="Estado"  >
+                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                <f:selectItem  itemLabel="CURTO" itemValue="CURTO"  />
+                <f:selectItem  itemLabel="LONGO" itemValue="LONGO"  />                                        
+            </p:selectOneMenu>
+            <p:selectOneMenu id="planoMetaPesRealizado" value="#{planoBean.metaspessoais.realizado}"   required="true" label="Propriedade"  >
+                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                <f:selectItem  itemLabel="SIM" itemValue="SIM"  />
+                <f:selectItem  itemLabel="NÃO" itemValue="NAO"  />                                        
+            </p:selectOneMenu>
+
+
+
+            <p:commandButton value="Inserir" process="panelMetaPes" update="tabMetas:dtMetaPes panelMetaPes :messages" action="#{planoBean.addMetaPes}" >
+
+            </p:commandButton>
+
+        </h:panelGrid>
+    </p:panel>
+    <p:outputPanel id="dtMetaPes">
+        <p:dataTable value="#{planoBean.plano.metaspessoais}"
+                     rowKey="#{item.id}"
+                     var="item" emptyMessage="${msg.lista_vasia}" >
+            <f:facet name="header">
+                <h:outputText value="Lista de Metas Pessoais" />
+            </f:facet>
+            <p:column  headerText="Data" >                                                     
+                <h:outputText value="#{item.datamon}" >
+                  <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+            <p:column  headerText="SEQ" >                                                     
+                <h:outputText value="#{item.id}" />
+            </p:column>
+            <p:column  headerText="METAS" >                                                     
+                <h:outputText value="#{item.meta.nome}" />
+            </p:column>
+
+            <p:column  headerText="PRAZO" >                                                     
+                <h:outputText value="#{item.prazo}" />
+            </p:column>
+            <p:column  headerText="REALIZADO" >                                                     
+                <h:outputText value="#{item.realizado}" />
+            </p:column>
+
+            <p:column headerText="AÇÕES" >
+                <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabMetas:dtMetaPes"  >
+                    <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.metaspessoais}"  />
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+    </p:outputPanel>
+    <p:separator />
+    <p:commandButton value="voltar" update="tabMetas, :messages" process="@this" immediate="true"   oncomplete="tabMetas.select(0)" />
+    <p:commandButton value="avançar" update="tabMetas,:frmPlano:tabGeral :messages" process="@this"  oncomplete="if(!args.validationFailed){tabGeral.select(4)}" />
+
+
+</ui:component>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+       
+        
+        
+        
+        <script type="text/javascript">  
+    function handleRequest(xhr, status, dlgPermissao, args) {  
+        if(args.validationFailed) {  
+            /* jQuery('#dlgPermissao').effect("shake", { times:3 }, 100);  */
+            dlgPermissao.show();
+        } else {  
+            dlgPermissao.hide();  
+            /*jQuery('#loginLink').fadeOut();  */
+        }  
+    }  
+</script>  
+    
+    </h:head>
+    <h:body>
+        <h:form id="frmListaPermissao" prependId="false">
+            <p:commandButton process="@this" value="Novo" actionListener="#{permissaoBean.newPermissao}"  update=":frmPermissao" oncomplete="dlgPermissao.show()"/>
+       
+            <p:outputPanel id="tbPermissao">
+                <p:dataTable  var="item" value="#{permissaoBean.listaPermissoes}" widgetVar="tbCursos" style="max-width: 700px; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+                    <f:facet name="header">  
+                        <h:panelGrid columns="2" border="0" >
+                            <h:panelGroup>
+                                 <h:outputText value="Busca: " />  
+                                    <p:inputText   style="width:150px" />  <p:commandButton type="button" onclick="tbPermissao.filter()" icon="-search" /> 
+                            </h:panelGroup>
+                            <p:commandButton icon=" ui-icon-print" process="@this"  title="Todos" ajax="false" immediate="true" onclick="this.form.target='_blank'" action="#{permissaoBean.imprimeRelatorioWebTodos()}" />
+                        </h:panelGrid>
+                    </f:facet>
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Código" />
+                        </f:facet>
+                        <h:outputText value="#{item.id}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>  
+                  
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Alterar"/>
+                        </f:facet>
+                        <p:commandButton process="@this"  update=":frmPermissao" icon=" ui-icon-refresh" actionListener="#{permissaoBean.editPermissao}" title="alterar"  oncomplete="dlgPermissao.show()"/>
+<!--                        <p:commandButton icon=" ui-icon-print"  title="imprimirPDF" ajax="false" process="@this" immediate="true" onclick="this.form.target='_blank'" action="# {permissaoBean.imprimeRelatorioWeb}" />-->
+                        
+                        
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:outputPanel >
+        </h:form>
+    </h:body>
+</ui:component>
+

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+        <p:fieldset id="fieldCursosSecretaria" legend="Cursos"  style="margin: 0 auto;" >
+         
+            <p:outputPanel   id="panelCursoSecr">
+                <h:panelGrid id="insPanelCursoSrc" columns="3"  >
+
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Curso: " />                                        
+                        <p:message for="cidListaCursoSrc" display="icon"  />                                        
+                    </h:panelGrid>
+                    <h:outputLabel value=" " />                                                      
+                    <h:outputLabel value=" " />                               
+                    <h:selectOneMenu id="cidListaCursoSrc"  style="width: 230px" value="#{cidadaoBean.cursossecretaria.curso}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Equipamento Secretaria"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{cursoBean.selectItemsCurso}" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton value="Inserir" process="panelCursoSecr" update="dtCursosSecr insPanelCursoSrc :messages" action="#{cidadaoBean.addCursoSec}" />                                
+                    <p:commandButton value="+" oncomplete="dlgCurso.show()" process="@this" action="#{cursoBean.newCurso}" update=":frmcadcurso:panelCursoInsert" />                               
+
+
+                </h:panelGrid> 
+            </p:outputPanel> 
+            <br />
+            <p:outputPanel  >
+
+<p:dataTable id="dtCursosSecr" value="#{cidadaoBean.cidadao.cursosSecretarias}" var="it" style="width: 400px"  >
+                    <p:column  headerText="Curso" >
+                        <h:outputText value="#{it.curso.nome}" />
+                    </p:column>
+                    <p:column  headerText="Situação" >                                                                      
+                        <h:outputText value="#{it.status}" />
+                    </p:column>
+
+
+                    <p:column style="width: 80px;text-align: center" >
+                        <f:facet name="header">
+                            <h:outputText value="ações"/>
+                        </f:facet>                                        
+                        <p:commandButton icon="ui-icon-close"  process="@this" rendered="#{'RESERVA'.equals(it.status.toString())}"   update="dtCursosSecr"  >
+                            <p:collector value="#{it}" unique="true" removeFrom="#{cidadaoBean.cidadao.cursosSecretarias}"  />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel> 
+          
+
+        </p:fieldset>
+    
+</ui:component>
+

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+    <p:panel>
+                    <p:commandButton value="inserir" process="@this" update=":formHistInterno" oncomplete="dlgHistoricoInterno.show()" action="#{convenioBean.histIntNew()}" />
+                    <p:outputPanel  >
+                        <p:dataTable id="opTabHistInterno" value="#{convenioBean.convenio.historicoInternos}" var="hist"  
+                                    
+                              rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+                            <p:column headerText="data"   style="width: 20px;text-align: center;" >
+                                <h:outputText value="#{hist.datainc}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+
+                            </p:column>
+                            <p:column headerText="descrição" style="width: 500px" >
+                                <h:outputText value="#{hist.descricao}" />
+                            </p:column>
+                             <p:column headerText="Anexo" style="width: 170px;"    >
+                        <p:dataTable value="#{hist.arquivos}" var="an"    >
+                            <p:column  style="width: 30px;text-align: center;" >
+                                <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" style="width: 16px;height: 16px;" title="download" 
+                                                 process="@this" immediate="true" update="dw"  ajax="false"                                                         
+                                                 >
+                                    <p:fileDownload value="#{an.file}"   />   
+                                </p:commandButton>  
+                                <p:commandButton  icon="ui-icon-document-b" title="view" 
+                                                  process="@this" immediate="true" update="dw"  ajax="false"  
+                                                  onclick="this.form.target = '_blank'"
+                                                  style="width: 16px;height: 16px;"
+                                                  >
+                                    <p:fileDownload value="#{an.file}"  contentDisposition="inline"  />   
+                                </p:commandButton>  
+                            </p:column>
+                            <p:column   >
+                                <h:outputText value="#{an.descricao}"/>
+                            </p:column>
+
+                            
+                        </p:dataTable>
+                    </p:column>
+                            <p:column headerText="ações" style="width: 80px; text-align: center;" >
+                                <p:commandButton icon="ui-icon-refresh" process="@this" title="alterar" update=":formHistInterno" oncomplete="dlgHistoricoInterno.show()" action="#{convenioBean.histIntEdit()}" >
+                                    <f:setPropertyActionListener value="#{hist}" target="#{convenioBean.historicoInterno}"  />                                    
+                                </p:commandButton>  
+                                <p:commandButton icon="ui-icon-close" title="excluir" process="@this" update="opTabHistInterno" >
+                                    <p:collector value="#{hist}" unique="true" removeFrom="#{convenioBean.convenio.historicoInternos}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:panel>
+</ui:component>
+

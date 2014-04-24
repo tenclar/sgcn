@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <p:fieldset legend="Acompanhamento Econômico" style="margin: 0 auto;">
+        <p:outputPanel id="panelRendimentos">
+            <p:panel   id="insRendimentos"> 
+                <h:panelGrid columns="2" >
+                    <h:outputLabel value="Data Monitoramento: " />
+                    <p:message for="planoRendaDataMon" display="icon"  />
+                </h:panelGrid>
+                <p:calendar id="planoRendaDataMon" size="8" autocomplete="off" value="#{planoBean.rendimento.datamon}" 
+                            onkeyup="Formatadata(this, event)" maxlength="10" onchange="validaDat(this, this.value)" 
+                            required="true" pattern="dd/MM/yyyy" locale="pt_BR" navigator="true"  />
+
+
+
+
+                <h:panelGrid columns="5"  >
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel value="Data: " />
+                        <p:message for="planRendData" display="icon"  />
+                    </h:panelGrid> 
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel value="Venda:" />
+                        <p:message for="planRendVendas" display="icon"  />
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel value="Despesa:" />
+                        <p:message for="planRendDesp" display="icon"  />
+                    </h:panelGrid> 
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel value="Outras Rendas:" />
+                        <p:message for="planRendOutras" display="icon"  />
+                    </h:panelGrid>
+                    <h:outputLabel value="" />
+
+                    <p:calendar id="planRendData" autocomplete="off" size="8" value="#{planoBean.rendimento.daterend}"
+                                required="true" maxlength="10" pattern="dd/MM/yyyy" locale="pt_BR" navigator="true"
+                                onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" >
+
+
+                    </p:calendar>
+                    <p:inputText id="planRendVendas" value="#{planoBean.rendimento.vendas}" onkeypress="mascara(this, valor)" required="true" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+
+                    </p:inputText>
+                    <p:inputText id="planRendDesp" value="#{planoBean.rendimento.despesas}" onkeypress="mascara(this, valor)" required="true" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+
+                    </p:inputText>
+                    <p:inputText id="planRendOutras" value="#{planoBean.rendimento.outras}" onkeypress="mascara(this, valor)" required="true" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+
+                    </p:inputText>
+
+                    <p:commandButton value="inserir" process="panelRendimentos"  update="insRendimentos tabGeral:dtRend :messages"   action="#{planoBean.addRend}" >
+
+
+                    </p:commandButton>
+
+                </h:panelGrid>
+            </p:panel>
+        </p:outputPanel>
+        <p:outputPanel id="dtRend">
+
+            <p:dataTable value="#{planoBean.plano.rendimentos}"  var="item" 
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         rows="10"
+
+                         editable="true"
+                         >
+                <p:ajax event="rowEdit" listener="#{planoBean.savePlano()}" update=":messages" />  
+                <p:column  headerText="Monitoramento" sortBy="#{item.datamon}" >
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{item.datamon}"  >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:calendar autocomplete="off" value="#{item.datamon}" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)"
+                                        required="true" maxlength="10" locale="pt_BR"  pattern="dd/MM/yyyy" showButtonPanel="true" navigator="true" >
+                                
+                            </p:calendar>
+                        </f:facet>  
+                    </p:cellEditor> 
+                </p:column> 
+
+                <p:column  headerText="Rendimento" sortBy="#{item.daterend}" >                                                     
+
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{item.daterend}"  >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText> 
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:calendar autocomplete="off" value="#{item.daterend}" required="true"  maxlength="10" pattern="dd/MM/yyyy" locale="pt_BR" >
+                                
+                            </p:calendar>
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>
+                <p:column  headerText="Vendas" >                                                     
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{item.vendas}" >                                
+                                <f:convertNumber pattern="##,##0.00#"   />
+                            </h:outputText>
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText  value="#{item.vendas}" required="true" onkeypress="mascara(this, valor)"  >
+                                <f:convertNumber pattern="##,##0.00#"  />
+                                
+                            </p:inputText>
+                        </f:facet>  
+                    </p:cellEditor>
+
+                </p:column>
+                <p:column  headerText="Despesas" >                                                     
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{item.despesas}" >
+                                <f:convertNumber pattern="##,##0.00#"  />
+                            </h:outputText>
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{item.despesas}" required="true" onkeypress="mascara(this, valor)" >
+                                <f:convertNumber pattern="##,##0.00#"  />
+                                
+                            </p:inputText>
+                        </f:facet>  
+                    </p:cellEditor>
+
+                </p:column>
+                <p:column  headerText="Lucro" >                                                     
+                    <h:outputText value="#{item.lucro}" >
+
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column  headerText="outras" >                                                     
+                    <h:outputText value="#{item.outras}" >
+
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column  headerText="Total" >                                                     
+                    <h:outputText value="#{item.totalRenda}" >
+
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Editar">
+                    <p:rowEditor />
+                </p:column>
+                <p:column headerText="excluir" >
+                    <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:dtRend"  >
+                        <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.rendimentos}"  />
+                    </p:commandButton>
+                </p:column>
+
+
+
+            </p:dataTable>
+
+
+
+
+
+
+        </p:outputPanel>
+    </p:fieldset>
+
+    <p:separator />
+    <p:commandButton value="voltar" update=":frmPlano:tabGeral, :messages" process="@this" immediate="true" oncomplete="tabGeral.select(3);tabMetas.select(1)" />
+<!--    <p:commandButton value="salvar" update=":frmPlano:tabGeral :messages" process="@this" action="# {planoBean.saveProx()}"  />-->
+    <p:commandButton value="avançar" update=":frmPlano:tabGeral :messages" process="@this"  oncomplete="if(!args.validationFailed){tabGeral.select(5)}" />
+</ui:component>
+

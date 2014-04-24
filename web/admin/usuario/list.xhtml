@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    
+    <h:form prependId="false" id="frmLocUsers"  >
+            <h:panelGrid columns="2">
+                            <h:panelGroup>
+                                <h:outputText value="Busca: " />  
+                                <p:inputText   value="#{usuarioBean.busca}"  style="width:150px" />  <p:commandButton update="frmLocUsers, :frmListUsers"  action="#{usuarioBean.localiza()}" icon="ui-icon-search" /> 
+                            </h:panelGroup>
+                            <p:commandButton icon=" ui-icon-print" process="@this"  title="Todos" ajax="false" immediate="true" onclick="this.form.target='_blank'" action="#{usuarioBean.imprimeRelatorioWebTodos}" />
+                        </h:panelGrid>
+            <p:separator />
+            
+            <p:commandButton value="Novo"  process="@this" actionListener="#{usuarioBean.newUsuario}"  update=":frmUsuario" oncomplete="dlgUsuario.show()"/>
+        </h:form   >
+        <h:form  prependId="false" id="frmListUsers">       
+            <p:outputPanel id="tbUsuario">
+                <p:dataTable  var="item" rowKey="#{item.id}" value="#{usuarioBean.listaUsuarios}"  style="max-width: 700px; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+                  
+                    <p:column style="text-align: center;">
+                        <f:facet name="header">
+                            <h:outputText value="Código" />
+                        </f:facet>
+                        <h:outputText value="#{item.id}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>  
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="login"/>
+                        </f:facet>
+                        <h:outputText value="#{item.login}"/>
+                    </p:column> 
+                    <p:column style="text-align: center;" >
+                        <f:facet name="header">
+                            <h:outputText value="Ativo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.status}"/>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="ação" >                       
+                        <p:commandButton process="@this" update=":frmUsuario" icon="ui-icon-refresh" title="alterar" oncomplete="dlgUsuario.show();" actionListener="#{usuarioBean.editUsuario}"  />
+                        
+                        <p:commandButton icon="ui-icon-print"  title="imprimirPDF" ajax="false" process="@this" immediate="true" onclick="this.form.target='_blank'" action="#{usuarioBean.imprimeRelatorioWeb}" />                      
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel >
+        </h:form>
+    
+</ui:component>
+

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+    <h:form id="formContato"  prependId="false" >
+        <p:panel id="pContato">
+            <p:outputPanel id="opContato">
+            <h:panelGrid columns="4" >
+                <h:outputLabel value="Apelido :" />
+                <p:inputText value="#{convenioBean.contato.apelido}" size="20" />
+
+                <h:outputLabel value="Nome Completo: " />
+                <p:inputText value="#{convenioBean.contato.nome}" size="60" />                 
+
+                <h:outputLabel value="Cargo: " />
+                <p:inputText value="#{convenioBean.contato.cargo}" size="20" />                 
+
+                <h:outputLabel value="Email: " />
+                <p:inputText value="#{convenioBean.contato.email}" size="30" />                 
+            </h:panelGrid>
+           </p:outputPanel>
+            
+        </p:panel>
+        <p:panel id="opPanel">
+<!--                 <h:outputLabel value="Telefones: " />-->
+            <p:outputPanel id="addTel">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="" />
+                    <h:outputLabel value="Número Telefones: " />
+
+                    <p:commandButton value="+"  process="@this,addTel" update="dtTel,addTel, :messages" action="#{convenioBean.inserirTelefone()}"  />
+                    <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{convenioBean.telefone.numero}"   >
+                        <f:validateLength minimum="9" />
+                    </p:inputMask>                            
+
+                </h:panelGrid>
+                <p:message for="tel"  />
+            </p:outputPanel>
+                <p:dataTable id="dtTel" var="item" value="#{convenioBean.contato.telefones}"
+                              style="width: 200px"   >
+                    <p:column style="width:78px" headerText="Telefone" >
+                        <h:outputText value="#{item.numero}" />
+                    </p:column>
+                    <p:column  style="width: 40px" headerText="ação" >
+                        <p:commandButton icon="ui-icon-close" title="excluir" process="@this" update=":formContato" >
+                            <p:collector removeFrom="#{convenioBean.contato.telefones}" unique="true" value="#{item}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        <p:separator />
+
+        <h:panelGroup>
+            <p:commandButton value="salvar" process="@this, pContato" update="opContato, :frmConvenio:tabGeral:opDataTableContatos, :messages"  oncomplete="if(!args.validationFailed){dlgContato.hide();}" action="#{convenioBean.insertContato()}" />
+            <p:commandButton value="cancelar"  update="formContato" immediate="true" oncomplete="dlgContato.hide();" action="#{convenioBean.cancelContato()}" />
+        </h:panelGroup>
+
+    </h:form>
+</ui:component>
+

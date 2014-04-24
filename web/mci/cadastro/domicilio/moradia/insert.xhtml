@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    <h:body>
+          
+        <h:form id="frmMoradia" prependId="false">
+                <h:panelGrid id="panelMoradiaInsert" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="moradiaNome" value="Nome:" />
+                    <p:inputText id="moradiaNome" value="#{domMoradiaBean.domMoradia.descricao}"   size="50" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                     <p:commandButton  update=":tvDomicilio:frmListMoradia:tbMoradia, :messages"  oncomplete="dlgMoradia.hide();" actionListener="#{domMoradiaBean.saveDomMoradia}" value="Salvar"/>
+                     <p:commandButton   oncomplete="dlgMoradia.hide();" immediate="true" actionListener="#{domMoradiaBean.cancelDomMoradia}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+

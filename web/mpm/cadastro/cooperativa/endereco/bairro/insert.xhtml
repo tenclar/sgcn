@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Cadastro de Bairro</title>
+    </h:head>
+    <h:body>
+          
+            <h:form id="frmBairro" prependId="false">
+                
+                <h:panelGrid id="panelBairro" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="bairroEstado" value="Estado: " />
+                    <h:selectOneMenu id="bairroEstado" value="#{enderecoBean.bairro.cidade.estado}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all">
+                        <f:selectItems value="#{bairroBean.selectItemsEstado}"/>
+                        <p:ajax update="bairroCidade" listener="#{enderecoBean.handleEstadoChange}" />
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel for="bairroCidade" value="Cidade: " />
+                    <h:selectOneMenu id="bairroCidade" value="#{enderecoBean.bairro.cidade}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" >                         
+                        <f:selectItems value="#{enderecoBean.selectItemsCidade}"/>
+                    </h:selectOneMenu>
+                     <h:outputLabel  value="Zona:"  />                     
+                     <h:selectOneMenu id="baizona" value="#{enderecoBean.bairro.zona}" styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                            <f:selectItem  itemLabel="selecione" />
+                            <f:selectItem  itemValue="URBANA" itemLabel="URBANA" />
+                            <f:selectItem  itemValue="RURAL" itemLabel="RURAL" />
+                        </h:selectOneMenu>
+                    <h:outputLabel for="bairroNome" value="Bairro / Ramal / KM:" />
+                    <p:inputText id="bairroNome" autocomplete="false" value="#{enderecoBean.bairro.nome}" required="true" requiredMessage="Campo Requerido" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();" />
+                    
+                </h:panelGrid>
+                <p:column colspan="2">
+                    <p:commandButton update=":frmLoc:enduf, :frmLoc:endcid, :frmLoc:endbairro, panelBairro, :messages "  oncomplete="if(!args.validationFailed){dialogBairro.hide();}if(args.validationFailed){dialogBairro.show();}" actionListener="#{enderecoBean.saveBairro}" value="salvar">
+                          
+                        
+                    </p:commandButton>
+                    <p:commandButton   oncomplete="dialogBairro.hide();" immediate="true" actionListener="#{enderecoBean.cancelBairro}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form prependId="false" id="frmBuscaEquip" >         
+        <p:focus for="cbBuscaEquip" />  
+        <p:outputPanel id="buscaEquipamento">
+
+
+            <h:outputText value="Busca: " />  
+            <p:inputText id="cbBuscaEquip" label="Campo Busca:" autocomplete="off"
+                         value="#{equipamentoBean.campoBusca}"  size="60" 
+                         onkeyup="this.value = this.value.toUpperCase();"  required="true"  /> 
+            <p:commandButton    
+                actionListener="#{equipamentoBean.localizar()}"  
+                update="frmBuscaEquip, opDataTableEquip, :messages" 
+                icon="ui-icon-search"   /> 
+        </p:outputPanel>
+        <p:commandButton  value="+"  process="@this" update=":frmEquipamento" onkeydown="setaFoco(this)"  actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show();document.getElementById('equipamentoNome').focus();" />                                    
+        <p:separator  />
+
+        <br />
+        <br />
+        <p:outputPanel id="opDataTableEquip" >
+            <p:dataTable  var="item" value="#{equipamentoBean.listaEquipamentos}"  paginator="true"  
+                          paginatorAlwaysVisible="false" rows="8"    rowKey="#{item.id}"
+                      
+                          rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                          rowIndexVar="rowIx" >
+               
+                <p:column headerText="id" >                    
+                    <h:outputText value="#{item.nome}" />
+                </p:column>
+                <p:column  headerText="ações" style=" text-align: center; width: 210px" >     
+
+                    <p:commandButton  value="Selecionar" process="@this"  title="Selecionar"  oncomplete="dlgBuscaEquip.hide();" update=":frmNewEquip:equipsec"   >
+                        <f:setPropertyActionListener value="#{item}" target="#{beneficiadoBean.equipamentosecretaria.equipamento}" />
+                    </p:commandButton>                                                                         
+
+
+                </p:column>
+
+            </p:dataTable>
+        </p:outputPanel>
+    </h:form>
+</ui:component>
+

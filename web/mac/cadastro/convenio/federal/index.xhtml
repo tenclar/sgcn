@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mac.xhtml">
+
+
+    <ui:define name="conteudo" >
+       
+             <div class="conteudo">
+            <p:panel  header="Cadastro de Recursos Federais" visible="false" closeSpeed="0" widgetVar="cadCon" closable="true"  >
+                <ui:include src="insert.xhtml"/>
+            </p:panel>
+        <p:panel id="panelCadView" header="Visão Recurso Federal" visible="false" closeSpeed="0" widgetVar="cadView" closable="true" closeTitle="Fechar"   >
+                <ui:include src="view.xhtml"/>
+            </p:panel>
+
+        <p:panel id="panelCadList" header="Lista de Recursos Federais" closeSpeed="0" widgetVar="cadlist" closable="true"  >
+                <ui:include src="list.xhtml"/>
+            </p:panel>
+
+        </div>
+
+
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <p:dialog header="Inserir Ministério" widgetVar="dlgMinisterio"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="dados/ministerio.xhtml" />
+        </p:dialog>
+         <p:dialog header="Inserir Natureza de Despesa" widgetVar="dlgNatDespesa"  resizable="true" modal="true"  width="400"   > 
+            <ui:include src="dados/natureza.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserir Composição de Investimento" widgetVar="dlgComInvestimento"   resizable="true" modal="true"  width="750"   > 
+            <ui:include src="investimento/index.xhtml" />
+        </p:dialog>
+        
+        <p:dialog header="Inserir Historico Externo" widgetVar="dlgHistorico"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="historico/index.xhtml" />
+        </p:dialog>
+         <p:dialog header="Inserir Historico Interno" widgetVar="dlgHistoricoInterno"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="historicointerno/index.xhtml" />
+        </p:dialog>
+         <p:dialog header="Inserir Contato" widgetVar="dlgContato"  resizable="true" modal="true"  width="900"   > 
+            <ui:include src="contato/index.xhtml" />
+        </p:dialog>
+         <p:dialog header="Visualizar Contato" widgetVar="dlgContatoView"  resizable="true" modal="true"  width="900"   > 
+            <ui:include src="contato/view.xhtml" />
+        </p:dialog>
+         <p:dialog header="Inserir Vigencia" widgetVar="dlgVigencia"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="aditivosvigencia/vigenciainsert.xhtml" />
+        </p:dialog>
+         <p:dialog header="Inserir Contrapartida" widgetVar="dlgContra"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="contrapartida/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Inserir Aditivos" widgetVar="dlgAditivo"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="aditivosvigencia/aditivoinsert.xhtml" />
+        </p:dialog>
+        <p:confirmDialog id="confExcluirHistExt" message="Deseja Excluir ?"  
+                             header="Aviso" severity="alert" widgetVar="confExcluirHistExt">  
+                <h:form prependId="true">         
+
+                    <p:commandButton id="confirm" value="sim"  oncomplete="confExcluirHistExt.hide();"   /> 
+                    <p:commandButton id="decline" value="não" oncomplete="confExcluirHistExt.hide()"  />   
+                </h:form>
+            </p:confirmDialog> 
+         <p:confirmDialog id="confExcluirHistInt" message="Deseja Excluir ?"  
+                             header="Aviso" severity="alert" widgetVar="confExcluirHistInt">  
+                <h:form prependId="true">         
+
+                    <p:commandButton id="confirm" value="sim"  oncomplete="confExcluirHistInt.hide();"   /> 
+                    <p:commandButton id="decline" value="não" oncomplete="confExcluirHistInt.hide()"  />   
+                </h:form>
+            </p:confirmDialog> 
+    </ui:define>
+
+</ui:composition>
+

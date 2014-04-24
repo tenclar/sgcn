@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    
+        <p:fieldset legend="Negócio Pretendido">
+            <p:panel id="pResumo">
+                
+                <p:separator />
+                <h:outputLabel for="cidresumo"  value="Outras Informações: " styleClass="titulos" />
+                <br />
+                <br />
+                <p:message for="cidresumo" display="iocon" />
+                <p:inputTextarea id="cidresumo" value="#{cidadaoBean.cidadao.resumo}" cols="90" rows="15"  label="Descrição do Negócio" 
+                                 style="background: #e8e1b5; " autoResize="false" />
+<!--background: #45930b;-->
+            </p:panel>
+
+        </p:fieldset>
+    
+</ui:component>
+

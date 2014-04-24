@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:outputPanel id="panelEquipSecr" >
+        <p:panel    visible="false" >
+            <h:panelGrid id="insPanelEquipSrc" columns="7"  >
+                <h:panelGrid columns="2">                                        
+                    <h:outputLabel value="Data Recebimento: " />                                        
+                    <p:message for="cidEquipData" display="icon"  />                                        
+                </h:panelGrid>
+                <h:panelGrid columns="2">                                        
+                    <h:outputLabel value="Equipamento: " />                                        
+                    <p:message for="planolistaEquipSrc" display="icon"  />                                        
+                </h:panelGrid>
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value= "Patrimônio: " />
+                    <p:message for="planoEquipPatSrc" display="icon" />                                        
+                </h:panelGrid>                                   
+                <h:panelGrid columns="2">
+                    <h:outputLabel value= "Estado: " />
+                    <p:message for="planoEstadoEquipSrc" display="icon" />                                        
+                </h:panelGrid>  
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value= "Valor: " />
+                    <p:message for="planoEquipValorSrc" display="icon" />                                        
+                </h:panelGrid>                                     
+
+
+                <h:outputLabel value=" " />
+                <h:outputLabel value=" " />
+                <p:calendar id="cidEquipData" />
+
+                <h:selectOneMenu id="planolistaEquipSrc"  style="width: 230px" value="#{cidadaoBean.equipamentossecretaria.equipamento}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Equipamento Secretaria"  >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{equipamentoBean.selectItemsEquipamentos}" />
+                </h:selectOneMenu>
+                <h:selectOneMenu id="planoEstadoEquipSrc"   value="#{cidadaoBean.equipamentossecretaria.estado}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Estado"  >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItem  itemLabel="NOVO" itemValue="NOVO"  />
+                    <f:selectItem  itemLabel="ÓTIMO" itemValue="OTIMO"  />
+                    <f:selectItem  itemLabel="BOM" itemValue="BOM"  />
+                    <f:selectItem  itemLabel="REGULAR" itemValue="REGULAR"  />
+                    <f:selectItem  itemLabel="INSERVÍVEL" itemValue="INSERVIVEL"  />
+                </h:selectOneMenu>
+
+                <p:inputText id="planoEquipPatSrc" autocomplete="off" value="#{cidadaoBean.equipamentossecretaria.patrimonio}" size="20" rendered="true" label="Patrimônio" />
+
+                <p:inputText id="planoEquipValorSrc" autocomplete="off" value="#{cidadaoBean.equipamentossecretaria.valor}" size="20" rendered="true" label="Valor" />
+
+
+
+                <p:commandButton value="Inserir" process="insPanelEquipSrc" update="dtEquipSecr insPanelEquipSrc :messages" action="#{cidadaoBean.addEquipSecr}" />                                
+                <p:commandButton value="+" oncomplete="dlgEquipamento.show()" process="@this" action="#{equipamentoBean.newEquipamento}" update="panelEquipamentoInsert" /> 
+
+            </h:panelGrid> 
+            <br />
+            <p:outputPanel id="dtEquipSecr" >
+                <p:dataTable  value="#{cidadaoBean.cidadao.equipamentossecretarias}" var="item" emptyMessage="${msg.lista_vasia}"  >
+                    <f:facet name="header">
+                        <h:outputText value="Lista de Equipamento da Secretaria" />
+                    </f:facet>
+                    <p:column  headerText="Equipamento" >                                                     
+
+                        <h:outputText value="#{item.equipamento.nome}" />
+                    </p:column>
+                    <p:column  headerText="uso" >                                                                      
+
+                        <h:outputText value="#{item.patrimonio}" />
+                    </p:column>
+                    <p:column  headerText="Estado" >
+                        <h:outputText value="#{item.estado}" />
+                    </p:column>
+                    <p:column  headerText="Estado" >
+                        <h:outputText value="#{item.valor}" />
+                    </p:column>
+
+                    <p:column style="width: 80px;text-align: center" >
+                        <f:facet name="header">
+                            <h:outputText value="ações"/>
+                        </f:facet>                                        
+                        <p:commandButton icon="ui-icon ui-icon-close"  process="@this"  update="dtEquipSecr"  >
+
+                            <p:collector value="#{item}" unique="true" removeFrom="#{cidadaoBean.cidadao.equipamentossecretarias}"  />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel> 
+        </p:panel>  
+    </p:outputPanel>
+
+</ui:component>
+

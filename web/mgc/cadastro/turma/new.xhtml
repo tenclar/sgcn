@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form id="frmTurmaNew" prependId="false" > 
+        <p:fieldset legend="Dados da Turma" id="panelTurInsert" >
+
+            <h:panelGrid columns="3" style="margin-bottom:10px" id="panelTurInsert2">   
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="turmalistacursos" value="Curso:" /> 
+                    <h:outputText value=""/>
+                    <h:outputText value=""/>
+                    <h:selectOneMenu id="turmalistacursos"  value="#{turmaBean.turma.curso}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget ui-corner-all" label="Lista de Curso" style="width: 280px">
+                        <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
+                        <f:selectItems value="#{turmaBean.selectItemsCurso}"/>
+                    </h:selectOneMenu>                    
+                    <p:commandButton value="+" oncomplete="dlgCurso.show()" update=":frmCurso" process="@this" action="#{cursoBean.newCurso}"/>
+                    <p:message for="turmalistacursos" display="icon" />
+                </h:panelGrid>
+                
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Instituição:" />
+                    <h:outputText value=""/>
+                    <h:outputText value=""/>
+                    <h:selectOneMenu id="listaturmaLocals" value="#{turmaBean.turma.turmalocal}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget ui-corner-all" label="Lista Local"  style="width: 280px">
+                        <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
+                        <f:selectItems value="#{turmaLocalBean.selectItemsTurmaLocal}"/>
+                    </h:selectOneMenu>                
+                    <p:commandButton value="+" oncomplete="dlgTurmaLocal.show()" process="@this" action="#{turmaLocalBean.newTurmaLocal}"/> 
+                    <p:message for="listaturmaLocals" display="icon" />
+                </h:panelGrid>
+                
+                 <h:panelGrid columns="2">
+                    <h:outputLabel value="Status:" />
+                    <h:outputText value=""/>
+                    
+                    <h:selectOneMenu id="listaStatus" value="#{turmaBean.turma.status}"  styleClass="ui-inputfield ui-widget ui-corner-all" label="Status"  >
+                        <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
+                        <f:selectItems value="#{turmaBean.selectItemStatusTurma}" />
+                    </h:selectOneMenu>                
+                    
+                    <p:message for="listaStatus" display="icon" />
+                </h:panelGrid>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                
+
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="turmaNome" value="Nome da Turma:" />
+                    <p:inputText id="turmaNome" label="Nome turma" autocomplete="off" value="#{turmaBean.turma.nome}" onkeyup="this.value = this.value.toUpperCase();" required="true"  size="45"/>
+                    <p:message for="turmaNome" display="icon"  />
+                </h:panelGrid>                        
+
+                <h:panelGrid columns="3">                        
+                    <h:outputLabel for="turmahorario" value="Horário:" />
+                    <p:inputMask label="Horário" mask="99:99 - 99:99" size="14"  id="turmahorario" value="#{turmaBean.turma.horario}" required="true" />
+                    <p:message for="turmahorario" display="icon" showDetail="false" />
+                </h:panelGrid>
+
+                <h:panelGrid  columns="4" >
+                    <h:panelGrid  columns="2" >
+                        <h:outputLabel value="Data Inicio:&nbsp;" for="turmadtinic"/>
+                        <p:message for="turmadtinic" display="icon" showDetail="false" />
+                    </h:panelGrid>
+                    <p:calendar id="turmadtinic" onkeyup="Formatadata(this, event)" maxlength="10" onchange="validaDat(this, this.value)"  value="#{turmaBean.turma.datainicio}"  size="11" required="true"  requiredMessage="Informação necessária"  pattern="yyyy/MM/dd" >                                 
+                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    </p:calendar>
+                    <h:panelGrid  columns="2" >
+                        <h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Data Fim:&nbsp;" for="turmadtfim"/>
+                        <p:message for="turmadtfim" display="icon" showDetail="false" />
+                    </h:panelGrid>
+                    <p:calendar id="turmadtfim" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)"  maxlength="10" value="#{turmaBean.turma.datafim}"  size="11" required="true"  requiredMessage="Informação necessária"  pattern="yyyy/MM/dd" >                                 
+                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+
+                    </p:calendar>
+
+
+
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:fieldset > 
+        <p:fieldset id="fieldEndereco" legend="Endereço" style="height: 200px" >
+
+            <h:panelGrid columns="2">
+
+                <p:commandButton value="Localizar" process="@this" action="#{enderecoBean.enderecoClear}" icon="ui-icon-search" update=":frmBuscaEndCid" oncomplete="dlgBuscaEnd.show();"  /> 
+
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" id="cidEnd"  >
+
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="cidlogr" value="Logradouro: " styleClass="titulos" />                                      
+                    <p:message for="cidendereco" showDetail="true"  /> 
+                </h:panelGrid>
+
+                <h:outputLabel for="ciduf" value="UF : " styleClass="titulos" />
+                <h:outputLabel for="cidcid" value="Cidade: " styleClass="titulos"  />
+
+                <p:inputText readonly="true"  disabled="true" id="cidlogr" value="#{turmaBean.turma.endereco.logradouro}" style="background: #e8e1b5; color: #023401" size="80" />
+                <p:inputText readonly="true"  disabled="true" id="ciduf"  value="#{turmaBean.turma.endereco.bairro.cidade.estado.sigla}" style="background: #e8e1b5; color: #023401" size="6"  />
+                <p:inputText readonly="true"  disabled="true" id="cidcid" value="#{turmaBean.turma.endereco.bairro.cidade.nome}" style="background: #e8e1b5; color: #023401"  />
+
+            </h:panelGrid>
+            <h:panelGrid columns="3" id="cidEnd2">
+                <h:outputLabel for="cidbairro"  value="Bairro / Ramal: " styleClass="titulos"  />
+                <h:outputLabel for="cidzona" value="Zona:" styleClass="titulos" /> 
+                <h:outputLabel  value="" /> 
+                <p:inputText readonly="true"  disabled="true" id="cidbairro" value="#{turmaBean.turma.endereco.bairro.nome}" style="background: #e8e1b5; color: #023401"  />
+                <p:inputText readonly="true"  disabled="true" id="cidzona"  value="#{turmaBean.turma.endereco.bairro.zona}" style="background: #e8e1b5; color: #023401" />                                          
+                <h:inputHidden id="cidendereco"  value="#{turmaBean.turma.endereco.logradouro}" required="true" requiredMessage="Endereço não Selecionado"  />                                  
+
+            </h:panelGrid>
+
+
+        </p:fieldset>
+        <p:separator/>
+        <h:panelGroup>
+            <p:commandButton  update="frmTurmaNew, :frmListaAlunosTurma,  :messages" action="#{turmaBean.saveTurma}" oncomplete="if(!args.validationFailed){dlgTurmaNew.hide();dlgAlunosTurma.show();}" value="Salvar"/>
+            <p:commandButton oncomplete="dlgTurmaNew.hide();" process="@this" value="Cancelar" update=":frmTurmaNew" action="#{turmaBean.cancelTurma}" />
+        </h:panelGroup>
+
+    </h:form>
+
+</ui:component>
+

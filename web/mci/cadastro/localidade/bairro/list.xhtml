@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+        <h:form  id="frmListaBairro" prependId="false">
+            <p:outputPanel id="opBuscaBairro" >
+                <p:outputPanel id="opBuscaBairroInsert" >
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel  value="UF: " />                    
+                        <h:outputLabel  value="Cidade: " />                         
+                        <h:outputLabel  value="" />    
+
+
+                        <h:selectOneMenu id="baibuscauf" label="Estado" value="#{bairroBean.pesquisaEstado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
+                            <f:selectItems value="#{bairroBean.selectItemsEstado}" />
+                            <p:ajax update="baibuscacid" listener="#{bairroBean.handlePesquisaEstadoChange}" />
+                        </h:selectOneMenu>
+
+                        <h:selectOneMenu id="baibuscacid" label="Cidade" value="#{bairroBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                            <f:selectItems value="#{bairroBean.selectItemsCidade}" />                        
+                        </h:selectOneMenu>
+
+
+                        <p:commandButton  tabindex="0"   process="opBuscaBairro" actionListener="#{bairroBean.buscaDetalhado}" global="false" update="opBuscaBairroInsert, dtBairro, :messages" icon="-search" /> 
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" >
+                        <h:outputText value="Bairro: " />  
+                        <p:inputText  value="#{bairroBean.busca}"  style="width:360px" onkeyup="this.value = this.value.toUpperCase();"  label="Campo de Busca" >
+
+                        </p:inputText>
+
+
+                    </h:panelGrid>
+                    <p:messages showDetail="true" />
+                </p:outputPanel>
+            </p:outputPanel>
+            <p:separator />
+            <p:commandButton value="Novo" process="@this" actionListener="#{bairroBean.newBairro}"   update=":frmBairro" oncomplete="dialogBairro.show()"/>
+
+            <p:outputPanel id="dtBairro" >
+                <p:dataTable  var="item"  value="#{bairroBean.listaBairros}" pageLinks="7"  
+                              style="width: 600px;height: auto;  text-align: center;" 
+                              paginatorPosition="bottom"  
+                              paginator="true"  paginatorAlwaysVisible="false" rows="8" >
+
+                    <p:column style="text-align: center;" headerText="Código" >
+
+                        <h:outputText value="#{item.id}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" headerText="Bairro"    >
+
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column> 
+                    <p:column style="text-align: center;" headerText="Zona"   >
+
+                        <h:outputText value="#{item.zona}"/>
+                    </p:column> 
+
+                    <p:column headerText="Cidade" style="text-align: center;"  >                        
+                        <h:outputText value="#{item.cidade.nome}"/>
+                    </p:column>   
+
+                    <p:column style="text-align: center;" headerText="Estado" >
+
+                        <h:outputText value="#{item.cidade.estado.sigla}"/>
+                    </p:column>   
+
+                    <p:column style="text-align: center;" headerText="ações">
+
+
+                        <p:commandButton  icon="ui-icon-refresh" update=":frmBairro" actionListener="#{bairroBean.editBairro}" oncomplete="dialogBairro.show()"/>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:outputPanel >
+        </h:form>
+    </h:body>
+</ui:component>
+

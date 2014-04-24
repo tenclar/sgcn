@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"     
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    
+        <h:form id="frmCoop" prependId="false" binding="#{cooperativaBean.form}"   >    
+
+
+            <p:tabView   id="tabView"    activeIndex="0" widgetVar="tbView" >
+                
+                <p:tab title="Dados Pessoais" id="tabDadosPessoais"  >
+                    
+                    
+                    <ui:include src="dadoscadastro/index.xhtml"  />
+                    
+                    <p:commandButton   value="Avançar" process="@this, coopdados, coopendereco" update="coopdados, coopendereco, :frmBuscaCoop, :messages" oncomplete="if(!args.validationFailed){tbView.select(1)}"  actionListener="#{cooperativaBean.saveCoopNext}"   /> <p:spacer width="20" />
+             
+                </p:tab>               
+
+                <p:tab title="Cooperados/Associados" id="tabassociados"   >
+                    <ui:include src="associados/list.xhtml"  /> 
+                    
+                     <p:commandButton   value="Salvar" process="@this, coopdados, coopendereco" update="coopdados, coopendereco, :frmBuscaCoop, opdtAssociados, :messages" oncomplete="if(!args.validationFailed){cooplist.show();coopins.close();confImprimir.show();}"  actionListener="#{cooperativaBean.saveCoop}"   />
+            
+                </p:tab>             
+
+            </p:tabView>
+            <p:commandButton value="Cancelar" process="@this"  immediate="true"   update=" frmCoop, :frmBuscaCoop" oncomplete="cooplist.show();coopins.close();"  ajax="false"  action="#{cooperativaBean.cancelCoop}" /> 
+            
+        </h:form>
+
+    
+    </ui:component>
+

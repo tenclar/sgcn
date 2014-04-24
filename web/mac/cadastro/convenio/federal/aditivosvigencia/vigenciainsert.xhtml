@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:f="http://java.sun.com/jsf/core"
+              >
+
+
+    <h:form id="frmVigencia" prependId="false" >
+        <h:panelGrid columns="2"  >
+            <h:outputLabel value="Ordem:" />
+            <p:inputText value="#{convenioBean.vigencia.seq}" size="4" />
+            <h:outputLabel value="Data:" />
+            <h:panelGroup>
+                <p:calendar id="convigencia" label="Vigência" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value);" required="true" value="#{convenioBean.vigencia.datavigencia}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
+                    <f:convertDateTime pattern="dd/MM/yyyy" />   
+                </p:calendar> 
+                &nbsp;<p:message for="convigencia" />                              
+            </h:panelGroup>
+            <h:outputLabel value="Descrição: " />
+             <p:inputTextarea rows="8" cols="60" autoResize="false" value="#{convenioBean.vigencia.descricao}"  />
+        </h:panelGrid>
+        <p:commandButton value="Salvar"  update="frmVigencia, :frmConvenio:tabGeral:tbvig" oncomplete="dlgVigencia.hide();" action="#{convenioBean.vigenciaAdd()}" />
+        <p:commandButton value="Cancelar"  update="frmVigencia" oncomplete="dlgVigencia.hide();" immediate="true" />
+    </h:form>
+
+</ui:component>
+

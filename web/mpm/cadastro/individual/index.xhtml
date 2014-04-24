@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition         xmlns="http://www.w3.org/1999/xhtml"
+                       xmlns:p="http://primefaces.org/ui"
+                        xmlns:h="http://java.sun.com/jsf/html"
+                        xmlns:ui="http://java.sun.com/jsf/facelets"
+                        xmlns:f="http://java.sun.com/jsf/core"
+                        template="/templates/mpm.xhtml">
+
+
+    <ui:define name="conteudo" >
+        <div class="conteudo"> 
+
+            <p:panel header="Lista de Monitoramentos"   widgetVar="cadlist"  closeSpeed="0" visible="true"  closable="true"  >
+                <ui:include src="list.xhtml"  />  
+            </p:panel>
+
+           
+                <p:panel id="panelcad" binding="#{planoBean.panelPlano}" visible="false" header="Cadastro Plano de Monitoramento"  closable="true" closeSpeed="0"  widgetVar="plancad"     >             
+                    <ui:include src="insert.xhtml"  />  
+                </p:panel>
+           
+
+
+        </div>
+
+    </ui:define>
+    <ui:define name="caixadialogo">
+        <p:dialog widgetVar="dlgConfMon" header="Informação"  modal="true"    >
+
+            <h:form prependId="false">
+                <p:panel>
+                    <h:outputText value="Plano de Monitoramento não encontrado para o argumento. " />
+                    <h:outputText value="Deseja cadastrar Novo?" />
+                    
+                </p:panel>
+                <p:separator  />
+                <p:commandButton value="Sim" process="@this"  actionListener="#{planoBean.newPlano}"  oncomplete="dlgConfMon.hide();dlgNewMon.show();" update=":frmPlano, :frmPlanNew, :frmListPlano" />
+                <p:commandButton value="Não" process="@this" update=":frmPlano, :frmPlanNew, :frmListPlano" action="#{planoBean.cancelPlano()}" oncomplete="dlgConfMon.hide();" />
+            </h:form>
+        </p:dialog>
+        <p:dialog header="Novo Plano de Monitoramento" widgetVar="dlgNewMon"  resizable="true" modal="true"  width="900"   > 
+            <ui:include src="new.xhtml" /> 
+        </p:dialog>
+        <p:dialog header="Localizar Endereço" widgetVar="dlgBuscaEnd"   resizable="true" modal="true" position="top" showEffect="slide" width="800"   > 
+            <ui:include src="endereco/list.xhtml" /> 
+        </p:dialog>
+        <p:dialog header="Adicionar Endereço" widgetVar="dlgEndereco"   position="top" resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="endereco/endereco/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Adicionar Bairro" widgetVar="dialogBairro"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="endereco/bairro/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Adicionar Atividade" widgetVar="dlgAtividadeEmp"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/atividade.xhtml" />
+        </p:dialog>
+        <p:dialog header="Adicionar Projeto" widgetVar="dlgProjeto"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/projeto.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Produto " widgetVar="dlgProduto"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/produto.xhtml" />
+        </p:dialog>
+        <p:dialog header="Novo Servico " widgetVar="dlgServico"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/servico.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Ponto Fraco Interno" widgetVar="dlgPontoFracoInterno"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/ponto/fraco/interno/insert.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Ponto Fraco Externo" widgetVar="dlgPontoFracoExterno"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/ponto/fraco/externo/insert.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Ponto Forte Externo" widgetVar="dlgPontoForteExterno"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/ponto/forte/externo/insert.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Ponto Forte Interno" widgetVar="dlgPontoForteInterno"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/ponto/forte/interno/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Novo Responsável Acompanhamento" widgetVar="dlgResponsavel"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/responsavel.xhtml" />
+        </p:dialog>
+        <p:dialog header="Novo Meta" widgetVar="dlgMeta"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/meta.xhtml" />
+        </p:dialog>
+        <p:dialog header="Ponto Comercial" widgetVar="dlgPontoComercial"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/ponto/comercial/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Local Investimento" widgetVar="dlgLocalInvestimento"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/investimento.xhtml" />
+        </p:dialog>
+        <p:dialog header="Localizar Cidadão" widgetVar="dlgRespEmp"  resizable="true" modal="true"  width="600" >
+
+            <ui:include src="responsavel/list.xhtml" />
+        </p:dialog>
+        <p:dialog header="Localizar Responsável Empreendimento" widgetVar="dlgResp"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="acompanhante/list.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Bem Durável" widgetVar="dlgBemDuravel"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="dados/bemduravel/insert.xhtml" />
+        </p:dialog>
+        <p:dialog header="Lista de Bens Duráveis" widgetVar="dlgCidBensDuraveis"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="bensduraveis/cadastro/index.xhtml" />
+        </p:dialog>
+        <p:dialog header="Histórico Domicílio" widgetVar="dlgDomicilio"  resizable="true" modal="true" showEffect="slide" width="900" >
+
+            <ui:include src="domicilio/caracteristicas/index.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Novo Curso" widgetVar="dlgCursoSecr"  resizable="true" modal="true" showEffect="slide" width="600" >
+
+            <ui:include src="beneficiosecretaria/cursoinsert.xhtml" />
+        </p:dialog>
+
+        <p:dialog header="Cadastro de Cursos" widgetVar="dlgCurso"  resizable="true" modal="true" showEffect="slide" width="500">
+
+            <ui:include src="dados/curso.xhtml" />
+
+        </p:dialog>
+          <p:dialog header="Inserir Historico" widgetVar="dlgHistorico"  resizable="true" modal="true"  width="600"   > 
+            <ui:include src="historico/index.xhtml" />
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

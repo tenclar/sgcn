@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:fieldset legend="Microcrédito e Financiamento" id="fieldMicroFin" >
+        <p:outputPanel id="outMic" >                        
+            <h:panelGrid columns="2"> 
+                <h:outputLabel value="Recebeu Microcrédito? " /><p:message for="planoSelMicro" display="icon"  />
+                <h:selectOneRadio id="planoSelMicro" value="#{planoBean.plano.microcredito.recebeu}" required="true" requiredMessage=" Microcrédito"  >
+                    <f:selectItem itemValue="NAO" itemLabel="Não" />
+                    <f:selectItem itemValue="SIM" itemLabel="Sim"  />                            
+                    <p:ajax update="@this pMicro pfin"  listener="#{planoBean.handleRadioMicro}" />
+                </h:selectOneRadio>
+            </h:panelGrid> 
+        </p:outputPanel>
+        <p:outputPanel id="pMicro">
+            <p:panel id="panelMicro" header="Microcrédito" binding="#{planoBean.panelMicro}" rendered="false"  >
+                <h:outputLabel value="Em que Foi investido? " />
+                <p:outputPanel id="pMicroIns">
+                    <h:panelGrid id="insPanelMicro" columns="3" >
+                        <h:outputLabel value=" " />
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="item: " /><p:message for="planlistaLocalInvestimento" display="icon"  />                                        
+                        </h:panelGrid>                                                                     
+                        <h:outputLabel value=" " />
+                        <p:commandButton value="+" oncomplete="dlgLocalInvestimento.show()" process="@this" action="#{localInvestimentoBean.newLocalInvestimento}" update="panelLocalInvestimentoInsert" /> 
+                        <h:selectOneMenu id="planlistaLocalInvestimento"  style="width: 120px" value="#{planoBean.microlocalinvest.localinvestimento}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="item investido"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{localInvestimentoBean.selectItems}" />
+                        </h:selectOneMenu>                                  
+
+                        <p:commandButton value="Inserir" process="pMicroIns" update="dtMicro insPanelMicro :messages" action="#{planoBean.addLocalMicro}" >
+
+                        </p:commandButton>    
+
+                    </h:panelGrid>                               
+                </p:outputPanel>        
+                <p:outputPanel id="dtMicro" >
+                    <p:dataTable  value="#{planoBean.plano.microcredito.microlocaisinvestidos}" var="dados" emptyMessage="${msg.lista_vasia}"  >
+                        <p:column  headerText="Item Investimento" >                                                     
+
+                            <h:outputText value="#{dados.localinvestimento.nome}" />
+                        </p:column>
+
+                        <p:column style="width: 80px;text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="ações"/>
+                            </f:facet>                                        
+                            <p:commandButton icon="ui-icon ui-icon-close"  process="@this"  update="dtMicro"  >
+                                <p:collector value="#{dados}" unique="true" removeFrom="#{planoBean.plano.microcredito.microlocaisinvestidos}"  />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+                <p:outputPanel id="outObj">
+                    <h:panelGrid columns="2"  >
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Atingiu os Objetivos" /><p:message for="microObj" display="icon"  />                                        
+                        </h:panelGrid>
+                        <h:selectOneRadio id="microObj" value="#{planoBean.plano.microcredito.objetivo}" required="true" label="Objetivo"  > 
+
+                            <f:selectItem itemLabel="sim" itemValue="SIM"   /> 
+                            <f:selectItem itemLabel="Não" itemValue="NAO"   /> 
+                        </h:selectOneRadio>
+                    </h:panelGrid> 
+                </p:outputPanel>
+            </p:panel>
+        </p:outputPanel>
+        <p:outputPanel id="pfin">
+            <p:panel id="panelFin"  binding="#{planoBean.panelFin}" header="Financiamento" rendered="false"   >
+                <p:outputPanel id="outFin">
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Tem Condições de Obter financiamento? " /><p:message for="microConFin" display="icon"  />                                        
+                    </h:panelGrid>
+                    <h:selectOneRadio id="microConFin" value="#{planoBean.plano.microcredito.condfin}" required="true"  >                        
+                        <f:selectItem itemLabel="Não" itemValue="NAO"   /> 
+                        <f:selectItem itemLabel="Sim" itemValue="SIM"   />                             
+                    </h:selectOneRadio>
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Tem interesse em obter financiamento? " /><p:message for="microIntFin" display="icon"  />                                        
+                    </h:panelGrid>
+                    <h:selectOneRadio id="microIntFin" value="#{planoBean.plano.microcredito.intobterfin}" required="true"  >                        
+                        <f:selectItem itemLabel="Não" itemValue="NAO"   /> 
+                        <f:selectItem itemLabel="Sim" itemValue="SIM"   />                             
+                        <p:ajax update="pfininv"  listener="#{planoBean.handleRadioFinInv}" />
+                    </h:selectOneRadio>
+                </p:outputPanel>    
+                <p:outputPanel id="pfininv">
+                    <p:panel id="panelFinInv"  binding="#{planoBean.panelFinInv}" rendered="false"   >
+                        <h:outputLabel value="Em que será investido ? " />
+                        <h:panelGrid id="insPanelMicroFin" columns="3" >
+                            <h:outputLabel value=" " />
+                            <h:panelGrid columns="2">                                        
+                                <h:outputLabel value="Item:" /><p:message for="mlistaLocalFin" display="icon"  />                                        
+                            </h:panelGrid>                                                                     
+                            <h:outputLabel value=" " />
+
+                            <h:selectOneMenu  id="mlistaLocalFin"  style="width: 120px" value="#{planoBean.microlocalinvesfin.localinvestimento}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Item Investimento Financiamento"  >
+                                <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                                <f:selectItems value="#{localInvestimentoBean.selectItems}" />
+                            </h:selectOneMenu>                                  
+
+                            <p:commandButton value="Inserir" process="panelFinInv" update="dtMicroFin insPanelMicroFin :messages" action="#{planoBean.addLocalMicroFin}" >
+
+                            </p:commandButton>    
+                            <p:commandButton value="+" oncomplete="dlgLocalInvestimento.show()" process="@this" action="#{localInvestimentoBean.newLocalInvestimento()}" update="panelLocalInvestimentoInsert" /> 
+                        </h:panelGrid>                               
+
+                        <p:outputPanel id="dtMicroFin" >
+                            <p:dataTable  value="#{planoBean.plano.microcredito.microlocaisinvestfin}" var="dados" emptyMessage="${msg.lista_vasia}"  >
+                                <p:column  headerText="Item Investimento" >                                                   
+                                    <h:outputText value="#{dados.localinvestimento.nome}" />
+                                </p:column>                                    
+                                <p:column  headerText="ações" style="width: 80px;text-align: center" >                                        
+                                    <p:commandButton icon="ui-icon ui-icon-close"  process="@this"  update="dtMicroFin"  >                                            
+                                        <p:collector value="#{dados}" unique="true" removeFrom="#{planoBean.plano.microcredito.microlocaisinvestfin}"  />
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:outputPanel>
+
+                    </p:panel>   
+                </p:outputPanel>
+            </p:panel>
+        </p:outputPanel>
+    </p:fieldset>
+    <p:separator/>     
+
+
+
+</ui:component>

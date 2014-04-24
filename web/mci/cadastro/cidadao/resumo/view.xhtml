@@ -1,0 +1,344 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"     
+              xmlns:f="http://java.sun.com/jsf/core" 
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form>
+
+        <h:panelGrid id="cidviewdados"  >
+            <p:fieldset legend="Identificação do Responsável" style="width: 840px"   >
+                <h:panelGrid columns="3"  >
+                    <h:outputLabel for="cidviewcpf" value="CPF: " styleClass="titulos" />
+                    <h:outputText id="cidviewcpf" value="#{cidadaoBean.cidadao.cpf}" />
+                    <f:facet name="header">
+                        Nome
+                    </f:facet>
+                    <h:outputLabel for="cidviewnome" value="Nome: " />
+                    <h:outputText id="cidviewnome" value="#{cidadaoBean.cidadao.nome}"   />                                       
+                    <f:facet name="header">
+                        Etinia
+                    </f:facet>
+                    <h:outputLabel for="cidviewetinia" value="etinia: " />
+                    <h:outputText id="cidviewetinia"  value="#{cidadaoBean.cidadao.etinia}" />
+
+
+                </h:panelGrid>
+                <h:panelGrid columns="7"  styleClass="dados" >
+
+                    <h:outputLabel for="cidviewapelido" value="Apelido: " />
+                    <h:outputLabel for="cidviewrg" value="RG: " />
+                    <h:outputLabel for="cidvieworgaoexp" value="Órgão Expedidor: " />
+                    <h:outputLabel for="cidviewestadocivil" value="Estado Civil: " />
+                    <h:outputLabel for="cidviewsexo" value="Sexo: " />
+                    <h:outputLabel for="cidviewdtnasc" value="Data Nascimento: " />
+                    <h:outputLabel  value="Idade: " />
+
+                    <h:outputText id="cidviewapelido" value="#{cidadaoBean.cidadao.apelido}" />
+                    <h:outputText id="cidviewrg" value="#{cidadaoBean.cidadao.rg}"  />
+                    <h:outputText id="cidvieworgaoexp" value="#{cidadaoBean.cidadao.expedidor}"  />
+                    <h:outputText id="cidviewestadocivil" value="#{cidadaoBean.cidadao.estadocivil.descricao}" />                                                      
+                    <h:outputText id="cidviewsexo" value="#{cidadaoBean.cidadao.sexo}" />                                
+                    <h:outputText id="cidviewdtnasc"  value="#{cidadaoBean.cidadao.datanasc}"  />                                 
+                    <h:outputText id="cidviewIdade" value="#{cidadaoBean.cidadao.idade}" />
+
+
+                </h:panelGrid>
+                <h:panelGrid columns="4" styleClass="dados" >
+                    <h:outputLabel  value="Nescecidades Especiais:"  />
+                    <h:outputLabel  value="Escolaridade: " />
+                    <h:outputLabel  value="Naturalidade: " />
+                    <h:outputLabel  value="Telefone: " />
+
+                    <h:outputText id="cidviewnecesp" value="#{cidadaoBean.cidadao.necespecial.descricao}" />
+                    <h:outputText id="cidviewesc" style="width:120px"  value="#{cidadaoBean.cidadao.escolaridade.ano} | #{cidadaoBean.cidadao.escolaridade.grau}" styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                    <h:panelGroup  >
+                        <h:outputLabel  value="UF: " />
+                        <h:outputText id="cidviewnatuf" style="width: 180px" value="#{cidadaoBean.cidadao.naturalidade.estado}" converter="IndexedConverter"  styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                        <h:outputLabel  value="Cidade: " />
+                        <h:outputText id="cidviewaNat" style="width: 210px" value="#{cidadaoBean.cidadao.naturalidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputLabel  value="Residencial: " />
+                        <h:outputText id="cidviewresid" value="#{cidadaoBean.cidadao.residencial}" />
+                        <h:outputLabel  value="Celular: " />
+                        <h:outputText id="cidviewcel" value="#{cidadaoBean.cidadao.celular}" />                       
+                    </h:panelGroup>                     
+                </h:panelGrid>
+                <h:panelGroup>
+                    <fieldset>
+                        <legend>Endereço </legend>                                
+                        <h:panelGrid columns="7" id="cidviewEnd" styleClass="end" >
+
+                            <h:outputLabel  value="Logradouro: " />                                    
+                            <h:outputLabel  value="UF: " />
+                            <h:outputLabel  value="Cidade: " />
+                            <h:outputLabel  value="Bairro / Ramal: " />
+                            <h:outputLabel  value="Zona:"  />  
+                            <h:outputLabel  value="Nº / Lote: " />
+                            <h:outputLabel  value="Tempo Moradia:"  />                      
+
+
+
+                            <h:outputText id="cidviewlogr"   value="#{cidadaoBean.cidadao.endereco.logradouro}"  />
+                            <h:outputText id="cidviewuf"     value="#{cidadaoBean.cidadao.endereco.bairro.cidade.estado.sigla}" />
+                            <h:outputText id="cidviewcid"    value="#{cidadaoBean.cidadao.endereco.bairro.cidade.nome}"  />
+                            <h:outputText id="cidviewbairro" value="#{cidadaoBean.cidadao.endereco.bairro.nome}"    />
+                            <h:outputText id="cidviewzona"   value="#{cidadaoBean.cidadao.endereco.bairro.zona}"  />                                                            
+                            <h:outputText id="cidviewnum"    value="#{cidadaoBean.cidadao.numero}"   />                                                                            
+                            <h:outputText id="cidviewtpmor"  value="#{cidadaoBean.cidadao.tempomorada}" />   
+
+                        </h:panelGrid>
+
+
+                    </fieldset> 
+                </h:panelGroup>
+
+
+            </p:fieldset  >      
+            <p:fieldset legend="Características" >
+                <h:panelGrid columns="1"  style="margin: 0 auto; width: 80%">
+
+                    <p:fieldset legend="Participação em Cursos"   >                          
+
+                        <p:panel     visible="#{cidadaoBean.cidadao.curso}"   >
+
+
+
+                            <p:dataTable id="dataTableCursosview" value="#{cidadaoBean.cidadao.cursos}" var="dados"  >
+                                <p:column  headerText="Curso" style="width: 450px" >                                                                
+
+                                    <h:outputText value="#{dados.curso.nome}" />
+                                </p:column>
+                                <p:column  headerText="Carga" style="text-align: center" >                                                                      
+
+                                    <h:outputText value="#{dados.hora}" />
+                                </p:column>
+
+
+                            </p:dataTable>
+
+                        </p:panel>
+
+                    </p:fieldset>
+
+                    <p:fieldset legend="Benefícios Sociais"   >
+
+
+                        <p:panel    visible="#{cidadaoBean.cidadao.beneficioSocial}"   >
+
+
+                            <p:dataTable value="#{cidadaoBean.cidadao.cidbBenSociais}" var="item"   >
+
+                                <p:column headerText="Benefício"  style="width: 450px" >                                        
+                                    <h:outputText value="#{item.beneficioSocial.nome}" />                                    
+                                </p:column>
+
+                                <p:column  headerText="valor" >                                                                    
+                                    <h:outputText value="#{item.renda}" style="text-align: center" />
+                                </p:column>
+
+
+                            </p:dataTable>
+
+
+                        </p:panel>
+                    </p:fieldset>
+                    <p:fieldset legend="Benefícios Habitacionais"   >
+
+                        <p:panel    visible="#{cidadaoBean.cidadao.beneficiohabitacional}"   >
+
+
+                            <p:dataTable  value="#{cidadaoBean.cidadao.cidBenHabits}" var="item"   >
+                                <p:column headerText="Benefício" style="width: 450px" > 
+
+                                    <h:outputText value="#{item.beneficioHabitacional.nome}" />
+                                </p:column>
+                                <p:column  headerText="Valor" >                                                                     
+                                    <h:outputText value="#{item.valor}" style="text-align: center" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </p:fieldset>
+                </h:panelGrid>    
+            </p:fieldset>
+            <p:fieldset legend="Informações Sociais"  >
+                <h:panelGrid  style="margin: 0 auto; width: 80%" >
+                    <p:fieldset legend="Local de Trabalho " >
+
+                        <p:panel  visible="#{cidadaoBean.cidadao.emprego}" >
+
+                            <h:panelGrid columns="3" style="width: 100%" >
+
+                                <h:outputLabel  value="Local de Trabalho: "  />
+                                <h:outputLabel  value="Função: "  />
+                                <h:outputLabel  value="Remuneração: "  />
+
+                                <h:outputText value="#{cidadaoBean.cidadao.trabLocal}" />
+                                <h:outputText value="#{cidadaoBean.cidadao.trabFuncao}" />
+                                <h:outputText value="#{cidadaoBean.cidadao.trabRem}" />          
+
+                            </h:panelGrid>
+                        </p:panel>   
+                    </p:fieldset>
+                    <p:fieldset legend="Outras Atividades" >                        
+
+                        <p:panel      visible="#{cidadaoBean.cidadao.atividade}"   >    
+
+
+                            <p:dataTable value="#{cidadaoBean.cidadao.cidAtividades}"  var="ativ"  >
+                                <p:column style="width: 450px">
+                                    <f:facet name="header">
+                                        <h:outputText value="descrição"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ativ.atividade.descricao}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="remuneração"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ativ.renda}" />
+                                </p:column>
+
+                                <p:columnGroup type="footer">
+                                    <p:row>  
+                                        <p:column footerText="Total:" style="text-align: right"  />  
+
+                                        <p:column footerText="R$ #{cidadaoBean.cidadao.atividadeTotal}" />                                   
+
+
+                                    </p:row>
+                                </p:columnGroup>
+                            </p:dataTable>
+
+
+                        </p:panel>
+                    </p:fieldset>
+                </h:panelGrid>
+
+            </p:fieldset>
+            <p:fieldset legend="Informações dos Dependentes"  >
+                <h:panelGrid style="margin: 0 auto; width: 80%" >                        
+                    <p:outputPanel id="tbDependenteView" >
+                        <p:dataTable value="#{cidadaoBean.cidadao.dependentes}" var="item"     >
+                            <f:facet name="header">
+                                <h:outputText value="Dependentes"/>
+                            </f:facet>
+                            <p:column style="width:16px">  
+                                <p:rowToggler />  
+                            </p:column>  
+                            <p:column   headerText="Grau" >
+
+                                <h:outputText value="#{item.grau}" />
+                            </p:column>
+                            <p:column headerText="Nome" >
+
+                                <h:outputText value="#{item.nome}" />
+                            </p:column>
+                            <p:column  headerText="Sexo" >
+
+                                <h:outputText value="#{item.sexo}" />
+                            </p:column>
+                            <p:column headerText="Naturalidade"  >
+
+                                <h:outputText value="#{item.naturalidade.nome}/#{item.naturalidade.estado.nome}" />
+                            </p:column>
+                            <p:column  headerText="Data Nascimento" >
+
+                                <h:outputText value="#{item.dataNascimento}" />
+                            </p:column>
+                            <p:column  headerText="Especiais" >                                    
+
+                                <h:outputText value="#{item.necEspecial.descricao}" />
+                            </p:column>                               
+                            <p:rowExpansion>
+                                <h:panelGrid  columns="6" >
+                                    <h:outputText value="Frequenta"/>                                    
+                                    <h:outputText value="Grau Instrução"/>
+                                    <h:outputText value="Ano"/>                                    
+                                    <h:outputText value="Local de Tabalho"/>
+                                    <h:outputText value="Função"/>
+                                    <h:outputText value="Renda"/>
+
+                                    <h:outputText value="#{item.frequenta}" />
+                                    <h:outputText value="#{item.grau}" />
+                                    <h:outputText value="#{item.escolaridade.ano}" />                                    
+                                    <h:outputText value="#{item.localTrabalho}" />
+                                    <h:outputText value="#{item.cargo}" />
+                                    <h:outputText value="#{item.renda}" />
+                                </h:panelGrid> 
+                            </p:rowExpansion>    
+
+                        </p:dataTable>
+                    </p:outputPanel>
+                </h:panelGrid>
+
+
+            </p:fieldset>
+            <p:fieldset legend="Despesas com domicílio"  >
+                <h:panelGrid id="panelCidDespesaView" style="margin: 0 auto; width: 80%" >
+
+                    <p:outputPanel id="tbDespesaView">
+                        <p:dataTable value="#{cidadaoBean.cidadao.despesas}" var="item"   >
+                            <f:facet name="header"  >
+                                <h:outputText value="Lista de Despesas"/>
+                            </f:facet>
+                            <p:column headerText="Descrição" style="width: 450px" >
+
+                                <h:outputText value="#{item.despesa.descricao}" />
+                            </p:column>
+                            <p:column headerText="Valor" >
+
+                                <h:outputText value="#{item.valor}" />
+                            </p:column>
+
+
+
+
+                        </p:dataTable>
+                    </p:outputPanel>
+                </h:panelGrid>
+
+
+            </p:fieldset>
+            <p:fieldset legend="Características do Domicílio">
+
+                <h:panelGrid columns="8"  styleClass="dados" >
+
+                    <h:outputLabel value="Tipo de Moradia: " />
+                    <h:outputLabel value="Situação: " />
+                    <h:outputLabel value="Tipo de Construção: " />
+                    <h:outputLabel value="Local Banheiro: " />
+                    <h:outputLabel value="Tipo de Escoamento: " />
+                    <h:outputLabel value="Abastecimento de água: " />
+                    <h:outputLabel  value="Tipo de Iluminação: " />
+                    <h:outputLabel  value="Iluminação Pública: " />
+
+                    <h:outputText  value="#{cidadaoBean.cidadao.domicilio.moradia.descricao}" styleClass="ui-inputfield ui-widget  ui-corner-all"  />                           
+                    <h:outputText   value="#{cidadaoBean.cidadao.domicilio.situacao.nome}" styleClass="ui-inputfield ui-widget  ui-corner-all" />                          
+                    <h:outputText  value="#{cidadaoBean.cidadao.domicilio.construcao.nome}"  styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                    <h:outputText  value="#{cidadaoBean.cidadao.domicilio.localbanheiro}" styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                    <h:outputText value="#{cidadaoBean.cidadao.domicilio.escoamento.nome}"  styleClass="ui-inputfield ui-widget ui-corner-all" />
+                    <h:outputText  value="#{cidadaoBean.cidadao.domicilio.abastecimento.nome}" styleClass="ui-inputfield ui-widget ui-corner-all" />
+                    <h:outputText value="#{cidadaoBean.cidadao.domicilio.iluminacao.nome}"  styleClass="ui-inputfield ui-widget ui-corner-all" />
+                    <h:outputText value="#{cidadaoBean.cidadao.domicilio.iluminacaopublica}" />
+
+
+                </h:panelGrid>
+            </p:fieldset>
+            <h:panelGroup>
+
+                <!--                    <p:commandButton value="Confirmar" update=":messages" oncomplete="cadview.close()"  /> -->
+                <!--<p:commandButton value="editar" update="frmCid :messages" oncomplete="cadview.close();cadins.show();"  />-->
+                <p:commandButton value="Fechar" process="@this"   update="frmCidview" oncomplete="cadview.close()" action="#{cidadaoBean.cancelCidadao}" /> 
+            </h:panelGroup>
+        </h:panelGrid>
+    </h:form>
+</ui:component>
+

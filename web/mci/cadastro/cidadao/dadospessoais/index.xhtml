@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:fieldset  legend="Identificação do Responsável">
+
+        <p:fieldset   id="fieldIdent" legend="Dados Pessoais">
+            <h:panelGrid columns="4" >
+
+                <h:outputLabel   value="Status Cidadão " styleClass="titulos" />
+                <h:outputText value="#{cidadaoBean.cidadao.statuscid}"/>
+                <h:outputLabel  value="Status Benefício " styleClass="titulos" />
+                <h:outputText value="#{cidadaoBean.cidadao.benstatus}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="4" rendered="#{cidadaoBean.cidadao.statuscid == 'COLETIVO'? true:false}" >
+
+                <h:outputLabel   value="CNPJ" styleClass="titulos" />
+                <h:outputText value="#{cidadaoBean.cooper.cpf}"/>
+                <h:outputLabel  value="Nome " styleClass="titulos" />
+                <h:outputText value="#{cidadaoBean.cooper.nome}"/>
+            </h:panelGrid>
+
+            <h:panelGrid columns="6" >
+                <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="cidanodemanda"  value="Ano Demanda: " styleClass="titulos" />
+                    <p:message for="cidanodemanda" display="icon"   />
+                </h:panelGrid> 
+                <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="ciddata"  value="Data: " styleClass="titulos" />
+                    <p:message for="ciddata" display="icon"   />
+                </h:panelGrid> 
+
+                <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="cidcpf"  value="CPF: " styleClass="titulos" />
+                    <p:message for="cidcpf" display="icon"   />
+                </h:panelGrid> 
+                <h:panelGrid  columns="2">
+                    <h:outputLabel for="cidnome"  value="Nome Completo:" styleClass="titulos" />
+                    <p:message for="cidnome" display="icon"   />
+                </h:panelGrid>  
+
+                <h:panelGroup>
+                    <h:outputLabel for="cidpub" value="Público:" styleClass="titulos" />
+                    <p:message for="cidpub" display="icon"  />
+                </h:panelGroup>
+
+                <h:panelGrid  columns="2"  >                               
+                    <h:outputLabel for="cidlistaRamoEmpreendimentos"  value="Ramo Empreendimento: " styleClass="titulos" />
+                    <p:message for="cidlistaRamoEmpreendimentos" display="icon"   />
+                </h:panelGrid>
+                <p:inputText id="cidanodemanda" autocomplete="off"  value="#{cidadaoBean.cidadao.anodemanda}" size="8" required="true" label="Ano Demanda" maxlength="4" onkeypress="mascara(this, soNumeros)"  />
+                <p:calendar id="ciddata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{cidadaoBean.cidadao.datacreated}" pattern="dd/MM/yyyy"  >
+
+                </p:calendar>
+                <h:panelGroup>
+                    <p:inputText id="cidcpf" autocomplete="off" value="#{cidadaoBean.cidadao.cpf}" size="16" required="true" label="CPF" readonly="false" disabled="false" style="background: #e8e1b5; color: #023401" maxlength="11" onkeypress="mascara(this, soNumeros)" >
+                        <f:validateRegex pattern="[0-9]{11,11}" />
+                    </p:inputText>
+                </h:panelGroup>
+                <p:inputText id="cidnome" autocomplete="off" value="#{cidadaoBean.cidadao.nome}" size="50" required="true" label="Nome" readonly="false" disabled="false" style="background: #e8e1b5; color: #023401" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();" />                                       
+
+                <h:panelGroup>
+
+                    <p:selectOneMenu id="cidpub" label="Público" value="#{cidadaoBean.cidadao.publico}" converter="IndexedConverter"  required="true" style="width: 150px" >
+                        <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{publicoBean.selectItems}"   />                                
+                    </p:selectOneMenu> 
+                    <!--                    <p:commandButton value="+" actionListener="  {publicoBean.newPublico}" oncomplete="dlgPublico.show();" process="@this" update="panelNecEspecialInsert" />-->
+                </h:panelGroup>
+
+
+                <p:selectOneMenu label="Ramo do Empreendimento"  filter="true" filterMatchMode="startsWith" style="width: 140px" id="cidlistaRamoEmpreendimentos" value="#{cidadaoBean.cidadao.ramoempreendimento}"  converter="IndexedConverter" required="true"   >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}"  />     
+                </p:selectOneMenu> 
+                <!--                    <p:commandButton value="+" process="@this" oncomplete="dlgRamoEmpreendimento.show()" update="panelRamoEmpreendimentoInsert" actionListener="{ramoEmpreendimentoBean.newRamoEmpreendimento}" />-->
+            </h:panelGrid>
+
+            <h:panelGrid columns="8"  >
+                <h:panelGrid columns="2" >    
+                    <h:outputLabel for="cidapelido" value="Apelido: " styleClass="titulos" />
+                    <p:message for="cidapelido" display="icon"   />
+                </h:panelGrid>
+                <h:panelGrid columns="2" >    
+                    <h:outputLabel for="cidnis" value="NIS: " styleClass="titulos" />
+                    <p:message for="cidnis" display="icon"   />
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="cidrg" value="RG: " styleClass="titulos" />
+                    <p:message for="cidrg" display="icon"  />
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="cidorgaoexp" value="Órgão Expedidor: " styleClass="titulos" />
+                    <p:message for="cidorgaoexp" display="icon"  />
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="cidestadocivil" value="Estado Civil: " styleClass="titulos" />
+                    <p:message for="cidestadocivil" display="icon"  />
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="cidsexo" value="Sexo: " styleClass="titulos" />
+                    <p:message for="cidsexo" display="icon"  />
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="ciddtnasc" value="Data Nascimento: " styleClass="titulos" />
+                    <p:message for="ciddtnasc" display="icon"  />
+                </h:panelGrid>
+                <h:panelGrid  columns="2">
+                    <h:outputLabel for="cidIdade" value="Idade: " styleClass="titulos" />
+                    <p:message for="cidIdade" display="icon"  />
+                </h:panelGrid>
+                <p:inputText id="cidapelido" autocomplete="off"  size="30" value="#{cidadaoBean.cidadao.apelido}" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  label="Apelido" />
+                <p:inputText id="cidnis" autocomplete="off"  size="30" value="#{cidadaoBean.cidadao.nis}"  required="true"  label="NIS" />
+                <p:inputText id="cidrg" autocomplete="off" size="20" value="#{cidadaoBean.cidadao.rg}"  required="true" label="RG"  />
+                <p:inputText id="cidorgaoexp" size="6" value="#{cidadaoBean.cidadao.expedidor}" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"   required="true" label="Expedidor" />
+                <p:selectOneMenu  id="cidestadocivil" style="width: 100px;" value="#{cidadaoBean.cidadao.estadocivil}" converter="IndexedConverter" required="true"   >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{cidadaoBean.selectItemsEstadoCivil}" />      
+
+                </p:selectOneMenu>     
+
+                <p:selectOneMenu id="cidsexo" value="#{cidadaoBean.cidadao.sexo}" required="true" >
+                    <f:selectItem  itemValue="M" itemLabel="MASCULINO" />                         
+                    <f:selectItem  itemValue="F" itemLabel="FEMININO" />
+                </p:selectOneMenu> 
+
+                <p:calendar id="ciddtnasc"   value="#{cidadaoBean.cidadao.datanasc}" onkeyup="Formatadata(this, event)" size="8" required="true" locale="pt"  requiredMessage="Informação necessária"  pattern="dd/MM/yyyy" >                                 
+
+                    <p:ajax event="blur" update="cidIdade" global="false"  />
+                </p:calendar> 
+                <p:inputText id="cidIdade" value="#{cidadaoBean.cidadao.idade}" size="3" readonly="true"  required="true" />
+
+
+            </h:panelGrid>
+            <h:panelGrid columns="5"  >
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Necessidades Especiais:"  styleClass="titulos" />&nbsp;
+                    <p:message for="cidnecesp" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Escolaridade: " styleClass="titulos" />
+                    <p:message for="cidesc" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Ano"  styleClass="titulos" />
+                    <p:message for="cidano" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Instituição Ensino"  styleClass="titulos" />
+                    <p:message for="cidinst" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Naturalidade: " styleClass="titulos" />
+                    <p:message for="cdnat" display="icon"  /> 
+                </h:panelGrid>
+
+                <h:panelGroup>
+                    <p:selectOneMenu id="cidnecesp"  value="#{cidadaoBean.cidadao.necespecial}" converter="IndexedConverter"  required="true" style="width: 120px" >
+                        <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{cidadaoBean.selectItemsNecEspeciais}" />                                
+                    </p:selectOneMenu> 
+                    <!--                    <p:commandButton value="+" actionListener="# {necEspeciaisBean.newNecEspecial}" oncomplete="dlgNecEspecial.show();" process="@this" update=":frmNecessidade" />-->
+                </h:panelGroup>
+                <p:selectOneMenu id="cidesc" value="#{cidadaoBean.cidadao.escolaridade}" converter="IndexedConverter" style="width:160px"  required="true" >
+                    <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{cidadaoBean.selectItemsEscolaridade}" />
+
+                </p:selectOneMenu>
+                <p:inputText id="cidano" size="5" value="#{cidadaoBean.cidadao.ano}" required="true" autocomplete="off" />
+                <p:inputText id="cidinst" size="30" value="#{cidadaoBean.cidadao.instituicao}" required="true" autocomplete="off" />
+                <h:panelGrid columns="4"  >                    
+                    <p:outputLabel for="cidnatuf" value="UF: " />
+                    
+                    <p:selectOneMenu id="cidnatuf" label="Estado Naturalidade"
+                                     filter="true" filterMatchMode="startsWith"
+                                     style="width: 160px;"  value="#{cidadaoBean.cidadao.naturalidade.estado}" converter="IndexedConverter" required="true"    >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />      
+                        <f:selectItems  value="#{cidadaoBean.selectItemsEstado}" />                                
+                        <p:ajax update="cdnat"  listener="#{cidadaoBean.handleEstadoChange}"  />
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="cdnat"  value="Cidade: " />
+                    <p:selectOneMenu id="cdnat" label="Cidade Naturalidade"
+                                     filter="true" filterMatchMode="startsWith"
+                                     style="min-width: 160px;" value="#{cidadaoBean.cidadao.naturalidade}" converter="IndexedConverter" required="true"   >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                                
+                        <f:selectItems value="#{cidadaoBean.selectItemsCidade}" />                                
+
+                    </p:selectOneMenu>
+                  
+                </h:panelGrid>
+
+
+            </h:panelGrid>
+        </p:fieldset>
+        <table border="0" width="100%" >
+            <tr>
+                <td width="30%">
+
+
+                    <p:fieldset  legend="Telefones" style="height: 200px"  >
+                        <p:outputPanel id="addTel">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="" />
+                                <h:outputLabel value="Número: " />
+
+                                <p:commandButton value="+"  process="@this,addTel" update="dtTel,addTel" action="#{cidadaoBean.addTelefones()}" />
+                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cidadaoBean.telefone.numero}"  >
+                                    <f:validateLength minimum="9" />
+                                </p:inputMask>                            
+
+                            </h:panelGrid>
+                            <p:message for="tel"  />
+                        </p:outputPanel>
+                        <!--            <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: 60px"></div>-->
+                        <p:outputPanel id="opPanelTel">
+                            <p:dataTable id="dtTel"  var="tel" value="#{cidadaoBean.cidadao.telefones}"
+                                         >
+                                <p:column  headerText="Telefone" >
+                                    <h:outputText value="#{tel.numero}" />
+                                </p:column>
+                                <p:column  headerText="ação" >
+                                    <p:commandButton icon="ui-icon-close" title="excluir" process="@this"   >
+                                        <p:collector removeFrom="#{cidadaoBean.cidadao.telefones}" unique="true" value="#{tel}" />
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+                        
+                        </p:outputPanel>
+
+                    </p:fieldset>
+                </td>
+                <td width="70%">
+                    <p:fieldset id="fieldEndereco" legend="Endereço Residencial" style="height: 200px" >
+
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Localizar" process="@this"  icon="-search" update=":frmBuscaEndCid" onclick="dlgBuscaEnd.show()"  /> 
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="3" id="cidEnd"  >
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel for="cidlogr" value="Logradouro: " styleClass="titulos" />                                      
+                                <p:message for="cidendereco" showDetail="true"  /> 
+                            </h:panelGrid>
+
+                            <h:outputLabel for="ciduf" value="UF: " styleClass="titulos" />
+                            <h:outputLabel for="cidcid" value="Cidade: " styleClass="titulos"  />
+
+                            <p:inputText readonly="true" disabled="true" id="cidlogr" value="#{cidadaoBean.cidadao.endereco.logradouro}" style="background: #e8e1b5; color: #023401" size="80" />
+                            <p:inputText readonly="true"  disabled="true" id="ciduf"  value="#{cidadaoBean.cidadao.endereco.bairro.cidade.estado.sigla}" style="background: #e8e1b5; color: #023401" size="6"  />
+                            <p:inputText readonly="true"  disabled="true" id="cidcid" value="#{cidadaoBean.cidadao.endereco.bairro.cidade.nome}" style="background: #e8e1b5; color: #023401"  />
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="6" id="cidEnd2">
+                            <h:outputLabel for="cidbairro"  value="Bairro / Ramal: " styleClass="titulos"  />
+                            <h:outputLabel for="cidzona" value="Zona:" styleClass="titulos" />                                                          
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel for="cidnum" value="Número:"  styleClass="titulos"  />
+                                <p:message for="cidnum" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel for="cidcom"  value="Complemento:"  styleClass="titulos"  />
+                                <p:message for="cidcom" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel for="cidtMor" value="Moradia:" style="width: 10px" styleClass="titulos"  /> 
+                                <p:message for="cidtMor" display="icon"  /> 
+                            </h:panelGrid>
+                            <h:outputLabel  value=""  />
+
+                            <p:inputText readonly="true"  disabled="true" id="cidbairro" value="#{cidadaoBean.cidadao.endereco.bairro.nome}" style="background: #e8e1b5; color: #023401"  />
+                            <p:inputText readonly="true"  disabled="true" id="cidzona"  value="#{cidadaoBean.cidadao.endereco.bairro.zona}" style="background: #e8e1b5; color: #023401" />                        
+                            <p:inputText  id="cidnum" autocomplete="off" value="#{cidadaoBean.cidadao.numero}" size="7" required="true"  />  
+                            <p:inputText  id="cidcom"  label="Complemento" autocomplete="off" value="#{cidadaoBean.cidadao.complemento}" onblur="this.value = this.value.toUpperCase();"   size="45" required="true"  />  
+                            <p:inputText  id="cidtMor"  autocomplete="off" value="#{cidadaoBean.cidadao.tempomorada}" required="true" size="5"   >
+
+                            </p:inputText>                        
+                            <h:inputHidden id="cidendereco"  value="#{cidadaoBean.cidadao.endereco.logradouro}" required="true" validatorMessage="Endereço não Selecionado"  />
+                        </h:panelGrid>
+
+
+                    </p:fieldset>
+                </td></tr></table>
+
+        <p:panel  id="panelEmprego"  >
+            <h:panelGrid columns="3"  >
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="cidLocTrab" value="Local de Trabalho"  styleClass="titulos"  /> 
+                    <p:message for="cidLocTrab" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="cidFunc" value="Função"  styleClass="titulos"  /> 
+                    <p:message for="cidFunc" display="icon"  /> 
+                </h:panelGrid>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="cidTrabRenda" value="Renda"  styleClass="titulos"  /> 
+                    <p:message for="cidTrabRenda" display="icon"  /> 
+                </h:panelGrid>
+
+                <p:inputText id="cidLocTrab" label="Local de Trabalho" value="#{cidadaoBean.cidadao.trabLocal}" size="60" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  requiredMessage="${msg.conteudo_requerido}"  />
+                <p:inputText id="cidFunc" label="Função" value="#{cidadaoBean.cidadao.trabFuncao}" size="25" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  requiredMessage="${msg.conteudo_requerido}" />
+                <p:inputText id="cidTrabRenda" label="Renda" value="#{cidadaoBean.cidadao.trabRem}" size="10" onkeypress="mascara(this, Valor)"  requiredMessage="${msg.conteudo_requerido}" validatorMessage="${msg.valida_valor_minimo}" >
+                    <f:convertNumber pattern="##,##0.00#"  />                               
+                </p:inputText>
+            </h:panelGrid>
+        </p:panel>   
+    </p:fieldset  > 
+</ui:component>

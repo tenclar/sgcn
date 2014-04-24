@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:body>
+
+        <h:form prependId="false" id="frmUsuario" >
+            <p:panel>
+                <p:outputPanel id="opUsuario">
+                    <h:panelGrid id="panelUsuarioInsert" columns="2" style="margin-bottom:10px">
+                        <h:outputLabel for="UsuarioLogin" value="Login:" />
+                        <h:panelGrid columns="2">
+                            <p:inputText id="UsuarioLogin" value="#{usuarioBean.usuario.login}" onkeydown="this.value = this.value.toLowerCase();" onkeyup="this.value = this.value.toLowerCase();" size="20"  required="true" />
+                            <p:message for="UsuarioLogin" display="icon" />
+                        </h:panelGrid >
+
+                        <h:outputLabel for="UsuarioNome" value="nome:" />
+                        <h:panelGrid columns="2">
+                            <p:inputText id="UsuarioNome" value="#{usuarioBean.usuario.nome}" onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase();" size="70"  required="true" />
+                            <p:message for="UsuarioNome" display="icon" />
+                        </h:panelGrid >
+
+                        <h:outputLabel for="UsuarioEmail" value="email:" />
+                        <h:panelGrid columns="2">
+                            <p:inputText id="UsuarioEmail" value="#{usuarioBean.usuario.email}" label="e-mail" onkeydown="this.value = this.value.toLowerCase();" onkeyup="this.value = this.value.toLowerCase();" size="40"  required="true" />                                                         
+                            <p:message for="UsuarioEmail" display="icon" />
+                        </h:panelGrid >
+
+                        <h:outputLabel for="UsuarioStatus" value="Status" />                 
+                        <h:panelGrid columns="2">                        
+                            <h:selectOneMenu id="UsuarioStatus" value="#{usuarioBean.usuario.status}" style="width: 100px" required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >                        
+                                <f:selectItem itemLabel="Ativo"  itemValue="true" />
+                                <f:selectItem itemLabel="Inativo"  itemValue="false" />                        
+                            </h:selectOneMenu>
+                            <p:message for="UsuarioStatus" display="icon" />                        
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </p:outputPanel>
+                <p:panel>
+                    <p:outputPanel id="opPerm">
+                        <h:panelGrid columns="3" id="pgAddPerm" >
+                            <h:outputLabel  value="" />   
+                            <h:outputLabel for="UsuarioPermissao" value="Permissões: " />   
+                            <h:outputLabel  value="" />   
+                            <p:commandButton value="+"  process="@this" actionListener="#{permissaoBean.newPermissao}" update=":frmPermissao" oncomplete="dlgPermissao.show()" />
+                            <h:selectOneMenu id="UsuarioPermissao" value="#{usuarioBean.permissao.permissao}" 
+                                             style="width: 100px" required="true" 
+                                             converter="IndexedConverter"
+                                             styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                                <f:selectItem itemLabel="selecione"  noSelectionOption="true" />
+                                <f:selectItems value="#{permissaoBean.selectItems}" />
+                            </h:selectOneMenu>
+                            <p:commandButton process="@this, opPerm" value="incluir" update="dtPerm, :frmUsuario:pgAddPerm,  :messages" action="#{usuarioBean.addPermissao}" />
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    <p:spacer />
+                    <p:outputPanel id="dtPerm">
+                        <p:dataTable value="#{usuarioBean.usuario.permissaos}" var="i" >
+                            <p:column headerText="Permissão">
+                                <h:outputText value="#{i.permissao.nome}"/>
+                            </p:column>
+                            <p:column headerText="ações" >
+                                <p:commandButton value="excluir" immediate="true" process="@this" update="dtPerm"  >
+                                    <p:collector value="#{i}" unique="true"  removeFrom="#{usuarioBean.usuario.permissaos}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                    <p:separator />
+                    <p:column colspan="2">
+                        <p:commandButton process="@this,opUsuario, dtPerm"  update="panelUsuarioInsert,:messages" oncomplete="if(!args.validationFailed){dlgUsuario.hide()}"    actionListener="#{usuarioBean.saveUsuario}" value="Salvar"/>                        
+                                         
+                        <p:commandButton   oncomplete="dlgUsuario.hide();"  immediate="true" update="panelUsuarioInsert,:messages" action="#{usuarioBean.cancelUsuario}" value="Cancelar"/>
+                    </p:column>
+
+                </p:panel>
+            </p:panel>
+        </h:form>
+
+
+    </h:body>
+</ui:component>
+

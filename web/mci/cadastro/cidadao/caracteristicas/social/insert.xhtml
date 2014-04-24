@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+        <h:form id="frminsertbensoc" prependId="false">
+                <h:panelGrid id="panelBeneficioSocialInsert" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="benNome" value="Nome Benefício:" />
+                    <p:inputText id="benNome" value="#{beneficioSocialBean.beneficioSocial.nome}"  size="40" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                     <p:commandButton id="btcidsalvabensocial"  update="panelBeneficioSocialInsert,:frmCid:tabView:tabViewCarac:somItemBenSocial,:messages"  oncomplete="dlgBenSocial.hide();" actionListener="#{beneficioSocialBean.saveBeneficioSocial}" value="Salvar"/>
+                     <p:commandButton   oncomplete="dlgBenSocial.hide();" immediate="true" actionListener="#{beneficioSocialBean.cancelBeneficioSocial}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+</ui:component>
+

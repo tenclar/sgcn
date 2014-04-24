@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        
+    </h:head>
+    <h:body>
+          
+        <h:form id="frmpfext" prependId="false">
+                <h:panelGrid id="panelPontoForteExternoInsert" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="pontoForteExternoNome" value="Nome:" />
+                    <p:inputText id="pontoForteExternoNome" autocomplete="false" value="#{pontoForteExternoBean.pontoForteExterno.nome}" size="60" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    
+                   
+                </h:panelGrid>
+                 <p:column colspan="2">
+                     <p:commandButton  update="panelPontoForteExternoInsert,:frmListapfext:tbPontoForteExterno,:messages"  oncomplete="dlgPontoForteExterno.hide();" actionListener="#{pontoForteExternoBean.savePontoForteExterno}" value="Salvar"/>
+                     <p:commandButton   oncomplete="dlgPontoForteExterno.hide();" immediate="true" actionListener="#{pontoForteExternoBean.cancelPontoForteExterno}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+

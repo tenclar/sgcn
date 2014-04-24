@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+    <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />  
+    <p:dialog modal="false" widgetVar="statusDialog"  width="20"     draggable="false" closable="false" >  
+        <h:graphicImage value="${request.contextPath}/../images/ajax-loader.gif" />  
+    </p:dialog>   
+    <h:form prependId="false" id="frmBuscaBen" >
+        <h:panelGrid  columns="2"  style="width: 100%" >
+            <h:panelGroup>
+                
+                <p:panel header="informações de Visão">
+                 
+
+                        <p:fieldset  legend="Tipo de Relatório">
+                            <h:selectOneRadio  id="tiporel"    >
+                                <f:selectItem itemLabel="resumo"  itemValue="1" />
+                                <f:selectItem itemLabel="Detalhado Geral "   itemValue="2"   />
+                                <f:selectItem itemLabel="Detalhado Especifico " itemValue="3"  />
+                                <p:ajax oncomplete="panelDetalhado.show()"   />
+                            </h:selectOneRadio>
+                        </p:fieldset>
+                    <p:panel   widgetVar="panelDetalhado" visible="false" >
+                    <p:fieldset  legend="Detalhado"      >
+                        <h:selectManyCheckbox id="detalhados"     >
+                                
+                                <f:selectItem itemLabel="Dados Cadastrais"   itemValue="1"   />
+                                <f:selectItem itemLabel="Benefícios Sociais"  itemValue="2"  />
+                                <f:selectItem itemLabel="Benefícios Habitacionais"  itemValue="3" />
+                                <f:selectItem itemLabel="Equipamentos Prórios" />
+                                <f:selectItem itemLabel="Cursos Próprios" />
+                                <f:selectItem itemLabel="Cursos Secretaria" />
+                                <f:selectItem itemLabel="Despesas " />
+                                <f:selectItem itemLabel="Bens Duráveis " />
+                                <f:selectItem itemLabel="Histórico" />
+
+
+                            </h:selectManyCheckbox>
+
+                        </p:fieldset>
+                  </p:panel>
+                </p:panel>
+                <p:panel header="Filtro"   >
+                    <p:fieldset legend="Período">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel for="seldataInicial" value="Data Inicial" />
+                                <h:outputLabel for="seldataFinal" value="Data Final" />
+                                <p:calendar id="seldataInicial" pattern="yyyy/MM/dd" showOn="button" />
+                                <p:calendar id="seldataFinal" pattern="yyyy/MM/dd" />
+                            </h:panelGrid>
+                        </p:fieldset>
+                    <h:panelGrid columns="3" >                       
+                        
+                        <p:fieldset legend="Secretaria" >
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="selBeneficiados" value="Beneficiados" />
+                                <h:outputLabel for="selCursosSec" value="Cursos Secretaria" />
+                                <h:outputLabel for="selEquipSec" value="Equipamentos Secretaria" />
+
+                                <h:selectOneMenu id="selBeneficiados" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="INDIVIDUAL" />                
+                                    <f:selectItem itemValue="S"  itemLabel="COLETIVO" />                
+                                </h:selectOneMenu>                    
+                                <h:selectOneMenu id="selCursosSec"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu>                   
+                                <h:selectOneMenu id="selEquipSec"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu> 
+
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Dados Cadastrais">
+                            <h:panelGrid columns="4">
+                                <h:outputLabel for="selSexo" value="Sexo" />
+                                <h:outputLabel for="selIndigena" value="Indígena" />
+                                <h:outputLabel for="selEstadoCivil" value="Estado Civil" />
+                                <h:outputLabel for="selEscolaridade" value="Escolaridade" />
+                                <h:selectOneMenu id="selSexo"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="M"  itemLabel="M"   />
+                                    <f:selectItem itemValue="F"  itemLabel="F" />                
+                                </h:selectOneMenu> 
+                                <h:selectOneMenu id="selIndigena" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="SIM"  itemLabel="S"   />
+                                    <f:selectItem itemValue="NAO"  itemLabel="N" />                
+                                </h:selectOneMenu> 
+                                <h:selectOneMenu id="selEstadoCivil"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="C"  itemLabel="Casado"   />
+                                    <f:selectItem itemValue="S"  itemLabel="Solteiro" />                
+                                </h:selectOneMenu> 
+                                <h:selectOneMenu id="selEscolaridade"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="C"  itemLabel="Casado"   />
+                                    <f:selectItem itemValue="S"  itemLabel="Solteiro" />                
+                                </h:selectOneMenu> 
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Endereço" >
+                            <h:panelGrid columns="2"  >
+
+                                <h:outputLabel for="selCidade" value="Cidade" />
+                                <h:outputLabel for="selBairro" value="Bairro" />                        
+                                <h:selectOneMenu id="selCidade"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="C"  itemLabel="Rio Branco"   />
+                                    <f:selectItem itemValue="S"  itemLabel="Cruzeiro do Sul" />                
+                                </h:selectOneMenu>                   
+                                <h:selectOneMenu id="selBairro"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="C"  itemLabel="Centro"   />
+                                    <f:selectItem itemValue="S"  itemLabel="Caladinho" />                
+                                </h:selectOneMenu> 
+                            </h:panelGrid>
+                        </p:fieldset>
+                    </h:panelGrid>
+                    <h:panelGrid>
+                        <p:fieldset legend="Caracteristicas" >
+                            <h:panelGrid columns="5">
+                                <h:outputLabel for="selAtividades" value="Atividades" />
+                                <h:outputLabel for="selCursos" value="Cursos Próprios" />
+                                <h:outputLabel for="selEquipPro" value="Equipamentos Próprios" />
+                                <h:outputLabel for="selBenSociais" value="Beneficios Sociais" />
+                                <h:outputLabel for="selBenHabits" value="Beneficios Habitacionais" />
+                                <h:selectOneMenu id="selAtividades" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÂO" />                
+                                </h:selectOneMenu>                    
+                                <h:selectOneMenu id="selCursos"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu>                   
+                                <h:selectOneMenu id="selEquipPro"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu> 
+                                <h:selectOneMenu id="selBenSociais"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu> 
+                                <h:selectOneMenu id="selBenHabits"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                                    <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                    <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                    <f:selectItem itemValue="S"  itemLabel="NÃO" />                
+                                </h:selectOneMenu> 
+                            </h:panelGrid>
+                        </p:fieldset>
+
+
+                    </h:panelGrid>
+
+
+
+                </p:panel>
+            </h:panelGroup>           
+
+
+            <p:commandButton  style="width: 100px; height: 120px;"  icon="ui-icon-search" value="pesquisar"  /> 
+
+        </h:panelGrid>
+        <!--         <f:facet name="header">  
+                            <h:panelGrid columns="2">
+                                <h:panelGroup style="float:left;"  >
+                                    <h:outputText value="Busca: " />  
+                                    <p:inputText   style="width:500px" />  <p:commandButton type="button" onclick="tbConsulta.filter()" icon="ui-icon-search" /> 
+                                </h:panelGroup>
+                                <p:commandButton icon="ui-icon-print" process="@this"  title="Todos" ajax="false" immediate="true" onclick="this.form.target='_blank'" style="float:right;"  />
+                            </h:panelGrid>
+                        </f:facet>-->
+
+        <p:outputPanel id="cptabela" >
+            <p:dataTable  var="item" value="#{dados}"  paginator="true" rendered="#{not empty dados}"  widgetVar="tbConsulta"
+                          paginatorAlwaysVisible="false" rows="8"   selectionMode="single"  style="text-align: left;"
+                          rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+
+                <p:column headerText="id" >                    
+                    <h:outputText value="#{item}" />
+                </p:column>
+                <p:column headerText="CPF" >                    
+                    <h:outputText value="#{item}" />
+                </p:column>
+                <p:column headerText="Nome:"   >
+                    <h:outputText value="#{item}"/>
+                </p:column>                       
+                <p:column  headerText="Indígena" >                    
+                    <h:outputText value="#{item}"/>
+                </p:column>                                     
+                <p:column  headerText="Telefone" >                    
+                    <h:outputText value="Residencial: #{item}" /> <br/>
+                    <h:outputText value="Celular: #{item}"/>
+                </p:column>  
+                <p:column  headerText="ações" style=" text-align: center; width: 210px" >     
+                    <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true"  title="imprimir" >
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+    </h:form>
+</ui:component>
+

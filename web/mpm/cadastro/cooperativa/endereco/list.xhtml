@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+          
+          
+    <h:form prependId="false" id="frmBuscaEndCid" >
+        <p:focus for="itBuscaend" />
+        <p:outputPanel  id="opBuscaEnd" >  
+            <p:outputPanel  id="opBuscaEndInsert" > 
+                <h:panelGrid columns="5">
+                    <h:outputLabel  value="UF: " />                    
+                    <h:outputLabel  value="Cidade: " />     
+                    <h:outputLabel  value="Bairro / Ramal: " />    
+                    <h:outputLabel  value="" />    
+                    <h:outputLabel  value="" />    
+                    <h:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
+                        <f:selectItems value="#{enderecoBean.selectItemsEstado}" />
+                        <p:ajax update="endbuscacid, endbuscabairro" listener="#{enderecoBean.handlePesquisaEstadoChange}" />
+                    </h:selectOneMenu>
+
+                    <h:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                        <f:selectItems value="#{enderecoBean.selectItemsCidade}" />
+                        <p:ajax update="endbuscabairro" listener="#{enderecoBean.handlePesquisaCidadeChange}" />
+                    </h:selectOneMenu>
+
+                    <h:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                                     converter="IndexedConverter"   >
+
+                        <f:selectItems value="#{enderecoBean.selectItemsBairro}" />                            
+                    </h:selectOneMenu> 
+                    <p:commandButton id="itBuscaend" tabindex="0"   process="opBuscaEnd" actionListener="#{enderecoBean.buscaEnderecoDetalhado}" update="opBuscaEndInsert, listaloc,:messages" icon="ui-icon-search" /> 
+                    <p:commandButton process="@this" tabindex="2" value="+"  oncomplete="dlgEndereco.show()" update=":frmLoc" action="#{enderecoBean.newEnd(enderecoBean.pesquisaEstado,enderecoBean.pesquisaCidade,enderecoBean.buscaendereco)}" />
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" >
+                    <h:outputText value="logradouro: " />  
+                    <p:inputText  value="#{enderecoBean.buscaendereco}"  style="width:360px" onkeyup="this.value = this.value.toUpperCase();" required="true"  requiredMessage="Campo em Branco" label="Campo de Busca" >
+                        <f:validateLength minimum="3" />
+                    </p:inputText>
+
+
+                </h:panelGrid>
+
+
+
+                <p:messages id="ms" showDetail="true" />
+            </p:outputPanel> 
+        </p:outputPanel> 
+
+
+        <p:outputPanel id="listaloc">
+
+            <p:dataTable id="dtListaEndereco" var="item" value="#{enderecoBean.dataModelListaEndereco}"  
+                         style=" text-align: center;" paginatorPosition="bottom"
+                         pageLinks="5" selection="#{planoBean.plano.endereco}"
+                         paginator="true"  paginatorAlwaysVisible="false" rows="10" 
+                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+                <p:column selectionMode="single"/>
+                <p:column style="text-align: center;" headerText="CEP">                                                    
+                    <h:outputText value="#{item.cep}" />
+                </p:column  >
+                <p:column style="text-align: center;" headerText="logradouro" >                      
+                    <h:outputText value="#{item.logradouro}"/>
+                </p:column>                       
+                <p:column style="text-align: center;" headerText="bairro" >                       
+                    <h:outputText value="#{item.bairro.nome}"/>
+                </p:column>                      
+                <p:column style="text-align: center;" headerText="Cidade" >                       
+                    <h:outputText value="#{item.bairro.cidade.nome}"/>
+                </p:column>                       
+                <p:column style="text-align: center;" headerText="Estado" >                       
+                    <h:outputText value="#{item.bairro.cidade.estado.sigla}"/>
+                </p:column>  
+<!--                <p:column style="text-align: center;" headerText="ações" styleClass="actions" >                       
+                    <p:commandButton id="selectButton"  action=" # {enderecoBean.enderecoClear}" value="selecionar" process="@this, listaloc"  oncomplete="dlgBuscaEnd.hide();" 
+                                     update="cidEnd,cidEnd2,frmBuscaEndCid"   >  
+                        <f:setPropertyActionListener value=" # {item}" target=" # {cidadaoBean.cidadao.endereco}"  />  
+                    </p:commandButton>  
+                </p:column>-->
+            </p:dataTable>
+            <p:separator />
+            <p:commandButton   action="#{enderecoBean.enderecoClear}" value="selecionar"   oncomplete="dlgBuscaEnd.hide();document.getElementById('planonum').focus();" 
+                                     update="frmBuscaEndCid, :frmPlano:tabGeral:planoEnd, :frmPlano:tabGeral:planoEnd2"   >  
+                         
+                    </p:commandButton> 
+        </p:outputPanel >
+    </h:form>
+</ui:component>
+

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <h:form  prependId="false" id="frmCidBensDuraveis" >
+
+            <p:fieldset legend="Histórico Bens Duráveis">
+                <p:outputPanel id="opData">
+                    <p:outputPanel id="opInsert">
+                        <h:panelGrid  columns="2"  >
+                            <h:outputLabel for="cidDataBens" value="Data: " styleClass="titulos" />
+                            <p:message for="cidDataBens" display="icon"  /> 
+                        </h:panelGrid>
+                        <p:calendar id="cidDataBens" value="#{planoBean.cidBensDuraveis.dataadd}" locale="pt_BR"  showOn="button"  size="11" required="true"    pattern="dd/MM/yyyy" >
+                            
+                        </p:calendar>
+                    </p:outputPanel>
+                </p:outputPanel>
+                <p:separator />
+                <p:panel id="panelCidBensDuravies" >
+
+                    <h:panelGrid id ="panelGridBensDuraveis" columns="4"   >
+
+                        <h:panelGrid  columns="2"  >
+                            <h:outputLabel for="cidSelBemDuravel" value="Lista de Bens: " styleClass="titulos" />
+                            <p:message for="cidSelBemDuravel" display="icon"  /> 
+                        </h:panelGrid>
+                        <h:panelGrid  columns="2"  >
+                            <h:outputLabel for="cidBensValor" value="Valor: " styleClass="titulos" />
+                            <p:message for="cidBensValor" display="icon"  /> 
+                        </h:panelGrid>
+                        <h:outputLabel value="" />
+                        <h:outputLabel value="" />
+
+                        <h:selectOneMenu id="cidSelBemDuravel" label="Bens" value="#{planoBean.bensDuraveis.bemDuravel}" converter="IndexedConverter" required="true" style="width:120px" styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />                            
+                            <f:selectItems value="#{cidadaoBean.selectItemsBemDuravel}" />
+                        </h:selectOneMenu>
+                        <p:inputText label="valor" size="10" id="cidBensValor" value="#{planoBean.bensDuraveis.valor}" onkeypress="mascara(this, valor)" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </p:inputText>  
+                        <p:commandButton value="Inserir" process="panelCidBensDuravies" update="panelGridBensDuraveis,dtBensDuraveis, :messages" actionListener="#{planoBean.addBemDuravel}" />
+                        <p:commandButton value="+" process="@this" update=":frmBemDuravel" actionListener="#{bemDuravelBean.newBemDuravel}" oncomplete="dlgBemDuravel.show()"/>                                    
+
+                    </h:panelGrid>
+                    <p:outputPanel  id="dtBensDuraveis" >
+                        <p:dataTable  value="#{planoBean.cidBensDuraveis.bensduraveis}" var="sub" >
+                            <p:column   headerText="Bem" >
+                                <h:outputText value="#{sub.bemDuravel.nome}" />
+                            </p:column>
+                            <p:column   headerText="Valor" >
+                                <h:outputText value="#{sub.valor}" >
+                                     <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                            </p:column>
+                            <p:column style="width: 80px;text-align: center" headerText="ações" >
+                                <p:commandButton icon=" ui-icon-close" update="dtBensDuraveis" process="@this"   >
+                                    <p:collector value="#{sub}"  unique="true" removeFrom="#{planoBean.cidBensDuraveis.bensduraveis}" />
+                                </p:commandButton>                                        
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:panel>
+                <p:column colspan="2">
+                    <p:commandButton process="@this, opData" update="opInsert,:frmPlano:tabGeral:tabIdent:tabInfoResp:tbCidBensDuraveis,:messages" oncomplete="if(!args.validationFailed){dlgCidBensDuraveis.hide();}" action="#{planoBean.saveCidBensDuraveis}" value="Salvar"/>
+                    <p:commandButton   oncomplete="dlgCidBensDuraveis.hide();"  immediate="true"  value="Cancelar" update=":frmCidBensDuraveis,:messages"  action="#{planoBean.cancelCidBensDuraveis()}" />
+                </p:column>
+            </p:fieldset>
+        </h:form>
+
+    </h:body>
+</html>
+

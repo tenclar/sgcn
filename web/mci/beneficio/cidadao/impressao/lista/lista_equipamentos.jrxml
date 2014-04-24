@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="termo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc02909f-dbca-43ad-84c1-4f073afc449e">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+
+     cidade.`nome` AS cidade_nome,
+     cidadao.`nome` AS cidadao_nome,
+     cidadao.`cpf` AS cidadao_cpf,
+     cidadao.`numero` AS cidadao_numero,
+     cidadao.`nis` AS cidadao_nis,
+     cidadao.`expedidor` AS cidadao_expedidor,
+     endereco.`cep` AS endereco_cep,
+     endereco.`complemento` AS endereco_complemento,
+     endereco.`logradouro` AS endereco_logradouro,
+     bairro.`nome` AS bairro_nome,
+     mci_equipamentossecretaria.`estado` AS mci_equipamentossecretaria_estado,
+     mci_equipamentossecretaria.`patrimonio` AS mci_equipamentossecretaria_patrimonio,
+     mci_equipamentossecretaria.`quantidade` AS mci_equipamentossecretaria_quantidade,
+     mci_equipamentossecretaria.`valor` AS mci_equipamentossecretaria_valor,
+     mci_equipamentossecretaria.`dataentrega` AS mci_equipamentossecretaria_dataentrega,
+     mci_equipamentossecretaria.`codgrp` AS mci_equipamentossecretaria_codgrp,
+     mci_equipamentossecretaria.`tipoequipamento` AS mci_equipamentossecretaria_tipoequipamento,
+     mci_equipamento.`nome` AS mci_equipamento_nome
+
+FROM
+	`cidadao` cidadao
+    INNER JOIN `endereco` endereco ON cidadao.`endereco_id` =  endereco.`id`
+     INNER JOIN `bairro` bairro ON endereco.`bairro_id` = bairro.`id`
+     INNER JOIN `cidade` cidade ON bairro.`cidade_id` = cidade.`id`
+     INNER JOIN `mci_equipamentossecretaria` mci_equipamentossecretaria ON cidadao.`id` = mci_equipamentossecretaria.`cidadao_id`
+     INNER JOIN `mci_equipamento` mci_equipamento ON mci_equipamentossecretaria.`equipamento_id` = mci_equipamento.`id`
+where cidadao.tipopessoa = 'CID' and cidadao.benstatus = 'INDIVIDUAL'
+group by  cidade.nome,cidadao.nome
+order by cidade.nome asc]]>
+	</queryString>
+	<field name="cidade_nome" class="java.lang.String"/>
+	<field name="cidadao_nome" class="java.lang.String"/>
+	<field name="cidadao_cpf" class="java.lang.String"/>
+	<field name="cidadao_numero" class="java.lang.String"/>
+	<field name="cidadao_nis" class="java.lang.Long"/>
+	<field name="cidadao_expedidor" class="java.lang.String"/>
+	<field name="endereco_cep" class="java.lang.String"/>
+	<field name="endereco_complemento" class="java.lang.String"/>
+	<field name="endereco_logradouro" class="java.lang.String"/>
+	<field name="bairro_nome" class="java.lang.String"/>
+	<field name="mci_equipamentossecretaria_estado" class="java.lang.String"/>
+	<field name="mci_equipamentossecretaria_patrimonio" class="java.lang.String"/>
+	<field name="mci_equipamentossecretaria_quantidade" class="java.lang.Integer"/>
+	<field name="mci_equipamentossecretaria_valor" class="java.lang.Double"/>
+	<field name="mci_equipamentossecretaria_dataentrega" class="java.sql.Date"/>
+	<field name="mci_equipamentossecretaria_codgrp" class="java.lang.String"/>
+	<field name="mci_equipamentossecretaria_tipoequipamento" class="java.lang.String"/>
+	<field name="mci_equipamento_nome" class="java.lang.String"/>
+	<group name="cidade" isStartNewColumn="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{cidade_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<frame>
+					<reportElement uuid="df1d128b-cac4-40fb-8836-c4b29196eb06" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="38fccb1a-4db1-423a-8bd2-462a9dc8034c" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="4a781a2f-cbc2-4b97-b88b-b17c3acce90f" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cidade_nome}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="2"/>
+		</groupFooter>
+	</group>
+	<group name="cidadao">
+		<groupExpression><![CDATA[$F{cidadao_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="44935f90-f006-4c58-b645-0c6e03af30ea" style="Detail" x="47" y="1" width="394" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="b71c8249-96eb-4ea0-bd4d-1a216e42b627" style="Detail" x="477" y="1" width="78" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_cpf}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="40cb7948-764d-4733-ad14-33d770c52722" style="Column header" x="1" y="1" width="46" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6b29a755-a30f-43f5-ab68-e7ee9138b21f" style="Column header" x="441" y="1" width="36" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[CPF:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b8b19506-d59c-464d-b133-723888c77318" style="Column header" x="1" y="15" width="35" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[End.:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="49aa2086-e267-47ad-bab8-aab8062c61e4" style="Detail" x="36" y="16" width="336" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{endereco_logradouro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="23d4c149-a188-4e92-b78e-c1df9709ffed" style="Detail" x="389" y="16" width="27" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cidadao_numero}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="1fca5172-2ffb-495d-b6c3-24fd61d4bbcc" style="Column header" x="419" y="16" width="45" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[Bairro:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="11d3da8e-2740-4264-af43-3982c7066840" style="Detail" x="464" y="15" width="91" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{bairro_nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ce901f2b-a280-44eb-b3ab-56b5e3915ba7" style="Column header" x="448" y="34" width="35" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Estado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f3dfee7d-4a97-4a89-9549-89ed2a1e1068" style="Column header" x="1" y="34" width="46" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Patromônio]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0c651e4a-5e83-486b-bc69-7cf9f349192d" style="Column header" x="104" y="34" width="229" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d16cbd53-6294-4815-9aa5-9de11b8c8347" style="Column header" x="333" y="34" width="49" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Entrega]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="411c7fca-f9e0-478b-9867-938bc4fd4a17" style="Column header" x="382" y="34" width="21" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[QTD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="faca76a4-e62b-465b-9fbd-148375269009" style="Column header" x="403" y="34" width="45" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Valor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3df973bd-1813-4d0d-bdc5-d37e18a6dd7f" style="Column header" x="47" y="34" width="57" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[GRP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8cb6f077-f993-4151-a752-f77da6167521" style="Column header" x="483" y="34" width="72" height="15" forecolor="#736343"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6b29a755-a30f-43f5-ab68-e7ee9138b21f" style="Column header" x="372" y="16" width="17" height="15" forecolor="#736343"/>
+					<textElement/>
+					<text><![CDATA[nº]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="1" y="34" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="0" y="48" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="10"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="97" splitType="Stretch">
+			<image>
+				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="10" y="15" width="64" height="64"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="145" y="5" width="265" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="145" y="21" width="265" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="138" y="37" width="278" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="105" y="53" width="344" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EQUIPAMENTOS DE BENEFICIÁRIOS INDIVIDUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="281280b1-8860-467f-a7c4-284ab300ccda" x="105" y="69" width="344" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POR CIDADE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch">
+			<line>
+				<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Immediate">
+			<frame>
+				<reportElement uuid="f11329d5-d5ff-444c-81e9-5c268f2e6cdd" style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="cef4f092-232d-47bf-b10c-e1b98ffabe0f" style="Detail" stretchType="RelativeToBandHeight" x="448" y="0" width="35" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_estado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1807ae28-ad51-4ada-af6b-ccb661469e9e" style="Detail" stretchType="RelativeToBandHeight" x="1" y="0" width="46" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_patrimonio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c0033f5e-328d-450d-a993-fe1904992ccf" style="Detail" stretchType="RelativeToBandHeight" x="382" y="0" width="21" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+					<reportElement uuid="e1876765-aa11-4bec-b789-481353acd66f" style="Detail" stretchType="RelativeToBandHeight" x="403" y="0" width="45" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_valor}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="9c89249b-47de-4a24-a221-6dd8c7ec3510" style="Detail" stretchType="RelativeToBandHeight" x="333" y="0" width="49" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_dataentrega}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="14901009-5779-4f2a-a9b7-cd1bedc3ffa6" style="Detail" stretchType="RelativeToBandHeight" x="47" y="0" width="57" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_codgrp}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d972851e-61bf-42a5-b050-049296be7e34" style="Detail" stretchType="RelativeToBandHeight" x="483" y="0" width="71" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamentossecretaria_tipoequipamento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="cf2e8e55-c551-4b7b-b77f-810a08381862" style="Detail" stretchType="RelativeToBandHeight" x="104" y="0" width="229" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mci_equipamento_nome}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="8639ab5c-68f3-47c4-b9f0-081fbaef9c20" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="82f5cc36-334b-4358-9be6-bfa4dda94dce" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="6268b16e-c0ff-4f3d-8acc-22a4f9fef54a" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="5b3477e0-289f-44b9-b44c-38f44f2cab2c" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="bb6020b0-a567-479f-baad-74d174997514" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

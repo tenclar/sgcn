@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <h:head>
+        <script type="text/javascript">  
+            
+               function handleComplete(args){                    
+                      if(!args.validationFailed){
+                         if(args.success==true) {
+                         
+                         dlgCoopNew.hide();    
+                         cooplist.close();
+                         coopins.show();
+                         document.getElementById('coopie').focus();
+                         }
+                     }                 
+                  
+              }
+              
+  
+                
+           </script>  
+        
+    </h:head>
+  <h:body>
+      
+        <h:form id="frmCoopNew"  prependId="false">                
+            <p:focus for="coopnewcnpj"  />
+            <p:fieldset legend="Identificação da Empresa ">
+                <p:messages showDetail="true" />
+                <h:panelGrid id="panelCoopInsert" columns="2" style="margin-bottom:10px">
+                    <h:panelGrid  columns="2">
+                        <h:outputLabel for="coopnewcnpj"  value="CNPJ: "  /><p:message for="coopnewcnpj" display="icon"  />
+                    </h:panelGrid>
+                     <h:panelGrid  columns="2">      
+                        <h:outputLabel for="coopnewnome" value="Nome: "  /><p:message for="coopnewnome" display="icon"  />                        
+                     </h:panelGrid>
+                    <p:inputText id="coopnewcnpj" autocomplete="false" onkeypress="mascara(this,soNumeros)"   value="#{cooperativaBean.cooperativa.cpf}" size="21"   required="true" label="CNPJ" >
+                         
+                        </p:inputText>
+                    <p:inputText id="coopnewnome" autocomplete="false" value="#{cooperativaBean.cooperativa.nome}" size="80"   required="true" label="Nome"
+                                 onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase();"  />                                       
+                </h:panelGrid>
+                <p:column colspan="2">
+                    <p:commandButton  update="@this panelCoopInsert :frmCoop :messages" oncomplete="handleComplete(args)"  actionListener="#{cooperativaBean.saveCoopNew}" value="Salvar"/>
+                    <p:commandButton   oncomplete="dlgCoopNew.hide();tbView.select(0);" immediate="true"  value="Cancelar" action="#{cooperativaBean.cancelCoop}" />
+                </p:column>
+            </p:fieldset  >                      
+        </h:form>
+    </h:body>
+</ui:component>
+

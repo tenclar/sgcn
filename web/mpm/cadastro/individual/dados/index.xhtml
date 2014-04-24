@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:fieldset id="fieldident"  legend="Identificação do Empreendimento">
+        <p:outputPanel id="outIdent">
+            <h:panelGroup  id="panelIdent" >
+                <h:panelGrid columns="2" >
+                    <h:outputLabel for="planoEmpNome" value="Nome do Empreendimento:"  />   
+                    <p:message for="planoEmpNome" display="icon"  />
+                </h:panelGrid> 
+                <p:inputText id="planoEmpNome" autocomplete="off" value="#{planoBean.plano.nomeempreendimento}" size="120"   required="true" onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase();"  requiredMessage="Nome do Empreendimento" />                                       
+                <h:panelGrid columns="2" id="panelAtividadepCom" >
+                    <h:panelGroup>
+                        <h:panelGrid  columns="2">
+                            <h:outputLabel for="planolistaAtividade"  value="Atividade: "  />     
+                            <p:message for="planolistaAtividade" display="icon"  />
+                        </h:panelGrid>  
+                        <h:selectOneMenu id="planolistaAtividade"  style="min-width: 300px" value="#{planoBean.plano.atividade}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" requiredMessage="Atividade não Selecionada" >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{atividadeEmpBean.selectItems}" />
+                        </h:selectOneMenu>      
+                        <p:commandButton value="+" oncomplete="dlgAtividadeEmp.show()" process="@this" action="#{atividadeEmpBean.newAtividade}" update=":frmAtividade" /> 
+
+                    </h:panelGroup>
+                    <h:panelGroup id="pCom">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value= "Ponto Comercial: " />
+                            <p:message for="planListaPonto" display="icon" />                                        
+                        </h:panelGrid>   
+                        <h:selectOneMenu id="planListaPonto" style="min-width: 300px"   value="#{planoBean.plano.pontocomercial}"  converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Ponto Comercial" requiredMessage="Ponto Comercial: item não Selecionado"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true"  />
+                            <f:selectItems  value="#{pontoComercialBean.selectItemsPontoComercial}"  />
+                        </h:selectOneMenu>
+                        <p:commandButton value="+" oncomplete="dlgPontoComercial.show()" process="@this" action="#{pontoComercialBean.newPontoComercial}" update=":frmComercial" /> 
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGroup id="panelGProjetos">
+                <h:panelGrid  columns="2">
+                    <h:outputLabel for="planolistaProjetos"  value="Projeto: "  />     
+                    <p:message for="planolistaProjetos" display="icon"  />
+                </h:panelGrid>  
+                <h:selectOneMenu id="planolistaProjetos"  style="min-width: 300px" value="#{planoBean.plano.projeto}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" requiredMessage="Projeto não selecionado" >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{projetoBean.selectItemsProjeto}" />
+                </h:selectOneMenu>                                       
+                <p:commandButton  value="+" oncomplete="dlgProjeto.show()" process="@this" action="#{projetoBean.newProjeto}" update=":frmProjeto" /> 
+                </h:panelGroup>                
+                
+                <h:panelGroup>
+                    <fieldset>
+                        <legend>Responsável Acompanhamento </legend>
+                        <h:panelGroup id="planAcp"> 
+                            <h:outputLabel for="planoRespEmpAcomp" value="Nome: "  />
+                            <p:inputText id="planoRespEmpAcomp"  value="#{planoBean.plano.responsavel.nome}" size="80" readonly="true" disabled="true"  label="Nome"  style="background: #e8e1b5; color: #023401"    />                                                                       
+                            <h:outputLabel for="planoTelRespEmpAcomp" value="Telefone: "  />                          
+                            <p:inputText id="planoTelRespEmpAcomp"  value="#{planoBean.plano.responsavel.telefone}" size="20" readonly="true" disabled="true"  label="Telefone"  style="background: #e8e1b5;color: #023401"    />                                       
+                            <p:commandButton  process="@this" icon="-search" oncomplete="dlgResp.show()" update=":frmListaAcp"  title="Busca"  /> 
+                            <p:message for="planoRespAcompHidden" showDetail="true" />
+                            <h:inputHidden value="#{planoBean.plano.responsavel.nome}" required="true" id="planoRespAcompHidden" requiredMessage="Responsável Acompanhamento não selecionado" />                                
+                        </h:panelGroup>   
+                    </fieldset>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup>
+                <fieldset>
+                    <legend>Endereço</legend>
+
+                    <h:panelGrid columns="2">
+                        
+                        <p:commandButton value="Localizar" process="@this"  icon="-search" update=":frmBuscaEndCid" onclick="dlgBuscaEnd.show()"  /> 
+                    </h:panelGrid>
+                    <h:panelGrid columns="3" id="planoEnd"  >
+                        <h:outputLabel for="planologr" value="Logradouro: " styleClass="titulos" />                                      
+                        <h:outputLabel for="planouf" value="UF: " styleClass="titulos" />
+                        <h:outputLabel for="planocid" value="Cidade: " styleClass="titulos"  />                                                                                      
+                        <p:inputText  readonly="true" disabled="true" id="planologr" value="#{planoBean.plano.endereco.logradouro}" size="80" />
+                        <p:inputText readonly="true"  disabled="true" id="planouf"  value="#{planoBean.plano.endereco.bairro.cidade.estado.sigla}" style="background: #e8e1b5; color: #023401" size="6"  />
+                        <p:inputText readonly="true"  disabled="true" id="planocid" value="#{planoBean.plano.endereco.bairro.cidade.nome}" style="background: #e8e1b5; color: #023401"   />                                     
+                    </h:panelGrid>
+                    <h:panelGrid columns="4" id="planoEnd2">
+                        <h:outputLabel for="planobairro"  value="Bairro / Ramal: " styleClass="titulos" />
+                        <h:outputLabel for="planozona" value="Zona:" styleClass="titulos"  />   
+                        <h:panelGrid  columns="2">
+                            <h:outputLabel for="planonum"  value="Número " styleClass="titulos"  />     
+                            <p:message for="planonum" display="icon"  />
+                        </h:panelGrid>                                                           
+                        <h:outputLabel  value=""   />   
+                        <p:inputText readonly="true"  disabled="true" id="planobairro" value="#{planoBean.plano.endereco.bairro.nome}" style="background: #e8e1b5; color: #023401"  />
+                        <p:inputText readonly="true"  disabled="true" id="planozona"  value="#{planoBean.plano.endereco.bairro.zona}" style="background: #e8e1b5; color: #023401" />                        
+                        <p:inputText  id="planonum"  value="#{planoBean.plano.endnum}" onkeypress="mascara(this,soNumeros)"  >
+                            <f:convertNumber minIntegerDigits="1" type="number"  />
+                        </p:inputText>
+                        <h:panelGrid  columns="2">
+                            <h:inputHidden id="endlogr" value="#{planoBean.plano.endereco.logradouro}" required="true" requiredMessage="Endereço não Localizado"  />     
+                            <p:message for="endlogr"   />
+                        </h:panelGrid> 
+
+                    </h:panelGrid>
+
+                </fieldset> 
+            </h:panelGroup>
+            <h:panelGroup>
+                <fieldset>
+                    <legend>Histórico do Negócio</legend>
+                    <ui:include src="../historico/list.xhtml" />
+                    <p:message for="txtHist" />
+                    <p:inputTextarea id="txtHist" value="#{planoBean.plano.historico}" autoResize="false" style="background: #e8e1b5;;width:98%;height: 150px; margin: 0 auto;" readonly="true" disabled="true" label="Histórico do Negócio" />
+                </fieldset>
+            </h:panelGroup>
+            <p:messages id="msgs" />
+        </p:outputPanel> 
+    </p:fieldset  >
+    <p:separator />                
+    <p:commandButton value="voltar" process="@this" immediate="true"  update="tabIdent" oncomplete="tabIdent.select(0);tabPlanBenef.select(1);tabInfoResp.select(2);" />                        
+    <p:commandButton value="avançar" process="@this, tabIdent:fieldident" update="tabIdent:fieldident, panelIdent, panelAtividadepCom, panelGProjetos, planAcp, tabIdent:planoEnd, tabIdent:planoEnd2, msgs, :messages, :frmPlano:tabGeral" action="#{planoBean.saveProx()}"  oncomplete="if(args.validationFailed){tabGeral.select(0);tabIdent.select(1);}else{tabGeral.select(1);}" />
+
+
+</ui:component>
+

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core"
+       >
+    
+     <p:fieldset id="fieldSecretaria" legend="Equipamentos"  style="margin: 0 auto;" >
+                        
+                        <p:outputPanel id="panelEquipSecr" >
+                        <p:panel    >                            
+                            
+                            <p:outputPanel id="dtEquipSecr" >
+                                <p:dataTable  value="#{planoBean.plano.cidadao.equipamentossecretarias}" var="item"  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Lista de Equipamento da Secretaria" />
+                                    </f:facet>
+                                    <p:column  headerText="Equipamento" >                                                     
+
+                                        <h:outputText value="#{item.equipamento.nome}" />
+                                    </p:column>
+                                    <p:column  headerText="uso" >                                                                      
+
+                                        <h:outputText value="#{item.patrimonio}" />
+                                    </p:column>
+                                    <p:column  headerText="Estado" >
+                                        <h:outputText value="#{item.estado}" />
+                                    </p:column>
+                                    <p:column  headerText="Estado" >
+                                        <h:outputText value="#{item.valor}" />
+                                    </p:column>
+
+<!--                                    <p:column style="width: 80px;text-align: center" headerText="Ações" >
+                                                                               
+                                        <p:commandButton icon=" ui-icon-close"  process="@this"  update="dtEquipSecr"  >
+
+                                            <p:collector value="# {item}" removeFrom="# {planoBean.plano.cidadao.equipamentossecretarias}"  />
+                                        </p:commandButton>
+                                    </p:column>-->
+
+                                </p:dataTable>
+                            </p:outputPanel> 
+                        </p:panel>  
+                            </p:outputPanel>
+                    </p:fieldset>    
+</html>
+

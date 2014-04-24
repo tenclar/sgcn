@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:panel   > 
+        <p:fieldset legend="Equipamentos da Secretaria">
+            <p:commandButton value="adicionar" process="@this" update=":frmNewEquip" oncomplete="dlgEquipNew.show()" action="#{beneficiadoBean.equipSecrNew()}" />
+            <p:outputPanel id="tbEquip" >                 
+                <p:dataTable value="#{beneficiadoBean.cidadao.equipamentossecretarias}"  var="at"  
+                              paginator="true"  
+                              paginatorAlwaysVisible="false" rows="8"  
+                              rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
+                    <p:column style="width: 250px"  headerText="Data" >                                
+                        <h:outputText value="#{at.dataentrega}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>                    
+                    </p:column>
+                    <p:column style="width: 250px"  headerText="Equipamento" >                              
+                                <h:outputText value="#{at.equipamento.nome}" />
+                    </p:column>
+                     <p:column  style="width: 100px" headerText="Tipo" >                                                        
+                         <h:outputText value="#{at.tipoequipamento}" />                                                                                                
+                    </p:column>
+                    <p:column  style="width: 100px" headerText="Quantidade"  >                                                        
+                        <h:outputText value="#{at.quantidade}" />                                                                                                
+                    </p:column>
+                    <p:column  style="width: 80px" headerText="Patrimônio" >                                
+                                <h:outputText value="#{at.patrimonio}" />                                                              
+                    </p:column>
+                    <p:column  style="width: 80px" headerText="GRP" >                                                        
+                                <h:outputText value="#{at.codgrp}" />                                                                                                
+                    </p:column>
+                   
+                    <p:column  style="text-align: center;width: 80px" headerText="Estado" >                                
+                        
+                                <h:outputText value="#{at.estado}"  />                                                                 
+                            
+
+                    </p:column>
+                    <p:column  style="text-align: center;width: 80px" headerText="Valor" >                                
+                        
+                                <h:outputText value="#{at.valor}"  >                            
+                                    <f:convertNumber pattern="##,##0.00#"  />
+                                </h:outputText>
+                            
+                        
+                    </p:column>
+                       
+                    <p:column style="text-align: center;width: 20px" headerText="ações" >            
+                        <p:commandButton icon="ui-icon-refresh" process="@this"   update=":frmNewEquip" oncomplete="dlgEquipNew.show()" action="#{beneficiadoBean.editEquip()}"    >
+                            <f:setPropertyActionListener value="#{at}" target="#{beneficiadoBean.equipamentosecretaria}" />
+                        </p:commandButton>                                                                                       
+                        <p:commandButton icon="ui-icon-close"  immediate="true"  oncomplete="confirmation.show()"    >
+                            <f:setPropertyActionListener value="#{at}" target="#{beneficiadoBean.equipamentosecretaria}" />
+                        </p:commandButton>                                                                                       
+                    </p:column>
+                    
+                </p:dataTable>
+            </p:outputPanel>
+        </p:fieldset>
+    </p:panel>
+
+
+
+
+</html>
+

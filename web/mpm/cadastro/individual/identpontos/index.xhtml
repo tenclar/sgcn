@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:tabView id="tabPontos" widgetVar="tabPontos">
+            <p:tab title="Fracos Internos" id="tabDados" >
+                <p:outputPanel id="panelPfi" >
+                    <h:panelGrid id="insPanelPfi" columns="3"  >
+                        <h:outputLabel value=" " />
+                        <h:panelGrid columns="2">                                        
+                            <h:outputLabel value="Fraquezas: " />                                        
+                            <p:message for="planolistaPfi" display="icon"  />                                        
+                        </h:panelGrid>                                    
+                        <h:outputLabel value=" " />
+                        <p:commandButton value="+" oncomplete="dlgPontoFracoInterno.show()" process="@this" actionListener="#{pontoFracoInternoBean.newPontoFracoInterno}" update=":frmpfrin" /> 
+                        <h:selectOneMenu id="planolistaPfi"  style="width: 140px" value="#{planoBean.pontosfracosinternos.pontofracointerno}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista de Pontos Fracos Internos"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{pontoFracoInternoBean.selectItemsPontoFracoInterno}" />
+                        </h:selectOneMenu>                                  
+                        <p:commandButton value="Inserir" process="panelPfi" update="tabPontos:dtPfi, insPanelPfi :messages" action="#{planoBean.addPontoFracoInterno}" />
+                    </h:panelGrid>   
+                </p:outputPanel>
+                <p:outputPanel id="dtPfi" >
+                    <p:dataTable  value="#{planoBean.plano.pontosfracosinternos}" var="item" emptyMessage="${msg.lista_vasia}"  >
+                        <p:column  headerText="Ponto Fraco Interno" >                                                    
+                            <h:outputText value="#{item.pontofracointerno.nome}" />
+                        </p:column>                                        
+                        <p:column  headerText="ações"  style="width: 80px;text-align: center" >                                            
+                            <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabPontos:dtPfi"  >
+                                <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.pontosfracosinternos}"  />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>     
+                <p:separator />
+                <p:commandButton value="voltar" update=":frmPlano:tabGeral, :messages" immediate="true"  oncomplete="tabGeral.select(1);tabPontos.select(1);" />
+                <p:commandButton value="avançar" update="tabPontos, :messages" process="@this"   oncomplete="if(!args.validationFailed){tabPontos.select(1)}" />
+            </p:tab>
+            <p:tab id="panelPfe" title="Fracos Externos"   >
+                <h:panelGrid id="insPanelPfe" columns="3"  >
+                    <h:outputLabel value=" " />
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Ameaças: " />                                        
+                        <p:message for="planolistaPfi" display="icon"  />                                        
+                    </h:panelGrid>                                    
+                    <h:outputLabel value=" " />
+                    <p:commandButton value="+" oncomplete="dlgPontoFracoExterno.show()" process="@this" actionListener="#{pontoFracoExternoBean.newPontoFracoExterno}" update=":frmpfrex" /> 
+                    <h:selectOneMenu id="planolistaPfe"  style="width: 140px" value="#{planoBean.pontosfracosexternos.pontofracoexterno}" converter="IndexedConverter" 
+                                     styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista Pontos Fracos Externos"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{pontoFracoExternoBean.selectItemsPontoFracoExterno}" />
+                    </h:selectOneMenu>                      
+                    <p:commandButton value="Inserir" process="panelPfe" update="tabPontos:dtPfe insPanelPfe :messages" action="#{planoBean.addPontoFracoExterno}" />
+
+
+                </h:panelGrid>                            
+                <p:outputPanel id="dtPfe" >
+                    <p:dataTable  value="#{planoBean.plano.pontosfracosexternos}" var="item" emptyMessage="${msg.lista_vasia}"  >
+                        <p:column  headerText="Ponto Fraco Externo" >                                                   
+                            <h:outputText value="#{item.pontofracoexterno.nome}" />
+                        </p:column>
+                        <p:column style="width: 80px;text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="ações"/>
+                            </f:facet>                                        
+                            <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabPontos:dtPfe"  >
+                                <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.pontosfracosexternos}"  />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>  
+                <p:separator />
+                <p:commandButton value="voltar" update="tabPontos, :messages" process="@this" immediate="true"   oncomplete="tabPontos.select(0)" />
+                <p:commandButton value="avançar" update="tabPontos, :messages" process="@this"  oncomplete="if(!args.validationFailed){tabPontos.select(2)}" />
+            </p:tab> 
+            <p:tab id="panelPfoi" title="Fortes Internos"   >
+                <h:panelGrid id="insPanelPfoi" columns="3"  >
+                    <h:outputLabel value=" " />
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Forças: " />                                        
+                        <p:message for="planolistaPfoi" display="icon"  />                                        
+                    </h:panelGrid>                                    
+                    <h:outputLabel value=" " />
+                    <p:commandButton value="+" oncomplete="dlgPontoForteInterno.show()" process="@this" actionListener="#{pontoForteInternoBean.newPontoForteInterno}" update=":frmpfint" /> 
+                    <h:selectOneMenu id="planolistaPfoi"  style="width: 140px" value="#{planoBean.pontosfortesinternos.pontoforteinterno}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                                     required="true" label="Lista de Pontos fortes Internos"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{pontoForteInternoBean.selectItemsPontoForteInterno}" />
+                    </h:selectOneMenu>                                  
+                    <p:commandButton value="Inserir" process="panelPfoi" update="tabPontos:dtPfoi insPanelPfoi :messages" action="#{planoBean.addPontoForteInterno}" />                                    
+
+                </h:panelGrid>                               
+                <p:outputPanel id="dtPfoi" >
+                    <p:dataTable  value="#{planoBean.plano.pontosfortesinternos}" var="item" emptyMessage="${msg.lista_vasia}"  >
+                        <p:column  headerText="Ponto Forte Interno" >                                                    
+                            <h:outputText value="#{item.pontoforteinterno.nome}" />
+                        </p:column>                                        
+                        <p:column  headerText="ações"  style="width: 80px;text-align: center" >                                            
+                            <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabPontos:dtPfoi"  >
+                                <p:collector value="#{item}" unique="true" removeFrom="#{planoBean.plano.pontosfortesinternos}"  />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>     
+                <p:separator />
+                <p:commandButton value="voltar" update="tabPontos, :messages" process="@this" immediate="true"   oncomplete="tabPontos.select(1)" />
+                <p:commandButton value="avançar" update="tabPontos, :messages" process="@this"  oncomplete="if(!args.validationFailed){tabPontos.select(3)}" />
+            </p:tab>                 
+            <p:tab id="panelPfoe" title="Fortes Externos"   >
+                <h:panelGrid id="insPanelPfoe" columns="3"  >
+                    <h:outputLabel value=" " />
+                    <h:panelGrid columns="2">                                        
+                        <h:outputLabel value="Oportunidades: " />                                        
+                        <p:message for="planolistaPfoi" display="icon"  />                                        
+                    </h:panelGrid>                                    
+                    <h:outputLabel value=" " />
+                    <p:commandButton value="+" oncomplete="dlgPontoForteExterno.show()" process="@this" action="#{pontoForteExternoBean.newPontoForteExterno}" update=":frmpfext" /> 
+                    <h:selectOneMenu id="planolistaPfoe"  style="width: 140px" value="#{planoBean.pontosfortesexternos.pontoforteexterno}" converter="IndexedConverter" 
+                                     styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista Pontos Fortes Externos"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{pontoForteExternoBean.selectItemsPontoForteExterno}" />
+                    </h:selectOneMenu>                      
+                    <p:commandButton value="Inserir" process="panelPfoe" update="tabPontos:dtPfoe insPanelPfoe :messages" action="#{planoBean.addPontoForteExterno}" >                                   
+                    </p:commandButton>
+                </h:panelGrid>                            
+                <p:outputPanel id="dtPfoe" >                                
+                    <p:dataTable id="dtpf" value="#{planoBean.plano.pontosfortesexternos}" var="item" emptyMessage="${msg.lista_vasia}"   >                                    
+                        <p:column  headerText="Ponto Forte Externo" >                                                   
+                            <h:outputText value="#{item.pontoforteexterno.nome}" />
+                        </p:column>
+                        <p:column style="width: 80px;text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="ações"/>
+                            </f:facet>                                        
+                            <p:commandButton icon=" ui-icon-close"  process="@this"  update=":frmPlano:tabGeral:tabPontos:dtPfoe"  >
+                                <p:collector value="#{item}" unique="true"  removeFrom="#{planoBean.plano.pontosfortesexternos}"  />
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>  
+                <p:separator />
+                <p:commandButton value="voltar" update="tabPontos, :messages" process="@this" immediate="true"   oncomplete="tabPontos.select(2)" />
+                <p:commandButton value="avançar" update="tabPontos,:frmPlano:tabGeral :messages" process="@this"  oncomplete="if(!args.validationFailed){tabGeral.select(3)}" />
+            </p:tab>    
+
+        </p:tabView>
+
+    </h:body>
+</html>
+

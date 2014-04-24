@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"     
+      xmlns:f="http://java.sun.com/jsf/core" >
+
+
+    <h:head>
+
+        <title>Cadastro Individual</title>
+        <style type="text/css">
+            .dados {
+                width: 100%;
+                border: 2px;
+                border-style:  solid;
+
+            }
+            #panel {
+                border-color: #000;
+                border-style: solid;
+                border-width: thin; 
+
+            }
+        </style>
+    </h:head>
+
+    <h:body >
+        <h:form id="frmPlanoView" prependId="false">        
+            <p:panel id="panel" >
+                <h:panelGrid columns="2" >
+                    <p:graphicImage  value="/images/brasao2.jpg" width="100" height="100" />
+                    <h:panelGrid>
+                        <h:outputText value="SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN " />
+                        <h:outputText value="SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS - SEPN" />
+                        <h:outputText value="MPM - Modulo Plano de Monitoramento" />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+            <h:panelGrid id="paneldados" style="width: 100%" >
+                <p:fieldset legend="Identificação do Responsável">
+                    <h:panelGrid  >
+                        <h:panelGrid columns="3" >
+                            <h:outputLabel for="cidviewcpf" value="CPF:"  />                            
+                            <h:outputLabel for="cidviewnome"  value="Nome Completo:"  />                            
+                            <h:outputLabel for="cidviewetinia" value="Etinia:"  />
+                            <h:outputText id="cidviewcpf"  />
+                            <h:outputText id="cidviewnome"   />                                       
+                            <h:outputText id="cidviewetinia"   />
+
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="7"  styleClass="dados" >
+
+                            <h:outputLabel for="cidviewapelido" value="Apelido: " />
+                            <h:outputLabel for="cidviewrg" value="RG: " />
+                            <h:outputLabel for="cidvieworgaoexp" value="Órgão Expedidor: " />
+                            <h:outputLabel for="cidviewestadocivil" value="Estado Civil: " />
+                            <h:outputLabel for="cidviewsexo" value="Sexo: " />
+                            <h:outputLabel for="cidviewdtnasc" value="Data Nascimento: " />
+                            <h:outputLabel  value="Idade: " />
+
+                            <h:outputText id="cidviewapelido" />
+                            <h:outputText id="cidviewrg"  />
+                            <h:outputText id="cidvieworgaoexp"   />
+                            <h:outputText id="cidviewestadocivil"  />                                                      
+                            <h:outputText id="cidviewsexo"  />                                
+                            <h:outputText id="cidviewdtnasc"    />                                 
+                            <h:outputText id="cidviewIdade"  />
+
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="4" styleClass="dados" >
+                            <h:outputLabel  value="Nescecidades Especiais:"  />
+                            <h:outputLabel  value="Escolaridade: " />
+                            <h:outputLabel  value="Naturalidade: " />
+                            <h:outputLabel  value="Telefone: " />
+
+                            <h:outputText id="cidviewnecesp"  />
+                            <h:outputText id="cidviewesc" style="width:120px"   styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                            <h:panelGroup  >
+                                <h:outputLabel  value="UF: " />
+                                <h:outputText id="cidviewnatuf" style="width: 180px" converter="IndexedConverter"  styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                                <h:outputLabel  value="Cidade: " />
+                                <h:outputText id="cidviewaNat" style="width: 210px"   styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <h:outputLabel  value="Residencial: " />
+                                <h:outputText id="cidviewresid" />
+                                <h:outputLabel  value="Celular: " />
+                                <h:outputText id="cidviewcel"  />                       
+                            </h:panelGroup>                     
+                        </h:panelGrid>
+                        <h:panelGroup>
+                            <fieldset>
+                                <legend>Endereço </legend>                                
+                                <h:panelGrid columns="7" id="cidviewEnd"  >
+
+                                    <h:outputLabel  value="Logradouro: " />                                    
+                                    <h:outputLabel  value="UF: " />
+                                    <h:outputLabel  value="Cidade: " />
+                                    <h:outputLabel  value="Bairro / Ramal: " />
+                                    <h:outputLabel  value="Zona:"  />  
+                                    <h:outputLabel  value="Nº / Lote: " />
+                                    <h:outputLabel  value="Tempo Moradia:"  />                      
+
+
+
+                                    <h:outputText id="cidviewlogr"     />
+                                    <h:outputText id="cidviewuf"    />
+                                    <h:outputText id="cidviewcid"     />
+                                    <h:outputText id="cidviewbairro"     />
+                                    <h:outputText id="cidviewzona"    />                                                            
+                                    <h:outputText id="cidviewnum"      />                                                                            
+                                    <h:outputText id="cidviewtpmor"   />   
+
+                                </h:panelGrid>
+
+
+                            </fieldset> 
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                </p:fieldset  >      
+                <p:fieldset legend="Características">
+                    <h:panelGrid columns="3"  style="margin: 0 auto; width: 80%">
+
+                        <p:fieldset legend="Participação em Cursos"  style="width: 350px; " >                          
+
+                            <p:panel     >
+
+
+
+                                <p:dataTable id="dataTableCursosview" var="dados" style="width: 310px" >
+                                    <p:column  headerText="Curso" >                                                                
+
+                                        <h:outputText  />
+                                    </p:column>
+                                    <p:column  headerText="Carga" >                                                                      
+
+                                        <h:outputText  />
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+                        </p:fieldset>
+
+                        <p:fieldset legend="Benefícios Sociais" style="width: 350px; "  >
+
+
+                            <p:panel      >
+
+
+                                <p:dataTable  var="item" style="width: 310px"  >
+
+                                    <p:column headerText="Benefício">                                        
+                                        <h:outputText  />                                    
+                                    </p:column>
+
+                                    <p:column  headerText="Remuneração" >                                                                    
+                                        <h:outputText />
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+
+                            </p:panel>
+                        </p:fieldset>
+                        <p:fieldset legend="Benefícios Habitacionais" style="width: 350px; "  >
+
+                            <p:panel     >
+
+
+                                <p:dataTable  var="item" style="width: 310px"  >
+                                    <p:column headerText="Benefício" > 
+
+                                        <h:outputText  />
+                                    </p:column>
+                                    <p:column  headerText="Valor" >                                                                     
+                                        <h:outputText  />
+                                    </p:column>
+
+                                </p:dataTable>
+
+                            </p:panel>
+                        </p:fieldset>
+                    </h:panelGrid>    
+                </p:fieldset>
+                <p:fieldset legend="Informações Sociais"  >
+                    <h:panelGrid columns="2" >
+                        <p:panel style="width: 500px;">
+
+                            <p:panel   >
+
+                                <h:panelGrid columns="3" >
+
+                                    <h:outputLabel  value="Local de Trabalho: "  />
+                                    <h:outputLabel  value="Função: "  />
+                                    <h:outputLabel  value="Remuneração: "  />
+
+                                    <h:outputText  />
+                                    <h:outputText  />
+                                    <h:outputText  />          
+
+                                </h:panelGrid>
+                            </p:panel>   
+                        </p:panel>
+                        <p:panel style="width: 550px; ">
+
+                            <p:panel         >    
+
+
+                                <p:dataTable  var="ativ"  >
+                                    <p:column style="width: 250px">
+                                        <f:facet name="header">
+                                            <h:outputText value="descrição"/>
+                                        </f:facet>
+                                        <h:outputText  />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="remuneração"/>
+                                        </f:facet>
+                                        <h:outputText  />
+                                    </p:column>
+
+                                    <p:columnGroup type="footer">
+                                        <p:row>  
+                                            <p:column footerText="Total:" style="text-align: right"  />  
+
+                                            <p:column footerText="R$ " /> 
+
+                                            <p:column    />  
+
+                                        </p:row>
+                                    </p:columnGroup>
+                                </p:dataTable>
+
+
+                            </p:panel>
+                        </p:panel>
+                    </h:panelGrid>
+
+                </p:fieldset>
+                <p:fieldset legend="Informações dos Dependentes"  >
+                    <h:panelGrid >                        
+                        <p:outputPanel id="tbDependenteView" >
+                            <p:dataTable  var="item"     >
+                                <f:facet name="header">
+                                    <h:outputText value="Dependentes"/>
+                                </f:facet>
+                                <p:column style="width:16px">  
+                                    <p:rowToggler />  
+                                </p:column>  
+                                <p:column   headerText="Grau" >
+
+                                    <h:outputText />
+                                </p:column>
+                                <p:column headerText="Nome" >
+
+                                    <h:outputText  />
+                                </p:column>
+                                <p:column  headerText="Sexo" >
+
+                                    <h:outputText />
+                                </p:column>
+                                <p:column headerText="Naturalidade"  >
+
+                                    <h:outputText  />
+                                </p:column>
+                                <p:column  headerText="Data Nascimento" >
+
+                                    <h:outputText value="#{item.dataNascimento}" />
+                                </p:column>
+                                <p:column  headerText="Especiais" >                                    
+
+                                    <h:outputText  />
+                                </p:column>                               
+
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </h:panelGrid>
+
+
+                </p:fieldset>
+                <p:fieldset legend="Despesas com domicílio"  >
+                    <h:panelGrid id="panelCidDespesaView" >
+
+                        <p:outputPanel id="tbDespesaView">
+                            <p:dataTable  var="item" style="width: 500px"  >
+                                <f:facet name="header">
+                                    <h:outputText value="Lista de Despesas"/>
+                                </f:facet>
+                                <p:column headerText="Descrição" >
+
+                                    <h:outputText  />
+                                </p:column>
+                                <p:column headerText="Valor" >
+
+                                    <h:outputText  />
+                                </p:column>
+
+                                <p:column style="width: 80px;text-align: center" headerText="ações" >                              
+
+                                    <p:commandButton icon=" ui-icon-close" update="tbDespesa" process="@this"   >
+                                        <p:collector unique="true" value="#{item}"   />
+                                    </p:commandButton>
+                                </p:column>
+
+
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </h:panelGrid>
+
+
+                </p:fieldset>
+                <p:fieldset legend="Características do Domicílio">
+
+                    <h:panelGrid columns="8"  styleClass="dados" >
+
+                        <h:outputLabel value="Tipo de Moradia: " />
+                        <h:outputLabel value="Situação: " />
+                        <h:outputLabel value="Tipo de Construção: " />
+                        <h:outputLabel value="Local Banheiro: " />
+                        <h:outputLabel value="Tipo de Escoamento: " />
+                        <h:outputLabel value="Abastecimento de água: " />
+                        <h:outputLabel  value="Tipo de Iluminação: " />
+                        <h:outputLabel  value="Iluminação Pública: " />
+
+                        <h:outputText  styleClass="ui-inputfield ui-widget  ui-corner-all"  />                           
+                        <h:outputText   styleClass="ui-inputfield ui-widget  ui-corner-all" />                          
+                        <h:outputText   styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                        <h:outputText  styleClass="ui-inputfield ui-widget  ui-corner-all" />
+                        <h:outputText styleClass="ui-inputfield ui-widget ui-corner-all" />
+                        <h:outputText   styleClass="ui-inputfield ui-widget ui-corner-all" />
+                        <h:outputText  styleClass="ui-inputfield ui-widget ui-corner-all" />
+                        <h:outputText />
+
+
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGroup>
+
+                    <!--                    <p:commandButton value="Confirmar" update=":messages" oncomplete="cadview.close()"  />
+                                        <p:commandButton value="editar" update="frmCid :messages" oncomplete="cadview.close();cadins.show();"  />-->
+                    <p:commandButton value="Fechar" process="@this"   update="frmCidview" oncomplete="cadview.close()" action="#{cidadaoBean.cancelCidadao}" /> 
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+
+    </h:body>
+</html>
+
