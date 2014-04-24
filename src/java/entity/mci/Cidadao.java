@@ -22,6 +22,7 @@ import org.hibernate.annotations.Cascade;
  *
  * @author tecnologia01
  */
+
 @Entity
 @Table(name = "cidadao")
 public class Cidadao implements Serializable {
