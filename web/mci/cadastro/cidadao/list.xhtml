@@ -71,10 +71,14 @@
 
                     <h:outputText value="#{item.nome}"/>
                 </p:column>  
-                <p:column headerText="Status Cidadão"  styleClass="datatablecolunas" >
+                <p:column headerText="Ramo" styleClass="datatablecolunas"  >
 
+                    <h:outputText value="#{item.ramoempreendimento.nome}"/>
+                </p:column> 
+                <p:column headerText="Status Cidadão"  styleClass="datatablecolunas" >
                     <h:outputText value="#{item.statuscid}"/>
                 </p:column> 
+                
                 <p:column headerText="Status Benefício" styleClass="datatablecolunas"  >
 
                     <h:outputText value="#{item.benstatus}"/>

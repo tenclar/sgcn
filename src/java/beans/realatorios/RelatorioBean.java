@@ -37,7 +37,7 @@ public class RelatorioBean implements Serializable {
 
     private EnumStatusBeneficio statusben;
     private EnumStatusCid statuscid;
-    private RelatorioUtil relatorioutil = new RelatorioUtil();
+    private final RelatorioUtil relatorioutil = new RelatorioUtil();
     private int publico;
     private int ramo;
     private int estadocivil;
@@ -176,6 +176,9 @@ public class RelatorioBean implements Serializable {
         
     }
     //relatorios
+     
+     
+     
     
      public void quadroQuantitativo() throws IOException, JRException {
 
