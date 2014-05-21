@@ -10,10 +10,6 @@ import dao.mci.CidadaoDAO;
 import entity.Bairro;
 import entity.Cidade;
 import entity.mci.Cidadao;
-import entity.mci.Escolaridade;
-import entity.mci.EstadoCivil;
-import entity.mci.Publico;
-import entity.mci.RamoEmpreendimento;
 import entity.mci.enumerator.EnumStatusBeneficio;
 import entity.mci.enumerator.EnumStatusCid;
 import entity.mci.enumerator.EnumTipoPessoa;
@@ -21,24 +17,15 @@ import entity.relatorio.QuadroQuantitativo;
 import entity.relatorio.RelBeneficiario;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.component.panel.Panel;
+import util.RelatorioUtil;
 
 /**
  *
@@ -50,7 +37,7 @@ public class RelatorioBean implements Serializable {
 
     private EnumStatusBeneficio statusben;
     private EnumStatusCid statuscid;
-   
+    private RelatorioUtil relatorioutil = new RelatorioUtil();
     private int publico;
     private int ramo;
     private int estadocivil;
@@ -86,33 +73,7 @@ public class RelatorioBean implements Serializable {
         panelperiodo.setRendered(false);
     }
     
-    private void criaRelatorio(List listas, String caminhorelatorio, String nomerelatorio) throws IOException, JRException {
-
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath(caminhorelatorio);
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=" + nomerelatorio);
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
-
-
-    }
+   
 
    
 
@@ -226,7 +187,7 @@ public class RelatorioBean implements Serializable {
         String urlrelatorio = "mci/cadastro/relatorios/qtdstatus.jasper";
         String nomerelatorio = "quadroquantitativo.pdf";
 
-        criaRelatorio(lista, urlrelatorio, nomerelatorio);
+        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
 
 
