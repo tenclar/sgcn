@@ -17,7 +17,7 @@
                    
                 </h:panelGrid>
                  <p:column colspan="2">
-                     <p:commandButton  update="frmServico, :messages"  oncomplete="dlgServico.hide();" actionListener="#{servicoBean.saveServico}" value="Salvar"/>
+                     <p:commandButton  update="frmServico, :frmPlano:tabGeral:tabProd:planolistaServicos, :messages"  oncomplete="dlgServico.hide();" actionListener="#{servicoBean.saveServico}" value="Salvar"/>
                      <p:commandButton   oncomplete="dlgServico.hide();" immediate="true" actionListener="#{servicoBean.cancelServico}" value="Cancelar"/>
                     </p:column>
             </h:form>

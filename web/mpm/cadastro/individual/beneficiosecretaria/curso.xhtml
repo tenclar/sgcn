@@ -10,7 +10,7 @@
     <p:fieldset id="fieldCursosSecretaria" legend="Cursos"  style="margin: 0 auto;" >         
         <p:commandButton value="Novo" process="@this" action="#{planoBean.newCursoSec()}" update=":frmInsCursos" oncomplete="dlgCursoSecr.show()" />
         <p:outputPanel id="dtCursosSecr" >
-            <p:dataTable  value="#{planoBean.plano.cidadao.cursosSecretarias}" var="it"  >
+            <p:dataTable  value="#{planoBean.plano.cidadao.cursosSecretarias}" var="it"  rowKey="#{it.id}" >
                 <p:column  headerText="Curso" >
                     <h:outputText value="#{it.curso.nome}" />
                 </p:column>

@@ -81,8 +81,7 @@ public class CidadaoBean implements Serializable {
     private Panel panelAtividade;
     private Panel panelView;
     private Panel panelCursoSecr;
-    private TabView tabView;
-    private TabView tabViewCaracteristicas;
+    
     private UIForm formCid;
     private boolean editar = false;
     private Telefone telefone;
@@ -125,13 +124,7 @@ public class CidadaoBean implements Serializable {
         this.cidBensDuraveis = cidBensDuraveis;
     }
 
-    public TabView getTabView() {
-        return tabView;
-    }
-
-    public void setTabView(TabView tabView) {
-        this.tabView = tabView;
-    }
+    
 
     public Panel getPanelCursoSecr() {
         return panelCursoSecr;
@@ -149,14 +142,7 @@ public class CidadaoBean implements Serializable {
         this.tipoBusca = tipoBusca;
     }
 
-    public TabView getTabViewCaracteristicas() {
-        return tabViewCaracteristicas;
-    }
-
-    public void setTabViewCaracteristicas(TabView tabViewCaracteristicas) {
-        this.tabViewCaracteristicas = tabViewCaracteristicas;
-    }
-
+  
     public Panel getPanelEquipSecr() {
         return panelEquipSecr;
     }
@@ -1006,8 +992,7 @@ public class CidadaoBean implements Serializable {
         if (cidadaoDAO.getListByCnp(this.cidadao.getCpf()).isEmpty()) {
 
             success = false;
-            this.tabView.setActiveIndex(0);
-            this.tabViewCaracteristicas.setActiveIndex(0);
+            
 
             // facesutils.cleanSubmittedValues(formCid);
             cidadao.setEstadocivil(new EstadoCivil());
@@ -1173,23 +1158,6 @@ public class CidadaoBean implements Serializable {
 
     }
 
-    public void proximo() {
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        cidadaoDAO.save(cidadao);
-        tabView.setActiveIndex(this.getTabView().getActiveIndex() + 1);
-    }
-
-    public void anterior() {
-        tabView.setActiveIndex(this.getTabView().getActiveIndex() - 1);
-    }
-
-    public void proximoCarac() {
-        tabViewCaracteristicas.setActiveIndex(this.getTabViewCaracteristicas().getActiveIndex() + 1);
-    }
-
-    public void anteriorCarac() {
-        tabViewCaracteristicas.setActiveIndex(this.getTabViewCaracteristicas().getActiveIndex() - 1);
-    }
 
     @SuppressWarnings("unchecked")
     public void saveImprimir() throws IOException, JRException {
@@ -1254,51 +1222,7 @@ public class CidadaoBean implements Serializable {
 
     }
 
-    public void onTabChangeCarac(TabChangeEvent event) {
-        if ("atividades".equals(event.getTab().getId())) {
-            this.tabViewCaracteristicas.setActiveIndex(0);
-        }
-        if ("cursos".equals(event.getTab().getId())) {
-            this.tabViewCaracteristicas.setActiveIndex(1);
-        }
-        if ("equip".equals(event.getTab().getId())) {
-            this.tabViewCaracteristicas.setActiveIndex(2);
-        }
-        if ("bsociais".equals(event.getTab().getId())) {
-            this.tabViewCaracteristicas.setActiveIndex(3);
-        }
-        if ("bhabit".equals(event.getTab().getId())) {
-            this.tabViewCaracteristicas.setActiveIndex(4);
-        }
-    }
-
-    public void onTabChangeView(TabChangeEvent event) {
-        if ("tabDadosPessoais".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(0);
-        }
-        if ("tabcaracteristicas".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(1);
-        }
-        if ("tabdependentes".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(2);
-        }
-        if ("tabdespdom".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(3);
-        }
-        if ("tabcaracdom".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(4);
-        }
-        if ("tabbensduraveis".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(5);
-        }
-        if ("tabbeneficios".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(6);
-        }
-        if ("tabresumos".equals(event.getTab().getId())) {
-            this.tabView.setActiveIndex(7);
-        }
-
-    }
+   
 
     public List<Cidadao> getListaAnoDemandas() {
         CidadaoDAO cdao = new CidadaoDAO();

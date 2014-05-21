@@ -124,7 +124,7 @@
         <init-param>
             <param-name>thresholdSize</param-name>
             <param-value>10485760</param-value>
-            <!--<param-value>10737418240</param-value>-->
+<!--            <param-value>10737418240</param-value>-->
         </init-param>
 <!--        <init-param>
             <param-name>uploadDirectory</param-name>

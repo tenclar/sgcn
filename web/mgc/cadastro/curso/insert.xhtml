@@ -6,7 +6,7 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:ui="http://java.sun.com/jsf/facelets">
    
-    <h:form id="frmListCurso" prependId="false">
+    <h:form id="frmCurso" prependId="false">
             <h:panelGrid id="panelCursoInsert" columns="2" style="margin-bottom:10px">
                 <h:outputLabel for="cursoNome" value="Nome:" />
                 <p:inputText id="cursoNome" autocomplete="off" value="#{cursoBean.curso.nome}" size="60" onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
@@ -15,6 +15,6 @@
                 <p:commandButton  update=":frmListCurso, :messages"  oncomplete="dlgCurso.hide();" action="#{cursoBean.saveCurso}" value="Salvar"/>
                 <p:commandButton   oncomplete="dlgCurso.hide();" immediate="true" actionListener="#{cursoBean.cancelCurso}" value="Cancelar"/>
             </p:column>
-      
+    </h:form>
 </ui:component>
 

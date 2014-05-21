@@ -10,7 +10,7 @@
         <h:form id="frmBen" prependId="false"  binding="#{beneficiadoBean.formBen}"  >
             
             <p:tabView   id="tabView"    widgetVar="tabView"  >
-                <p:tab title="Dados" id="tabDadosPessoais">
+                <p:tab title="Dados" id="tabDadosPessoais" >
                     <ui:include src="dados/index.xhtml"  />                    
                     <p:separator  />
                     <h:panelGroup >
@@ -51,10 +51,10 @@
                 
 
             </p:tabView>
-
-            <p:commandButton value="Cancelar" process="@this"  immediate="true"   update="frmBen :frmBuscaBen"
-                             oncomplete="cadBenInd.close();litBenInd.show();document.getElementById('cbBusca').focus();"  
-                             action="#{beneficiadoBean.cancelBeneficiado}"  /> 
+<!--            action="# {beneficiadoBean.cancelBeneficiado}"-->
+            <p:commandButton value="Cancelar" process="@this"     update="frmBen :frmBuscaBen"
+                             oncomplete="cadBenInd.close();litBenInd.show();"  
+                               /> 
         </h:form>
 
 </ui:component>

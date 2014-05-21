@@ -58,50 +58,65 @@ public class TurmaBean implements Serializable {
         this.turma.setStatus(EnumStatusTurma.ANDAMENTO.toString());
     }
 
+    public void save() {
+        try {
+            TurmaDAO turmaDAO = new TurmaDAO();
+            turmaDAO.saveTurma(turma);
+            facesutils.info("Cadastro Efetuado! ");
+
+        } catch (Exception e) {
+            facesutils.erro("Cadastro Não Efetuado! ");
+        }
+
+    }
+
     public void saveTurma() {
 
-
-
         TurmaDAO turmaDAO = new TurmaDAO();
-         CursoSecretariaDAO cdao = new CursoSecretariaDAO();
+        CursoSecretariaDAO cdao = new CursoSecretariaDAO();
+        turmaDAO.saveTurma(turma);
         try {
-            turmaDAO.saveTurma(turma);
 
             if (turma.getTurcidadaos().size() > 0) {
-                System.out.println(" maior que zero");
-
+             //   System.out.println(" maior que zero");
 
                 for (TurCidadaos t : turma.getTurcidadaos()) {
 
                     if (!t.getStatus().equals("DESISTENTE")) {
-                       
+
                         CursosSecretaria csec = cdao.getEntityByIdCurso(this.turma.getCurso().getId(), t.getCidadao().getId());
-                        
+
                         if (turma.getStatus().equals(EnumStatusTurma.FINALIZADO.toString())) {
-                            t.setStatus(EnumStatusCurso.CONCLUSO.toString());                            
+                            t.setStatus(EnumStatusCurso.CONCLUSO.toString());
                             csec.setStatus(EnumStatusCurso.CONCLUSO);
-                            
+
                         } else if (turma.getStatus().equals(EnumStatusTurma.ANDAMENTO.toString())) {
-                            t.setStatus(EnumStatusCurso.CURSANDO.toString());                            
+                            t.setStatus(EnumStatusCurso.CURSANDO.toString());
                             csec.setStatus(EnumStatusCurso.CURSANDO);
-                            
+
+                        } else if (turma.getStatus().equals(EnumStatusTurma.CANCELADO.toString())) {
+                            t.setStatus(EnumStatusCurso.RESERVA.toString());
+                            csec.setStatus(EnumStatusCurso.RESERVA);
+
                         }
                         cdao.saveCursoSecretaria(csec);
-                            turmaDAO.saveTurma(turma);
+                           // turmaDAO.saveTurma(turma);
+
                     }
 
                 }
             }
 
-            //this.turma = turmaDAO.getTurma(turma.getId());
-            //this.turma.getTurcidadaos().toString();   
-            //facesutils.info("Cadastro Salvo");
+            this.turma = turmaDAO.getTurma(turma.getId());
+            this.turma.getTurcidadaos().toString();
+            facesutils.info("Cadastro Salvo");
             //this.turma = new Turma();
+
             this.listaTurmas = null;
             this.busca = null;
         } catch (Exception e) {
             facesutils.erro("Cadastro Não Efetuado! ");
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -215,13 +230,14 @@ public class TurmaBean implements Serializable {
 
     public void localizaCidadaosByCoop() {
         this.listaCidadaos = null;
-        this.buscaCidadao = "";
+
         TurmaDAO turmaDAO = new TurmaDAO();
         if ("nome".equals(this.tipoBuscaCidadaoCoop)) {
             this.listaCidadaos = turmaDAO.getAssocidosByNom(cooperativa.getId(), EnumTipoPessoa.CID, this.buscaCidadaoCoop);
         } else if ("cpf".equals(this.tipoBuscaCidadaoCoop)) {
             this.listaCidadaos = turmaDAO.getAssocidosByCnp(cooperativa.getId(), EnumTipoPessoa.CID, this.buscaCidadaoCoop);
         }
+        this.buscaCidadaoCoop = "";
 
     }
 
@@ -262,7 +278,6 @@ public class TurmaBean implements Serializable {
             }
         }
 
-
         return this.dmListaAlunos;
     }
 
@@ -279,9 +294,7 @@ public class TurmaBean implements Serializable {
         TurmaDAO turmaDAO = new TurmaDAO();
         turmaDAO.saveTurma(this.turma);
 
-
         this.turCidadaos = null;
-
 
     }
 
@@ -304,11 +317,9 @@ public class TurmaBean implements Serializable {
 
         try {
 
-
             this.turma.getTurcidadaos().add(this.turCidadaos);
             TurmaDAO turmaDAO = new TurmaDAO();
             turmaDAO.saveTurma(this.turma);
-
 
             this.turCidadaos = null;
             facesutils.info("Cadastro Efetuado!");

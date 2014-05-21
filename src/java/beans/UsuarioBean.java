@@ -179,6 +179,7 @@ public class UsuarioBean implements Serializable {
             responseStream.close();
             context.renderResponse();
             context.responseComplete();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,7 +21,7 @@ public class ProdutoDAO extends GenericDAO {
     }
 
     public List<Produto> getProdutos() {
-        return getPureList(Produto.class, "from Produto produto");
+        return getPureList(Produto.class, "from Produto p order by p.nome");
     }
 //    public void removeProduto(Produto produto) {
 //        removePojo(produto);

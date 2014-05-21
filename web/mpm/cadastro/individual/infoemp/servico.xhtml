@@ -25,10 +25,14 @@
 
                         <h:outputLabel value=" " />
                         <p:commandButton value="+" oncomplete="dlgServico.show()" process="@this" actionListener="#{servicoBean.newServico}" update=":frmServico" /> 
-                        <h:selectOneMenu id="planolistaServicos"  style="width: 200px" value="#{planoBean.servicos.servico}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista de Serviços"  >
+                        <p:selectOneMenu id="planolistaServicos"  style="width: 200px"
+                                         value="#{planoBean.servicos.servico}"
+                                         converter="IndexedConverter"
+                                          filter="true" filterMatchMode="startsWith"
+                                         required="true" label="Lista de Serviços"  >
                             <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                             <f:selectItems value="#{servicoBean.selectItemsServico}" />
-                        </h:selectOneMenu>
+                        </p:selectOneMenu>
 
                         <p:inputText id="planoServicoValor" onkeypress="mascara(this, valor)" autocomplete="off" value="#{planoBean.servicos.valor}" size="5" rendered="true" label="Valor" >
                            

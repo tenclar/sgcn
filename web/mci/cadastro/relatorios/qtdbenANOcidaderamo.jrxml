@@ -16,6 +16,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
+	<parameter name="anodemanda" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select
      cid.nome as cidade,
@@ -30,7 +31,8 @@ inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
 
 where c.tipopessoa = 'CID'
 and c.benstatus = 'BENEFICIADO'
-and c.sexo = 'F'
+#and c.sexo = 'F'
+and c.anodemanda = $P{anodemanda}
 
 
 GROUP BY
@@ -139,6 +141,13 @@ ORDER BY
 				</textElement>
 				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE POR CIDADE E RAMO]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="a2eaeaf3-8062-4018-bbd3-4ad4400b6931" x="237" y="67" width="100" height="15" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{anodemanda}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

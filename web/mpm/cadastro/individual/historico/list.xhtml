@@ -29,7 +29,7 @@
                                     <f:setPropertyActionListener value="#{hist}" target="#{planoBean.historicovisita}"  />                                    
                                 </p:commandButton>  
                                 <p:commandButton icon=" ui-icon-close" title="excluir" process="@this" update=":frmPlano:tabGeral:tabIdent:opTabHistInterno" >
-                                    <p:collector value="#{hist}" unique="true" removeFrom="#{planoBean.historicovisita}" />
+                                    <p:collector value="#{hist}" unique="true" removeFrom="#{planoBean.plano.historicovisitas}" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>

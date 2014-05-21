@@ -8,7 +8,7 @@
     <h:body>
         <p:commandButton value ="Inserir" process="@this" actionListener="#{planoBean.newDomicilio}" oncomplete="dlgDomicilio.show()" update=":frmDomicilio"  />                    
                     <p:outputPanel id="tbhistDom" >
-                        <p:dataTable value="#{planoBean.plano.cidadao.histdomicilio}" var="item"   >
+                        <p:dataTable value="#{planoBean.plano.cidadao.histdomicilio}" var="item" rowKey="#{item.id}"   >
 
                             <f:facet name="header">
                                 <h:outputText value="Histórico do Domiíclio"/>
@@ -70,7 +70,8 @@
                                 </f:facet>
                                 <p:commandButton icon=" ui-icon-refresh" process="@this" oncomplete="dlgDomicilio.show()" actionListener="#{planoBean.editDomicilio}" update=":frmDomicilio"  >
                                     <f:setPropertyActionListener value="#{item}" target="#{planoBean.domicilio}"/>
-                                </p:commandButton><!--                                </p:commandButton>rendered="# {p:ifGranted(msg.perm_view)}"-->
+                                </p:commandButton>
+                                
 
                                 <p:commandButton icon=" ui-icon-close" update=":frmPlano:tabGeral:tabIdent:tabInfoResp:tbhistDom" process="@this"  >
                                     <p:collector value="#{item}" unique="true"  removeFrom="#{planoBean.plano.cidadao.histdomicilio}" />
@@ -80,7 +81,7 @@
 
                         </p:dataTable>
                     </p:outputPanel>                   
-        
+        <!--                                </p:commandButton>rendered="# {p:ifGranted(msg.perm_view)}"-->
     </h:body>
 </html>
 

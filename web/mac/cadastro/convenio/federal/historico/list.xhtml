@@ -8,57 +8,60 @@
               >
 
     <p:panel>
-        <p:commandButton value="inserir" process="@this" update=":formHistorico" oncomplete="PF('dlgHistorico').show()" action="#{convenioBean.histNew()}" />
-<!--        <p:commandButton value="atualizar" process="opTabHist2" update="opTabHist"  />-->
+        
+        <!--        <p:commandButton value="atualizar" process="opTabHist2" update="opTabHist"  />-->
         <!--        rowStyleClass="# {empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"-->
         <p:outputPanel id="opTabHist2" >
-           
-                <p:dataTable id="opTabHist" value="#{convenioBean.convenio.historicos}" var="hist"          >
 
-                    <p:column headerText="data"  sortBy="#{hist.datainc}"   style="width: 100px" >
-                        <h:outputText value="#{hist.datainc}"  >
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
+            <p:dataTable id="opTabHist" value="#{convenioBean.convenio.historicos}" var="hist"          >
+                
+                <p:column  style="width: 80px;" >
+                    <f:facet name="header" >
+                        <p:commandButton  icon="ui-icon-plus" process="@this" update=":formHistorico" oncomplete="PF('dlgHistorico').show()" action="#{convenioBean.histNew()}" />
+                    </f:facet>
+                    <p:commandButton id="btaltHist" icon="ui-icon-refresh" process="@this" title="alterar" update=":formHistorico" oncomplete="dlgHistorico.show();" action="#{convenioBean.histEdit()}" >
+                        <f:setPropertyActionListener value="#{hist}" target="#{convenioBean.historico}"  />                                    
+                    </p:commandButton> 
+                    <p:commandButton icon="ui-icon-close" title="excluir" process="@this" update="opTabHist" >
+                        <p:collector value="#{hist}" unique="true" removeFrom="#{convenioBean.convenio.historicos}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="data"  sortBy="#{hist.datainc}"   style="width: 100px" >
+                    <h:outputText value="#{hist.datainc}"  >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
 
-                    </p:column>
-                    <p:column headerText="descrição" style="width: 500px" >
-                        <h:outputText value="#{hist.descricao}" />
-                    </p:column>
-                    <p:column headerText="Anexo"   style="width: 170px;" >
-                        <p:dataTable value="#{hist.anexos}" var="an"     >
-                            <p:column style="width: 30px;"  >
-                                <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" title="download" 
-                                                 process="@this" immediate="true" update="dw"  ajax="false"                                                         
-                                                 style="width: 16px;height: 16px;"
-                                                 >
-                                    <p:fileDownload value="#{an.file}"   />   
-                                </p:commandButton>  
-                                <p:commandButton  icon="ui-icon-document-b" title="view" 
-                                                  process="@this" immediate="true" update="dw"  ajax="false"  
-                                                  onclick="this.form.target = '_blank'"
-                                                  style="width: 16px;height: 16px;"
-                                                  >
-                                    <p:fileDownload value="#{an.file}"  contentDisposition="inline"  />   
-                                </p:commandButton>  
-                            </p:column>
-                            <p:column    >
-                                <h:outputText value="#{an.descricao}"  />
-                            </p:column>
+                </p:column>
+                <p:column headerText="descrição" style="width: 500px" >
+                    <h:outputText value="#{hist.descricao}" />
+                </p:column>
+                <p:column headerText="Anexo"   style="width: 170px;" >
+                    <p:dataTable value="#{hist.anexos}" var="an"     >
+                        <p:column style="width: 30px;"  >
+                            <p:commandButton id="dw" icon="ui-icon-arrowthickstop-1-s" title="download" 
+                                             process="@this" immediate="true" update="dw"  ajax="false"                                                         
+                                             style="width: 16px;height: 16px;"
+                                             >
+                                <p:fileDownload value="#{an.file}"   />   
+                            </p:commandButton>  
+                            <p:commandButton  icon="ui-icon-document-b" title="view" 
+                                              process="@this" immediate="true" update="dw"  ajax="false"  
+                                              onclick="this.form.target = '_blank'"
+                                              style="width: 16px;height: 16px;"
+                                              >
+                                <p:fileDownload value="#{an.file}"  contentDisposition="inline"  />   
+                            </p:commandButton>  
+                        </p:column>
+                        <p:column    >
+                            <h:outputText value="#{an.descricao}"  />
+                        </p:column>
 
 
-                        </p:dataTable>
-                    </p:column>
-                    <p:column headerText="Ações" style="width: 80px;" >
+                    </p:dataTable>
+                </p:column>
 
-                        <p:commandButton id="btaltHist" icon="ui-icon-refresh" process="@this" title="alterar" update=":formHistorico" oncomplete="dlgHistorico.show();" action="#{convenioBean.histEdit()}" >
-                            <f:setPropertyActionListener value="#{hist}" target="#{convenioBean.historico}"  />                                    
-                        </p:commandButton> 
-                        <p:commandButton icon="ui-icon-close" title="excluir" process="@this" update="opTabHist" >
-                            <p:collector value="#{hist}" unique="true" removeFrom="#{convenioBean.convenio.historicos}" />
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
-            
+            </p:dataTable>
+
         </p:outputPanel>
     </p:panel>
 </ui:component>

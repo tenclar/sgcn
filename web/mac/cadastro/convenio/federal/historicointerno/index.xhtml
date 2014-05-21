@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:p="http://primefaces.org/ui"
+              xmlns:p="http://primefaces.org/ui"
               xmlns:h="http://java.sun.com/jsf/html"
               xmlns:ui="http://java.sun.com/jsf/facelets"
               xmlns:f="http://java.sun.com/jsf/core"
@@ -10,49 +10,63 @@
 
     <p:panel  >
         <h:form id="formHistInterno"   enctype="multipart/form-data"  >
-            <h:panelGrid >
-                <h:outputLabel value="Data :" />                
-                <p:calendar  label="Data" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value)" showOn="button"  required="true" value="#{convenioBean.historicoInterno.datainc}" maxlength="10" size="10"  pattern="yyyy/MM/dd" >
-                    <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                </p:calendar>
-                <h:outputLabel value="Descrição: " />
-                <p:inputTextarea rows="8" cols="60" autoResize="false" value="#{convenioBean.historicoInterno.descricao}"  />
+            <h:panelGrid columns="2" style="width: 100%" >
+                <h:panelGroup style="width: 50%;">
+                    <h:panelGrid >
+                        <h:outputLabel value="Data :" />
+                        <p:calendar id="cData"  
+                                    locale="pt_BR" showButtonPanel="true"
+                                    navigator="true"
+                                    onkeyup="Formatadata(this, event)" 
+                                    onchange="validaDat(this, this.value)"
+                                    pattern="dd/MM/yyyy"
+                                    maxlength="10" size="10" value="#{convenioBean.historicoInterno.datainc}" 
+                                    required="true" showOn="button" >
+
+                        </p:calendar>
+
+                        <h:outputLabel value="Descrição: " />
+                        <p:inputTextarea rows="5" cols="50" autoResize="false" value="#{convenioBean.historicoInterno.descricao}"  />
 
 
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid>
+
+                        <h:outputLabel value="Anexos "  />
+
+                      
+                        <p:fileUpload fileUploadListener="#{convenioBean.handleFileUploadArq}"
+                                      mode="advanced" dragDropSupport="false"  
+                                      update="dtArq, :messages" sizeLimit="100000000"
+                                      cancelLabel="Cancelar" uploadLabel="Enviar"
+                                      label="Selecionar"
+                                      multiple="true"
+                                      required="true"
+                                      fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />  
+
+
+                    </h:panelGrid>
+
+                    <p:separator />
+                    <p:outputPanel id="dtArq">
+                        <p:dataTable  var="anexo" value="#{convenioBean.historicoInterno.arquivos}"  >
+
+                            <p:column headerText="Arquivos"  >
+                                <h:outputText value="#{anexo.descricao}" />
+                            </p:column>
+                            <p:column headerText="Ações" style="width: 50px" >
+                                <p:commandButton icon="ui-icon-arrowthickstop-1-s" />
+                                <p:commandButton icon="ui-icon-close" >
+                                    <p:collector value="#{anexo}" unique="true" removeFrom="#{convenioBean.historicoInterno.arquivos}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+
+                </h:panelGroup>
             </h:panelGrid>
-
-            <h:panelGrid>
-
-                <h:outputLabel value="Anexos "  />
-
-<!--                <p:fileUpload  label="Localizar"  
-                               fileUploadListener="# {convenioBean.handleFileUploadArq}" 
-
-                            
-                              
-                               multiple="true"   
-                               update=":messages, dtArq"                                   
-                               allowTypes="*.pdf"/>  -->
-
-
-
-            </h:panelGrid>
-
-            <p:separator />
-            <p:outputPanel id="dtArq">
-                <p:dataTable  var="anexo" value="#{convenioBean.historicoInterno.arquivos}"  >
-                   
-                    <p:column headerText="Arquivos"  >
-                        <h:outputText value="#{anexo.descricao}" />
-                    </p:column>
-                    <p:column headerText="Ações" style="width: 50px" >
-                        <p:commandButton icon="ui-icon-arrowthickstop-1-s" />
-                        <p:commandButton icon="ui-icon-close" />
-                    </p:column>
-                </p:dataTable>
-            </p:outputPanel>
-
-
 
             <p:separator />
 

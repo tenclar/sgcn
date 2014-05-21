@@ -88,6 +88,25 @@
                 </p:panel>
             </p:outputPanel>
         </p:panel>
+        <p:panel header="Agrupar">
+            <h:selectManyCheckbox  id="selagrupar"      >
+
+                <f:selectItem itemLabel="ANO DEMANDA"  itemValue="ANODEMANDA" />
+                <f:selectItem itemLabel="STATUS"  itemValue="ANODEMANDA" />
+                <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
+                <f:selectItem itemLabel="BAIRRO " itemValue="BAIRRO"  />                            
+                <f:selectItem itemLabel="LOGRADOURO" itemValue="LOGRADOURO"   />
+                <f:selectItem itemLabel="RAMO"  itemValue="RAMO"  />
+                <f:selectItem itemLabel="NOME" itemValue="NOME"  />                            
+                <f:selectItem itemLabel="SEXO"  itemValue="SEXO"  />                                
+                <f:selectItem itemLabel="FAIXA ETÁRIA"  itemValue="IDADE"  />
+                <f:selectItem itemLabel="ESCOLARIDADE" itemValue="ESCOLARIDADE"  />                                                                                         
+
+
+
+            </h:selectManyCheckbox>
+
+        </p:panel>
 
         <p:panel header="Filtro"   >
 
@@ -294,15 +313,16 @@
 
 
 
-            <p:separator />
 
-            <p:commandButton action="gotorelatorio" process="@this" immediate="true"  onclick="if (!args.validationFailed) {
-            this.form.target = '_blank';
-        }" icon="ui-icon-search" value="Pesquisar"    >
-            </p:commandButton>
 
         </p:panel>
 
+        <p:separator />
+
+        <p:commandButton action="gotorelatorio" process="@this" immediate="true"  onclick="if (!args.validationFailed) {
+                        this.form.target = '_blank';
+                    }" icon="ui-icon-search" value="Pesquisar"    >
+        </p:commandButton>
 
     </h:form>
 </ui:component>

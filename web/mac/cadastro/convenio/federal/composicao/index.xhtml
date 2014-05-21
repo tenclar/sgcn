@@ -12,6 +12,7 @@
                     <p:outputPanel  >
                         <p:dataTable id="opTabInvest"  value="#{convenioBean.convenio.investimentos}" var="item"
                                       rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                                      editable="true"
                                       rowIndexVar="rowIx" >
                             <p:column headerText="Código Despesa" style="width: 40px" >
                                 <h:outputText value="#{item.natDespesa.id}" />                        
@@ -74,7 +75,7 @@
                                         <p:inputTextarea rows="10" cols="15" value="#{item.complemento}" />  
                                     </f:facet>  
                                 </p:cellEditor>  
-                                <h:outputText value="#{item.complemento}" />
+                               
                             </p:column>
                             <p:column style="width: 40px" headerText="Editar" >
                                 <p:rowEditor  />

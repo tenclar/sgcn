@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:p="http://primefaces.org/ui"
+              xmlns:p="http://primefaces.org/ui"
               xmlns:h="http://java.sun.com/jsf/html"
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -16,40 +16,45 @@
                     <h:outputLabel for="turmalistacursos" value="Curso:" /> 
                     <h:outputText value=""/>
                     <h:outputText value=""/>
-                    <h:selectOneMenu id="turmalistacursos"  value="#{turmaBean.turma.curso}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget ui-corner-all" label="Lista de Curso" style="width: 280px">
+                    <p:selectOneMenu id="turmalistacursos"  value="#{turmaBean.turma.curso}"
+                                     filter="true" filterMatchMode="startsWith" 
+                                     converter="IndexedConverter" 
+                                     label="Lista de Curso" style="width: 280px">
                         <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
                         <f:selectItems value="#{turmaBean.selectItemsCurso}"/>
-                    </h:selectOneMenu>                    
+                    </p:selectOneMenu>                    
                     <p:commandButton value="+" oncomplete="dlgCurso.show()" update=":frmCurso" process="@this" action="#{cursoBean.newCurso}"/>
                     <p:message for="turmalistacursos" display="icon" />
                 </h:panelGrid>
-                
+
                 <h:panelGrid columns="3">
                     <h:outputLabel value="Instituição:" />
                     <h:outputText value=""/>
                     <h:outputText value=""/>
-                    <h:selectOneMenu id="listaturmaLocals" value="#{turmaBean.turma.turmalocal}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget ui-corner-all" label="Lista Local"  style="width: 280px">
+                    <p:selectOneMenu id="listaturmaLocals" value="#{turmaBean.turma.turmalocal}" 
+                                     filter="true" filterMatchMode="startsWith"
+                                     converter="IndexedConverter" label="Lista Local"  style="width: 280px">
                         <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
                         <f:selectItems value="#{turmaLocalBean.selectItemsTurmaLocal}"/>
-                    </h:selectOneMenu>                
+                    </p:selectOneMenu>                
                     <p:commandButton value="+" oncomplete="dlgTurmaLocal.show()" process="@this" action="#{turmaLocalBean.newTurmaLocal}"/> 
                     <p:message for="listaturmaLocals" display="icon" />
                 </h:panelGrid>
-                
-                 <h:panelGrid columns="2">
+
+                <h:panelGrid columns="2">
                     <h:outputLabel value="Status:" />
                     <h:outputText value=""/>
-                    
+
                     <h:selectOneMenu id="listaStatus" value="#{turmaBean.turma.status}"  styleClass="ui-inputfield ui-widget ui-corner-all" label="Status"  >
                         <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
                         <f:selectItems value="#{turmaBean.selectItemStatusTurma}" />
                     </h:selectOneMenu>                
-                    
+
                     <p:message for="listaStatus" display="icon" />
                 </h:panelGrid>
             </h:panelGrid>
             <h:panelGrid columns="2">
-                
+
 
 
                 <h:panelGrid columns="3">
@@ -69,15 +74,29 @@
                         <h:outputLabel value="Data Inicio:&nbsp;" for="turmadtinic"/>
                         <p:message for="turmadtinic" display="icon" showDetail="false" />
                     </h:panelGrid>
-                    <p:calendar id="turmadtinic" onkeyup="Formatadata(this, event)" maxlength="10" onchange="validaDat(this, this.value)"  value="#{turmaBean.turma.datainicio}"  size="11" required="true"  requiredMessage="Informação necessária"  pattern="yyyy/MM/dd" >                                 
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    <p:calendar id="turmadtinic" 
+                                locale="pt_BR" showButtonPanel="true"
+                                navigator="true"
+                                onkeyup="Formatadata(this, event)" 
+                                onchange="validaDat(this, this.value)"
+                                value="#{turmaBean.turma.datainicio}" 
+                                size="11" required="true" 
+                                requiredMessage="Informação necessária"  pattern="dd/MM/yyyy" >                                 
+
                     </p:calendar>
                     <h:panelGrid  columns="2" >
                         <h:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;Data Fim:&nbsp;" for="turmadtfim"/>
                         <p:message for="turmadtfim" display="icon" showDetail="false" />
                     </h:panelGrid>
-                    <p:calendar id="turmadtfim" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)"  maxlength="10" value="#{turmaBean.turma.datafim}"  size="11" required="true"  requiredMessage="Informação necessária"  pattern="yyyy/MM/dd" >                                 
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    <p:calendar id="turmadtfim" 
+                                locale="pt_BR" showButtonPanel="true"
+                                navigator="true"
+                                onkeyup="Formatadata(this, event)" 
+                                onchange="validaDat(this, this.value)"  
+                                maxlength="10" value="#{turmaBean.turma.datafim}" 
+                                size="11" required="true"  requiredMessage="Informação necessária"
+                                pattern="dd/MM/yyyy" >                                 
+                        
 
                     </p:calendar>
 
@@ -123,7 +142,7 @@
         </p:fieldset>
         <p:separator/>
         <h:panelGroup>
-            <p:commandButton  update="frmTurmaNew, :frmListaAlunosTurma,  :messages" action="#{turmaBean.saveTurma}" oncomplete="if(!args.validationFailed){dlgTurmaNew.hide();dlgAlunosTurma.show();}" value="Salvar"/>
+            <p:commandButton  update="frmTurmaNew, :frmListaAlunosTurma, :frmBuscaTurma,  :messages" action="#{turmaBean.saveTurma()}" oncomplete="if(!args.validationFailed){dlgTurmaNew.hide();dlgAlunosTurma.show();}" value="Salvar"/>
             <p:commandButton oncomplete="dlgTurmaNew.hide();" process="@this" value="Cancelar" update=":frmTurmaNew" action="#{turmaBean.cancelTurma}" />
         </h:panelGroup>
 

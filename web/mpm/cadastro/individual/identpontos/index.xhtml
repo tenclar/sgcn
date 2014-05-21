@@ -17,10 +17,16 @@
                         </h:panelGrid>                                    
                         <h:outputLabel value=" " />
                         <p:commandButton value="+" oncomplete="dlgPontoFracoInterno.show()" process="@this" actionListener="#{pontoFracoInternoBean.newPontoFracoInterno}" update=":frmpfrin" /> 
-                        <h:selectOneMenu id="planolistaPfi"  style="width: 140px" value="#{planoBean.pontosfracosinternos.pontofracointerno}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista de Pontos Fracos Internos"  >
+                        <p:selectOneMenu id="planolistaPfi"  
+                                         style="width: 140px" 
+                                         value="#{planoBean.pontosfracosinternos.pontofracointerno}" 
+                                         converter="IndexedConverter" 
+                                         required="true" label="Lista de Pontos Fracos Internos"
+                                         filter="true" filterMatchMode="startsWith" 
+                                         >
                             <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                             <f:selectItems value="#{pontoFracoInternoBean.selectItemsPontoFracoInterno}" />
-                        </h:selectOneMenu>                                  
+                        </p:selectOneMenu>                                  
                         <p:commandButton value="Inserir" process="panelPfi" update="tabPontos:dtPfi, insPanelPfi :messages" action="#{planoBean.addPontoFracoInterno}" />
                     </h:panelGrid>   
                 </p:outputPanel>
@@ -49,11 +55,14 @@
                     </h:panelGrid>                                    
                     <h:outputLabel value=" " />
                     <p:commandButton value="+" oncomplete="dlgPontoFracoExterno.show()" process="@this" actionListener="#{pontoFracoExternoBean.newPontoFracoExterno}" update=":frmpfrex" /> 
-                    <h:selectOneMenu id="planolistaPfe"  style="width: 140px" value="#{planoBean.pontosfracosexternos.pontofracoexterno}" converter="IndexedConverter" 
-                                     styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista Pontos Fracos Externos"  >
+                    <p:selectOneMenu id="planolistaPfe"  style="width: 140px"                                     
+                                     value="#{planoBean.pontosfracosexternos.pontofracoexterno}" 
+                                     converter="IndexedConverter" 
+                                     filter="true" filterMatchMode="startsWith"
+                                     required="true" label="Lista Pontos Fracos Externos"  >
                         <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{pontoFracoExternoBean.selectItemsPontoFracoExterno}" />
-                    </h:selectOneMenu>                      
+                    </p:selectOneMenu>                      
                     <p:commandButton value="Inserir" process="panelPfe" update="tabPontos:dtPfe insPanelPfe :messages" action="#{planoBean.addPontoFracoExterno}" />
 
 
@@ -86,11 +95,14 @@
                     </h:panelGrid>                                    
                     <h:outputLabel value=" " />
                     <p:commandButton value="+" oncomplete="dlgPontoForteInterno.show()" process="@this" actionListener="#{pontoForteInternoBean.newPontoForteInterno}" update=":frmpfint" /> 
-                    <h:selectOneMenu id="planolistaPfoi"  style="width: 140px" value="#{planoBean.pontosfortesinternos.pontoforteinterno}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                    <p:selectOneMenu id="planolistaPfoi"  style="width: 140px"
+                                     value="#{planoBean.pontosfortesinternos.pontoforteinterno}" 
+                                     converter="IndexedConverter" 
+                                     filter="true" filterMatchMode="startsWith"
                                      required="true" label="Lista de Pontos fortes Internos"  >
                         <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{pontoForteInternoBean.selectItemsPontoForteInterno}" />
-                    </h:selectOneMenu>                                  
+                    </p:selectOneMenu>                                  
                     <p:commandButton value="Inserir" process="panelPfoi" update="tabPontos:dtPfoi insPanelPfoi :messages" action="#{planoBean.addPontoForteInterno}" />                                    
 
                 </h:panelGrid>                               
@@ -119,11 +131,13 @@
                     </h:panelGrid>                                    
                     <h:outputLabel value=" " />
                     <p:commandButton value="+" oncomplete="dlgPontoForteExterno.show()" process="@this" action="#{pontoForteExternoBean.newPontoForteExterno}" update=":frmpfext" /> 
-                    <h:selectOneMenu id="planolistaPfoe"  style="width: 140px" value="#{planoBean.pontosfortesexternos.pontoforteexterno}" converter="IndexedConverter" 
-                                     styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Lista Pontos Fortes Externos"  >
+                    <p:selectOneMenu id="planolistaPfoe"  style="width: 140px" value="#{planoBean.pontosfortesexternos.pontoforteexterno}" 
+                                     converter="IndexedConverter" 
+                                     filter="true" filterMatchMode="startsWith"
+                                     required="true" label="Lista Pontos Fortes Externos"  >
                         <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{pontoForteExternoBean.selectItemsPontoForteExterno}" />
-                    </h:selectOneMenu>                      
+                    </p:selectOneMenu>                      
                     <p:commandButton value="Inserir" process="panelPfoe" update="tabPontos:dtPfoe insPanelPfoe :messages" action="#{planoBean.addPontoForteExterno}" >                                   
                     </p:commandButton>
                 </h:panelGrid>                            

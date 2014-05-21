@@ -17,7 +17,7 @@
                    
                 </h:panelGrid>
                  <p:column colspan="2">
-                     <p:commandButton  update="frmProduto, :messages"  oncomplete="dlgProduto.hide();" actionListener="#{produtoBean.saveProduto}" value="Salvar"/>
+                     <p:commandButton  update="frmProduto, :frmPlano:tabGeral:tabProd:planolistaProdutos, :messages"  oncomplete="dlgProduto.hide();" actionListener="#{produtoBean.saveProduto}" value="Salvar"/>
                      <p:commandButton   oncomplete="dlgProduto.hide();" immediate="true" actionListener="#{produtoBean.cancelProduto}" value="Cancelar"/>
                     </p:column>
             </h:form>

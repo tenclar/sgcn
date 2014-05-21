@@ -22,7 +22,7 @@
                 update="frmBuscaEquip, opDataTableEquip, :messages" 
                 icon="ui-icon-search"   /> 
         </p:outputPanel>
-        <p:commandButton  value="+"  process="@this" update=":frmEquipamento" onkeydown="setaFoco(this)"  actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show();document.getElementById('equipamentoNome').focus();" />                                    
+        <p:commandButton  value="+"  process="@this" update=":frmEquipamento"   actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show();" />                                    
         <p:separator  />
 
         <br />

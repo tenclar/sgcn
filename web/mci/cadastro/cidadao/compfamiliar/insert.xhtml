@@ -84,6 +84,7 @@
                     
                     <h:panelGroup>
                         <p:selectOneMenu id="depnecesp" 
+                                         filter="true" filterMatchMode="startsWith"
                                          tabindex="5"
                                          value="#{cidadaoBean.dependente.necEspecial}" 
                                          required="true"  
@@ -98,6 +99,7 @@
                     </h:panelGroup>
 
                     <p:selectOneMenu id="depesc" tabindex="6"
+                                     filter="true" filterMatchMode="startsWith"
                                      style="width:120px" 
                                      value="#{cidadaoBean.dependente.escolaridade}"
                                      required="true" converter="IndexedConverter"  >

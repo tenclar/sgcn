@@ -20,21 +20,25 @@
                     <h:outputLabel  value="Bairro / Ramal: " />    
                     <h:outputLabel  value="" />    
                     <h:outputLabel  value="" />    
-                    <h:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
+                    <p:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  
+                                     filter="true" filterMatchMode="startsWith" required="true" converter="IndexedConverter" >
                         <f:selectItems value="#{enderecoBean.selectItemsEstado}" />
                         <p:ajax update="endbuscacid, endbuscabairro" listener="#{enderecoBean.handlePesquisaEstadoChange}" />
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
 
-                    <h:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                    <p:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}" 
+                                     filter="true" filterMatchMode="startsWith"
+                                      required="true" converter="IndexedConverter" >
                         <f:selectItems value="#{enderecoBean.selectItemsCidade}" />
                         <p:ajax update="endbuscabairro" listener="#{enderecoBean.handlePesquisaCidadeChange}" />
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
 
-                    <h:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                    <p:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  
+                                     filter="true" filterMatchMode="startsWith"
                                      converter="IndexedConverter"   >
 
                         <f:selectItems value="#{enderecoBean.selectItemsBairro}" />                            
-                    </h:selectOneMenu> 
+                    </p:selectOneMenu> 
                     <p:commandButton id="itBuscaend" tabindex="0" process="@this, opbuscaend , listaloc"   actionListener="#{enderecoBean.buscaEnderecoDetalhado}" update="@this, opBuscaEndInsert, listaloc,:messages" icon="ui-icon-search" /> 
                     <p:commandButton process="@this" tabindex="2" value="+"  oncomplete="dlgEndereco.show()" update=":frmLoc" action="#{enderecoBean.newEnd(enderecoBean.pesquisaEstado,enderecoBean.pesquisaCidade,enderecoBean.buscaendereco)}" />
                 </h:panelGrid>

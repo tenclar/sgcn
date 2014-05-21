@@ -15,14 +15,14 @@
     <h:form id="frmPlanNew"  prependId="false">                
         <p:fieldset legend="Identificação" id="panelPlanInsert" >
             <h:outputLabel for="plandata" value="Data Cadastro:" />
-            <p:calendar id="plandata" showOn="button"  size="7" locale="pt_BR" value="#{planoBean.plano.datacreated}" pattern="dd/MM/yyyy" >
+            <p:calendar id="plandata" showOn="button"  size="10" locale="pt_BR" value="#{planoBean.plano.datacreated}" pattern="dd/MM/yyyy" >
                 
             </p:calendar>
             <fieldset>
                 <legend>Responsável Empreendimento </legend>
                 <h:panelGroup >
                     <h:outputLabel for="planoNomeRespEmpr" value="Nome: "  />
-                    <p:inputText id="planoNomeRespEmpr" value="#{planoBean.plano.cidadao.nome}" size="80" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                                           
+                    <p:inputText id="planoNomeRespEmpr" value="#{planoBean.plano.cidadao.nome}" size="60" readonly="true" disabled="true"  style="background: #e8e1b5;color: #023401"      />                                                                                           
                     <p:commandButton process="@this" value="localizar" icon="ui-icon-search" oncomplete="dlgRespEmp.show()" title="Busca" action="#{cidadaoBuscaBean.clear}" /> 
                     <p:message for="planoRespEmprHidden" showDetail="true" />
                     <h:inputHidden  value="#{planoBean.plano.cidadao.nome}" required="true" id="planoRespEmprHidden" requiredMessage="Responsável não selecionado" />

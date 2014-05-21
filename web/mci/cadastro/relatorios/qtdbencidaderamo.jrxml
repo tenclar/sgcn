@@ -16,6 +16,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
+	<parameter name="demanda" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[#total de monitoramento por beneficiário
 select
@@ -32,7 +33,7 @@ inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
 where c.tipopessoa = 'CID'
 
 and c.benstatus = 'BENEFICIADO'
-#AND  YEAR(eq.dataentrega) = 2011
+AND  YEAR(eq.dataentrega) = 2011
 #and (SELECT count(eq.cidadao_id) as totale FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id ) >0
 
 GROUP BY

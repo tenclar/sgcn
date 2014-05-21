@@ -58,7 +58,7 @@ public class ConvenioBean implements Serializable {
     private Anexo anexo;
     private Arquivo arq;
     private StreamedContent file;
-    
+
     private boolean inserirContra;
     private Telefone telefone;
     private boolean nvigencia;
@@ -75,8 +75,6 @@ public class ConvenioBean implements Serializable {
     public void setContrapartida(ContraPartida contrapartida) {
         this.contrapartida = contrapartida;
     }
-    
-    
 
     public HistoricoInterno getHistoricoInterno() {
         return historicoInterno;
@@ -207,14 +205,12 @@ public class ConvenioBean implements Serializable {
     public void setConvenio(Convenio convenio) {
         this.convenio = convenio;
 
-
     }
 
     public void newConvenio() {
 
         this.convenio = new Convenio();
-        this.convenio.setTipoconvenio(TipoConvenio.FEDERAL);        
-        
+        this.convenio.setTipoconvenio(TipoConvenio.FEDERAL);
 
     }
 
@@ -245,7 +241,7 @@ public class ConvenioBean implements Serializable {
     public void save() {
         ConvenioDAO convenioDAO = new ConvenioDAO();
         convenioDAO.saveConvenio(convenio);
-        
+
     }
 
     public void merge() {
@@ -267,13 +263,10 @@ public class ConvenioBean implements Serializable {
         this.convenio.getInvestimentos().toString();
         this.convenio.getVigencias().toString();
         this.convenio.getAditivos().toString();
-        
-
-
-
 
     }
-    public void editConvenioView(){
+
+    public void editConvenioView() {
         ConvenioDAO convenioDAO = new ConvenioDAO();
         this.convenio = convenioDAO.getConvenio(this.convenio.getId());
         this.convenio.getAditivos().toString();
@@ -330,7 +323,6 @@ public class ConvenioBean implements Serializable {
         }
         cdao.saveConvenio(convenio);
 
-
     }
 
     public void editarContato() {
@@ -342,7 +334,6 @@ public class ConvenioBean implements Serializable {
         ContatoDAO contatoDAO = new ContatoDAO();
         Contato c = contatoDAO.getContato(this.contato.getId());
         this.contato = c;
-
 
     }
 
@@ -364,7 +355,7 @@ public class ConvenioBean implements Serializable {
         this.investimento.setConvenio(convenio);
         this.convenio.getInvestimentos().add(investimento);
         this.save();
-        
+
         this.investimento = new Investimento();
     }
 
@@ -381,13 +372,12 @@ public class ConvenioBean implements Serializable {
 
     public void histAdd() {
         if (inserirHist == true) {
-            
+
             this.convenio.getHistoricos().add(historico);
             this.historico.setConvenio(convenio);
             inserirHist = false;
         }
         this.save();
-        
 
     }
 
@@ -399,7 +389,7 @@ public class ConvenioBean implements Serializable {
     public void histCancel() {
         this.historico = null;
     }
-    
+
     public void histIntNew() {
         this.historicoInterno = new HistoricoInterno();
         this.arq = new Arquivo();
@@ -410,7 +400,7 @@ public class ConvenioBean implements Serializable {
         if (inserirHistInt == true) {
             this.historicoInterno.setConvenio(convenio);
             this.convenio.getHistoricoInternos().add(historicoInterno);
-            
+
             inserirHistInt = false;
         }
         this.save();
@@ -434,7 +424,7 @@ public class ConvenioBean implements Serializable {
 
     public void vigenciaAdd() {
         if (nvigencia == true) {
-            
+
             this.convenio.getVigencias().add(vigencia);
             this.vigencia.setConvenio(convenio);
             this.vigencia = new Vigencia();
@@ -450,21 +440,21 @@ public class ConvenioBean implements Serializable {
 
     public void aditivoAdd() {
         if (nadtivo == true) {
-            
+
             this.convenio.getAditivos().add(aditivo);
             this.aditivo.setConvenio(convenio);
             this.aditivo = new Aditivo();
             nadtivo = false;
         }
         this.save();
-        
+
     }
 
     public void handleFileUpload(FileUploadEvent event) {
         try {
             //Cria um arquivo UploadFile, para receber o arquivo do evento
             UploadedFile arqu = event.getFile();
-            InputStream in = new BufferedInputStream(arqu.getInputstream());
+            //InputStream in = new BufferedInputStream(arqu.getInputstream());
             //copiar para pasta do projeto
             this.arquivo = caracteres(arqu.getFileName());
             File fille = new File("/home/sgcn/mac/arquivos/" + this.arquivo);
@@ -472,19 +462,23 @@ public class ConvenioBean implements Serializable {
             ///file.mkdirs();
             //O método file.getAbsolutePath() fornece o caminho do arquivo criado
             //Pode ser usado para ligar algum objeto do banco ao arquivo enviado
-            
             this.caminho = fille.getAbsolutePath();
-            FileOutputStream fout = new FileOutputStream(fille);
-            while (in.available() != 0) {
-                fout.write(in.read());
-            }
-            fout.close();
+            //FileOutputStream fout = new FileOutputStream(fille);
+
+            byte[] conteudo = event.getFile().getContents();  // daqui pra baixo é somente operações de IO.  
+            FileOutputStream fos = new FileOutputStream(caminho);
+            fos.write(conteudo);
+            fos.close();
+          //  while (in.available() != 0) {
+            //     fout.write(in.read());
+            // }
+            //fout.close();
             this.anexoAdd();
-            FacesMessage msg = new FacesMessage("Succesful", this.caminho + " foi Enviado.");
+            FacesMessage msg = new FacesMessage("Succesful", this.arquivo + " foi Enviado.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
         } catch (IOException ex) {
-            FacesMessage msg = new FacesMessage("Error", this.caminho + " não Enviado. " + ex.getMessage());
+            FacesMessage msg = new FacesMessage("Error", this.arquivo + " não Enviado. " + ex.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
         }
@@ -495,28 +489,34 @@ public class ConvenioBean implements Serializable {
         try {
             //Cria um arquivo UploadFile, para receber o arquivo do evento
             UploadedFile arqu = event.getFile();
-            InputStream in = new BufferedInputStream(arqu.getInputstream());
+           // InputStream in = new BufferedInputStream(arqu.getInputstream());
             //copiar para pasta do projeto
-            
+
             this.arquivo = caracteres(arqu.getFileName());
             File fille = new File("/home/sgcn/mac/arquivos/interno/" + arqu.getFileName());
 
             ///file.mkdirs();
             //O método file.getAbsolutePath() fornece o caminho do arquivo criado
             //Pode ser usado para ligar algum objeto do banco ao arquivo enviado
-            
             this.caminho = fille.getAbsolutePath();
-            FileOutputStream fout = new FileOutputStream(fille);
-            while (in.available() != 0) {
-                fout.write(in.read());
-            }
-            fout.close();
+            ///FileOutputStream fout = new FileOutputStream(fille);
+            
+             byte[] conteudo = event.getFile().getContents();  // daqui pra baixo é somente operações de IO.  
+             
+            FileOutputStream fos = new FileOutputStream(caminho);
+            fos.write(conteudo);
+            fos.close();
+            
+//            while (in.available() != 0) {
+//                fout.write(in.read());
+//            }
+//            fout.close();
             this.arquivoAdd();
-            FacesMessage msg = new FacesMessage("Sucesso", this.caminho + " foi Envidado.");
+            FacesMessage msg = new FacesMessage("Sucesso", this.arquivo + " foi Envidado.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
         } catch (IOException ex) {
-            FacesMessage msg = new FacesMessage("Erro", this.caminho + " não Enviado. " + ex.getMessage());
+            FacesMessage msg = new FacesMessage("Erro", this.arquivo + " não Enviado. " + ex.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
         }
@@ -542,15 +542,17 @@ public class ConvenioBean implements Serializable {
         //  System.out.println("arquivo : " + file.getContentType());
 
     }
-    public String caracteres(String texto){
+
+    public String caracteres(String texto) {
         String ComAcentos = "!@#$%¨&*()-?:{}][ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç ";
         String SemAcentos = "_________________AAAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUuuuuCc_";
-        for (int i = 0; i < ComAcentos.length(); i++)
-            texto = texto.replace(ComAcentos.charAt(i), SemAcentos.charAt(i)).trim() ;
+        for (int i = 0; i < ComAcentos.length(); i++) {
+            texto = texto.replace(ComAcentos.charAt(i), SemAcentos.charAt(i)).trim();
+        }
           //  texto = texto.replace(ComAcentos[i].toString(), SemAcentos[i].toString());
-        
+
         return texto;
-        
+
         //0800 942 0222 marcia fernandes
     }
 
@@ -571,7 +573,6 @@ public class ConvenioBean implements Serializable {
             System.out.println("Erro add anexo");
         }
 
-
     }
 
     public void arquivoAdd() {
@@ -587,25 +588,26 @@ public class ConvenioBean implements Serializable {
             System.out.println("Erro add anexo");
         }
 
-
     }
-    public void contranew(){
+
+    public void contranew() {
         this.contrapartida = new ContraPartida();
         this.inserirContra = true;
     }
-    
-    public void contraSave(){
-        
-        if (this.inserirContra  == true){
+
+    public void contraSave() {
+
+        if (this.inserirContra == true) {
             convenio.getContrapartidas().add(contrapartida);
             contrapartida.setConvenio(convenio);
             this.inserirContra = false;
         }
         ConvenioDAO convenioDAO = new ConvenioDAO();
         convenioDAO.saveConvenio(convenio);
-        
+
     }
-     public void contraedit(){
+
+    public void contraedit() {
         this.inserirContra = false;
     }
 
@@ -618,7 +620,6 @@ public class ConvenioBean implements Serializable {
 
         //this.convenio = cDAO.getConvenio(c.getId());  
         listausr.add(convenio);
-
 
         FacesContext fcontexts = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) fcontexts.getExternalContext().getContext();
@@ -637,6 +638,7 @@ public class ConvenioBean implements Serializable {
         JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
         JasperExportManager.exportReportToPdf(jasperPrint);
         //response.getOutputStream().write(x1);
+        
         responseStream.flush();
         responseStream.close();
         fcontexts.renderResponse();

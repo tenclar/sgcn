@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.8150000000000004"/>
-	<property name="ireport.x" value="16"/>
-	<property name="ireport.y" value="0"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
-	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
-	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
-	<style name="Detail" mode="Transparent" fontName="Times New Roman" fontSize="10" pdfFontName="Times-Roman"/>
-	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+	<property name="ireport.x" value="294"/>
+	<property name="ireport.y" value="12"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Arial" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Arial" fontSize="10" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Arial" pdfFontName="Times-Roman">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 			<style mode="Opaque" backcolor="#F0EFEF"/>
@@ -20,8 +20,7 @@
 		<![CDATA[select cast(c.tipopessoa as string) as tipopessoa, cast(c.statuscid as string) as statuscid, cast(c.benstatus as string) as benstatus, cast(count(c.id) as int) as total
 from Cidadao c
 group by c.tipopessoa, c.statuscid, c.benstatus
-order by c.tipopessoa desc, c.benstatus
-]]>
+order by c.tipopessoa desc, c.benstatus]]>
 	</queryString>
 	<field name="tipopessoa" class="java.lang.String"/>
 	<field name="statuscid" class="java.lang.String"/>

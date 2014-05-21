@@ -50,8 +50,8 @@
                     </p:column> 
                      
                     <p:column headerText="ações" style=" text-align: center; width: 220px" >
-                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Associados" title="Adicionar Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgCidCoopTurma.show();" update="frmCidCoopTurma" actionListener="#{turmaBean.selectCooperativa}"/>
-                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Adicionar Todos" title="Adicionar Todos Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgAlunosTurma.show();" update="frmListaAlunosTurma" actionListener="#{turmaBean.addCooperativa}"/>
+                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Associados" title="Adicionar Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgCidCoopTurma.show();" update=":frmCidCoopTurma" actionListener="#{turmaBean.selectCooperativa}"/>
+                        <p:commandButton icon="ui-icon ui-icon-refresh" value="Adicionar Todos" title="Adicionar Todos Associados" process="@this" oncomplete="dlgCooperativaTurma.hide(); dlgAlunosTurma.show();" update=":frmListaAlunosTurma" actionListener="#{turmaBean.addCooperativa}"/>
                     </p:column>
                 </p:dataTable>
             </p:outputPanel>

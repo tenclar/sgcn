@@ -47,7 +47,7 @@
                              rendered="#{planoBean.buscacpf}"> 
                     <f:validator validatorId="cpfvalidator"  />
                 </p:inputText>
-                <p:inputText id="cbBuscanome" label="Campo Busca" autocomplete="off" 
+                <p:inputText id="cbBuscanome" label="Campo Busca"  autocomplete="off" 
                              value="#{planoBean.campoBusca}" 
                              size="70" onkeyup="this.value = this.value.toUpperCase();" 
                              required="true" rendered="#{planoBean.buscanome}" /> 
@@ -56,7 +56,7 @@
                              size="70" onkeyup="this.value = this.value.toUpperCase();" 
                              required="true" rendered="#{planoBean.buscanomeresp}" /> 
         </p:outputPanel>
-        <p:commandButton    action="#{planoBean.localiza}"  update="frmListPlano,:frmListaPlano, :messages" 
+        <p:commandButton    action="#{planoBean.localiza}"  value="Localizar" update="frmListPlano,:frmListaPlano, :messages" 
                             icon="ui-icon-search"         oncomplete="verificadado(args);"
                                /> 
 
@@ -78,7 +78,7 @@
                 
                  <p:column  headerText="ações" style="width: 40px" >     
 
-                    <p:commandButton icon=" ui-icon-refresh"  title="atualizar" process="@this"  update=":frmPlano"  oncomplete="plancad.show();cadlist.close();tabGeral.select(0);tabIdent.select(0)" action="#{planoBean.editPlano}" />
+                     <p:commandButton icon=" ui-icon-refresh"  title="atualizar"  process="@this"  update=":frmPlano"  oncomplete="plancad.show();cadlist.close();tabGeral.select(0);tabIdent.select(0);tabInfoResp.select(0);tabPlanBenef.select(0);" action="#{planoBean.editPlano}" />
 
                     <p:commandButton icon=" ui-icon-print" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{planoBean.imprimir}"   title="imprimir"    />
                 </p:column>

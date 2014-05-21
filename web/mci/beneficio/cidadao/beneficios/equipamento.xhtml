@@ -12,6 +12,7 @@
             <p:outputPanel id="tbEquip" >                 
                 <p:dataTable value="#{beneficiadoBean.cidadao.equipamentossecretarias}"  var="at"  
                               paginator="true"  
+                              rowKey="#{at.id}"
                               paginatorAlwaysVisible="false" rows="8"  
                               rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx">
                     <p:column style="width: 250px"  headerText="Data" >                                

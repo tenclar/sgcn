@@ -58,8 +58,10 @@
             <p:dataTable var="item" value="#{turmaBean.dataModelListaCid}" 
                          paginator="true" paginatorAlwaysVisible="false" 
                          paginatorPosition="bottom" 
-                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" 
-                         rows="8" emptyMessage="Efetue uma Consulta" style="width: 100%;min-height: 400px"  >
+                         rowKey="#{item.id}"
+                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+                         rowIndexVar="rowIx" 
+                         rows="8" emptyMessage="Efetue uma Consulta" style="width: 100%;"  >
 
                 
                 <p:column headerText="CPF"  style="width:130px; text-align: center;" > 
@@ -73,7 +75,13 @@
                 </p:column> 
 
                 <p:column headerText="ações" style=" text-align: center; width: 100px" >
-                    <p:commandButton id="addcidturma" icon="ui-icon ui-icon-plus" value="Adicionar" title="Adicionar" process="@this" oncomplete="dlgCidadaoTurma.hide();" update=":frmListaAlunosTurma tbcidadao" actionListener="#{turmaBean.addCidadao}"/>
+                    <p:commandButton id="addcidturma" icon="ui-icon-plus"
+                                     
+                                     title="Adicionar"
+                                     process="@this" 
+                                     oncomplete="dlgCidadaoTurma.hide();" 
+                                     update=":frmListaAlunosTurma, :frmCidadaoTurma:tbcidadao" 
+                                     actionListener="#{turmaBean.addCidadao}"/>
                 </p:column>
             </p:dataTable>
 

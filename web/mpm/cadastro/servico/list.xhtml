@@ -6,10 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
    
-    <h:body>
+    
         <h:form id="frmListaServico" prependId="false">
             <p:commandButton process="@this"  update=":frmServico" oncomplete="dlgServico.show()" value="Novo" actionListener="#{servicoBean.newServico}"  />
-       
+     
             
                 <p:dataTable id="tbServico"  var="item" value="#{servicoBean.listaServicos}" widgetVar="tbServicos" style="width: 500px;height: auto; text-align: center;" paginatorPosition="bottom"  paginator="true"  paginatorAlwaysVisible="false" rows="8" >
                     <f:facet name="header">  
@@ -39,10 +39,10 @@
 
                     </p:column>
 
-                
+                </p:dataTable>
 
-            </p:outputPanel >
+          
         </h:form>
-    </h:body>
+    
 </ui:component>
 

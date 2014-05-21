@@ -506,11 +506,18 @@ public class PlanoBean implements Serializable {
     public void editPlano() {
 
         PlanoDAO planoDAO = new PlanoDAO();
-        facesutils.cleanSubmittedValues(panelPlano);
+        //facesutils.cleanSubmittedValues(panelPlano);
         Plano p = (Plano) (this.listaPlanos.getRowData());
         this.plano = planoDAO.getPlano(p.getId());
         plano.getMicrocredito().getMicrolocaisinvestidos().toString();
         plano.getMicrocredito().getMicrolocaisinvestfin().toString();
+        plano.getCidadao().getHistdomicilio().toString();
+        plano.getCidadao().getCidbensduraveis().toString();
+        plano.getCidadao().getCidBenHabits().toString();
+        plano.getCidadao().getCidbBenSociais().toString();
+        plano.getCidadao().getCursosSecretarias();
+        plano.getCidadao().getEquipamentossecretarias();
+        
         this.produtos = new Produtos();
         this.servicos = new Servicos();
         this.metasempresarais = new MetasEmpresariais();

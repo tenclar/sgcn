@@ -3,8 +3,8 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
               xmlns:h="http://java.sun.com/jsf/html"
               xmlns:ui="http://java.sun.com/jsf/facelets"
-             xmlns:p="http://primefaces.org/ui"
-              
+              xmlns:p="http://primefaces.org/ui"
+
               xmlns:f="http://java.sun.com/jsf/core">
 
 
@@ -59,22 +59,22 @@
                 </p:fieldset>
             </h:panelGrid>
         </fieldset>
-
-        <p:tabView id="tabInfoResp" widgetVar="tabInfoResp"  rendered="#{not empty planoBean.plano.cidadao.nome}"   >
-            <p:tab title="Caracteríticas do Domicílio" id="tabcaracdom" >  
+        <!--        rendered="# {not empty planoBean.plano.cidadao.nome}"-->
+        <p:tabView id="tabInfoResp" widgetVar="tabInfoResp"      >
+            <p:tab title="Caracteríticas do Domicílio"  >  
                 <ui:include src="../domicilio/lista/index.xhtml"  /> 
                 <p:separator />
-                <h:panelGroup >
-                    <!--                    <p:commandButton value="voltar" process="@this" immediate="true"  update="tabIdent" oncomplete="tabIdent.select(0);" />                        -->
-                    <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" oncomplete="tabInfoResp.select(1);" />                                                  
-                </h:panelGroup> 
+
+                <!--                    <p:commandButton value="voltar" process="@this" immediate="true"  update="tabIdent" oncomplete="tabIdent.select(0);" />                        -->
+                <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" oncomplete="tabInfoResp.select(1);" />                                                  
+
             </p:tab>  
-            <p:tab title="bens duráveis" id="tabbensduraveis" >
+            <p:tab title="bens duráveis"  >
                 <ui:include src="../bensduraveis/lista/index.xhtml"  />                    
                 <p:commandButton value="voltar" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" immediate="true" oncomplete="tabInfoResp.select(0);" />                                                                     
                 <p:commandButton value="próximo" process="@this" update=":frmPlano:tabGeral:tabIdent:tabInfoResp" oncomplete="tabInfoResp.select(2);" />                                                  
             </p:tab>
-            <p:tab title="Benefícios" id="tabbeneficios"   >   
+            <p:tab title="Benefícios"    >   
                 <p:tabView id="tabPlanBenef" widgetVar="tabPlanBenef"  >
                     <p:tab title="Cursos">
                         <ui:include src="../beneficiosecretaria/curso.xhtml"  />  

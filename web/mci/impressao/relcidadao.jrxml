@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="360117f9-6159-430f-b19a-847c3c28c869">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="270"/>
 	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<pen lineWidth="1.0"/>
 		<box leftPadding="2">
@@ -30,7 +30,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString language="hql">
-		<![CDATA[from Cidadao c]]>
+		<![CDATA[from Cidadao c where c.cpf = '72728434204']]>
 	</queryString>
 	<field name="ano" class="java.lang.Integer"/>
 	<field name="anodemanda" class="java.lang.Integer"/>
@@ -144,14 +144,14 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="238">
+		<band height="290">
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="833d0c8c-88b2-45d3-889e-cbe959eb80bd" style="fields" x="472" y="40" width="83" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="833d0c8c-88b2-45d3-889e-cbe959eb80bd" style="fields" x="472" y="65" width="83" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{publico}.getNome()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="f33ed450-80e7-4c9c-bd71-5aa415c6e0ec" style="columnHeader" x="80" y="26" width="392" height="15"/>
+				<reportElement uuid="f33ed450-80e7-4c9c-bd71-5aa415c6e0ec" style="columnHeader" x="80" y="51" width="392" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -159,12 +159,12 @@
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="97494b51-f5da-4734-827a-0d125641060f" style="fields" x="80" y="40" width="392" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="97494b51-f5da-4734-827a-0d125641060f" style="fields" x="80" y="65" width="392" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="d1bb7d22-145f-4546-a7ba-be2835826f1b" style="columnHeader" x="472" y="26" width="83" height="15"/>
+				<reportElement uuid="d1bb7d22-145f-4546-a7ba-be2835826f1b" style="columnHeader" x="472" y="51" width="83" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -172,17 +172,17 @@
 				<text><![CDATA[Público]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement uuid="20690753-44c2-4b73-b278-0e8ec8cbd828" style="fields" x="120" y="70" width="78" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="20690753-44c2-4b73-b278-0e8ec8cbd828" style="fields" x="120" y="95" width="78" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{datanasc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="67bc5d31-711c-40ca-b152-d14809c61d45" style="fields" x="472" y="70" width="83" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="67bc5d31-711c-40ca-b152-d14809c61d45" style="fields" x="472" y="95" width="83" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{expedidor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="071c8b88-11db-4b3f-843c-fbb94f8fdca8" style="columnHeader" x="472" y="55" width="83" height="15"/>
+				<reportElement uuid="071c8b88-11db-4b3f-843c-fbb94f8fdca8" style="columnHeader" x="472" y="80" width="83" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -190,7 +190,7 @@
 				<text><![CDATA[Org Exp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b267079c-31df-4ddc-a6c4-7910312db270" style="columnHeader" x="120" y="55" width="78" height="15"/>
+				<reportElement uuid="b267079c-31df-4ddc-a6c4-7910312db270" style="columnHeader" x="120" y="80" width="78" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -198,12 +198,12 @@
 				<text><![CDATA[Data Nasc.:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="c66fbe27-3d6a-451b-ad77-764e736cb149" style="fields" x="80" y="70" width="40" height="15"/>
+				<reportElement uuid="c66fbe27-3d6a-451b-ad77-764e736cb149" style="fields" x="80" y="95" width="40" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="92e8a0fd-6825-40f9-a01f-30c36f9f066e" style="columnHeader" x="80" y="55" width="40" height="15"/>
+				<reportElement uuid="92e8a0fd-6825-40f9-a01f-30c36f9f066e" style="columnHeader" x="80" y="80" width="40" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -211,12 +211,12 @@
 				<text><![CDATA[sexo:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="779fd4d2-6ecf-4b02-98f3-63bef3cf67f5" style="fields" x="0" y="70" width="80" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="779fd4d2-6ecf-4b02-98f3-63bef3cf67f5" style="fields" x="0" y="95" width="80" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{apelido}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="2b85794d-5597-4751-8491-b194dd138547" x="0" y="56" width="80" height="15"/>
+				<reportElement uuid="2b85794d-5597-4751-8491-b194dd138547" x="0" y="81" width="80" height="15"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -229,7 +229,7 @@
 			</staticText>
 			<elementGroup>
 				<staticText>
-					<reportElement uuid="f9ebdb4d-dbd7-4664-86ff-0b7df0ffdb2f" style="columnHeader" x="198" y="55" width="47" height="15"/>
+					<reportElement uuid="f9ebdb4d-dbd7-4664-86ff-0b7df0ffdb2f" style="columnHeader" x="198" y="80" width="47" height="15"/>
 					<textElement>
 						<font fontName="SansSerif" size="10" isBold="true"/>
 						<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -237,14 +237,14 @@
 					<text><![CDATA[idade:]]></text>
 				</staticText>
 				<textField>
-					<reportElement uuid="cd026029-619f-4365-bc40-163a0ca98e9f" style="fields" x="198" y="70" width="47" height="15" backcolor="#FFFFFF"/>
+					<reportElement uuid="cd026029-619f-4365-bc40-163a0ca98e9f" style="fields" x="198" y="95" width="47" height="15" backcolor="#FFFFFF"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
 				</textField>
 			</elementGroup>
 			<elementGroup>
 				<staticText>
-					<reportElement uuid="9a7eaf01-4d88-4bd2-89d1-a1a1d51547a6" style="columnHeader" x="0" y="26" width="80" height="15"/>
+					<reportElement uuid="9a7eaf01-4d88-4bd2-89d1-a1a1d51547a6" style="columnHeader" x="0" y="51" width="80" height="15"/>
 					<textElement>
 						<font fontName="SansSerif" size="10" isBold="true"/>
 						<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -252,13 +252,13 @@
 					<text><![CDATA[Data Cadastro:]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy">
-					<reportElement uuid="7c425d07-0ce4-41b2-ae8e-765ffc493e07" style="fields" x="0" y="40" width="80" height="15" backcolor="#FFFFFF"/>
+					<reportElement uuid="7c425d07-0ce4-41b2-ae8e-765ffc493e07" style="fields" x="0" y="65" width="80" height="15" backcolor="#FFFFFF"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{datacreated}]]></textFieldExpression>
 				</textField>
 			</elementGroup>
 			<staticText>
-				<reportElement uuid="3bf3515a-b5c9-4746-8ebc-b5316f406c70" style="columnHeader" x="357" y="55" width="115" height="15"/>
+				<reportElement uuid="3bf3515a-b5c9-4746-8ebc-b5316f406c70" style="columnHeader" x="357" y="80" width="115" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -266,17 +266,17 @@
 				<text><![CDATA[RG:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="b98b3309-2533-49e3-9ebf-1873f577a692" style="fields" x="357" y="70" width="115" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="b98b3309-2533-49e3-9ebf-1873f577a692" style="fields" x="357" y="95" width="115" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement uuid="7277a7c8-3bb0-43e5-aafb-446ba2b1e49b" style="fields" x="0" y="100" width="120" height="15"/>
+				<reportElement uuid="7277a7c8-3bb0-43e5-aafb-446ba2b1e49b" style="fields" x="0" y="125" width="120" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="2aed5ff8-b644-4828-9b00-b3f1b8af67c8" style="columnHeader" x="0" y="85" width="120" height="15"/>
+				<reportElement uuid="2aed5ff8-b644-4828-9b00-b3f1b8af67c8" style="columnHeader" x="0" y="110" width="120" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -284,12 +284,12 @@
 				<text><![CDATA[CPF:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="32da8a02-3d01-4225-abba-97807b5b5555" style="fields" x="120" y="100" width="125" height="15"/>
+				<reportElement uuid="32da8a02-3d01-4225-abba-97807b5b5555" style="fields" x="120" y="125" width="125" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{estadocivil}.getDescricao()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="a5081686-7591-460d-a90d-82867f724326" style="columnHeader" x="120" y="85" width="125" height="15"/>
+				<reportElement uuid="a5081686-7591-460d-a90d-82867f724326" style="columnHeader" x="120" y="110" width="125" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -297,7 +297,7 @@
 				<text><![CDATA[Estado Civil:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="e781350a-33e1-4056-8bb8-d6de9a9cb234" style="fields" x="245" y="100" width="272" height="15"/>
+				<reportElement uuid="e781350a-33e1-4056-8bb8-d6de9a9cb234" style="fields" x="245" y="125" width="272" height="15"/>
 				<box leftPadding="2">
 					<rightPen lineWidth="0.0"/>
 				</box>
@@ -305,7 +305,7 @@
 				<textFieldExpression><![CDATA[$F{naturalidade}.getNome()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="3a0f3c5f-0932-411c-847d-d7559dc199b8" style="columnHeader" x="245" y="85" width="310" height="15"/>
+				<reportElement uuid="3a0f3c5f-0932-411c-847d-d7559dc199b8" style="columnHeader" x="245" y="110" width="310" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -313,17 +313,17 @@
 				<text><![CDATA[Naturalidade:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="0324d788-7a97-4178-aa5f-30269429ed14" style="fields" x="340" y="129" width="47" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="0324d788-7a97-4178-aa5f-30269429ed14" style="fields" x="340" y="154" width="47" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="e35b67d3-f6ba-48fb-886a-712e8a1a7f76" style="fields" x="0" y="129" width="340" height="15"/>
+				<reportElement uuid="e35b67d3-f6ba-48fb-886a-712e8a1a7f76" style="fields" x="0" y="154" width="340" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="c815a51b-f8b4-4246-b3e2-772247369c08" style="columnHeader" x="340" y="115" width="47" height="15"/>
+				<reportElement uuid="c815a51b-f8b4-4246-b3e2-772247369c08" style="columnHeader" x="340" y="140" width="47" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -331,7 +331,7 @@
 				<text><![CDATA[Nº]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="93ac08e0-ce66-4fbe-9a4c-e8f3d5b44172" style="columnHeader" x="0" y="115" width="340" height="15"/>
+				<reportElement uuid="93ac08e0-ce66-4fbe-9a4c-e8f3d5b44172" style="columnHeader" x="0" y="140" width="340" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -339,7 +339,7 @@
 				<text><![CDATA[Endereço:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="bfa2788e-b97f-453e-9d10-b4980f980f41" style="fields" x="517" y="100" width="38" height="15"/>
+				<reportElement uuid="bfa2788e-b97f-453e-9d10-b4980f980f41" style="fields" x="517" y="125" width="38" height="15"/>
 				<box leftPadding="2">
 					<leftPen lineWidth="0.0"/>
 				</box>
@@ -347,12 +347,12 @@
 				<textFieldExpression><![CDATA[$F{naturalidade}.getEstado().getSigla()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="3fbc9c6f-fb3c-47ef-8f09-b577038ecf96" style="fields" x="421" y="159" width="34" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="3fbc9c6f-fb3c-47ef-8f09-b577038ecf96" style="fields" x="421" y="184" width="34" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getEstado().getSigla()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="b39a8d41-7298-4a3b-a55c-ef232abd492a" style="columnHeader" x="421" y="144" width="34" height="15"/>
+				<reportElement uuid="b39a8d41-7298-4a3b-a55c-ef232abd492a" style="columnHeader" x="421" y="169" width="34" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -360,12 +360,12 @@
 				<text><![CDATA[UF]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="da3926ea-986a-4fcb-9f55-e8da7579bc07" style="fields" x="387" y="129" width="168" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="da3926ea-986a-4fcb-9f55-e8da7579bc07" style="fields" x="387" y="154" width="168" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="09a3c23c-354e-4eca-a68c-b4c8062905d3" style="columnHeader" x="198" y="144" width="223" height="15"/>
+				<reportElement uuid="09a3c23c-354e-4eca-a68c-b4c8062905d3" style="columnHeader" x="0" y="169" width="422" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -373,17 +373,17 @@
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="dec29b3d-2ede-4129-bf02-0c251fba08c4" style="fields" x="198" y="159" width="223" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="dec29b3d-2ede-4129-bf02-0c251fba08c4" style="fields" x="0" y="184" width="422" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="f84e2ed1-0370-4039-aad4-b68e1c55903d" style="fields" x="455" y="159" width="100" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="f84e2ed1-0370-4039-aad4-b68e1c55903d" style="fields" x="455" y="184" width="100" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{endereco}.getCep()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="daaf2c95-a3a9-45bb-a2d0-4c8e382945f9" style="columnHeader" x="455" y="144" width="100" height="15"/>
+				<reportElement uuid="daaf2c95-a3a9-45bb-a2d0-4c8e382945f9" style="columnHeader" x="455" y="169" width="100" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -406,7 +406,7 @@
 				<text><![CDATA[Dados Pessoais]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="10a8a215-69cf-4cc0-9c8e-afd8b0ea308d" style="columnHeader" x="332" y="174" width="223" height="15"/>
+				<reportElement uuid="10a8a215-69cf-4cc0-9c8e-afd8b0ea308d" style="columnHeader" x="332" y="229" width="223" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -414,16 +414,16 @@
 				<text><![CDATA[Instituição:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="3c3dc7f5-ecb4-46b9-baec-2de43b93aed5" style="fields" x="332" y="189" width="223" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="3c3dc7f5-ecb4-46b9-baec-2de43b93aed5" style="fields" x="332" y="244" width="223" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="134" y="189" width="198" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="134" y="244" width="198" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{escolaridade}.getGrau()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="134" y="174" width="198" height="15"/>
+				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="134" y="229" width="198" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -431,7 +431,7 @@
 				<text><![CDATA[Escolaridade:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1b1bb25f-9fd4-4ab6-8137-6b1b8db5ce16" style="columnHeader" x="387" y="115" width="168" height="15"/>
+				<reportElement uuid="1b1bb25f-9fd4-4ab6-8137-6b1b8db5ce16" style="columnHeader" x="387" y="140" width="168" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -439,7 +439,7 @@
 				<text><![CDATA[Bairro / Ramal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ac305026-21a8-4c44-98b8-75dc0586e5b5" style="columnHeader" x="0" y="144" width="198" height="15"/>
+				<reportElement uuid="ac305026-21a8-4c44-98b8-75dc0586e5b5" style="columnHeader" x="0" y="199" width="555" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -447,7 +447,7 @@
 				<text><![CDATA[Complemento:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="0b57d90d-2bc7-4fe8-9225-b85335178fc0" style="fields" x="0" y="159" width="198" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="0b57d90d-2bc7-4fe8-9225-b85335178fc0" style="fields" x="0" y="214" width="555" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
 			</textField>
@@ -469,12 +469,12 @@
 				<text><![CDATA[Benefício:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="b98b3309-2533-49e3-9ebf-1873f577a692" style="fields" x="245" y="70" width="112" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="b98b3309-2533-49e3-9ebf-1873f577a692" style="fields" x="245" y="95" width="112" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="3bf3515a-b5c9-4746-8ebc-b5316f406c70" style="columnHeader" x="245" y="55" width="112" height="15"/>
+				<reportElement uuid="3bf3515a-b5c9-4746-8ebc-b5316f406c70" style="columnHeader" x="245" y="80" width="112" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -482,7 +482,7 @@
 				<text><![CDATA[NIS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cdb559ab-6975-44a6-86b5-2f103ea45b48" style="columnHeader" x="421" y="204" width="134" height="15"/>
+				<reportElement uuid="cdb559ab-6975-44a6-86b5-2f103ea45b48" style="columnHeader" x="421" y="259" width="134" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -490,17 +490,17 @@
 				<text><![CDATA[Remuneração:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="3c3dc7f5-ecb4-46b9-baec-2de43b93aed5" style="fields" x="198" y="219" width="223" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="3c3dc7f5-ecb4-46b9-baec-2de43b93aed5" style="fields" x="198" y="274" width="223" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{trabFuncao}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="0" y="219" width="198" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="0" y="274" width="198" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{trabLocal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="0" y="204" width="198" height="15"/>
+				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="0" y="259" width="198" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -508,12 +508,12 @@
 				<text><![CDATA[Local de Trabalho:]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="6c4540ed-0dd8-4747-89ad-2cbc91d6fed7" style="fields" x="421" y="219" width="134" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="6c4540ed-0dd8-4747-89ad-2cbc91d6fed7" style="fields" x="421" y="274" width="134" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{trabRem}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="10a8a215-69cf-4cc0-9c8e-afd8b0ea308d" style="columnHeader" x="198" y="204" width="223" height="15"/>
+				<reportElement uuid="10a8a215-69cf-4cc0-9c8e-afd8b0ea308d" style="columnHeader" x="198" y="259" width="223" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -521,7 +521,7 @@
 				<text><![CDATA[Função:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="0" y="174" width="134" height="15"/>
+				<reportElement uuid="b66e8c23-cc85-4900-b5a9-1fc641423c83" style="columnHeader" x="0" y="229" width="134" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
@@ -529,9 +529,33 @@
 				<text><![CDATA[Necessidade Especial:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="0" y="189" width="134" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="bc41a8ee-d786-4b02-bcbb-63a2e427a83d" style="fields" x="0" y="244" width="134" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{necespecial}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e69a9e05-7836-45ef-a5d7-468452c53451" x="0" y="31" width="144" height="20"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ramo Empreendimento:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c1d2cdb5-5e75-4ee8-b9ed-e067f4778ff4" x="144" y="31" width="411" height="20"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ramoempreendimento}.getNome()]]></textFieldExpression>
 			</textField>
 		</band>
 		<band>
@@ -604,24 +628,9 @@
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_cidbensduraveis.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="89">
+		<band height="43">
 			<staticText>
-				<reportElement uuid="26a42e52-40e2-4bee-a368-eaed68dac050" style="columnHeader" mode="Opaque" x="0" y="0" width="555" height="26" backcolor="#ECEAEA"/>
-				<box leftPadding="2">
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Informações do Empreendimento]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="2b0eb2e2-1491-43fd-a4ce-f61359c3a101" mode="Opaque" x="0" y="46" width="555" height="20" backcolor="#ECEAEA"/>
+				<reportElement uuid="2b0eb2e2-1491-43fd-a4ce-f61359c3a101" mode="Opaque" x="0" y="2" width="555" height="20" backcolor="#ECEAEA"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -631,10 +640,10 @@
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descrição do Empreendimento]]></text>
+				<text><![CDATA[Observações]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement uuid="4e39053d-6d68-41bc-8a94-e91cf0e8fdc3" x="0" y="66" width="555" height="20"/>
+				<reportElement uuid="4e39053d-6d68-41bc-8a94-e91cf0e8fdc3" x="0" y="22" width="555" height="20"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -643,30 +652,6 @@
 				</box>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{resumo}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="e69a9e05-7836-45ef-a5d7-468452c53451" x="0" y="26" width="144" height="20"/>
-				<box leftPadding="5">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ramo do Empreendimento:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="c1d2cdb5-5e75-4ee8-b9ed-e067f4778ff4" x="144" y="26" width="411" height="20"/>
-				<box leftPadding="5">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ramoempreendimento}.getNome()]]></textFieldExpression>
 			</textField>
 		</band>
 		<band>

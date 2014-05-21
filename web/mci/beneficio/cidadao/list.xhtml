@@ -34,7 +34,7 @@
                     <f:facet name="header">
                          <p:commandButton   icon="ui-icon-plus"  process="@this"  actionListener="#{beneficiadoBean.novoBeneficiado}" oncomplete="cadBenInd.show();litBenInd.close();"  update=":frmBen"   />                  
                     </f:facet>
-                    <p:commandButton icon="ui-icon-refresh" process="@this"  title="editar" oncomplete="cadBenInd.show();litBenInd.close();" update=":frmBen, :frmBuscaBen" actionListener="#{beneficiadoBean.editBen}"  >
+                    <p:commandButton icon="ui-icon-refresh" process="@this"  title="editar" oncomplete="cadBenInd.show();litBenInd.close();" update=":frmBen, :frmBuscaBen" action="#{beneficiadoBean.editBen}"  >
 
                     </p:commandButton>                                                                         
                     <p:commandButton icon="ui-icon-print"  process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{beneficiadoBean.imprimir}" title="imprimir" >
@@ -50,18 +50,6 @@
 
                     <h:outputText value="#{item.nome}"/>
                 </p:column>                       
-
-
-
-                <!--                <p:column  headerText="Telefone" >                    
-                                    <p:dataTable id="dtTel" var="itel" style="width: 240px" value="# {item.telefones}">
-                                        <p:column headerText="Telefone" >
-                                            <h:outputText value="# {itel.numero}" />
-                                        </p:column>
-                
-                                    </p:dataTable>
-                                </p:column>  -->
-
 
             </p:dataTable>
         </p:outputPanel>

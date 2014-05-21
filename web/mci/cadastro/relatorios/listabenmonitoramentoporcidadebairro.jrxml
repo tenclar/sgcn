@@ -31,21 +31,23 @@ select
 
      pub.nome as publico,
     (SELECT count(eq.cidadao_id) as totale FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id ) as totalequipamento,
-	 (select count(distinct r.datamon) as totalm from mpm_rendimento r where r.plano_id = p.id) as totalmonitoramento
+	 #(select count(distinct r.datamon) as totalm from mpm_rendimento r where r.plano_id = p.id) as totalmonitoramento
+count(distinct r.datamon) as totalmonitoramento
 from cidadao c
 inner join endereco e on e.id = c.endereco_id
 inner join bairro b on b.id = e.bairro_id
 inner join cidade cid on cid.id = b.cidade_id
 inner join mci_publico pub ON  pub.id = c.publico_id
 inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
-left join mpm_plano p ON c.id = p.cidadao_id
+inner join mpm_plano p ON c.id = p.cidadao_id
+left join  mpm_rendimento r on r.plano_id = p.id
 
 where c.tipopessoa = 'CID'
 and c.statuscid = 'INDIVIDUAL'
-and c.benstatus = 'INDIVIDUAL'
+and c.benstatus = 'BENEFICIADO'
 
 GROUP BY
-      cid.nome, b.nome, c.id
+      cid.nome, b.nome, p.id
 
 ORDER BY
        cid.nome asc, b.nome asc
@@ -301,11 +303,23 @@ ORDER BY
 	<columnFooter>
 		<band height="30" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement uuid="b38a19b0-b504-4deb-964f-0c45b84ee98c" x="730" y="4" width="36" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalenc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3ef723ad-d24e-407a-b092-5178a46cb6ea" style="Column header" x="647" y="5" width="83" height="18" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Encubações]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

@@ -20,7 +20,7 @@
             </h:panelGrid>
             <p:separator />
             <h:panelGroup>
-                <p:commandButton value="salvar"  update="formHistInterno, :frmPlano:tabGeral:tabIdent:opTabHistInterno"  oncomplete="dlgHistorico.hide()" action="#{planoBean.histAdd()}" />
+                <p:commandButton value="salvar"  update="formHistInterno, :frmPlano:tabGeral:tabIdent:opTabHistInterno, :messages"  oncomplete="dlgHistorico.hide()" action="#{planoBean.histAdd()}" />
                 <p:commandButton value="cancelar"  update="formHistInterno" immediate="true" oncomplete="dlgHistorico.hide();" action="#{planoBean.histCancel()}" />
             </h:panelGroup>
 

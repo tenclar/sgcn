@@ -22,12 +22,8 @@
 <!--    rendered="# {p:ifGranted('ROLE_ADMIN')}"-->
         <p:outputPanel id="tbConvenio">
             <p:dataTable  var="item" value="#{convenioBean.listaConveniosFederal}" 
-                          style="text-align: center;"
-                          paginatorPosition="bottom"
-                          rows="6"
-                          
-                          paginator="true"  
-                          paginatorAlwaysVisible="false" >
+                          style="text-align: center;" rowKey="#{item.id}"
+                   >
 
                 <p:columnGroup type="header" >
                     <p:row>

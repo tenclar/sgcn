@@ -21,7 +21,7 @@ public class ServicoDAO extends GenericDAO {
     }
 
     public List<Servico> getServicos() {
-        return getPureList(Servico.class, "from Servico servico");
+        return getPureList(Servico.class, "from Servico s order by s.nome");
     }
 //    public void removeServico(Servico servico) {
 //        removePojo(servico);

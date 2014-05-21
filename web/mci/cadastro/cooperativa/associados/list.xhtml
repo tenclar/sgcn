@@ -41,7 +41,7 @@
                     </p:column>  
                 <p:column  headerText="ações" style=" text-align: center; width: 210px" >     
                     <p:commandButton   icon="ui-icon-close"  value="excluir" process="@this" update=":frmCoop:tabView:opdtAssociados" action="#{cooperativaBean.remAssociado()}" title="editar"  >
-                        <f:setPropertyActionListener value="#{item}" target="#{cooperativaBean.cidassociados}" />        
+                        <f:setPropertyActionListener value="#{item}"  target="#{cooperativaBean.cidassociados}" />        
                     </p:commandButton>                                    
 <!--                   
 

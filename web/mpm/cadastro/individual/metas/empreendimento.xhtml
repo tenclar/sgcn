@@ -38,7 +38,11 @@
 
         <h:outputLabel value=" " />
         <p:commandButton value="+" oncomplete="dlgMeta.show()" process="@this" action="#{metaBean.newMeta}" update=":frmMeta" /> 
-        <p:selectOneMenu id="planoListaMetaEmp"  style="width: 230px" value="#{planoBean.metasempresarais.meta}" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Meta"  >
+        <p:selectOneMenu id="planoListaMetaEmp"  style="width: 230px" 
+                         value="#{planoBean.metasempresarais.meta}"
+                         converter="IndexedConverter" 
+                         filter="true" filterMatchMode="startsWith"
+                         required="true" label="Meta"  >
             <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
             <f:selectItems value="#{metaBean.selectItems}" />
         </p:selectOneMenu>

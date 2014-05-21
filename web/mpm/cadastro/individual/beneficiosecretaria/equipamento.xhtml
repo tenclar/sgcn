@@ -12,7 +12,7 @@
                         <p:panel    >                            
                             
                             <p:outputPanel id="dtEquipSecr" >
-                                <p:dataTable  value="#{planoBean.plano.cidadao.equipamentossecretarias}" var="item"  >
+                                <p:dataTable  value="#{planoBean.plano.cidadao.equipamentossecretarias}" var="item" rowKey="#{item.id}"  >
                                     <f:facet name="header">
                                         <h:outputText value="Lista de Equipamento da Secretaria" />
                                     </f:facet>

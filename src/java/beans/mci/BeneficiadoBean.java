@@ -13,6 +13,7 @@ import entity.mci.enumerator.EnumStatusBeneficio;
 import entity.mci.enumerator.EnumTipoEquipamento;
 import entity.mci.enumerator.EnumTipoPessoa;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,7 +74,7 @@ public class BeneficiadoBean implements Serializable {
     public void setFilterLista(List<EquipamentosSecretaria> filterLista) {
         this.filterLista = filterLista;
     }
-    
+
     public String getEnableQtd() {
         return enableQtd;
     }
@@ -261,20 +262,21 @@ public class BeneficiadoBean implements Serializable {
         }
     }
 
-    public void editBen(ActionEvent actionEvent) {
+    public void editBen() {
         facesutils.cleanSubmittedValues(formBen);
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        this.cidadao = (Cidadao) (this.dmLista.getRowData());
-        this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
+        Cidadao c = (Cidadao) (this.dmLista.getRowData());
+        this.cidadao = cidadaoDAO.getEntity(c.getId());
         if (cidadao.getTipopessoa() == EnumTipoPessoa.COOP) {
             this.cidadao.getAssociados().toString();
         }
-
+        cidadao.getCidbBenSociais().toString();
     }
 
     public void selectCid() {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
+        Cidadao c = this.cidadao;
+        this.cidadao = cidadaoDAO.getEntity(c.getId());
         if (cidadao.getTipopessoa() == EnumTipoPessoa.COOP) {
             this.cidadao.getAssociados().toString();
         }
@@ -284,8 +286,7 @@ public class BeneficiadoBean implements Serializable {
         this.listacid = null;
         this.campoPesquisa = null;
 
-        this.facesutils.cleanSubmittedValues(formBen);
-
+        //this.facesutils.cleanSubmittedValues(formBen);
     }
 
     public void imprimir() throws IOException, JRException {
@@ -319,7 +320,6 @@ public class BeneficiadoBean implements Serializable {
         responseStream.close();
         fcontext.renderResponse();
         fcontext.responseComplete();
-        this.cidadao = null;
 
     }
 
@@ -354,7 +354,6 @@ public class BeneficiadoBean implements Serializable {
         responseStream.close();
         fcontext.renderResponse();
         fcontext.responseComplete();
-        this.cidadao = null;
 
     }
 
@@ -389,7 +388,6 @@ public class BeneficiadoBean implements Serializable {
         responseStream.close();
         fcontext.renderResponse();
         fcontext.responseComplete();
-        this.cidadao = null;
 
     }
 
@@ -422,7 +420,6 @@ public class BeneficiadoBean implements Serializable {
         responseStream.close();
         fcontext.renderResponse();
         fcontext.responseComplete();
-        this.cidadao = null;
 
     }
 
@@ -455,7 +452,6 @@ public class BeneficiadoBean implements Serializable {
         responseStream.close();
         fcontext.renderResponse();
         fcontext.responseComplete();
-        this.cidadao = null;
 
     }
 }

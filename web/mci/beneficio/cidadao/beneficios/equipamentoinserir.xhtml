@@ -13,7 +13,12 @@
                 <p:outputPanel id="panelInsEquipSecr" >
                     <h:panelGrid columns="2" id="insEquip" >                    
                         <h:outputLabel value="Data de Entrega:" styleClass="titulos"  /> 
-                        <p:calendar id="dataEntregaEquip" onkeyup="Formatadata(this,event)" onchange="validaDat(this,this.value)" maxlength="10" value="#{beneficiadoBean.equipamentosecretaria.dataentrega}"  size="11" required="true"  requiredMessage="Informação necessária" locale="pt_BR" pattern="dd/MM/yyyy" >                                 
+                        <p:calendar id="dataEntregaEquip" 
+                                    onkeyup="Formatadata(this,event)"
+                                    onchange="validaDat(this,this.value)"
+                                    maxlength="10" value="#{beneficiadoBean.equipamentosecretaria.dataentrega}"  
+                                    size="11" required="true"  showOn="button" requiredMessage="Informação necessária"
+                                    locale="pt_BR" pattern="dd/MM/yyyy" >                                 
                               
                                 
                             </p:calendar> 

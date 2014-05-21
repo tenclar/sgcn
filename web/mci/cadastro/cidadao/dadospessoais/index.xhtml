@@ -161,13 +161,17 @@
                 </h:panelGrid>
 
                 <h:panelGroup>
-                    <p:selectOneMenu id="cidnecesp"  value="#{cidadaoBean.cidadao.necespecial}" converter="IndexedConverter"  required="true" style="width: 120px" >
+                    <p:selectOneMenu id="cidnecesp"  value="#{cidadaoBean.cidadao.necespecial}"
+                                     filter="true" filterMatchMode="startsWith"
+                                     converter="IndexedConverter"  required="true" style="width: 120px" >
                         <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{cidadaoBean.selectItemsNecEspeciais}" />                                
                     </p:selectOneMenu> 
                     <!--                    <p:commandButton value="+" actionListener="# {necEspeciaisBean.newNecEspecial}" oncomplete="dlgNecEspecial.show();" process="@this" update=":frmNecessidade" />-->
                 </h:panelGroup>
-                <p:selectOneMenu id="cidesc" value="#{cidadaoBean.cidadao.escolaridade}" converter="IndexedConverter" style="width:160px"  required="true" >
+                <p:selectOneMenu id="cidesc" value="#{cidadaoBean.cidadao.escolaridade}"
+                                 filter="true" filterMatchMode="startsWith"
+                                 converter="IndexedConverter" style="width:160px"  required="true" >
                     <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
                     <f:selectItems value="#{cidadaoBean.selectItemsEscolaridade}" />
 
@@ -242,7 +246,7 @@
                     <p:fieldset id="fieldEndereco" legend="Endereço Residencial" style="height: 200px" >
 
                         <h:panelGrid columns="2">
-                            <p:commandButton value="Localizar" process="@this"  icon="-search" update=":frmBuscaEndCid" onclick="dlgBuscaEnd.show()"  /> 
+                            <p:commandButton value="Localizar" process="@this"  icon="ui-icon-search" update=":frmBuscaEndCid" onclick="dlgBuscaEnd.show()"  /> 
 
                         </h:panelGrid>
 
@@ -308,7 +312,8 @@
 
                 <p:inputText id="cidLocTrab" label="Local de Trabalho" value="#{cidadaoBean.cidadao.trabLocal}" size="60" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  requiredMessage="${msg.conteudo_requerido}"  />
                 <p:inputText id="cidFunc" label="Função" value="#{cidadaoBean.cidadao.trabFuncao}" size="25" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  requiredMessage="${msg.conteudo_requerido}" />
-                <p:inputText id="cidTrabRenda" label="Renda" value="#{cidadaoBean.cidadao.trabRem}" size="10" onkeypress="mascara(this, Valor)"  requiredMessage="${msg.conteudo_requerido}" validatorMessage="${msg.valida_valor_minimo}" >
+                <p:inputText id="cidTrabRenda" label="Renda" value="#{cidadaoBean.cidadao.trabRem}"
+                             size="10"  onkeypress="mascara(this, valor)"   requiredMessage="${msg.conteudo_requerido}"  >
                     <f:convertNumber pattern="##,##0.00#"  />                               
                 </p:inputText>
             </h:panelGrid>

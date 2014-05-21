@@ -15,15 +15,19 @@
                 <h:panelGrid id="panelBairro" columns="2" style="margin-bottom:10px">
                        
                     <h:outputLabel for="bairroEstado" value="Estado: " />
-                    <h:selectOneMenu id="bairroEstado" value="#{enderecoBean.bairro.cidade.estado}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all">
+                    <p:selectOneMenu id="bairroEstado" value="#{enderecoBean.bairro.cidade.estado}"  
+                                     required="true" converter="IndexedConverter"
+                                     filter="true" filterMatchMode="startsWith" >
                         <f:selectItems value="#{bairroBean.selectItemsEstado}"/>
                         <p:ajax update="bairroCidade" listener="#{enderecoBean.handleEstadoChange}" />
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                     
                     <h:outputLabel for="bairroCidade" value="Cidade: " />
-                    <h:selectOneMenu id="bairroCidade" value="#{enderecoBean.bairro.cidade}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" >                         
+                    <p:selectOneMenu id="bairroCidade" value="#{enderecoBean.bairro.cidade}" 
+                                     required="true" converter="IndexedConverter" 
+                                     filter="true" filterMatchMode="startsWith" >                         
                         <f:selectItems value="#{enderecoBean.selectItemsCidade}"/>
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                      <h:outputLabel  value="Zona:"  />                     
                      <h:selectOneMenu id="baizona" value="#{enderecoBean.bairro.zona}" styleClass="ui-inputfield ui-widget  ui-corner-all" >
                             <f:selectItem  itemLabel="selecione" />

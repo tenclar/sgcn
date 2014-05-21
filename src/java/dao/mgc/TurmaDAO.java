@@ -54,10 +54,8 @@ public class TurmaDAO extends GenericDAO {
     public List<Cidadao> getCidadaosByNom(String nome, EnumTipoPessoa tipopessoa, boolean cidTodos, int cursoId) {
         String param1 = "%" + nome + "%";
         String query = " from Cidadao c"
-                + " where  c.nome like ? and c.tipopessoa = ?"
-                + " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc"
-                + " group by tc.cidadao.id"
-                + " order by tc.cidadao.id)"; 
+                + " where  c.nome like ? and c.tipopessoa = ?";
+              //  + " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc group by tc.cidadao.id order by tc.cidadao.id)"; 
 
         if (cidTodos) {
             query += " and c.id in (select distinct(cs.cidadao.id) from CursosSecretaria cs "
@@ -72,9 +70,10 @@ public class TurmaDAO extends GenericDAO {
 
     public List<Cidadao> getCidadaosByCnp(String cnp, EnumTipoPessoa tipopessoa, boolean cidTodos, int cursoId) {
         String query = "from Cidadao c "
-                + " where c.cpf = ? and c.tipopessoa = ? and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
+                + " where c.cpf = ? and c.tipopessoa = ?";
+               /* + " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
                 + " group by tc.cidadao.id "
-                + " order by tc.cidadao.id) ";
+                + " order by tc.cidadao.id) ";*/ 
         if (cidTodos) {
             query += " and c.id in (select distinct(cs.cidadao.id) from CursosSecretaria cs "
                     + " where cs.curso.id = " + cursoId 
@@ -88,9 +87,10 @@ public class TurmaDAO extends GenericDAO {
 
     public List<Cidadao> getAssocidos(int coop, EnumTipoPessoa tipopessoa) {
         String query = " from Cidadao c "
-                + " where c.tipopessoa = ? and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
-                + " group by tc.cidadao.id "
-                + " order by tc.cidadao.id) "
+                + " where c.tipopessoa = ? "
+                //+ " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
+                //+ " group by tc.cidadao.id "
+               // + " order by tc.cidadao.id) "
                 + " and c.id in (select distinct(ca.associado.id) from CidAssociados ca "
                 + " where ca.cidadao.id = ? "
                 + " group by ca.associado.id "
@@ -100,23 +100,23 @@ public class TurmaDAO extends GenericDAO {
     }
 
     public List<Cidadao> getAssocidosByNom(int coop, EnumTipoPessoa tipopessoa, String param) {
+        String args = "%"+param+"%";
         String query = " from Cidadao c "
-                + " where c.nome like ? and c.tipopessoa = ? and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
-                + " group by tc.cidadao.id "
-                + " order by tc.cidadao.id) "
+                + " where c.nome like ? and c.tipopessoa = ?"
+                //+ " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc group by tc.cidadao.id order by tc.cidadao.id) "
                 + " and c.id in (select distinct(ca.associado.id) from CidAssociados ca "
                 + " where ca.cidadao.id = ? "
                 + " group by ca.associado.id "
                 + " order by ca.associado.id) "
                 + " order by c.nome ";
-        return getPureListMaxResult(Cidadao.class, query, param, tipopessoa, coop);
+        return getPureListMaxResult(Cidadao.class, query, args, tipopessoa, coop);
     }
 
     public List<Cidadao> getAssocidosByCnp(int coop, EnumTipoPessoa tipopessoa, String param) {
+        
         String query = " from Cidadao c "
-                + " where c.cpf = ? and c.tipopessoa = ? and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc "
-                + " group by tc.cidadao.id "
-                + " order by tc.cidadao.id) "
+                + " where c.cpf = ? and c.tipopessoa = ? "
+                //+ " and c.id not in (select distinct(tc.cidadao.id) from TurCidadaos tc group by tc.cidadao.id  order by tc.cidadao.id) "
                 + " and c.id in (select distinct(ca.associado.id) from CidAssociados ca "
                 + " where ca.cidadao.id = ? "
                 + " group by ca.associado.id "

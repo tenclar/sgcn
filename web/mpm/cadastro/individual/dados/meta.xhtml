@@ -16,7 +16,7 @@
                    
                 </h:panelGrid>
                  <p:column colspan="2">
-                     <p:commandButton  update="panelMetaInsert,:messages"  oncomplete="dlgMeta.hide();" actionListener="#{metaBean.saveMeta}" value="Salvar"/>
+                     <p:commandButton  update="panelMetaInsert,:frmPlano:tabGeral:tabMetas:planoListaMetaEmp, :frmPlano:tabGeral:tabMetas:planoMetaEmpPrazo, :messages"  oncomplete="dlgMeta.hide();" actionListener="#{metaBean.saveMeta}" value="Salvar"/>
                      <p:commandButton   oncomplete="dlgMeta.hide();" immediate="true" actionListener="#{metaBean.cancelMeta}" value="Cancelar"/>
                     </p:column>
             </h:form>

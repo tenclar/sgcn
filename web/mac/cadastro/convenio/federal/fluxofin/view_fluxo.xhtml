@@ -9,7 +9,7 @@
       >
     <h:head>
         <title> Fluxo Financeiro</title>
-        <link type="text/css" href="${request.contextPath}/temas/theme/theme.css" rel="stylesheet" />
+
         <link type="text/css" href="${request.contextPath}/css/layout.css" rel="stylesheet" />
         <script  type="text/javascript" src="${request.contextPath}/js/mascaras.js"></script>
         <script type="text/javascript" src="${request.contextPath}/js/util.js"></script>
@@ -17,169 +17,189 @@
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
     </h:head>
-    <h:body> 
-        <h:form   >
-            <table class="headerRel"  style="background: #fff; width: 100%;" >
-                <tr> 
-                    <td class="colunalogo" >
-                        <p:graphicImage url="/images/brasao.jpg" width="100" height="100" />
-                    </td> 
-                    <td class="colunameio">  <p>SGCN - SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS</p>            
-                        <p>SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS</p>
-                        <p>GOVERNO DO ESTADO DO ACRE</p>
-                        <p>FLUXO FINANCEIRO</p></td>
-                    <td class="colunausuario">
-                        <p>Usuário: #{usuarioLoginBean.usersec.login}</p>            
-                        <p>Setor: setor</p>
-                        <p>data: #{usuarioLoginBean.usersec.dataloginold.date}/#{usuarioLoginBean.usersec.dataloginold.month+1}/#{usuarioLoginBean.usersec.dataloginold.year-100}</p>  
-                        <p>hora: <h:outputText value="#{session.lastAccessedTime}">
-                               <f:convertDateTime pattern="HH:mm:ss" />
-                            </h:outputText>     
-                        </p>
-                    </td>
-                </tr>            
-            </table>
-        </h:form>
+    <h:body style="background-color: #fff; width: 1024px;"> 
+
+
+        <table class="headerRel"  style="background: #fff; width: 100%;" >
+            <tr> 
+                <td class="colunalogo" >
+                    <p:graphicImage url="/images/brasao.jpg" width="100" height="100" />
+                </td> 
+                <td class="colunameio">  <p>SGCN - SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS</p>            
+                    <p>SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS</p>
+                    <p>GOVERNO DO ESTADO DO ACRE</p>
+                    <p>FLUXO FINANCEIRO</p></td>
+                <td class="colunausuario">
+                    <p>Usuário: #{usuarioLoginBean.usersec.login}</p>            
+                    <p>Setor: setor</p>
+                    <p>data: #{usuarioLoginBean.usersec.dataloginold.date}/#{usuarioLoginBean.usersec.dataloginold.month+1}/#{usuarioLoginBean.usersec.dataloginold.year-100}</p>  
+                    <p>hora: <h:outputText value="#{session.lastAccessedTime}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>     
+                    </p>
+                </td>
+            </tr>            
+        </table>
+
+
         <h:form prependId="false" id="frmViewFluxo"  >
-            <p:panel   >  
-                <p:outputPanel >
-                    <p:dataTable  var="item" value="#{fluxoFinBean.lista}"  
-                                  style="text-align: center;" paginatorPosition="bottom"  
-                                  paginator="true"  paginatorAlwaysVisible="false" rows="6" >
-                        <f:facet  name="header" >
-                            <!--                            <h:outputText value="RESUMO ACOMPANHAMENTO DE CONVÊNIOS"/>-->
-                        </f:facet>
-                        <p:columnGroup type="header" >
-                            <p:row>
-                                <p:column rowspan="2"  headerText="Convênio" style="width: 40px" />
-                                <p:column rowspan="2" headerText="SICONV" style="width: 40px" />
-                                <p:column rowspan="2" headerText="Área" style="width: 60px" />
-                                <p:column rowspan="2" headerText="Ministério" style="width: 40px" />
-                                <p:column rowspan="2" headerText="Objetivos" style="width: 120px" />
-                                <p:column  colspan="3" headerText="Valores" style="width: 160px" />
 
 
-                            </p:row>
-                            <p:row>
-                                <p:column  headerText="Ministério" style="width: 40px" />
-                                <p:column  headerText="Contrapartida" style="width: 40px" />
-                                <p:column  headerText="Total" style="width: 40px" />
-                            </p:row>
-                        </p:columnGroup>
-                        <p:column style="text-align: center;" headerText="Convênio" >
-                            <h:outputText value="#{item.codigo}"/>
-                        </p:column>  
-                        <p:column style="text-align: center;" headerText="SICONV" >
-
-                            <h:outputText value="#{item.siconv}"/>
-                        </p:column> 
-                        <p:column style="text-align: center;" headerText="Área" >
-
-                            <h:outputText value="#{item.area}"/>
-                        </p:column>
-                        <p:column style="text-align: center;" headerText="Ministério" >
-
-                            <h:outputText value="#{item.ministerio.nome}"/>
-                        </p:column>
-                        <p:column style="text-align: center;" headerText="Objetivos" >
-
-                            <h:outputText value="#{item.objetivos}"/>
-                        </p:column>
-
-                        <p:column style="text-align: center;" headerText="Valor Ministério" >
-
-                            <h:outputText value="#{item.valorministerio}">
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </p:column>
-                        <p:column style="text-align: center;" headerText="Valor Contrapartida" >
-
-                            <h:outputText value="#{item.contrapartida}">
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </p:column>
-                        <p:column style="text-align: center;" headerText="Valor total" >
-
-                            <h:outputText value="#{item.total}"  >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </p:column>
+            <p:dataTable  var="item" value="#{fluxoFinBean.lista}"  
+                          style="text-align: center;" paginatorPosition="bottom"  
+                          paginator="true"  paginatorAlwaysVisible="false" rows="6" >
+                <f:facet  name="header" >
+                    <!--                            <h:outputText value="RESUMO ACOMPANHAMENTO DE CONVÊNIOS"/>-->
+                </f:facet>
+                <p:columnGroup type="header" >
+                    <p:row>
+                        <p:column rowspan="2"  headerText="Convênio" style="width: 40px" />
+                        <p:column rowspan="2" headerText="SICONV" style="width: 40px" />
+                        <p:column rowspan="2" headerText="Área" style="width: 60px" />
+                        <p:column rowspan="2" headerText="Ministério" style="width: 40px" />
+                        <p:column rowspan="2" headerText="Objetivos" style="width: 120px;" />
+                        <!--                        <p:column  colspan="3" headerText="Valores" style="width: 160px" />-->
 
 
-                    </p:dataTable>
-                </p:outputPanel >
-            </p:panel>   
+                    </p:row>
+                    <!--                    <p:row>
+                                            <p:column  headerText="Ministério" style="width: 40px" />
+                                            <p:column  headerText="Contrapartida" style="width: 40px" />
+                                            <p:column  headerText="Total" style="width: 40px" />
+                                        </p:row>-->
+                </p:columnGroup>
+                <p:column style="text-align: center;" headerText="Convênio" >
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>  
+                <p:column style="text-align: center;" headerText="SICONV" >
 
-            <p:panel style="min-height:  500px" id="pViewPie"    > 
-                <h:panelGrid columns="3" style="width: 100%"    >
-                    <p:panel id="geral" header="Total" >
-                        <h:panelGrid columns="2"  style="text-align: right" >
-                            <h:outputLabel value="Convênio: " style="text-align: left" />   
-                            <h:outputText value="#{fluxoFinBean.convenio.total}" style="text-align: right" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                            <h:outputLabel value="Utilizado: " style="text-align: left" />
-                            <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinCon + fluxoFinBean.convenio.totalFluxoFinProp}" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </h:panelGrid>
-                    </p:panel>
+                    <h:outputText value="#{item.siconv}"/>
+                </p:column> 
+                <p:column style="text-align: center;" headerText="Área" >
 
-                    <p:panel id="vlconcedente" header="Concedente" >
-                        <h:panelGrid columns="2"  style="text-align: right" >
-                            <h:outputLabel value="Total: " style="text-align: left" />   
-                            <h:outputText value="#{fluxoFinBean.convenio.valorministerio}" style="text-align: right" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                            <h:outputLabel value="Utilizado: " style="text-align: left" />
-                            <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinCon}" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </h:panelGrid>
-                    </p:panel>
-                    <p:panel id="vlproponente" header="Proponente" >
-                        <h:panelGrid columns="2"  style="text-align: right" >
-                            <h:outputLabel value="Total: "  />   
-                            <h:outputText value="#{fluxoFinBean.convenio.contrapartida}" style="text-align: right" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                            <h:outputLabel value="Utilizado: " />
-                            <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinProp}" >
-                                <f:convertNumber pattern="##,##0.00#"  />
-                            </h:outputText>
-                        </h:panelGrid>
-                    </p:panel>
+                    <h:outputText value="#{item.area}"/>
+                </p:column>
+                <p:column style="text-align: center;" headerText="Ministério" >
+
+                    <h:outputText value="#{item.ministerio.nome}"/>
+                </p:column>
+                <p:column style="text-align: left;" headerText="Objetivos" >
+
+                    <h:outputText value="#{item.objetivos}"/>
+                </p:column>
+
+                <!--                <p:column style="text-align: center;" headerText="Valor Ministério" >
+                
+                                    <h:outputText value="# {item.valorministerio}">
+                                        <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column style="text-align: center;" headerText="Valor Contrapartida" >
+                
+                                    <h:outputText value="# {item.contrapartida}">
+                                        <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column style="text-align: center;" headerText="Valor total" >
+                
+                                    <h:outputText value="# {item.total}"  >
+                                        <f:convertNumber pattern="##,##0.00#"  />
+                                    </h:outputText>
+                                </p:column>-->
+
+
+            </p:dataTable>
 
 
 
-                    <p:panel id="geralgrafico" >
-                        <p:pieChart id="pieGeral" showDataLabels="true"   
-                                    legendPosition="e"
-                                    sliceMargin="5" diameter="250"
-                                    fill="false"
-                                    value="#{fluxoFinBean.pieModel}" 
-                                    seriesColors="f39c12,e74c3c"  />  
-                    </p:panel>
 
-                    <p:panel id="graficovlconcedente"  >
-                        <p:pieChart showDataLabels="true" 
-                                    sliceMargin="10"
-                                    diameter="200" 
-                                    value="#{fluxoFinBean.pieModel2}" 
-                                    legendPosition="e" 
-                                    
-                                    seriesColors="E7E658,cc6666"  />  
-                    </p:panel>
+            <h:panelGrid columns="3" style="width: 100%"    >
 
-                    <p:panel id="graficovlproponente"  >
-                        <p:pieChart  showDataLabels="true"    value="#{fluxoFinBean.pieModel3}" legendPosition="e"  />  
-                    </p:panel>
+
+                <p:panel id="vlconcedente" header="Ministério / Concedente" style="font-weight: bold;" >
+                    <h:panelGrid columns="2"  style="text-align: right;font-weight: normal;" >
+                        <h:outputLabel value="Total: " style="text-align: left" />   
+                        <h:outputText value="#{fluxoFinBean.convenio.valorministerio}" style="text-align: right" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                        <h:outputLabel value="Utilizado: " style="text-align: left" />
+                        <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinCon}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                        <h:outputLabel value="Saldo: " style="text-align: left" />
+                        <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.valorministerio - fluxoFinBean.convenio.totalFluxoFinCon}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </h:panelGrid>
+                    <p:pieChart showDataLabels="true" 
+                                sliceMargin="10"
+                                diameter="250" 
+                                style="width: 500px;font-weight: normal;" 
+                                value="#{fluxoFinBean.pieModel2}" 
+                                legendPosition="w" 
+                                shadow="false"
+                                seriesColors="E7E658,cc6666"  /> 
+                </p:panel>
+                <p:panel id="vlproponente" header="Contrartida / Proponente" style="font-weight: bold;" >
+                    <h:panelGrid columns="2"  style="text-align: right; font-weight: normal;" >
+                        <h:outputLabel value="Total: "  />   
+                        <h:outputText value="#{fluxoFinBean.convenio.contrapartida}" style="text-align: right" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                        <h:outputLabel value="Utilizado: " />
+                        <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinProp}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                        <h:outputLabel value="Saldo: " />
+                        <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.contrapartida - fluxoFinBean.convenio.totalFluxoFinProp}" >
+                            <f:convertNumber pattern="##,##0.00#"  />
+                        </h:outputText>
+                    </h:panelGrid>
+                    <p:pieChart  showDataLabels="true"
+                                 sliceMargin="10"
+                                 diameter="250"
+                                 shadow="false"
+                                 style="width: 500px;font-weight: normal;" 
+                                 seriesColors="E7E658,cc6666" 
+                                 value="#{fluxoFinBean.pieModel3}"
+                                 legendPosition="w"   />  
+                </p:panel>
+            </h:panelGrid>
+
+            <p:panel id="geral" header="Total Geral" style="font-weight: bold; " >
+                <h:panelGrid columns="2"  style="text-align: right;font-weight: normal;" >
+                    <h:outputLabel value="Convênio: " style="text-align: left" />   
+                    <h:outputText value="#{fluxoFinBean.convenio.total}" style="text-align: right" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                    <h:outputLabel value="Utilizado: " style="text-align: left" />
+                    <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.totalFluxoFinCon + fluxoFinBean.convenio.totalFluxoFinProp}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
+                    <h:outputLabel value="Saldo: " style="text-align: left" />
+                    <h:outputText style="text-align: right" value="#{fluxoFinBean.convenio.total - (fluxoFinBean.convenio.totalFluxoFinCon + fluxoFinBean.convenio.totalFluxoFinProp)}" >
+                        <f:convertNumber pattern="##,##0.00#"  />
+                    </h:outputText>
                 </h:panelGrid>
-                <!--                    <p:commandButton value="Editar"  process="@this"  update=":frmListFluxo"  oncomplete="panelViewFluxo.close();panelListFluxo.show();"/>-->
-                <!--oncomplete="panelViewFluxo.close(); panelListFluxoRecursos.show();"-->
-                <p:commandButton value="Fechar"  process="@this" ajax="false" immediate="true"  onclick="javascript:window.close();"   />
 
+
+                <p:pieChart id="pieGeral" showDataLabels="true"   
+                            style="width: 500px;font-weight: normal;" 
+                            sliceMargin="10"
+                            legendPosition="w"
+                            shadow="false"
+                            seriesColors="E7E658,cc6666" 
+                            diameter="250"                                    
+                            value="#{fluxoFinBean.pieModel}" 
+                            />  
             </p:panel>
+            <!--            seriesColors="f39c12,e74c3c"  -->
+
+            <!--                    <p:commandButton value="Editar"  process="@this"  update=":frmListFluxo"  oncomplete="panelViewFluxo.close();panelListFluxo.show();"/>-->
+            <!--oncomplete="panelViewFluxo.close(); panelListFluxoRecursos.show();"-->
+            <p:commandButton value="Fechar"  process="@this" ajax="false" immediate="true"  onclick="javascript:window.close();"   />
+
+
 
 
 

@@ -33,13 +33,13 @@
             <h:selectBooleanCheckbox id="turcidcoopbycurso" label="Todos Cidadãos" value="#{turmaBean.cidByCurso}"/>
             <h:outputLabel value="Buscar somente cidadãos a realizar curso de #{turmaBean.turma.curso.nome}." for="turcidcoopbycurso"/>
             <br/>
-            <h:selectOneRadio value="#{turmaBean.tipoBuscaCidadao}" >
+            <h:selectOneRadio value="#{turmaBean.tipoBuscaCidadaoCoop}" >
                 <f:selectItem itemValue="nome" itemLabel="nome" />
                 <f:selectItem itemValue="cpf" itemLabel="CPF" /> 
             </h:selectOneRadio>
             <h:outputLabel value="Busca: " for="cidcoopBusca" styleClass="titulos"/>
-            <p:inputText id="cidcoopBusca" autocomplete="off" value="#{turmaBean.buscaCidadao}" size="100" onkeyup="this.value = this.value.toUpperCase();"/> 
-            <p:commandButton actionListener="#{turmaBean.localizaCidadaosByCoop()}" title="Buscar Cidadãos" label="Buscar" update="frmCidCoopTurma, :messages" icon="ui-icon-search" /> 
+            <p:inputText id="cidcoopBusca" autocomplete="off" value="#{turmaBean.buscaCidadaoCoop}" size="100" onkeyup="this.value = this.value.toUpperCase();"/> 
+            <p:commandButton action="#{turmaBean.localizaCidadaosByCoop()}" title="Buscar Cidadãos" label="Buscar" update="frmCidCoopTurma, :messages" icon="ui-icon-search" /> 
             <p:outputPanel id="tbcidcoopadao" >
                 <p:dataTable var="item" value="#{turmaBean.dataModelListaCid}"
                              paginator="true" paginatorAlwaysVisible="false" 
