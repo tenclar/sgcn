@@ -127,6 +127,33 @@
 
         </p:panel>
         <p:separator />
+
+        <p:panel>
+            <p:dataTable  value="#{convenioBean.convenio.concedentes}" var="concedente" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                          rowIndexVar="rowIx"    >
+                <f:facet  name="header" >
+                    <h:outputText value=" Ministério / Contrapartida"/>
+                </f:facet>
+               
+                <p:column headerText="ordem" style="width: 20px" >
+                    <h:outputText value="#{concedente.ordem}" />                                                            
+                </p:column>
+                <p:column headerText="Data" >                  
+                    <h:outputText value="#{concedente.datacon}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    </h:outputText>                     
+                </p:column>
+                <p:column headerText="Descrição" >
+                    <h:outputText value="#{concedente.descricao}" />                                                            
+                </p:column>
+                <p:column headerText="Status" >
+                    <h:outputText value="#{concedente.status}" />                                                            
+                </p:column>
+
+
+            </p:dataTable>    
+        </p:panel>
+        <p:separator />
         <p:panel>
 
             <p:dataTable  value="#{convenioBean.convenio.contrapartidas}" var="contra" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
@@ -243,11 +270,11 @@
         </p:panel>
         <p:separator />
         <p:panel>
-            
-                <p:commandButton value="editar" update=":frmConvenio" process="@this"  oncomplete="cadView.close();cadCon.show()" rendered="#{p:ifGranted('ROLE_ADMIN')}" action="#{convenioBean.editConvenioView()}" />
-                <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{convenioBean.imprimirDetalhado()}" title="imprimir" />
-                <p:commandButton id="btfecharview" value="fechar" update="frmViewConvenio" process="@this"  oncomplete="cadView.close();cadlist.show()" />
-            
+
+            <p:commandButton value="editar" update=":frmConvenio" process="@this"  oncomplete="cadView.close();cadCon.show()" rendered="#{p:ifGranted('ROLE_ADMIN')}" action="#{convenioBean.editConvenioView()}" />
+            <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{convenioBean.imprimirDetalhado()}" title="imprimir" />
+            <p:commandButton id="btfecharview" value="fechar" update="frmViewConvenio" process="@this"  oncomplete="cadView.close();cadlist.show()" />
+
         </p:panel>    
         <p:panel></p:panel>
 

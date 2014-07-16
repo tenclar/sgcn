@@ -6,16 +6,19 @@ package beans.mci;
 
 import dao.mci.NecEspecialDAO;
 import entity.mci.NecEspecial;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import net.sf.jasperreports.engine.JRException;
+import util.RelatorioUtil;
 
 /**
  *
@@ -106,5 +109,16 @@ public class NecEspeciaisBean  implements Serializable{
 
     public void cancelNecEspecial() {
         this.necEspecials = null;
+    }
+    
+    public void imprimeRelatorioWebTodos() throws IOException, JRException {
+        
+           NecEspecialDAO oDAO = new     NecEspecialDAO();
+        List lista =  oDAO.getNecEspecials();
+        
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_necespecial");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_necespecial");
+
     }
 }

@@ -55,7 +55,7 @@
                     <p:message for="cidlistaRamoEmpreendimentos" display="icon"   />
                 </h:panelGrid>
                 <p:inputText id="cidanodemanda" autocomplete="off"  value="#{cidadaoBean.cidadao.anodemanda}" size="8" required="true" label="Ano Demanda" maxlength="4" onkeypress="mascara(this, soNumeros)"  />
-                <p:calendar id="ciddata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{cidadaoBean.cidadao.datacreated}" pattern="dd/MM/yyyy"  >
+                <p:calendar id="ciddata" onkeyup="Formatadata(this, event)"  onchange="validaDat(this, this.value)" locale="pt_BR" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{cidadaoBean.cidadao.datacreated}"  >
 
                 </p:calendar>
                 <h:panelGroup>
@@ -76,7 +76,7 @@
 
 
                 <p:selectOneMenu label="Ramo do Empreendimento"  filter="true" filterMatchMode="startsWith" style="width: 140px" id="cidlistaRamoEmpreendimentos" value="#{cidadaoBean.cidadao.ramoempreendimento}"  converter="IndexedConverter" required="true"   >
-                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    
                     <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}"  />     
                 </p:selectOneMenu> 
                 <!--                    <p:commandButton value="+" process="@this" oncomplete="dlgRamoEmpreendimento.show()" update="panelRamoEmpreendimentoInsert" actionListener="{ramoEmpreendimentoBean.newRamoEmpreendimento}" />-->

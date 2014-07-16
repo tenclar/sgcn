@@ -19,10 +19,10 @@
                         </h:panelGroup>
                         <p:calendar id="cData"  
                                     locale="pt_BR" showButtonPanel="true"
-                                    navigator="true"
+                                    navigator="true" pattern="dd/MM/yyyy"
                                     onkeyup="Formatadata(this, event)" 
                                     onchange="validaDat(this, this.value)"
-                                     pattern="dd/MM/yyyy"
+                                     
                                     maxlength="10" size="10" value="#{convenioBean.historico.datainc}" 
                                     required="true" showOn="button" >
 

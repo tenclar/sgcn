@@ -195,7 +195,7 @@ public class CooperativaBean implements Serializable {
         }
 
         this.cooperativa.getTelefones().add(this.telefone);
-        //CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
         //cidadaoDAO.save(cooperativa);
         this.telefone = new Telefone();
         return null;
@@ -284,6 +284,7 @@ public class CooperativaBean implements Serializable {
         if (cidadaoDAO.getListByCnp(this.cooperativa.getCpf()).isEmpty()) {
 
             facesutils.cleanSubmittedValues(form);
+            telefone = new Telefone();
             cooperativa.setEndereco(new Endereco());
             cooperativa.setTipopessoa(EnumTipoPessoa.COOP);
             this.cooperativa.setRepresentante(new Cidadao());

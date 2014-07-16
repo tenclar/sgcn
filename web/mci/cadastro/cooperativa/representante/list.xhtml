@@ -6,12 +6,9 @@
               xmlns:h="http://java.sun.com/jsf/html"
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Lista de Cidadãos</title>
-    </h:head>
-    <h:body>
-        <h:form id="frmListaCidadao" prependId="false">
-            <p:outputPanel>  
+  
+        <h:form id="frmListaRepresentante" prependId="false">
+          
                 <h:selectOneRadio value="#{cidadaoBuscaBean.tipoBusca}"  >
                     <f:selectItem itemValue="cpf"  itemLabel="CPF" />                
                     <!--            <f:selectItem itemValue="nomeresp"  itemLabel="Nome do Responsável"  />-->
@@ -22,11 +19,11 @@
                 <p:inputText  value="#{cidadaoBuscaBean.campoPesquisa}"  style="width:250px" onkeyup="this.value = this.value.toUpperCase();" required="true"  requiredMessage="Campo em Branco" /> 
                 &nbsp;
                 <p:commandButton actionListener="#{cidadaoBuscaBean.localizaCid}"
-                                 update="frmListaCidadao"
+                                 update="frmListaRepresentante"
                                  icon="ui-icon-search" /> 
                 <p:messages  showDetail="true" />
 
-            </p:outputPanel> 
+         
 
 
             <p:outputPanel id="listarep">
@@ -61,6 +58,6 @@
                 </p:dataTable>
             </p:outputPanel >
         </h:form>
-    </h:body>
+    
 </ui:component>
 

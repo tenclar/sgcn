@@ -6,9 +6,11 @@ package beans.mci;
 
 import dao.mci.ParentescoDAO;
 import entity.mci.Parentesco;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,6 +19,8 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import net.sf.jasperreports.engine.JRException;
+import util.RelatorioUtil;
 
 /**
  *
@@ -119,4 +123,17 @@ public class ParentescoBean implements Serializable {
     public void cancelParentesco() {
         this.parentesco = null;
     }
+    
+      @SuppressWarnings("unchecked")
+    public void imprimeRelatorioWebTodos() throws IOException, JRException {
+        
+       ParentescoDAO parentescoDAO = new ParentescoDAO();
+        List lista =  parentescoDAO.getParentescos();
+        
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_parentesco");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_parentesco");
+
+    }
+    
 }

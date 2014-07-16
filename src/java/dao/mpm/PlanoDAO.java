@@ -2,9 +2,10 @@ package dao.mpm;
 
 import dao.GenericDAO;
 import entity.mci.enumerator.EnumTipoPessoa;
+import entity.mpm.Ano;
 import entity.mpm.Plano;
+import entity.mpm.Rendimento;
 import java.util.List;
-import org.hibernate.Session;
 
 public class PlanoDAO extends GenericDAO {
 
@@ -63,6 +64,7 @@ public class PlanoDAO extends GenericDAO {
         String query = " from Plano p  where  p.cidadao.nome like ? and p.cidadao.tipopessoa = ?";
         return getPureList(Plano.class, query, param1,tipopessoa);
     }
+    
     
 //    public void removePlano(Plano plano) {
 //        removePojo(plano);

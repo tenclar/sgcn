@@ -21,7 +21,7 @@ public class EscolaridadeDAO extends GenericDAO {
     }
 
     public List<Escolaridade> getEscolaridades() {
-        return getPureList(Escolaridade.class, "from Escolaridade escolaridade");
+        return getPureList(Escolaridade.class, "from Escolaridade e order by e.id");
     }
 //    public void removeEscolaridade(Escolaridade escolaridade) {
 //        removePojo(escolaridade);

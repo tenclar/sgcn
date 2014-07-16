@@ -28,6 +28,7 @@ public class Rendimento implements Serializable{
     private Date datamon = new Date();
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date daterend = new Date();
+    
     private double vendas;
     private double despesas;
     private double outras;
@@ -35,6 +36,9 @@ public class Rendimento implements Serializable{
     private Plano plano;
     @Transient
     List<Rendimento> rendimentos= new ArrayList<Rendimento>();
+
+    
+    
 
     public Date getDatamon() {
         return datamon;

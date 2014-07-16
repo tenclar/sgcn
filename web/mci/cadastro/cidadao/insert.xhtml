@@ -65,8 +65,8 @@
                     <!--                    :tabView:selRadioAtiv, selRadioCursos,selRadioEquip, selRadioBen, selRadioBenHabit,  , tabView:fieldIdent, fieldEndereco, panelEmprego,-->
                     <!--tabView:fieldident, tabView:pResumo,-->
                     <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(6)" />                        
-                    <p:commandButton id="btsalvarcidadao" value="salvar" process="@this
-                                     tabresumos" 
+                    <p:commandButton id="btsalvarcidadao" value="salvar"
+                                     process="@this,:frmCid:tabView:fieldIdent, tabresumos" 
                                      update=":frmCid,  :frmBuscaCid,  :messages"
                                      oncomplete="if(!args.validationFailed){cadlist.show();cadins.close();confImprimir.show();}" 
                                      actionListener="#{cidadaoBean.saveCidadao}" /> 

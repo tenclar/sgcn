@@ -65,7 +65,7 @@
                                 <h:outputText value="#{i.permissao.nome}"/>
                             </p:column>
                             <p:column headerText="ações" >
-                                <p:commandButton value="excluir" immediate="true" process="@this" update="dtPerm"  >
+                                <p:commandButton value="excluir" immediate="true" process="@this" update=":frmUsuario:dtPerm"  >
                                     <p:collector value="#{i}" unique="true"  removeFrom="#{usuarioBean.usuario.permissaos}" />
                                 </p:commandButton>
                             </p:column>

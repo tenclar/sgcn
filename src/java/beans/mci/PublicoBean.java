@@ -6,9 +6,11 @@ package beans.mci;
 
 import dao.mci.PublicoDAO;
 import entity.mci.Publico;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,6 +19,8 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import net.sf.jasperreports.engine.JRException;
+import util.RelatorioUtil;
 
 /**
  *
@@ -125,5 +129,17 @@ public class PublicoBean implements Serializable {
 
     public void cancelPublico() {
         this.publico = null;
+    }
+    
+     @SuppressWarnings("unchecked")
+    public void imprimeRelatorioWebTodos() throws IOException, JRException {
+        
+        PublicoDAO publicoDAO = new PublicoDAO();
+        List lista =  publicoDAO.getPublicos();
+        
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_publico");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_publico");
+
     }
 }

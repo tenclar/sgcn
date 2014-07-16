@@ -48,6 +48,10 @@ public class EscolaridadeBean implements Serializable{
      public List<SelectItem> getSelectItems() {
       EscolaridadeDAO   escolaridadeDAO = new EscolaridadeDAO();
         List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Escolaridade e = new Escolaridade();
+        e.setId(0);
+        e.setGrau("TODOS");
+        toReturn.add(new SelectItem(e,e.getGrau()));
         for (Escolaridade p : escolaridadeDAO.getEscolaridades()) {
             toReturn.add(new SelectItem(p, p.getGrau()));
         }

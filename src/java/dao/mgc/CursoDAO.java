@@ -26,7 +26,7 @@ public class CursoDAO extends GenericDAO {
     }
 
     public List<Curso> getCursos() {
-        return getPureList(Curso.class, "from Curso curso Order by curso.nome");
+        return getPureList(Curso.class, "from Curso c order by c.nome");
     }
 //    public CursoDAO(Session ses) {
 //        super(ses);

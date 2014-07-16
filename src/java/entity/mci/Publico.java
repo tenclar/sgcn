@@ -60,6 +60,8 @@ public class Publico implements Serializable {
         hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
+
+    
     
     
     

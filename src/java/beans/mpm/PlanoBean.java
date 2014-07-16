@@ -347,16 +347,13 @@ public class PlanoBean implements Serializable {
         if ("nome".equals(this.tipoBusca)) {
             listaPlano = planoDAO.getListByPlanoName(campoBusca, EnumTipoPessoa.COOP);
 
-        }else
-        if ("emp".equals(this.tipoBusca)) {
+        } else if ("emp".equals(this.tipoBusca)) {
             listaPlano = planoDAO.getListByRespName(tipoBusca, EnumTipoPessoa.COOP);
 
-        }else
-        if ("cpf".equals(this.tipoBusca)) {
+        } else if ("cpf".equals(this.tipoBusca)) {
             listaPlano = planoDAO.getListByRespCnp(campoBusca, EnumTipoPessoa.COOP);
 
-        }else
-        if (listaPlano.isEmpty()) {
+        } else if (listaPlano.isEmpty()) {
             mon = false;
         } else {
             mon = true;
@@ -517,7 +514,7 @@ public class PlanoBean implements Serializable {
         plano.getCidadao().getCidbBenSociais().toString();
         plano.getCidadao().getCursosSecretarias();
         plano.getCidadao().getEquipamentossecretarias();
-        
+
         this.produtos = new Produtos();
         this.servicos = new Servicos();
         this.metasempresarais = new MetasEmpresariais();
@@ -530,7 +527,6 @@ public class PlanoBean implements Serializable {
 
         //this.microlocalinvesfin = new MicroLocalInvestFin();
         //this.microlocalinvest = new MicroLocalInvest();
-        
         this.handleRadioFinInv2();
         this.handleRadioMicro2();
 
@@ -905,6 +901,9 @@ public class PlanoBean implements Serializable {
         this.plano.setCidadao(cooperativa);
     }
 
+   
+     
+     
     @SuppressWarnings("unchecked")
     public void imprimir() throws IOException, JRException {
         PlanoDAO planoDAO = new PlanoDAO();

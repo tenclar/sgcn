@@ -29,6 +29,7 @@
     <mapping class="entity.Bairro"/>
     <mapping class="entity.Endereco"/>
     <mapping class="entity.mac.ContraPartida"/>
+    <mapping class="entity.mac.Concedente"/>
     <mapping class="entity.Telefone"/>
     <mapping class="entity.mac.Aditivo"/>
     <mapping class="entity.mac.Vigencia"/>

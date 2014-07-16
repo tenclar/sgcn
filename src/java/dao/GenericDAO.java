@@ -124,6 +124,7 @@ public class GenericDAO implements Serializable {
             }
             toReturn = qr.list();
             return toReturn;
+            
         } catch (Exception e) {
             System.out.println("entou no catch pure list " + e.getMessage());
            // s.getTransaction().rollback();
@@ -147,7 +148,7 @@ public class GenericDAO implements Serializable {
             for (int i = 0; i < params.length; i++) {
                 qr.setParameter(i, params[i]);
             }
-            qr.setMaxResults(40);
+            qr.setMaxResults(10);
         }
         List<T> toReturn = qr.list();
        

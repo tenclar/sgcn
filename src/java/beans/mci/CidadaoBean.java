@@ -38,6 +38,7 @@ import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.TabChangeEvent;
 import util.FacesUtils;
+import util.RelatorioUtil;
 
 @ManagedBean
 @ViewScoped
@@ -87,6 +88,7 @@ public class CidadaoBean implements Serializable {
     private Telefone telefone;
     private Cidadao cooper;
     private boolean inserircid = true;
+    private final RelatorioUtil relatorioutil = new RelatorioUtil();
 
     public CidadaoBean() {
         this.listacid = null;
@@ -1120,7 +1122,7 @@ public class CidadaoBean implements Serializable {
         Cidadao c = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(c.getId());
 
-        if ("ASSOCIADO".equals(cidadao.getStatuscid().toString())) {
+        if (cidadao.getStatuscid().equals(EnumStatusCid.COLETIVO)) {
             CidAssociadosDAO cidassdao = new CidAssociadosDAO();
             CidAssociados cass = cidassdao.getCidAssociadosbyId(c.getId());
             this.cooper = cidadaoDAO.getEntity(cass.getCidadao().getId());
@@ -1162,64 +1164,31 @@ public class CidadaoBean implements Serializable {
     @SuppressWarnings("unchecked")
     public void saveImprimir() throws IOException, JRException {
 
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
+        List<Cidadao> lista = new ArrayList<Cidadao>();
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
-        listausr.add(cidadao);
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-        String relJasper = scontext.getRealPath("/mci/impressao/relcidadao.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "inline; filename=relcidadao.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        //JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
-        // this.cidadao = null;
+        lista.add(cidadao);
+        
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlficha");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomeficha");
+        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
+
 
     }
 
     @SuppressWarnings("unchecked")
     public void imprimir() throws IOException, JRException {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
+        List<Cidadao> lista = new ArrayList<Cidadao>();
         Cidadao c = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(c.getId());
-        listausr.add(cidadao);
+        lista.add(cidadao);
+        
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlficha");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomeficha");
+        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-        String relJasper = scontext.getRealPath("/mci/impressao/relcidadao.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=cadastro.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
-        //  this.cidadao = null;
-
+       
     }
 
    

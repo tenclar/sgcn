@@ -73,6 +73,12 @@ public class Convenio implements Serializable {
     @OrderBy(value = "datainc desc")
     @Cascade(value = {org.hibernate.annotations.CascadeType.DELETE_ORPHAN, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<HistoricoInterno> historicoInternos = new ArrayList<HistoricoInterno>();
+    
+    @OneToMany(mappedBy = "convenio", fetch = FetchType.LAZY)
+    @OrderBy(value = "datacon desc")
+    @Cascade(value = {org.hibernate.annotations.CascadeType.DELETE_ORPHAN, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private List<Concedente> concedentes = new ArrayList<Concedente>();
+    
     @OneToMany(mappedBy = "convenio", fetch = FetchType.LAZY)
     @OrderBy(value = "datacontra desc")
     @Cascade(value = {org.hibernate.annotations.CascadeType.DELETE_ORPHAN, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -228,6 +234,16 @@ public class Convenio implements Serializable {
     public void setContrapartidas(List<ContraPartida> contrapartidas) {
         this.contrapartidas = contrapartidas;
     }
+
+    public List<Concedente> getConcedentes() {
+        return concedentes;
+    }
+
+    public void setConcedentes(List<Concedente> concedentes) {
+        this.concedentes = concedentes;
+    }
+    
+    
 
     public List<FluxoFinConcedente> getListafluxofinconcedente() {
         return listafluxofinconcedente;

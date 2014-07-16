@@ -9,5 +9,5 @@ package entity.mci.enumerator;
  * @author NOTE-04
  */
 public enum EnumStatusCid {
-  INDIVIDUAL,COLETIVO;
+ TODOS, INDIVIDUAL,COLETIVO;
 }

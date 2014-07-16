@@ -26,11 +26,19 @@
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
                 </h:panelGroup>
             </p:tab>
-            <p:tab title="Contrapartida">
-                <ui:include src="contrapartida/list.xhtml" />
+            <p:tab title="Concedente">
+                <ui:include src="concedente/list.xhtml" />
                  <h:panelGroup>
                     <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(1);" />
                     <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(3);}else{tabGeral.select(2);}" action="#{convenioBean.save()}" />
+                    <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
+                </h:panelGroup>                
+            </p:tab>
+            <p:tab title="Contrapartida">
+                <ui:include src="contrapartida/list.xhtml" />
+                 <h:panelGroup>
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(2);" />
+                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(4);}else{tabGeral.select(3);}" action="#{convenioBean.save()}" />
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
                 </h:panelGroup>                
             </p:tab>
@@ -38,8 +46,8 @@
                 
                 <ui:include src="aditivosvigencia/aditivo.xhtml" />
                  <h:panelGroup>
-                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(2);" />
-                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(4);}else{tabGeral.select(3);}" action="#{convenioBean.save()}" />
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(3);" />
+                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(5);}else{tabGeral.select(4);}" action="#{convenioBean.save()}" />
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
                 </h:panelGroup>
                 
@@ -47,8 +55,8 @@
              <p:tab title="Vigência">                         
                 <ui:include src="aditivosvigencia/vigencia.xhtml" />
                  <h:panelGroup>
-                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(3);" />
-                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(5);}else{tabGeral.select(4);}" action="#{convenioBean.save()}" />
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(4);" />
+                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(6);}else{tabGeral.select(5);}" action="#{convenioBean.save()}" />
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
                 </h:panelGroup>
             </p:tab>
@@ -56,8 +64,8 @@
                 <ui:include src="composicao/index.xhtml" />
                 <p:separator />
                 <h:panelGroup>
-                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(4);" />
-                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(6);}else{tabGeral.select(5);}" action="#{convenioBean.save()}" />
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(5);" />
+                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(7);}else{tabGeral.select(6);}" action="#{convenioBean.save()}" />
                     <p:commandButton value="fechar" update=" :frmListConvenios:tbConvenio" process="@this" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show();}" action="#{convenioBean.cancelConvenio()}" />
                 </h:panelGroup>
 
@@ -66,8 +74,8 @@
                 <ui:include src="historico/list.xhtml" />
                 <p:separator />
                 <h:panelGroup>
-                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(5);" />  
-                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(7);}else{tabGeral.select(6);}" action="#{convenioBean.save()}" />                    
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(6);" />  
+                    <p:commandButton value="avançar" process="@this" update="tabGeral :messages" oncomplete="if(!args.validationFailed){tabGeral.select(8);}else{tabGeral.select(7);}" action="#{convenioBean.save()}" />                    
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio, :frmConvenio, :messages" process="@this" immediate="true"  oncomplete="cadCon.close();cadlist.show();"  action="#{convenioBean.cancelConvenio()}"/>
                 </h:panelGroup>
 
@@ -77,7 +85,7 @@
 
                 <p:separator />
                 <h:panelGroup>
-                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(6);" />    
+                    <p:commandButton value="voltar" process="@this" immediate="true" update="tabGeral" oncomplete="tabGeral.select(7);" />    
                     <p:commandButton value="Salvar" update=":frmListConvenios:tbConvenio, :frmConvenio, :messages" process="@this" actionListener="#{convenioBean.saveConvenio}" oncomplete="if(!args.validationFailed){cadCon.close();cadlist.show()}" />
                     <p:commandButton value="fechar" update=":frmListConvenios:tbConvenio, :frmConvenio, :messages" process="@this" immediate="true"  oncomplete="cadCon.close();cadlist.show();"/>
                 </h:panelGroup>

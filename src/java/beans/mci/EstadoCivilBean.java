@@ -46,7 +46,11 @@ public class EstadoCivilBean implements Serializable {
     }
  public List<SelectItem> getSelectItems() {
        EstadoCivilDAO  estadocivilDAO = new EstadoCivilDAO();
+       EstadoCivil es = new EstadoCivil();       
         List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        es.setId(0);
+        es.setDescricao("TODOS");
+        toReturn.add(new SelectItem(es,es.getDescricao()));
         for (EstadoCivil p : estadocivilDAO.getEstadosCivis()) {
             toReturn.add(new SelectItem(p, p.getDescricao()));
         }

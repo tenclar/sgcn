@@ -6,115 +6,15 @@
               xmlns:f="http://java.sun.com/jsf/core"
               xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <h:form id="frmrelatorio" prependId="false"  >
-
-        <p:panel header="informações de Visão">
-            <p:outputPanel id="outPanelrel"   >
-                <fieldset >
-                    <legend>Tipo de Relatório</legend>
-                    <h:panelGrid columns="2" >
-                        <h:selectOneRadio  id="tiporel" label="Tipo de Relatório" value="#{relatorioBean.tiporelatorio}" required="true"  >
-                            <f:selectItem id="selresumo" itemLabel="resumo"  itemValue="1"  />
-                            <f:selectItem itemLabel="Detalhado Especifico"   itemValue="2"   />
-                            <f:selectItem itemLabel="Detalhado Geral" itemValue="3"  />
-                            <p:ajax listener="#{relatorioBean.handleSelectItemTipoRelatorio()}" update="outPanelrel, panelResumo, panelDetalhe, panelDetalheGeral"   />
-
-                        </h:selectOneRadio>
-                        <p:message for="tiporel"  />
-                    </h:panelGrid>
-
-                </fieldset>
-
-                <p:panel id="panelResumo"    widgetVar="panelResumo"  binding="#{relatorioBean.panelresumo}" >
-                    <fieldset ><legend>Resumo - Campos dos Dados Cadastrais</legend>
-
-                        <h:selectManyCheckbox      >
-                            <f:selectItem itemLabel="CIDADE" itemValue="CIDADE" itemDisabled="true"  />
-                            <f:selectItem itemLabel="BAIRRO " itemValue="BAIRRO" itemDisabled="true"  />
-                            <f:selectItem itemLabel="LOGRADOURO" itemValue="LOGRADOURO" itemDisabled="true"  />
-                            <f:selectItem itemLabel="NOME" itemValue="NOME" itemDisabled="true"  />
-                            <f:selectItem itemLabel="CPF"  itemValue="CPF" itemDisabled="true"    />
-                            <f:selectItem itemLabel="RG"  itemValue="RG" itemDisabled="true" />
-                            <f:selectItem itemLabel="NIS" itemValue="NIS" itemDisabled="true"  />
-                            <f:selectItem itemLabel="SEXO"  itemValue="SEXO" itemDisabled="true" />                                
-                            <f:selectItem itemLabel="IDADE"  itemValue="IDADE" itemDisabled="true" />
-                            <f:selectItem itemLabel="ESCOLARIDADE" itemValue="ESCOLARIDADE" itemDisabled="true"  />                                                              
-                            <f:selectItem itemLabel="TELEFONE"  itemValue="TELEFONE" itemDisabled="true" />
-                            <f:selectItem itemLabel="ANO DEMANDA"  itemValue="ANODEMANDA" itemDisabled="true" />
-                            <f:selectItem itemLabel="RAMO"  itemValue="RAMO" itemDisabled="true" />
-                            <f:selectItem itemLabel="STATUS"  itemValue="ANODEMANDA" itemDisabled="true" />
-
-
-                        </h:selectManyCheckbox>
-
-                    </fieldset>
-                </p:panel>
-
-                <p:panel id="panelDetalhe" widgetVar="panelDetalhado"  binding="#{relatorioBean.paneldetalhado}" >
-                    <fieldset ><legend>Detalhado - Partes da Ficha Cadastral</legend>
-
-                        <h:selectManyCheckbox id="seldetalhado"    >
-
-                            <f:selectItem itemLabel="Dados Cadastrais" itemValue="1"      />
-                            <f:selectItem itemLabel="Benefícios Sociais"  itemValue="2"  />
-                            <f:selectItem itemLabel="Benefícios Habitacionais"  itemValue="3" />                              
-                            <f:selectItem itemLabel="Despesas" />
-                            <f:selectItem itemLabel="Bens Duráveis" />
-                            <f:selectItem itemLabel="Cursos Secretaria" />
-                            <f:selectItem itemLabel="Equipamentos Secretarias" />
-                            <f:selectItem itemLabel="Histórico" />
-
-                        </h:selectManyCheckbox>
-
-
-                    </fieldset>
-                </p:panel>
-                <p:panel id="panelDetalheGeral"  widgetVar="panelDetalhadoGeral" binding="#{relatorioBean.paneldetalhadogeral}" >
-                    <fieldset ><legend>Detalhado Geral- toda a ficha cadastral</legend>
-
-                        <h:selectManyCheckbox  id="seldetgeral"      >
-
-                            <f:selectItem itemLabel="Dados Cadastrais"    itemDisabled="true"  />
-                            <f:selectItem itemLabel="Benefícios Sociais"   itemDisabled="true"  />
-                            <f:selectItem itemLabel="Benefícios Habitacionais"   itemDisabled="true" />                                
-                            <f:selectItem itemLabel="Despesas" itemDisabled="true"   />
-                            <f:selectItem itemLabel="Bens Duráveis"  itemDisabled="true"  />
-                            <f:selectItem itemLabel="Equipamentos Secretaria"  itemDisabled="true"  />
-                            <f:selectItem itemLabel="Cursos Secretaria" itemDisabled="true"   />
-                            <f:selectItem itemLabel="Histórico" itemDisabled="true"   />
-
-                        </h:selectManyCheckbox>
-                    </fieldset>
-                </p:panel>
-            </p:outputPanel>
-        </p:panel>
-        <p:panel header="Agrupar">
-            <h:selectManyCheckbox  id="selagrupar"      >
-
-                <f:selectItem itemLabel="ANO DEMANDA"  itemValue="ANODEMANDA" />
-                <f:selectItem itemLabel="STATUS"  itemValue="ANODEMANDA" />
-                <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
-                <f:selectItem itemLabel="BAIRRO " itemValue="BAIRRO"  />                            
-                <f:selectItem itemLabel="LOGRADOURO" itemValue="LOGRADOURO"   />
-                <f:selectItem itemLabel="RAMO"  itemValue="RAMO"  />
-                <f:selectItem itemLabel="NOME" itemValue="NOME"  />                            
-                <f:selectItem itemLabel="SEXO"  itemValue="SEXO"  />                                
-                <f:selectItem itemLabel="FAIXA ETÁRIA"  itemValue="IDADE"  />
-                <f:selectItem itemLabel="ESCOLARIDADE" itemValue="ESCOLARIDADE"  />                                                                                         
-
-
-
-            </h:selectManyCheckbox>
-
-        </p:panel>
+    <h:form id="frmrelatorio"   >
 
         <p:panel header="Filtro"   >
 
             <p:outputPanel id="outPeriodo" >
                 <h:panelGrid columns="2">
                     <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
-                        <f:selectItem itemLabel="Geral"  itemValue="1" />
-                        <f:selectItem itemLabel="Período de cadastro"   itemValue="2"   />
+                        <f:selectItem  itemValue="1" itemLabel="Geral"  />
+                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />
                         <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
@@ -123,15 +23,15 @@
 
                 <p:separator />
 
-                <p:panel widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}" >
-                    <h:panelGrid columns="2">
-                        <p:outputPanel>
+                <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}" >
+                    <h:panelGrid id="pgdads" columns="2">
+                        <p:outputPanel id="opdemanda">
                             <fieldset>
                                 <legend>Demanda</legend>
 
                                 <h:panelGrid columns="2">
                                     <h:outputLabel for="cidanodemanda" value="Ano" />  
-                                    <!--                                    <p:inputText id="cidanodemanda" autocomplete="off"   size="8" required="true" label="Ano Demanda" maxlength="4" onkeypress="mascara(this, soNumeros)"  />-->
+                             
                                     <p:selectOneMenu id="cidanodemanda"    converter="IndexedConverter" >
                                         <f:selectItem itemLabel="TODOS" noSelectionOption="true"  />
                                         <f:selectItems value="#{cidadaoBean.listaAnoDemandas}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
@@ -141,17 +41,21 @@
                         </p:outputPanel>    
 
 
-                        <p:outputPanel>
+                        <p:outputPanel id="opcadastro">
                             <fieldset>
                                 <legend>Data de Cadatro</legend>
                                 <h:panelGrid columns="4">
                                     <h:outputLabel for="seldataInicial" value="Inicial" />                                                                                           
-                                    <p:calendar id="seldataInicial" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value);" maxlength="10" size="8"  pattern="yyyy/MM/dd" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy"  />                                            
+                                    <p:calendar id="seldataInicial" onkeyup="Formatadata(this, event);" 
+                                                onchange="validaDat(this, this.value);"  
+                                                locale="pt_BR" maxlength="10" size="10" pattern="dd/MM/yyyy" >
+                                                                              
                                     </p:calendar>
                                     <h:outputLabel for="seldataFinal" value="Final" /> 
-                                    <p:calendar id="seldataFinal" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value);" maxlength="10" size="8"  pattern="yyyy/MM/dd" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy"  />
+                                    <p:calendar id="seldataFinal" onkeyup="Formatadata(this, event);"
+                                                onchange="validaDat(this, this.value);" 
+                                                locale="pt_BR" maxlength="10" size="10" pattern="dd/MM/yyyy" >
+                                        
                                     </p:calendar>
                                 </h:panelGrid>
                             </fieldset>
@@ -163,36 +67,34 @@
 
             </p:outputPanel>
 
-            <h:panelGrid columns="4" style="width: 100%"  >  
-                <p:outputPanel  >
+            <h:panelGrid id="pgfiltros" columns="4" style="width: 100%"  >  
+                <p:outputPanel id="opfiltros"  >
                     <fieldset style="height:  200px" >
                         <legend>Benefícios da Secretaria</legend>
 
                         <h:panelGrid columns="2"  >
                             <h:outputLabel for="selstatuscid" value="Tipo Beneficio" />                             
-                            <h:selectOneMenu id="selstatuscid" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
-                                <f:selectItem itemValue="%"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="INDIVIDUAL"  itemLabel="INDIVIDUAL" /> 
-                                <f:selectItem itemValue="COLETIVO"  itemLabel="COLETIVO" />                                                              
-                            </h:selectOneMenu>                    
-                            <h:outputLabel for="selstatusben" value="Beneficiados" />                             
-                            <h:selectOneMenu id="selstatusben" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
-                                <f:selectItem itemValue="%"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="RESERVA"  itemLabel="RESERVA" /> 
-                                <f:selectItem itemValue="BENEFICIADO"  itemLabel="BENEFICIADO" />                                                              
-                            </h:selectOneMenu>                    
-                            <h:outputLabel for="selCursosSec" value="Cursos" />
-                            <h:selectOneMenu id="selCursosSec"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="%"  itemLabel="TODOS"   />
+                            <p:selectOneMenu id="selstatuscid" value="#{relatorioBean.statuscid}" converter="IndexedConverter"  style="width: 130px;"  >
+                                <f:selectItems value="#{relatorioBean.selectItemStatusCid}" />
+
+                            </p:selectOneMenu>                    
+                            <h:outputLabel for="selstatusben" value="Status Beneficiado"  />                             
+                            <p:selectOneMenu id="selstatusben" value="#{relatorioBean.statusben}"    style="width: 130px;"  >
+                                <f:selectItems value="#{relatorioBean.selectItemStatusBen}" />
+
+                            </p:selectOneMenu>                    
+                            <h:outputLabel for="selCursosSec" value="Cursos"   />
+                            <p:selectOneMenu id="selCursosSec"  style="width: 130px;" value="#{relatorioBean.possuicursossec}" >
+                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
                                 <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÃO" />                
-                            </h:selectOneMenu>                   
-                            <h:outputLabel for="selEquipSec" value="Equipamentos" />
-                            <h:selectOneMenu id="selEquipSec"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="%"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="&gt;0"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="=0"  itemLabel="NÃO" />                
-                            </h:selectOneMenu> 
+                                <f:selectItem itemValue="N"  itemLabel="NÃO" />                
+                            </p:selectOneMenu>                   
+                            <h:outputLabel for="selEquipSec" value="Equipamentos"   />
+                            <p:selectOneMenu id="selEquipSec" style="width: 130px;" value="#{relatorioBean.possuiequipsec}" >
+                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                <f:selectItem itemValue="N"  itemLabel="NÃO" />                
+                            </p:selectOneMenu> 
 
                         </h:panelGrid>
                     </fieldset>
@@ -202,15 +104,19 @@
                         <legend>Informações do Empreendimento</legend>
                         <h:panelGrid columns="2"  >
                             <h:outputLabel for="selPublico" value="Público Alvo" />
-                            <h:selectOneMenu id="selPublico" label="Público"  converter="IndexedConverter"  required="true" style="width: 120px" styleClass="ui-inputfield ui-widget  ui-corner-all" >
-                                <f:selectItem   itemLabel="TODOS"   />
-                                <f:selectItems value="#{publicoBean.selectItems}" />
-                            </h:selectOneMenu> 
+                            <p:selectOneMenu id="selPublico" label="Público" value="#{relatorioBean.publico}" 
+                                             converter="IndexedConverter"
+                                             style="width: 130px"  >
+                                
+                                <f:selectItems value="#{relatorioBean.selectItemsPublico}"  />
+                            </p:selectOneMenu> 
                             <h:outputLabel for="selRamo" value="Ramo" />
-                            <h:selectOneMenu id="selRamo" label="Ramo do Empreendimento" style="width: 140px"  converter="IndexedConverter" required="true"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
-                                <f:selectItem   itemLabel="TODOS" noSelectionOption="true"  />
+                            <p:selectOneMenu id="selRamo" label="Ramo do Empreendimento" value="#{relatorioBean.ramo}" 
+                                             converter="IndexedConverter" style="width: 130px" 
+                                              filter="true" filterMatchMode="startsWith" >
+                                
                                 <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}" />
-                            </h:selectOneMenu> 
+                            </p:selectOneMenu> 
 
                         </h:panelGrid>
                     </fieldset >
@@ -218,71 +124,29 @@
                 <p:outputPanel >
                     <fieldset style="height:  200px"  ><legend>Dados Cadastrais</legend>          
                         <h:panelGrid columns="2">
-                            <h:outputLabel for="selSexo" value="Sexo" />                                
-                            <h:selectOneMenu id="selSexo"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
+                            <h:outputLabel for="selGen" value="Gênero"  />                                
+                            <p:selectOneMenu id="selGen"  style="width:130px" value="#{relatorioBean.genero}"   >
                                 <f:selectItem itemValue="T"  itemLabel="TODOS"   />
                                 <f:selectItem itemValue="M"  itemLabel="M"   />
                                 <f:selectItem itemValue="F"  itemLabel="F" />                
-                            </h:selectOneMenu> 
+                            </p:selectOneMenu> 
                             <h:outputLabel for="selEstadoCivil" value="Estado  Civil" />
-                            <h:selectOneMenu  id="selEstadoCivil"  converter="IndexedConverter" required="true"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
-                                <f:selectItem   itemLabel="TODOS" noSelectionOption="true"  />
+                            <p:selectOneMenu  id="selEstadoCivil"   value="#{relatorioBean.estadocivil}"  converter="IndexedConverter" style="width:130px"  >
+                               
                                 <f:selectItems value="#{estadoCivilBean.selectItems}" />
 
-                            </h:selectOneMenu> 
+                            </p:selectOneMenu> 
 
                             <h:outputLabel for="selEscolaridade" value="Escolaridade" />
-                            <h:selectOneMenu id="selEscolaridade" converter="IndexedConverter" style="width:160px"  required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >
-                                <f:selectItem   itemLabel="TODOS" noSelectionOption="true"  />
+                            <p:selectOneMenu id="selEscolaridade"  value="#{relatorioBean.escolaridade}"  converter="IndexedConverter"  style="width:130px"  filter="true" filterMatchMode="startsWith"   >
+                                
                                 <f:selectItems value="#{escolaridadeBean.selectItems}" />
 
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
                         </h:panelGrid>
                     </fieldset>
                 </p:outputPanel>
-                <p:outputPanel> 
-                    <fieldset style="height:  200px" >
-                        <legend>Características do Beneficiário</legend>
-
-                        <h:panelGrid columns="2">
-                            <h:outputLabel for="selAtividades" value="Atividades" />
-
-                            <h:selectOneMenu id="selAtividades" styleClass="ui-inputfield ui-widget  ui-corner-all"   >
-                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÂO" />                
-                            </h:selectOneMenu>                    
-                            <h:outputLabel for="selCursos" value="Cursos Próprios" />
-
-                            <h:selectOneMenu id="selCursos"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÃO" />                
-                            </h:selectOneMenu>    
-                            <h:outputLabel for="selEquipPro" value="Equip. Próprios" />
-
-                            <h:selectOneMenu id="selEquipPro"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÃO" />                
-                            </h:selectOneMenu> 
-                            <h:outputLabel for="selBenSociais" value="Ben Sociais" />
-
-                            <h:selectOneMenu id="selBenSociais"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÃO" />                
-                            </h:selectOneMenu> 
-                            <h:outputLabel for="selBenHabits" value="Ben Habit" />
-                            <h:selectOneMenu id="selBenHabits"  styleClass="ui-inputfield ui-widget  ui-corner-all"  >
-                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
-                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
-                                <f:selectItem itemValue="S"  itemLabel="NÃO" />                
-                            </h:selectOneMenu> 
-                        </h:panelGrid>
-                    </fieldset>
-
-                </p:outputPanel>
+                
             </h:panelGrid>
             <p:outputPanel>
                 <fieldset>
@@ -296,16 +160,18 @@
 
 
 
-                        <h:selectOneMenu id="endbuscacid" label="Cidade" value="#{relatorioBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
+                        <p:selectOneMenu id="endbuscacid" label="Cidade" value="#{relatorioBean.pesquisaCidade}"  
+                                         filter="true" filterMatchMode="startsWith" converter="IndexedConverter" >
                             <f:selectItems value="#{relatorioBean.selectItemsCidade}" />
                             <p:ajax update="endbuscabairro" listener="#{relatorioBean.handlePesquisaCidadeChange}" />
-                        </h:selectOneMenu>
+                        </p:selectOneMenu>
 
-                        <h:selectOneMenu id="endbuscabairro" value="#{relatorioBean.pesquisaBairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" 
+                        <p:selectOneMenu id="endbuscabairro" value="#{relatorioBean.pesquisaBairro}" 
+                                         filter="true" filterMatchMode="startsWith"
                                          converter="IndexedConverter"   >
 
                             <f:selectItems value="#{relatorioBean.selectItemsBairro}" />                            
-                        </h:selectOneMenu> 
+                        </p:selectOneMenu> 
                     </h:panelGrid>
                 </fieldset>
             </p:outputPanel>
@@ -316,12 +182,23 @@
 
 
         </p:panel>
+        <p:panel id="pgrupo" header="Agrupar">
+
+            <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"  layout="pageDirection"  >
+                <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
+                <f:selectItem itemLabel="CIDADE - BAIRRO" itemValue="CIDADEBAIRRO"   />                           
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO" itemValue="DEMANDACIDADEBAIRRO"   />       
+
+
+            </h:selectOneRadio>
+
+        </p:panel>
 
         <p:separator />
 
-        <p:commandButton action="gotorelatorio" process="@this" immediate="true"  onclick="if (!args.validationFailed) {
-                        this.form.target = '_blank';
-                    }" icon="ui-icon-search" value="Pesquisar"    >
+
+<p:commandButton action="#{relatorioBean.pesquisa}"  update=":messages" ajax="false"
+                 icon="ui-icon-search" value="Pesquisar"  onclick="this.form.target='_new'"   >
         </p:commandButton>
 
     </h:form>

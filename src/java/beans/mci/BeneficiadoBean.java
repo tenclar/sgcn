@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIForm;
@@ -36,6 +37,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.FacesUtils;
+import util.RelatorioUtil;
 
 /**
  *
@@ -291,167 +293,45 @@ public class BeneficiadoBean implements Serializable {
 
     public void imprimir() throws IOException, JRException {
 
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
+        List<Cidadao> lista = new ArrayList<Cidadao>();
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         this.cidadao = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
-
-        listausr.add(cidadao);
-
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath("/mci/impressao/relcidadao.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=beneficiado.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
+        lista.add(cidadao);
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlficha");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomeficha");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
     }
 
     public void imprimirtermo() throws IOException, JRException {
 
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
+        List<Cidadao> lista = new ArrayList<Cidadao>();
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
 //        this.cidadao = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
         this.cidadao.getTelefones().toString();
-        listausr.add(cidadao);
+        lista.add(cidadao);
 
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath("/mci/beneficio/impressao/termo/termo.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=termo.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urltermoindividual");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nometermoindividual");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
     }
 
     public void imprimirtermoass() throws IOException, JRException {
 
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
+        List<Cidadao> lista = new ArrayList<Cidadao>();
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
 //        this.cidadao = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
         this.cidadao.getTelefones().toString();
-        listausr.add(cidadao);
+        lista.add(cidadao);
 
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath("/mci/beneficio/impressao/termo/termoass.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=termo.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urltermocoletivo");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nometermocoletivo");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
     }
 
-    public void imprimirequipind() throws IOException, JRException {
-
-        List<Cidadao> listausr = new ArrayList<Cidadao>();
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-//        this.cidadao = (Cidadao) (this.dmLista.getRowData());
-        listausr = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.CID);
-
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath("/mci/beneficio/impressao/equipamentos/equip_individual.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=lista_equip_ind.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
-
-    }
-
-    public void imprimirequipcol() throws IOException, JRException {
-
-        // List<Cidadao> listausr = new ArrayList<Cidadao>();
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-//        this.cidadao = (Cidadao) (this.dmLista.getRowData());
-        List<Cidadao> listausr = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.COOP);
-
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-
-        String relJasper = scontext.getRealPath("/mci/beneficio/impressao/equipamentos/equip_coletivo.jasper");
-        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
-        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
-        Map parameters = new HashMap();
-
-        response.setHeader("Content-Disposition", "inline; filename=lista_equip_coletivo.pdf");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setContentType("application/pdf");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-        JasperExportManager.exportReportToPdf(jasperPrint);
-        //response.getOutputStream().write(x1);
-        responseStream.flush();
-        responseStream.close();
-        fcontext.renderResponse();
-        fcontext.responseComplete();
-
-    }
 }

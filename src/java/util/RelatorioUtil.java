@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.apache.commons.collections.map.HashedMap;
 
 /**
  *
@@ -26,8 +27,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  */
 public class RelatorioUtil {
     
-    
-     public void criaRelatorio(List listas, String caminhorelatorio, String nomerelatorio) throws IOException, JRException {
+     public void criaRelatorio(List listas, String caminhorelatorio, String nomerelatorio,Map parameters ) throws IOException, JRException {
 
         FacesContext fcontext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
@@ -37,8 +37,35 @@ public class RelatorioUtil {
         HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
         ServletOutputStream responseStream = response.getOutputStream();
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
-        Map parameters = new HashMap();
+        
 
+        response.setHeader("Content-Disposition", "inline; filename=" + nomerelatorio);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setContentType("application/pdf");
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
+        byte x1[] = JasperExportManager.exportReportToPdf(jasperPrint);
+        response.getOutputStream().write(x1);
+        responseStream.flush();
+        responseStream.close();
+        fcontext.renderResponse();
+        fcontext.responseComplete();
+
+
+    }
+     public void criaRelatorio(List listas, String caminhorelatorio, String nomerelatorio ) throws IOException, JRException {
+
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
+
+        String relJasper = scontext.getRealPath(caminhorelatorio);
+        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
+        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
+        ServletOutputStream responseStream = response.getOutputStream();
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
+        
+        Map parameters = new HashMap();
         response.setHeader("Content-Disposition", "inline; filename=" + nomerelatorio);
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("application/pdf");

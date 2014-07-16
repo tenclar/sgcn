@@ -7,6 +7,7 @@ package util;
 
 
 
+import java.sql.Connection;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,9 +19,10 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class HibernateUtil{
     
-    private static Logger log =Logger.getLogger(HibernateUtil.class);
-    private static SessionFactory sessionFactory;
-    private static ThreadLocal<Session> sessions = new ThreadLocal<Session>();
+    private static  Logger log =Logger.getLogger(HibernateUtil.class);
+    private static  SessionFactory sessionFactory;
+    private static  ThreadLocal<Session> sessions = new ThreadLocal<Session>();
+    private static Connection conn = null;
     
     static{
           sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
@@ -58,6 +60,9 @@ public class HibernateUtil{
     }
       
       
-    
+    public static Connection getConnection(){
+        conn = getSessionFactory().getCurrentSession().connection();
+        return conn;
+    }
    
 }

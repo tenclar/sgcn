@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -29,6 +30,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import util.RelatorioUtil;
 
 /**
  *
@@ -42,12 +44,12 @@ public class RamoEmpreendimentoBean implements Serializable {
     private DataModel listaRamoEmpreendimentos;
     private RamoEmpreendimento ramoEmpreendimento;
     private List<RamoEmpreendimento> listaRamoEmpreendimento = null;
-    
+
     private boolean edit = false;
 
     @SuppressWarnings("unchecked")
     public DataModel getListaRamoEmpreendimentos() {
-       RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
+        RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
         if (listaRamoEmpreendimento == null) {
             listaRamoEmpreendimento = ramoEmpreendimentoDAO.getRamoEmpreendimentos();
         }
@@ -56,10 +58,13 @@ public class RamoEmpreendimentoBean implements Serializable {
     }
 
     public List<SelectItem> getSelectItemsRamo() {
-       RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
+        RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
         List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        RamoEmpreendimento rr = new RamoEmpreendimento();
+        rr.setId(0); rr.setNome("TODOS");
+        toReturn.add(new SelectItem(rr, rr.getNome()));
         for (RamoEmpreendimento r : ramoEmpreendimentoDAO.getRamoEmpreendimentos()) {
-            toReturn.add(new SelectItem(r,r.getNome()));
+            toReturn.add(new SelectItem(r, r.getNome()));
         }
         return toReturn;
     }
@@ -71,13 +76,11 @@ public class RamoEmpreendimentoBean implements Serializable {
     public void setRamoEmpreendimento(RamoEmpreendimento ramoEmpreendimento) {
         this.ramoEmpreendimento = ramoEmpreendimento;
 
-
     }
 
     public void newRamoEmpreendimento(ActionEvent actionEvent) {
 
         this.ramoEmpreendimento = new RamoEmpreendimento();
-
 
     }
 
@@ -105,7 +108,6 @@ public class RamoEmpreendimentoBean implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Cadastro Não Efetuado! " + e.getMessage()));
         }
 
-
     }
 
     public void editRamoEmpreendimento(ActionEvent actionEvent) {
@@ -131,31 +133,15 @@ public class RamoEmpreendimentoBean implements Serializable {
     public void cancelRamoEmpreendimento() {
         this.ramoEmpreendimento = null;
     }
-    
+
     @SuppressWarnings("unchecked")
     public void imprimeRelatorioWebTodos() throws IOException, JRException {
         List lista = new ArrayList();
         RamoEmpreendimentoDAO rdao = new RamoEmpreendimentoDAO();
         lista.addAll(rdao.getRamoEmpreendimentos());
-        try {
-            context = FacesContext.getCurrentInstance();
-            ServletContext scontext = (ServletContext) context.getExternalContext().getContext();
-            String relJasper = scontext.getRealPath("/mci/cadastro/relatorios/lista_ramo.jasper");
-            HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-            ServletOutputStream responseStream = response.getOutputStream();
-            JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
-            Map parameters = new HashMap();
-            response.setHeader("Content-Disposition", "inline; filename=impressao.pdf");
-            response.setContentType("application/pdf");
-            response.setHeader("Cache-Control", "no-cache");
-            JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-            responseStream.flush();
-            responseStream.close();
-            context.renderResponse();
-            context.responseComplete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urllistaramo");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_ramo");
+
     }
 }

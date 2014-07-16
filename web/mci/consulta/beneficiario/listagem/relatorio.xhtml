@@ -19,18 +19,21 @@
                     <p>GOVERNO DO ESTADO DO ACRE</p>
                     <p>{TITULO_RELATORIO}</p></td>
                 <td class="colunausuario">
-                    <p>Usuário: login</p>            
+                    <p>Usuário: #{usuarioLoginBean.usersec.login}</p>            
                     <p>Setor: setor</p>
-                    <p>data - hora</p>  
-
+                    <p>data: #{usuarioLoginBean.usersec.dataloginold.date}/#{usuarioLoginBean.usersec.dataloginold.month+1}/#{usuarioLoginBean.usersec.dataloginold.year-100}</p>  
+                    <p>hora: <h:outputText value="#{session.lastAccessedTime}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>     
+                    </p>
                 </td>
             </tr>            
         </table>
     </ui:define>
 
     <ui:define name="content">
-        <h:form>
-            <p:dataTable id="tbl" var="dados" value="dados,dados" styleClass="dataTable">
+        <h:form id="frmRelat" >
+            <p:dataTable  var="dados" value="#{relatorioBean.listaBeneficiarios}" styleClass="dataTable">
                 <f:facet name="header">
                     <p:panel style="text-align: right;">
                         <h:commandLink>
@@ -55,17 +58,55 @@
                     </p:panel>
                 </f:facet>
                 
-                <p:column headerText="CIDADE" sortBy="cidade"  >
+                <p:column headerText="CIDADE"    >
+                    <h:outputText value="#{dados.endereco.bairro.cidade.nome}" /> 
+                </p:column>
+                <p:column headerText="BAIRRO" rendered="#{relatorioBean.colunabairro}" >
+                    <h:outputText value="#{dados.endereco.bairro.nome}" />
+                </p:column>               
+                <p:column headerText="RAMO" rendered="#{relatorioBean.colunaramo}"  >
+                    <h:outputText value="#{dados.ramoempreendimento.nome}" />
+                </p:column>
+                <p:column headerText="NOME">
+                    <h:outputText value="#{dados.nome}" />
+                </p:column>
+                 <p:column headerText="LOGRADOURO" rendered="#{relatorioBean.colunalogradouro}"  >
+                     <h:outputText value="#{dados.endereco.logradouro}, #{dados.numero}" />
+                </p:column>
+                <p:column headerText="CPF"  >
+                    <h:outputText value="#{dados.cpf}" /> 
+                </p:column>
+                 <p:column headerText="RG"  rendered="#{relatorioBean.colunarg}"  >
+                    <h:outputText value="#{dados.endereco.logradouro}" /> 
+                </p:column>
+                <p:column headerText="NIS"  rendered="#{relatorioBean.colunanis}"   >
+                    <h:outputText value="#{dados.nis}" /> 
+                </p:column>
+                <p:column headerText="SEXO"  rendered="#{relatorioBean.colunasexo}"   >
+                    <h:outputText value="#{dados.sexo}" /> 
+                </p:column>
+                <p:column headerText="IDADE"  rendered="#{relatorioBean.colunaidade}"   >
+                    <h:outputText value="#{dados.idade}" /> 
+                </p:column>
+                <p:column headerText="ESCOLARIDADE"  rendered="#{relatorioBean.colunaescolaridade}"   >
+                    <h:outputText value="#{dados.escolaridade.grau}" /> 
+                </p:column>
+                               
+                <p:column headerText="TELEFONES" rendered="#{relatorioBean.colunatelefone}" >
                     <h:outputText value="cidade" /> 
                 </p:column>
-                <p:column headerText="BAIRRO">
-                    <h:outputText value="cidade" /> </p:column>
-                <p:column headerText="LOGRADOURO"><h:outputText value="cidade" /> </p:column>
-                <p:column headerText="CPF"><h:outputText value="cidade" /> </p:column>
-                <p:column headerText="NOME"><h:outputText value="cidade" /> </p:column>
-                <p:column headerText="TELEFONES"><h:outputText value="cidade" /> </p:column>
-                <p:column headerText="PUBLICO"><h:outputText value="cidade" /> </p:column>
-                <p:column headerText="EQUIPAMENTOS"><h:outputText value="cidade" /> </p:column>
+                <p:column headerText="PUBLICO" rendered="#{relatorioBean.colunapublico}"   >
+                    <h:outputText value="#{dados.publico.nome}" /> 
+                </p:column>
+                 <p:column headerText="Status cid"   >
+                     <h:outputText value="#{dados.statuscid}" /> 
+                </p:column>
+                 <p:column headerText="Ben STATUS"   >
+                     <h:outputText value="#{dados.benstatus}" /> 
+                </p:column>
+                <p:column headerText="EQUIP" rendered="#{relatorioBean.colunaequip}"  >
+                    <h:outputText value="#{dados.equipamentossecretarias.size()}" /> 
+                </p:column>
             </p:dataTable>
         </h:form>
     </ui:define>

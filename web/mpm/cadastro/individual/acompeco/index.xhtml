@@ -5,7 +5,9 @@
 
               xmlns:h="http://java.sun.com/jsf/html"
               xmlns:f="http://java.sun.com/jsf/core"
-              xmlns:ui="http://java.sun.com/jsf/facelets">
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+             
+              >
 
 
     <p:fieldset legend="Acompanhamento Econômico" style="margin: 0 auto;">
@@ -71,12 +73,10 @@
         </p:outputPanel>
         <p:outputPanel id="dtRend">
 
-            <p:dataTable value="#{planoBean.plano.rendimentos}"  var="item" 
-                         paginator="true"
-                         paginatorPosition="bottom"
-                         rows="10"
-
+            <p:dataTable value="#{planoBean.plano.rendimentos}"  
+                         var="item"                                               
                          editable="true"
+                         
                          >
                 <p:ajax event="rowEdit" listener="#{planoBean.savePlano()}" update=":messages" />  
                 <p:column  headerText="Monitoramento" sortBy="#{item.datamon}" >
@@ -90,27 +90,47 @@
                         <f:facet name="input">  
                             <p:calendar autocomplete="off" value="#{item.datamon}" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)"
                                         required="true" maxlength="10" locale="pt_BR"  pattern="dd/MM/yyyy" showButtonPanel="true" navigator="true" >
-                                
+
                             </p:calendar>
                         </f:facet>  
                     </p:cellEditor> 
                 </p:column> 
 
-                <p:column  headerText="Rendimento" sortBy="#{item.daterend}" >                                                     
+                <p:column  headerText="Ano" sortBy="#{item.daterend.year}" >                                                     
 
 
                     <p:cellEditor>  
                         <f:facet name="output">  
                             <h:outputText value="#{item.daterend}"  >
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:convertDateTime pattern="yyyy" />
                             </h:outputText> 
                         </f:facet>  
                         <f:facet name="input">  
                             <p:calendar autocomplete="off" value="#{item.daterend}" required="true"  maxlength="10" pattern="dd/MM/yyyy" locale="pt_BR" >
-                                
+
                             </p:calendar>
                         </f:facet>  
                     </p:cellEditor>  
+                </p:column>
+                <p:column  headerText="Mês" sortBy="#{item.daterend.month}" >                                                     
+
+
+                     
+                            <h:outputText value="#{item.daterend}"  >
+                                <f:convertDateTime pattern="MM" />
+                            </h:outputText> 
+                       
+
+                   
+                </p:column>
+                <p:column  headerText="Dia" sortBy="#{item.daterend.date}" >                                                     
+
+
+                   
+                            <h:outputText value="#{item.daterend}"  >
+                                <f:convertDateTime pattern="dd" />
+                            </h:outputText> 
+                      
                 </p:column>
                 <p:column  headerText="Vendas" >                                                     
 
@@ -123,7 +143,7 @@
                         <f:facet name="input">  
                             <p:inputText  value="#{item.vendas}" required="true" onkeypress="mascara(this, valor)"  >
                                 <f:convertNumber pattern="##,##0.00#"  />
-                                
+
                             </p:inputText>
                         </f:facet>  
                     </p:cellEditor>
@@ -139,7 +159,7 @@
                         <f:facet name="input">  
                             <p:inputText value="#{item.despesas}" required="true" onkeypress="mascara(this, valor)" >
                                 <f:convertNumber pattern="##,##0.00#"  />
-                                
+
                             </p:inputText>
                         </f:facet>  
                     </p:cellEditor>
@@ -180,13 +200,12 @@
 
 
 
-
         </p:outputPanel>
     </p:fieldset>
 
     <p:separator />
     <p:commandButton value="voltar" update=":frmPlano:tabGeral, :messages" process="@this" immediate="true" oncomplete="tabGeral.select(3);tabMetas.select(1)" />
-<!--    <p:commandButton value="salvar" update=":frmPlano:tabGeral :messages" process="@this" action="# {planoBean.saveProx()}"  />-->
+    <!--    <p:commandButton value="salvar" update=":frmPlano:tabGeral :messages" process="@this" action="# {planoBean.saveProx()}"  />-->
     <p:commandButton value="avançar" update=":frmPlano:tabGeral :messages" process="@this"  oncomplete="if(!args.validationFailed){tabGeral.select(5)}" />
 </ui:component>
 

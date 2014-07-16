@@ -25,10 +25,10 @@
         <br />
         
         <p:outputPanel id="cptabela" >
-            <p:dataTable  var="item" value="#{beneficiadoBean.lista}"  paginator="true"  
-                          paginatorAlwaysVisible="false" rows="8"   selectionMode="single" 
+            <p:dataTable  var="item" value="#{beneficiadoBean.lista}" 
+                             selectionMode="single" 
                           rowKey="#{item.id}"
-                          paginatorPosition="bottom"
+                          
                           rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
                 <p:column  style=" text-align: center; width: 80px" >     
                     <f:facet name="header">

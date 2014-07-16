@@ -26,6 +26,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.FacesUtils;
+import util.RelatorioUtil;
 
 @ManagedBean
 @ViewScoped
@@ -134,29 +135,10 @@ public class CursoBean implements Serializable {
     
     @SuppressWarnings("unchecked")
     public void imprimeRelatorioWebTodos() throws IOException, JRException {
-        List lista = new ArrayList();
+        
          CursoDAO cursoDAO = new CursoDAO();
-        lista.addAll(cursoDAO.getCursos());
-        try {
-            context = FacesContext.getCurrentInstance();
-            ServletContext scontext = (ServletContext) context.getExternalContext().getContext();
-            String relJasper = scontext.getRealPath(ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("lista_cursos"));
-            HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-            ServletOutputStream responseStream = response.getOutputStream();
-            JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
-            
-            Map parameters = new HashMap();
-            response.setHeader("Content-Disposition", "inline; filename=impressao.pdf");
-            response.setContentType("application/pdf");
-            response.setHeader("Cache-Control", "no-cache");
-            JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, ds);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
-            responseStream.flush();
-            responseStream.close();
-            context.renderResponse();
-            context.responseComplete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+         List<Curso> lista = cursoDAO.getCursos();
+          String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_cursos");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_publico");
      }
 }

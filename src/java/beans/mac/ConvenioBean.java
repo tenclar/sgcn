@@ -60,14 +60,25 @@ public class ConvenioBean implements Serializable {
     private StreamedContent file;
 
     private boolean inserirContra;
+    private boolean inserirCon;
     private Telefone telefone;
     private boolean nvigencia;
     private boolean nadtivo;
     private ContraPartida contrapartida;
+    private Concedente concedente;
     private boolean inserirHistInt;
     private boolean inserirHist;
     private boolean inserirContato;
 
+    public Concedente getConcedente() {
+        return concedente;
+    }
+
+    public void setConcedente(Concedente concedente) {
+        this.concedente = concedente;
+    }
+
+    
     public ContraPartida getContrapartida() {
         return contrapartida;
     }
@@ -609,6 +620,27 @@ public class ConvenioBean implements Serializable {
 
     public void contraedit() {
         this.inserirContra = false;
+    }
+    
+    public void concedentenew() {
+        this.concedente = new Concedente();
+        this.inserirCon = true;
+    }
+
+    public void concedenteSave() {
+
+        if (this.inserirCon == true) {
+            convenio.getConcedentes().add(concedente);
+            concedente.setConvenio(convenio);
+            this.inserirCon = false;
+        }
+        ConvenioDAO convenioDAO = new ConvenioDAO();
+        convenioDAO.saveConvenio(convenio);
+
+    }
+
+    public void concedenteedit() {
+        this.inserirCon = false;
     }
 
     @SuppressWarnings("unchecked")

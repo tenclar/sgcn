@@ -10,5 +10,5 @@ package entity.mci.enumerator;
  */
 
 public  enum EnumStatusBeneficio {
- RESERVA , BENEFICIADO;    
+ TODOS, RESERVA , BENEFICIADO;    
 }
