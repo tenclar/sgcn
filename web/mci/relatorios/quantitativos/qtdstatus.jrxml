@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.8150000000000004"/>
-	<property name="ireport.x" value="294"/>
-	<property name="ireport.y" value="12"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Arial" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -194,20 +194,6 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<staticText>
-				<reportElement uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6" x="0" y="5" width="74" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Geral:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a" x="74" y="5" width="100" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{TotalGeral}]]></textFieldExpression>
-			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>

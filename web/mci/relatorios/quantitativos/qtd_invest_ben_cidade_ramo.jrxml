@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -21,7 +21,8 @@
 select
      cid.nome as cidade,
      ramo.nome as ramo,
-	  count(distinct c.id) as totalben
+	  count(distinct c.id) as totalben,
+sum(eq.valor) as totalinvest
 from cidadao c
 inner join mci_equipamentossecretaria eq on eq.cidadao_id = c.id
 inner join endereco e on e.id = c.endereco_id
@@ -30,11 +31,8 @@ inner join cidade cid on cid.id = b.cidade_id
 inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
 
 where c.tipopessoa = 'CID'
-
 and c.benstatus = 'BENEFICIADO'
-
-#AND  YEAR(eq.dataentrega) = 2011
-#and (SELECT count(eq.cidadao_id) as totale FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id ) >0
+and c.statuscid = 'INDIVIDUAL'
 
 GROUP BY
       cid.nome, ramo.nome
@@ -47,16 +45,29 @@ ORDER BY
 	<field name="cidade" class="java.lang.String"/>
 	<field name="ramo" class="java.lang.String"/>
 	<field name="totalben" class="java.lang.Long"/>
+	<field name="totalinvest" class="java.lang.Double"/>
 	<variable name="TotalBen" class="java.lang.Integer" resetType="Group" resetGroup="cidade" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalben}]]></variableExpression>
 	</variable>
-	<variable name="TotalGeral" class="java.lang.Integer" incrementType="Column" calculation="Sum">
+	<variable name="TotalGeralBen" class="java.lang.Integer" incrementType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$V{TotalBen}]]></variableExpression>
+	</variable>
+	<variable name="TotalInvest" class="java.lang.Double" resetType="Group" resetGroup="cidade" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinvest}]]></variableExpression>
+	</variable>
+	<variable name="TotalGeralInvest" class="java.lang.Integer" incrementType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$V{TotalInvest}]]></variableExpression>
 	</variable>
 	<group name="cidade" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{cidade}]]></groupExpression>
 		<groupHeader>
-			<band height="20">
+			<band height="36">
+				<line>
+					<reportElement uuid="36dd3830-bba8-4c72-87d7-b02c89269c82" positionType="FixRelativeToBottom" x="0" y="35" width="802" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
 				<frame>
 					<reportElement uuid="880ddc15-381e-40e4-a5f8-816f21acd9c8" mode="Opaque" x="0" y="2" width="802" height="15" forecolor="#B89F7D" backcolor="#000000"/>
 					<textField isStretchWithOverflow="true">
@@ -67,19 +78,34 @@ ORDER BY
 						<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
 					</textField>
 				</frame>
+				<staticText>
+					<reportElement uuid="0453cdb6-5503-4e08-bc5f-02aeb751a78e" x="0" y="18" width="242" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Ramo de Atividade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f98cea53-77dc-4ae7-94ef-3d512b0b5dc7" x="243" y="18" width="84" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Beneficiados]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="570a29db-5b37-4acf-b871-a6cd26b3dd86" x="327" y="18" width="85" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Investimento]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
 			<band height="18">
 				<textField>
-					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="131" y="2" width="85" height="15"/>
+					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="242" y="2" width="85" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TotalBen}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01" x="0" y="2" width="131" height="15"/>
+					<reportElement uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01" x="0" y="2" width="242" height="15"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -87,11 +113,26 @@ ORDER BY
 					<text><![CDATA[Total:]]></text>
 				</staticText>
 				<line>
-					<reportElement uuid="985a8c6b-598e-40cc-9199-3e0781facde9" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+					<reportElement uuid="985a8c6b-598e-40cc-9199-3e0781facde9" positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="405e62c8-8993-47f0-915d-fa2ada51768b" x="355" y="3" width="57" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TotalInvest}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+					<reportElement uuid="c1c27074-4f7c-4cad-9ef9-fead3b7b8da0" style="Detail" positionType="Float" x="327" y="3" width="28" height="15"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -149,45 +190,79 @@ ORDER BY
 	</pageHeader>
 	<detail>
 		<band height="15" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="131" y="0" width="85" height="15"/>
-				<box leftPadding="5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalben}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4" style="Detail" positionType="Float" x="1" y="0" width="130" height="15"/>
-				<box leftPadding="5"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{ramo}]]></textFieldExpression>
-			</textField>
+			<frame>
+				<reportElement uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3" style="Row" mode="Opaque" x="2" y="0" width="444" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4" style="Detail" positionType="Float" x="0" y="0" width="241" height="15"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ramo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="240" y="0" width="85" height="15"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalben}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement uuid="9a3754b7-acec-4b7a-95f3-b6a150724f04" style="Detail" positionType="Float" x="353" y="0" width="57" height="15"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalinvest}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+					<reportElement uuid="5cf88890-2c7f-49b8-ba96-f3717d4b7aa5" style="Detail" positionType="Float" x="325" y="0" width="28" height="15"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6" x="0" y="5" width="74" height="15"/>
+				<reportElement uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6" x="0" y="5" width="131" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Geral:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a" x="74" y="5" width="100" height="15"/>
+				<reportElement uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a" x="243" y="5" width="84" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{TotalGeral}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{TotalGeralBen}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="bebcfe89-9f2e-4c34-abb7-48b94f1af6b0" x="355" y="5" width="57" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalGeralInvest}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="bd2ad018-3fd0-4c37-99d0-13e7d7e4d0a5" style="Detail" positionType="Float" x="327" y="5" width="28" height="15"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

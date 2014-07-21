@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -44,6 +44,8 @@ ORDER BY
 	<variable name="TotalGeral" class="java.lang.Integer" incrementType="Group" incrementGroup="anodemanda" calculation="Sum">
 		<variableExpression><![CDATA[$V{TotalBen}]]></variableExpression>
 	</variable>
+	<variable name="tben" class="java.lang.Integer"/>
+	<variable name="tres" class="java.lang.Integer"/>
 	<group name="anodemanda">
 		<groupExpression><![CDATA[$F{anodemanda}]]></groupExpression>
 		<groupHeader>
@@ -124,14 +126,14 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+				<text><![CDATA[SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="44" width="555" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE POR CIDADE E RAMO]]></text>
+				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE POR ANO DEMANDA]]></text>
 			</staticText>
 		</band>
 	</title>
