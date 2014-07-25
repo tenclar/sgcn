@@ -18,7 +18,9 @@
 		<band height="15" splitType="Stretch">
 			<textField>
 				<reportElement uuid="4c5ab08b-94b2-4777-bdd3-c292299fb1e4" x="0" y="0" width="70" height="15"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>
 		</band>

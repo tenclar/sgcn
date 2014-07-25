@@ -108,7 +108,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{grupo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -119,7 +121,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{tipobeneficio}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -130,7 +134,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Agrupar]]></text>
 			</staticText>
 			<staticText>
@@ -141,7 +147,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Tipo Benefício]]></text>
 			</staticText>
 			<staticText>
@@ -152,7 +160,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Status]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -163,7 +173,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{statusben}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -174,7 +186,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{possuiequipsec}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -185,7 +199,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Equip]]></text>
 			</staticText>
 			<staticText>
@@ -196,7 +212,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Cursos]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -207,7 +225,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{possuicursossec}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -218,7 +238,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{publico}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -229,7 +251,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Público]]></text>
 			</staticText>
 			<staticText>
@@ -240,7 +264,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Ramo]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -251,7 +277,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{ramo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -262,7 +290,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{genero}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -273,7 +303,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Gênero]]></text>
 			</staticText>
 			<staticText>
@@ -284,7 +316,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -295,7 +329,9 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{cidade}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -306,7 +342,9 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Bairro]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
@@ -317,14 +355,16 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{bairro}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="a0552dfa-e30c-4b3c-ba39-2c534f6f64f4" x="2" y="61" width="800" height="14"/>
 				<box leftPadding="75"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PESQUISA EFETUADA POR:]]></text>
 			</staticText>
@@ -341,49 +381,49 @@
 			<staticText>
 				<reportElement uuid="a67657b1-e4f1-4871-92dc-e18a4aeb1533" style="Column header" x="464" y="0" width="65" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[CPF]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="0c729630-a66b-4bc3-9dec-046f2eae469a" style="Column header" x="527" y="0" width="151" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[LOGRADOURO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="5978d913-4b5e-4f83-8b4a-6e32dd629b0a" style="Column header" x="766" y="0" width="36" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[EQUIP]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="169ace4c-44fa-47a6-91ff-5184b9db8fab" style="Column header" x="676" y="0" width="93" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[TELEFONES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="cbd59aa6-f3ea-4413-993f-385417f27ba5" style="Column header" x="0" y="0" width="125" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[CIDADE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="5ccf81a0-34ac-4e2b-865e-28924a81fef3" style="Column header" x="313" y="0" width="151" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[NOME]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="4a251b08-afe3-4ff7-9df9-6a85cbfb0f21" style="Column header" x="125" y="0" width="94" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[BAIRRO]]></text>
 			</staticText>
@@ -393,7 +433,7 @@
 			<staticText>
 				<reportElement uuid="efe65a58-5e2c-4d66-9da9-0ce6e94314ec" style="Column header" x="219" y="0" width="94" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[RAMO]]></text>
 			</staticText>
@@ -407,14 +447,14 @@
 					<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="313" y="0" width="151" height="15"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="48f12016-d719-40c1-b574-174aca03b7d4" style="Detail" positionType="Float" x="766" y="0" width="36" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="11"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{equipamentossecretarias}.size()]]></textFieldExpression>
 				</textField>
@@ -430,33 +470,35 @@
 					<reportElement uuid="58673752-41e5-4a04-a6b4-2d1f37173e47" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="527" y="0" width="151" height="15"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()+", "+$F{numero}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement uuid="1a46277c-aa94-4f3c-9ee3-6910f9a9155e" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="2" y="0" width="123" height="15"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="0080f42f-9ed4-4a3b-b1ee-ec0e0c83fb78" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="464" y="0" width="65" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="e79cc6ef-a837-42df-95bf-e1a245bd1a0d" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="219" y="0" width="94" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ramoempreendimento}.getNome()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement uuid="4eca739e-7d2c-41a6-971f-6031f6c9bb16" style="Detail" positionType="Float" stretchType="RelativeToTallestObject" x="125" y="0" width="94" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
 				</textField>

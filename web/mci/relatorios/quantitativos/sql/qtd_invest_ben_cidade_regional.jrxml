@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="22"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -17,20 +17,19 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[
-select
+		<![CDATA[select
      cid.nome as cidade,
-    # ramo.nome as ramo,
+
      reg.nome as regnome,
 	  count(distinct c.id) as totalben,
-sum(eq.valor) as totalinvest
+sum(distinct eq.valor) as totalinvest
 from cidadao c
-inner join mci_equipamentossecretaria eq on eq.cidadao_id = c.id
+left join mci_equipamentossecretaria eq on eq.cidadao_id = c.id
 inner join endereco e on e.id = c.endereco_id
 inner join bairro b on b.id = e.bairro_id
 inner join cidade cid on cid.id = b.cidade_id
 inner join  regional reg ON reg.id = b.regional_id
-#inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
+
 
 where c.tipopessoa = 'CID'
 and c.benstatus = 'BENEFICIADO'
@@ -52,13 +51,13 @@ ORDER BY
 	<variable name="TotalBen" class="java.lang.Integer" resetType="Group" resetGroup="cidade" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalben}]]></variableExpression>
 	</variable>
-	<variable name="TotalGeralBen" class="java.lang.Integer" incrementType="Column" calculation="Sum">
+	<variable name="TotalGeralBen" class="java.lang.Integer" incrementType="Group" incrementGroup="cidade" calculation="Sum">
 		<variableExpression><![CDATA[$V{TotalBen}]]></variableExpression>
 	</variable>
 	<variable name="TotalInvest" class="java.lang.Double" resetType="Group" resetGroup="cidade" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalinvest}]]></variableExpression>
 	</variable>
-	<variable name="TotalGeralInvest" class="java.lang.Integer" incrementType="Column" calculation="Sum">
+	<variable name="TotalGeralInvest" class="java.lang.Integer" incrementType="Group" incrementGroup="cidade" calculation="Sum">
 		<variableExpression><![CDATA[$V{TotalInvest}]]></variableExpression>
 	</variable>
 	<group name="cidade" isStartNewPage="true">
@@ -184,7 +183,7 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE E INVESTIMENTO]]></text>
+				<text><![CDATA[DEMANDA 2011 - 2014- BENEFICIÁRIOS INDIVIDUAL - QUANTIDADE E INVESTIMENTO POR REGIONAL DE RIO BRANCO]]></text>
 			</staticText>
 		</band>
 	</title>

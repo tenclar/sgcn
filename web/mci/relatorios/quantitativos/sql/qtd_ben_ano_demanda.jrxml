@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.9487171000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1"/>
+	<property name="ireport.y" value="35"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -22,6 +22,9 @@
     c.benstatus,
 	  count(distinct c.id) as totalben
 from cidadao c
+inner join endereco e on e.id = c.endereco_id
+inner join bairro b on b.id = e.bairro_id
+inner join cidade cid on cid.id = b.cidade_id
 where c.tipopessoa = 'CID'
 GROUP BY
 c.anodemanda, c.benstatus
@@ -129,11 +132,11 @@ ORDER BY
 				<text><![CDATA[SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="44" width="555" height="15"/>
+				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="43" width="555" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE POR ANO DEMANDA]]></text>
+				<text><![CDATA[BENEFICIÁRIOS INDIVIDUAL E COLETIVO - QUANTIDADE POR ANO DEMANDA]]></text>
 			</staticText>
 		</band>
 	</title>
