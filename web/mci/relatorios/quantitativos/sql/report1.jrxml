@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dcd70d97-7a0b-470f-9ceb-09b40f266109">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="hql">
+		<![CDATA[select c from  Cidadao c
+ inner join c.cursosSecretarias cs
+where c.cpf = '62643142268'
+ and c.tipopessoa = 'CID'
+ and cs.status = 'RESERVA'
+ and cs.curso.id = 9
+ group by c.nome
+ order by c.nome ]]>
+	</queryString>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="anodemanda" class="java.lang.Integer"/>
+	<field name="apelido" class="java.lang.String"/>
+	<field name="associados" class="java.util.List"/>
+	<field name="atividade" class="java.lang.String"/>
+	<field name="atividadeTotal" class="java.lang.Double"/>
+	<field name="beneficioSocial" class="java.lang.String"/>
+	<field name="beneficiohabitacional" class="java.lang.String"/>
+	<field name="benstatus" class="entity.mci.enumerator.EnumStatusBeneficio"/>
+	<field name="cidAtividades" class="java.util.List"/>
+	<field name="cidBenHabits" class="java.util.List"/>
+	<field name="cidbBenSociais" class="java.util.List"/>
+	<field name="cidbensduraveis" class="java.util.List"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="cursos" class="java.util.List"/>
+	<field name="cursosSecretarias" class="java.util.List"/>
+	<field name="cursosecr" class="java.lang.String"/>
+	<field name="datacreated" class="java.util.Date"/>
+	<field name="datanasc" class="java.util.Date"/>
+	<field name="dataupdate" class="java.util.Date"/>
+	<field name="dependentes" class="java.util.List"/>
+	<field name="despesas" class="java.util.List"/>
+	<field name="despesasTotal" class="java.lang.Double"/>
+	<field name="endereco" class="entity.Endereco"/>
+	<field name="equipamento" class="java.lang.String"/>
+	<field name="equipamentosproprios" class="java.util.List"/>
+	<field name="equipamentossecretarias" class="java.util.List"/>
+	<field name="equipsecr" class="java.lang.String"/>
+	<field name="escolaridade" class="entity.mci.Escolaridade"/>
+	<field name="estadocivil" class="entity.mci.EstadoCivil"/>
+	<field name="expedidor" class="java.lang.String"/>
+	<field name="histdomicilio" class="java.util.List"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="idade" class="java.lang.Integer"/>
+	<field name="instituicao" class="java.lang.String"/>
+	<field name="naturalidade" class="entity.Cidade"/>
+	<field name="necespecial" class="entity.mci.NecEspecial"/>
+	<field name="nis" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="publico" class="entity.mci.Publico"/>
+	<field name="ramoempreendimento" class="entity.mci.RamoEmpreendimento"/>
+	<field name="representante" class="entity.mci.Cidadao"/>
+	<field name="resumo" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="statuscid" class="entity.mci.enumerator.EnumStatusCid"/>
+	<field name="telefones" class="java.util.List"/>
+	<field name="tempomorada" class="java.lang.String"/>
+	<field name="tipopessoa" class="entity.mci.enumerator.EnumTipoPessoa"/>
+	<field name="trabFuncao" class="java.lang.String"/>
+	<field name="trabLocal" class="java.lang.String"/>
+	<field name="trabRem" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

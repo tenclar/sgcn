@@ -1,5 +1,6 @@
 package beans.mci;
 
+import beans.UsuarioLoginBean;
 import dao.CidadeDAO;
 import dao.EnderecoDAO;
 import dao.EstadoDAO;
@@ -10,6 +11,7 @@ import entity.Endereco;
 import entity.Estado;
 import entity.mci.*;
 import entity.Telefone;
+import entity.Usuario;
 import entity.mci.enumerator.EnumStatusBeneficio;
 import entity.mci.enumerator.EnumStatusCid;
 import entity.mci.enumerator.EnumTipoPessoa;
@@ -25,18 +27,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.component.panel.Panel;
-import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
-import org.primefaces.event.TabChangeEvent;
 import util.FacesUtils;
 import util.RelatorioUtil;
 
@@ -82,7 +75,7 @@ public class CidadaoBean implements Serializable {
     private Panel panelAtividade;
     private Panel panelView;
     private Panel panelCursoSecr;
-    
+
     private UIForm formCid;
     private boolean editar = false;
     private Telefone telefone;
@@ -126,8 +119,6 @@ public class CidadaoBean implements Serializable {
         this.cidBensDuraveis = cidBensDuraveis;
     }
 
-    
-
     public Panel getPanelCursoSecr() {
         return panelCursoSecr;
     }
@@ -144,7 +135,6 @@ public class CidadaoBean implements Serializable {
         this.tipoBusca = tipoBusca;
     }
 
-  
     public Panel getPanelEquipSecr() {
         return panelEquipSecr;
     }
@@ -866,6 +856,7 @@ public class CidadaoBean implements Serializable {
         this.cidBensDuraveis = new CidBensDuraveis();
         this.bensDuraveis = new BensDuraveis();
         this.cidBensDuraveis.setDataadd(this.cidadao.getDatacreated());
+        
         this.editar = false;
         return null;
     }
@@ -994,7 +985,6 @@ public class CidadaoBean implements Serializable {
         if (cidadaoDAO.getListByCnp(this.cidadao.getCpf()).isEmpty()) {
 
             success = false;
-            
 
             // facesutils.cleanSubmittedValues(formCid);
             cidadao.setEstadocivil(new EstadoCivil());
@@ -1092,6 +1082,8 @@ public class CidadaoBean implements Serializable {
         //tabView.setActiveIndex(0);
         //tabViewCaracteristicas.setActiveIndex(0);
         this.cidadao = new Cidadao();
+        Usuario u = new UsuarioLoginBean().getUsersec();
+        this.cidadao.setUsuario(u);
         this.inserircid = true;
         //this.cidadao.setBenstatus(EnumStatusBeneficio.RESERVA);
         //this.cidadao.setStatuscid(EnumStatusCid.INDIVIDUAL);
@@ -1160,7 +1152,6 @@ public class CidadaoBean implements Serializable {
 
     }
 
-
     @SuppressWarnings("unchecked")
     public void saveImprimir() throws IOException, JRException {
 
@@ -1168,11 +1159,10 @@ public class CidadaoBean implements Serializable {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         this.cidadao = cidadaoDAO.getEntity(this.cidadao.getId());
         lista.add(cidadao);
-        
+
         String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlficha");
         String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomeficha");
         relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
-
 
     }
 
@@ -1183,19 +1173,26 @@ public class CidadaoBean implements Serializable {
         Cidadao c = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(c.getId());
         lista.add(cidadao);
-        
+
         String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlficha");
         String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomeficha");
         relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
-       
     }
-
-   
 
     public List<Cidadao> getListaAnoDemandas() {
         CidadaoDAO cdao = new CidadaoDAO();
         return cdao.getListaAnoDemandas();
 
+    }
+
+    public List<SelectItem> getSelectItemsAnoDemanda() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        
+        for (Cidadao a : this.getListaAnoDemandas()) {
+            toReturn.add(new SelectItem(a,a.toString()));
+
+        }
+        return toReturn;
     }
 }

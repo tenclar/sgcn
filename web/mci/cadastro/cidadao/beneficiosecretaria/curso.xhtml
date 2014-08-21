@@ -20,7 +20,10 @@
                     <p:selectOneMenu id="cidListaCursoSrc"  style="width: 230px"
                                      value="#{cidadaoBean.cursossecretaria.curso}" 
                                      filter="true" filterMatchMode="startsWith"
-                                     converter="IndexedConverter" required="true" label="Equipamento Secretaria"  >
+                                     converter="IndexedConverter" required="true" 
+                                     label="Equipamento Secretaria" 
+                                     
+                                     >
                         <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{cursoBean.selectItemsCurso}" />
                     </p:selectOneMenu>

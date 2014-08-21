@@ -28,7 +28,43 @@ public class CidadaoBuscaBean {
     private List<Cidadao> listacid;
     private String tipoBusca;
     private String campoPesquisa;
-    private FacesUtils facesutils;
+    private FacesUtils facesutils = new FacesUtils();
+    private boolean buscacod = true;
+    private boolean buscacpf = false;
+    private boolean buscanomeresp = false;
+    private boolean buscanome = false;
+
+    public boolean isBuscacod() {
+        return buscacod;
+    }
+
+    public void setBuscacod(boolean buscacod) {
+        this.buscacod = buscacod;
+    }
+
+    public boolean isBuscacpf() {
+        return buscacpf;
+    }
+
+    public void setBuscacpf(boolean buscacpf) {
+        this.buscacpf = buscacpf;
+    }
+
+    public boolean isBuscanomeresp() {
+        return buscanomeresp;
+    }
+
+    public void setBuscanomeresp(boolean buscanomeresp) {
+        this.buscanomeresp = buscanomeresp;
+    }
+
+    public boolean isBuscanome() {
+        return buscanome;
+    }
+
+    public void setBuscanome(boolean buscanome) {
+        this.buscanome = buscanome;
+    }
 
     public String getCampoPesquisa() {
         return campoPesquisa;
@@ -52,6 +88,39 @@ public class CidadaoBuscaBean {
         this.tipoBusca = "cpf";
     }
 
+    public void handleSelectBusca() {
+
+        if ("cod".equals(this.tipoBusca)) {
+            buscacod = true;
+            buscacpf = false;
+            buscanome = false;
+            buscanomeresp = false;
+            this.campoPesquisa = new String();
+        }
+        if ("nome".equals(this.tipoBusca)) {
+            buscacod = false;
+            buscacpf = false;
+            buscanome = true;
+            buscanomeresp = false;
+            this.campoPesquisa = new String();
+        }
+        if ("cpf".equals(this.tipoBusca)) {
+            buscacod = false;
+            buscacpf = true;
+            buscanome = false;
+            buscanomeresp = false;
+            this.campoPesquisa = new String();
+        }
+        if ("nomeresp".equals(this.tipoBusca)) {
+            buscacod = false;
+            buscacpf = false;
+            buscanome = false;
+            buscanomeresp = true;
+            this.campoPesquisa = new String();
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     public DataModel<Cidadao> getLista() {
         DataModel dmLista = null;
@@ -65,12 +134,18 @@ public class CidadaoBuscaBean {
 
     public void localiza(ActionEvent actionEvent) {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
-
-        if ("nome".equals(this.tipoBusca)) {
-            listacid = cidadaoDAO.getList(this.campoPesquisa, EnumTipoPessoa.CID, EnumStatusBeneficio.RESERVA);
-        }
-        if ("cpf".equals(this.tipoBusca)) {
-            listacid = cidadaoDAO.getListByCnp(this.campoPesquisa, EnumTipoPessoa.CID, EnumStatusBeneficio.RESERVA);
+        try {
+            if ("nome".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getList(this.campoPesquisa, EnumTipoPessoa.CID, EnumStatusBeneficio.RESERVA);
+            }
+            if ("cpf".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getListByCnp(this.campoPesquisa, EnumTipoPessoa.CID, EnumStatusBeneficio.RESERVA);
+            }
+            if (listacid.isEmpty()) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            facesutils.erro("Pesquisa não encontrada");
         }
     }
 
@@ -190,6 +265,8 @@ public class CidadaoBuscaBean {
     }
 
     public void clear() {
+        buscacpf = true;
+        tipoBusca = "cpf";
         this.campoPesquisa = null;
         this.listacid = null;
 

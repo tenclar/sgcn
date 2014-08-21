@@ -75,7 +75,7 @@ public class CursoBean implements Serializable {
         List<SelectItem> toReturn = new LinkedList<SelectItem>();
         CursoDAO cursoDAO = new CursoDAO();
         for (Curso c : cursoDAO.getCursos()) {
-            toReturn.add(new SelectItem(c, c.getNome()));
+            toReturn.add(new SelectItem(c,c.getNome()+" | "+ c.getId()));
         }
         return toReturn;
     }
@@ -115,7 +115,7 @@ public class CursoBean implements Serializable {
         this.curso = (Curso) (this.dmListaCursos.getRowData());
     }
 
-    public void updateCurso() {
+    public void updateCursos() {
         
         CursoDAO cursoDAO = new CursoDAO();
         try {

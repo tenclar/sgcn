@@ -61,11 +61,22 @@ public class CidadaoDAO extends GenericDAO {
         return getPureList(Cidadao.class, query, cnp);
 
     }
+    
 
     public List<Cidadao> getList(String nome) {
         String params = "%" + nome + "%";
         String query = " from Cidadao c  where  c.nome like ?";
         return getPureList(Cidadao.class, query, params);
+    }
+    public List<Cidadao> getListById(int id, EnumTipoPessoa tipopessoa) {
+  
+        String query = " from Cidadao c  where  c.id = ? and c.tipopessoa = ?";
+        return getPureList(Cidadao.class, query, id, tipopessoa);
+    }
+     public List<Cidadao> getListByNomeResp(String nome,EnumTipoPessoa tipopessoa ) {
+        String params = "%" + nome + "%";
+        String query = " from Cidadao c  where  c.representante.nome like ? and c.tipopessoa = ?";
+        return getPureList(Cidadao.class, query, params,tipopessoa);
     }
 
     public List<Cidadao> getListByCnp(String cnp, EnumTipoPessoa tipopessoa) {
@@ -153,7 +164,7 @@ public class CidadaoDAO extends GenericDAO {
     public List<Cidadao> getListaAnoDemandas() {
 
         try {
-            String query = " select distinct c.anodemanda as anodemanda from Cidadao c where c.tipopessoa = 'CID'";
+            String query = " select distinct c.anodemanda as anodemanda from Cidadao c where c.tipopessoa = 'CID' order by c.anodemanda ";
 
             return getPureList(Cidadao.class, query);
 

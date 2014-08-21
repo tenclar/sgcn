@@ -44,6 +44,7 @@
     <mapping class="entity.mac.NatDespesa"/>
     <mapping class="entity.mac.FluxoFinConcedente"/>
     <mapping class="entity.mac.FluxoFinProponente"/>
+    <mapping class="entity.mci.AnoDemanda"/>
     <mapping class="entity.mci.Publico"/>
     <mapping class="entity.mci.Escolaridade"/>
     <mapping class="entity.mci.EstadoCivil"/>

@@ -27,42 +27,40 @@
     </script> 
 
     <h:form id="frmListPlano" prependId="false">
+        <p:panel>
+            <h:selectOneRadio value="#{planoBean.tipoBusca}"  >
+                <f:selectItem itemValue="cpf"  itemLabel="CPF Responsável" />                
+                <f:selectItem itemValue="nomeben"  itemLabel="Nome do Beneficiado"  />
+                <f:selectItem itemValue="nome"  itemLabel="Nome do Empreendimento"  />
+                <p:ajax listener="#{planoBean.handleSelectBusca}" update="@this, inTexBusca"  />          
+            </h:selectOneRadio>
 
-        <h:selectOneRadio value="#{planoBean.tipoBusca}"  >
-            <f:selectItem itemValue="cpf"  itemLabel="CPF Responsável" />                
-            <f:selectItem itemValue="nomeben"  itemLabel="Nome do Beneficiado"  />
-            <f:selectItem itemValue="nome"  itemLabel="Nome do Empreendimento"  />
-            <p:ajax listener="#{planoBean.handleSelectBusca}" update="@this, inTexBusca"  />          
-        </h:selectOneRadio>
+            <h:outputText value="Argumento: " />  
+            <h:panelGrid columns="2">
+                <p:outputPanel id="inTexBusca" >
 
-        <h:outputText value="Argumento: " />  
-        <h:panelGrid columns="2">
-        <p:outputPanel id="inTexBusca" >
-            
-                <p:inputText id="arCpf" label="Campo CPF" autocomplete="off"  
-                             value="#{planoBean.campoBusca}"  size="11" 
-                             onkeyup="this.value = this.value.toUpperCase();"  
-                             required="true" maxlength="11" 
-                             onkeypress="mascara(this, soNumeros)"
-                             rendered="#{planoBean.buscacpf}"> 
-                    <f:validator validatorId="cpfvalidator"  />
-                </p:inputText>
-                <p:inputText id="cbBuscanome" label="Campo Busca"  autocomplete="off" 
-                             value="#{planoBean.campoBusca}" 
-                             size="70" onkeyup="this.value = this.value.toUpperCase();" 
-                             required="true" rendered="#{planoBean.buscanome}" /> 
-                <p:inputText id="cbBuscaNomeEmp" label="Campo Busca" autocomplete="off" 
-                             value="#{planoBean.campoBusca}" 
-                             size="70" onkeyup="this.value = this.value.toUpperCase();" 
-                             required="true" rendered="#{planoBean.buscanomeresp}" /> 
-        </p:outputPanel>
-        <p:commandButton    action="#{planoBean.localiza}"  value="Localizar" update="frmListPlano,:frmListaPlano, :messages" 
-                            icon="ui-icon-search"         oncomplete="verificadado(args);"
-                               /> 
-
-
-        </h:panelGrid>
-       
+                    <p:inputText id="arCpf" label="Campo CPF" autocomplete="off"  
+                                 value="#{planoBean.campoBusca}"  size="11" 
+                                 onkeyup="this.value = this.value.toUpperCase();"  
+                                 required="true" maxlength="11" 
+                                 onkeypress="mascara(this, soNumeros)"
+                                 rendered="#{planoBean.buscacpf}"> 
+                        <f:validator validatorId="cpfvalidator"  />
+                    </p:inputText>
+                    <p:inputText id="cbBuscanome" label="Campo Busca"  autocomplete="off" 
+                                 value="#{planoBean.campoBusca}" 
+                                 size="70" onkeyup="this.value = this.value.toUpperCase();" 
+                                 required="true" rendered="#{planoBean.buscanome}" /> 
+                    <p:inputText id="cbBuscaNomeEmp" label="Campo Busca" autocomplete="off" 
+                                 value="#{planoBean.campoBusca}" 
+                                 size="70" onkeyup="this.value = this.value.toUpperCase();" 
+                                 required="true" rendered="#{planoBean.buscanomeresp}" /> 
+                </p:outputPanel>
+                <p:commandButton    action="#{planoBean.localiza}"  value="Localizar" update="frmListPlano,:frmListaPlano, :messages" 
+                                    icon="ui-icon-search"         oncomplete="verificadado(args);"
+                                    />
+            </h:panelGrid>
+        </p:panel>
         <p:separator />      
     </h:form>
     <h:form id="frmListaPlano" prependId="false">
@@ -75,20 +73,20 @@
                           rowKey="#{item.id}"
                           rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
                           rowIndexVar="rowIx" selectionMode="single">
-                
-                 <p:column  headerText="ações" style="width: 40px" >     
 
-                     <p:commandButton icon=" ui-icon-refresh"  title="atualizar"  process="@this"  update=":frmPlano"  oncomplete="plancad.show();cadlist.close();tabGeral.select(0);tabIdent.select(0);tabInfoResp.select(0);tabPlanBenef.select(0);" action="#{planoBean.editPlano}" />
+                <p:column  headerText="ações" style="width: 40px" >     
+
+                    <p:commandButton icon=" ui-icon-refresh"  title="atualizar"  process="@this"  update=":frmPlano"  oncomplete="plancad.show();cadlist.close();tabGeral.select(0);tabIdent.select(0);tabInfoResp.select(0);tabPlanBenef.select(0);" action="#{planoBean.editPlano}" />
 
                     <p:commandButton icon=" ui-icon-print" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{planoBean.imprimir}"   title="imprimir"    />
                 </p:column>
-                 <p:column headerText="Resposável" >                    
+                <p:column headerText="Resposável" >                    
                     <h:outputText value="#{item.cidadao.nome}"/>
                 </p:column>  
-                
-                                 
 
-               
+
+
+
 
             </p:dataTable>
         </p:outputPanel>

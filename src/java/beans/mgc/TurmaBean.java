@@ -1,9 +1,13 @@
 package beans.mgc;
 
+import dao.BairroDAO;
+import dao.CidadeDAO;
 import dao.mci.CidadaoDAO;
 import dao.mci.CursoSecretariaDAO;
 import dao.mgc.CursoDAO;
 import dao.mgc.TurmaDAO;
+import entity.Bairro;
+import entity.Cidade;
 import entity.mci.Cidadao;
 import entity.mci.CursosSecretaria;
 import entity.mci.enumerator.EnumStatusBeneficio;
@@ -15,9 +19,12 @@ import entity.mci.enumerator.EnumTipoPessoa;
 import entity.mgc.Curso;
 import entity.mgc.TurCidadaos;
 import entity.mgc.Turma;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,7 +33,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import net.sf.jasperreports.engine.JRException;
 import util.FacesUtils;
+import util.RelatorioUtil;
 
 @ManagedBean
 @ViewScoped
@@ -34,9 +43,10 @@ public class TurmaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String busca;
+    private String campoBusca;
     private String buscaCidadao;
     private String buscaCidadaoCoop;
-    private String tipoBusca = "nome";
+    private String tipoBusca = "turma";
     private String tipoBuscaCidadao = "nome";
     private String tipoBuscaCidadaoCoop = "nome";
     private FacesUtils facesutils = new FacesUtils();
@@ -52,6 +62,17 @@ public class TurmaBean implements Serializable {
     private DataModel<Cidadao> dmListaAlunos = null;
     private TurCidadaos turCidadaos = null;
     private boolean cidByCurso = false;
+
+    private boolean buscacpf = false;
+    private boolean buscaturma = true;
+    private boolean buscanome = false;
+    
+    private Cidade cidadeSelect;
+    private Bairro bairroSelect;
+     private List<Cidade> listacidade = null;
+    private List<Bairro> listabairro = null;
+    private int  anocurso;
+    
 
     public void newTurma() {
         this.turma = new Turma();
@@ -78,7 +99,7 @@ public class TurmaBean implements Serializable {
         try {
 
             if (turma.getTurcidadaos().size() > 0) {
-             //   System.out.println(" maior que zero");
+                //   System.out.println(" maior que zero");
 
                 for (TurCidadaos t : turma.getTurcidadaos()) {
 
@@ -100,7 +121,7 @@ public class TurmaBean implements Serializable {
 
                         }
                         cdao.saveCursoSecretaria(csec);
-                           // turmaDAO.saveTurma(turma);
+                        // turmaDAO.saveTurma(turma);
 
                     }
 
@@ -153,7 +174,50 @@ public class TurmaBean implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Cadastro Não Efetuado! " + e.getMessage()));
         }
     }
+public void handlePesquisaCidadeChange() {
+        BairroDAO bairroDAO = new BairroDAO();
+        if (cidadeSelect.getId() != 0) {
+            this.listabairro = bairroDAO.getBairros(cidadeSelect.getId());
+        } else {
+            listabairro = null;
+            getSelectItemsCidade().clear();
+            getSelectItemsBairro().clear();
+        }
 
+    }
+public List<SelectItem> getSelectItemsCidade() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Cidade c = new Cidade();
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        c.setId(0);
+        c.setNome("TODOS");
+        toReturn.add(new SelectItem(c, c.getNome()));
+        if (this.listacidade == null) {
+            this.listacidade = cidadeDAO.getCidades(1);
+        }
+        if (this.listacidade != null) {
+            for (Cidade cid : listacidade) {
+                toReturn.add(new SelectItem(cid, cid.getNome()));
+            }
+
+        }
+        return toReturn;
+    }
+
+    public List<SelectItem> getSelectItemsBairro() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Bairro b = new Bairro();
+        b.setId(0);
+        b.setNome("TODOS");
+        toReturn.add(new SelectItem(b, b.getNome()));
+
+        if (listabairro != null) {
+            for (Bairro ba : listabairro) {
+                toReturn.add(new SelectItem(ba, ba.getNome()));
+            }
+        }
+        return toReturn;
+    }
     public void cancelTurma() {
         this.turma = null;
     }
@@ -185,10 +249,48 @@ public class TurmaBean implements Serializable {
     }
 
     public void localiza() {
+        try {
+            TurmaDAO turmaDAO = new TurmaDAO();
+            if ("turma".equals(this.tipoBusca)) {
+                  listaTurmas = turmaDAO.getTurmasFiltro(this.tipoBusca, this.busca,this.anocurso,this.cidadeSelect,this.bairroSelect);
+                this.busca = new String();
+            }
+            if ("cpf".equals(this.tipoBusca)) {
+                
+                
+                listaTurmas = turmaDAO.getTurmasFiltro(this.tipoBusca, this.busca,this.anocurso,this.cidadeSelect,this.bairroSelect);
+                this.busca = new String();
+            }
+             if (listaTurmas.isEmpty()) {
+                throw new Exception();
+            }
+             
+             System.out.println("Ano Curso "+ this.anocurso );
+        } catch (Exception e) {
+            facesutils.erro("Pesquisa não encontrada");
+        }
+    }
 
-        TurmaDAO turmaDAO = new TurmaDAO();
-        listaTurmas = turmaDAO.getTurmas(this.busca);
-        this.busca = "";
+    public void handleSelectBusca() {
+        if ("turma".equals(this.tipoBusca)) {
+            buscacpf = false;
+            buscanome = false;
+            buscaturma = true;
+            this.campoBusca = new String();
+        }
+        if ("cpf".equals(this.tipoBusca)) {
+            buscacpf = true;
+            buscanome = false;
+            buscaturma = false;
+            this.campoBusca = new String();
+        }
+        if ("nomeben".equals(this.tipoBusca)) {
+            buscacpf = false;
+            buscanome = true;
+            buscaturma = false;
+            this.campoBusca = new String();
+        }
+
     }
 
     public void localizaCidadaos() {
@@ -216,7 +318,7 @@ public class TurmaBean implements Serializable {
             this.listaCidadaos = turmaDAO.getCidadaosByNom(this.buscaCidadao, EnumTipoPessoa.COOP, false, this.turma.getCurso().getId());
 
         } else if ("cpf".equals(this.tipoBuscaCidadao)) {
-            this.listaCidadaos = turmaDAO.getCidadaosByCnp(this.buscaCidadao, EnumTipoPessoa.COOP, false, this.turma.getCurso().getId());
+            this.listaCidadaos = turmaDAO.getCidadaosByCnp(this.buscaCidadao, EnumTipoPessoa.COOP,false , this.turma.getCurso().getId());
         }
 
         this.buscaCidadao = null;
@@ -350,6 +452,53 @@ public class TurmaBean implements Serializable {
             facesutils.aviso("Cadastro Não Efetuado");
         }
         this.dmListaCidadao = null;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void imprimir() throws IOException, JRException {
+        TurmaDAO turmaDAO = new TurmaDAO();
+        List<Turma> lista = new ArrayList<Turma>();
+        Turma c = (Turma) (this.dmLista.getRowData());
+        this.turma = turmaDAO.getTurma(c.getId());
+        lista.add(turma);
+        
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlturma");
+        //String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomearqturma");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, "lista_turma");
+
+       
+    }
+
+    public String getCampoBusca() {
+        return campoBusca;
+    }
+
+    public void setCampoBusca(String campoBusca) {
+        this.campoBusca = campoBusca;
+    }
+
+    public boolean isBuscacpf() {
+        return buscacpf;
+    }
+
+    public void setBuscacpf(boolean buscacpf) {
+        this.buscacpf = buscacpf;
+    }
+
+    public boolean isBuscaturma() {
+        return buscaturma;
+    }
+
+    public void setBuscaturma(boolean buscaturma) {
+        this.buscaturma = buscaturma;
+    }
+
+    public boolean isBuscanome() {
+        return buscanome;
+    }
+
+    public void setBuscanome(boolean buscanome) {
+        this.buscanome = buscanome;
     }
 
     public String getBusca() {
@@ -503,4 +652,33 @@ public class TurmaBean implements Serializable {
     public void setListaAlunos(List<Cidadao> listaAlunos) {
         this.listaAlunos = listaAlunos;
     }
+
+    public Cidade getCidadeSelect() {
+        return cidadeSelect;
+    }
+
+    public void setCidadeSelect(Cidade cidadeSelect) {
+        this.cidadeSelect = cidadeSelect;
+    }
+
+    public Bairro getBairroSelect() {
+        return bairroSelect;
+    }
+
+    public void setBairroSelect(Bairro bairroSelect) {
+        this.bairroSelect = bairroSelect;
+    }
+
+    public int getAnocurso() {
+        return anocurso;
+    }
+
+    public void setAnocurso(int anocurso) {
+        this.anocurso = anocurso;
+    }
+    
+    
+    
+    
+    
 }

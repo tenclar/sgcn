@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcooperativa_associados" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8882d5b4-d445-4262-87d6-0d9143000087">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Detail" mode="Transparent" fontName="Arial" fontSize="9" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Arial" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[from TurCidadaos]]>
+	</queryString>
+	<field name="cidadao" class="entity.mci.Cidadao"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="turma" class="entity.mgc.Turma"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="26">
+			<staticText>
+				<reportElement uuid="306627fb-bc89-43d3-b461-cb6081c89ea1" mode="Opaque" x="0" y="0" width="555" height="26" backcolor="#EDEDED"/>
+				<box topPadding="1" leftPadding="5" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alunos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e446ce39-4d2b-4ba7-b49c-6d2a496e4a03" x="0" y="0" width="97" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4f3faa09-f785-46c1-a8ec-28236b205230" x="97" y="0" width="373" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f08731f-354c-4dcd-9816-8c6fb300cb02" x="470" y="0" width="85" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Telefones]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="027c5372-584e-4419-bc9d-3a08ba6dbec7" style="Row" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="7fb149a1-a314-435a-9d82-7d493a70669a" stretchType="RelativeToBandHeight" x="97" y="0" width="373" height="15" backcolor="#FFFFFF"/>
+					<box leftPadding="5">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cidadao}.getNome()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="85903fb1-234d-464c-ba31-24d5c8d3281d" stretchType="RelativeToBandHeight" x="0" y="0" width="97" height="15"/>
+					<box leftPadding="5">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cidadao}.getCpf()]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement uuid="0e96780c-0917-4552-9102-5cc9c5ad7831" stretchType="RelativeToTallestObject" x="470" y="0" width="85" height="15"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{cidadao}.getTelefones())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "lista_alunos_telefones.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

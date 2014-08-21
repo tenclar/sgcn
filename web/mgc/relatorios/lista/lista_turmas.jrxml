@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcooperativa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5acb32ac-019b-43bf-b564-e678dfbe2051">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#000000" fontName="Arial" fontSize="30" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Arial" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Arial" fontSize="10" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Arial" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[from Turma t where t.id = 3]]>
+	</queryString>
+	<field name="curso" class="entity.mgc.Curso"/>
+	<field name="datacreated" class="java.util.Date"/>
+	<field name="datafim" class="java.util.Date"/>
+	<field name="datainicio" class="java.util.Date"/>
+	<field name="dataupdate" class="java.util.Date"/>
+	<field name="endereco" class="entity.Endereco"/>
+	<field name="horario" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="turcidadaos" class="java.util.List"/>
+	<field name="turmalocal" class="entity.mgc.TurmaLocal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66">
+			<image>
+				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="9" y="1" width="64" height="64"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" style="Title" x="0" y="0" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" style="Title" x="0" y="16" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" style="Title" x="0" y="33" width="555" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA DE GESTÃO DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement uuid="b6eedcc8-1146-4f10-928a-6064772c480f" mode="Opaque" x="0" y="2" width="555" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="1936aba9-adfb-474a-86c6-caf105b8dfb7" x="411" y="0" width="144" height="15" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1cf93809-3984-4981-9840-362979deef82" x="0" y="48" width="36" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Início:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="7eb870ee-eb3f-48a4-bb9e-f30f83c46230" x="36" y="48" width="85" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datainicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c576a770-b6d9-4989-ae25-5531401e0da2" x="63" y="32" width="492" height="15"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turmalocal}.getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="28f9680b-4b75-4d31-a466-cc8f93f6f6e5" x="0" y="32" width="63" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Instituição:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3b0038c5-fa37-47f1-b5ab-76fa287b771c" x="63" y="65" width="246" height="15"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="622f0d1c-1525-45ba-b4ba-765fd8f0cd71" x="0" y="65" width="63" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bb9cc76a-03dc-4451-8794-fe0e0355581d" x="387" y="65" width="168" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1ca86ba2-1ed9-4f31-8c28-a4e88ea3d5f0" x="0" y="81" width="63" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cidade/UF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b1cdc71b-b87f-4bfb-8c87-a474fe518d5c" x="66" y="81" width="489" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="dead030a-a73b-41bf-8dd5-58fc757bcda0" x="309" y="65" width="78" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Bairro / Ramal:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="2cdc2c34-dda7-4213-9527-92b587d708ec" x="153" y="48" width="91" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datafim}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="310713d9-d890-46ae-954b-c491e66be6af" x="121" y="48" width="32" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Final:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="1e068577-0263-4e30-b9f1-88fc2f7823e0" x="443" y="48" width="112" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e2c4da53-043e-493d-8f4d-fb87d7da3d3a" x="375" y="48" width="68" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="f06643ae-a0e7-467c-9d31-d75043992bbc" x="297" y="48" width="78" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e8e394d0-8794-4265-84c7-1207dd93032b" x="244" y="48" width="53" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Horário:]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="b58a4251-3a71-4331-a7e9-84f7836ae486" mode="Opaque" x="0" y="0" width="555" height="15" forecolor="#000000" backcolor="#F1F1F1"/>
+				<textField>
+					<reportElement uuid="c0872f22-ee79-4c26-9c74-05c282e9b197" x="0" y="0" width="361" height="15"/>
+					<box leftPadding="5"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="22d3b357-0089-442d-b7e6-a4e2a5974f51" x="63" y="16" width="492" height="15" backcolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curso}.getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="de9552eb-9c2f-4cf5-941b-d05d5326599c" x="0" y="16" width="63" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Curso:]]></text>
+			</staticText>
+		</band>
+		<band>
+			<subreport>
+				<reportElement uuid="060c70e7-47a8-4fce-8926-985d17db6fe8" x="0" y="0" width="555" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{turcidadaos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "lista_turmas_alunos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement uuid="f8497ce0-20ed-4e1c-810d-c033078451b5" mode="Opaque" x="0" y="0" width="555" height="20" forecolor="#D0B48E" backcolor="#000000"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="c2c63fd2-5bab-4335-9bff-14c2efc27cda" style="Column header" x="515" y="0" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="c7c2a18f-b3ba-4c47-a3cb-40f6a9b2bdd4" style="Column header" x="435" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="e4f0b7d1-af97-45d8-80dd-472c7d8ac62d" x="0" y="0" width="435" height="20" forecolor="#FFFFFF"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Secretaria de Pequenos Negócios - Avenida Ceará, 1624 Centro - Rio Branco AC]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

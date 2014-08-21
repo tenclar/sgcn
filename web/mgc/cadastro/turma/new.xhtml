@@ -21,7 +21,7 @@
                                      converter="IndexedConverter" 
                                      label="Lista de Curso" style="width: 280px">
                         <f:selectItem itemLabel="selecione" noSelectionOption="true"/>
-                        <f:selectItems value="#{turmaBean.selectItemsCurso}"/>
+                        <f:selectItems value="#{cursoBean.selectItemsCurso}"/>
                     </p:selectOneMenu>                    
                     <p:commandButton value="+" oncomplete="dlgCurso.show()" update=":frmCurso" process="@this" action="#{cursoBean.newCurso}"/>
                     <p:message for="turmalistacursos" display="icon" />

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+     <h:head>
+        <title>Lista de Cidadãos</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false" id="frmLocCid" >
+             <p:outputPanel id="opBuscaCid">  
+                 <p:outputPanel id="opBuscaCid2">  
+                  <p:focus for="itBusca"  />       
+            <h:selectOneRadio value="#{cidadaoBuscaBean.tipoBusca}"  >
+                <f:selectItem itemValue="nome"  itemLabel="nome"  />
+                <f:selectItem itemValue="cpf"  itemLabel="CPF" />                
+            </h:selectOneRadio>
+                  <p:separator/>
+                  <h:outputText  value="Busca: " />  
+                  <p:inputText  id="itBusca" value="#{cidadaoBuscaBean.campoPesquisa}"  style="width:150px" onkeyup="this.value = this.value.toUpperCase();" required="true"  requiredMessage="Campo em Branco" /> 
+                  <p:commandButton action="#{cidadaoBuscaBean.localizaCidNaoBenNaoAssoc}" process="@this opBuscaCid listaresp" update="listaresp,opBuscaCid2 :messages" icon="-search" /> 
+             </p:outputPanel>      
+             </p:outputPanel> 
+            
+            
+            <p:outputPanel id="listaresp">
+                <p:dataTable id="dtlistcid" var="item" value="#{cidadaoBuscaBean.lista}"  
+                  style="width: 500px;height: auto; text-align: center;" paginatorPosition="bottom"
+                  selectionMode="single" selection="#{gruposBean.cidadao}" pageLinks="5"
+                  rowKey="#{item.id}"
+                  paginator="true"  paginatorAlwaysVisible="false" rows="8"  emptyMessage="Nenhum Cidadão Encontrado!" >
+                    <p:column style="text-align: center;" headerText="CPF">                                                    
+                        <h:outputText value="#{item.cpf}" />
+                    </p:column  >
+                    <p:column style="text-align: center;" headerText="RG" >                      
+                        <h:outputText value="#{item.rg}"/>
+                    </p:column>                       
+                    <p:column style="text-align: center;" headerText="nome" >                       
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>                   
+                                     
+                    
+                   </p:dataTable>
+            </p:outputPanel >
+<!--            <p:outputPanel id="opCidAss">
+                <p:messages />
+                <p:outputPanel id="opcidass2">
+                    <p:message for="coopassoc" showDetail="true" />
+                    <h:inputHidden  id="coopassoc"  value="# {cooperativaBean.cidadao.nome}"  required="true" validatorMessage="não selecionado" requiredMessage="não Selecionado" />
+                </p:outputPanel>
+            </p:outputPanel>-->
+            <p:commandButton value="Inserir" process="@this, listaresp" oncomplete="if(!args.validationFailed){dlgCid.hide();}" update=":frmCoop:tabView:opdtAssociados dtlistcid :messages" action="#{gruposBean.addAssociado}" />
+            <p:commandButton value="Cancelar" process="@this" immediate="true" oncomplete="dlgCid.hide()" update=":frmLocCid"  action="#{cidadaoBuscaBean.clear}" />
+        </h:form>
+    </h:body>
+</html>
+

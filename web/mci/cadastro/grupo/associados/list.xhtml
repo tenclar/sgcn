@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <p:fieldset legend="Lista de Cooperados/Associados">
+        <p:commandButton  value="Adicionar" process="@this"   oncomplete="dlgCid.show()"  update=":frmLocCid" action="#{cidadaoBuscaBean.clear()}"  />                  
+        <p:outputPanel id="opdtAssociados" >
+        
+            <p:dataTable  var="item" value="#{gruposBean.cooperativa.associados}"  
+                          paginator="true"  paginatorAlwaysVisible="false" rows="8"  
+                           rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                           rowIndexVar="rowIx" 
+                           widgetVar="tbass" rowKey="#{item.id}"
+                          style="min-height: 300px"   >
+                <f:facet name="header">  
+                         <p:outputPanel>  
+                                 <h:outputText value="Busca: " />  
+                                 <p:inputText id="globalFilter"  style="width:150px" onkeyup="tbass.filter();" /> 
+                      </p:outputPanel>  
+                    </f:facet>
+                 <p:column headerText="Data" >                    
+                     <h:outputText value="#{item.datainc}" > <f:convertDateTime pattern="dd/MM/yyyy" /> </h:outputText>
+                </p:column>
+                <p:column headerText="CPF"  filterMatchMode="contains"  filterBy="#{item.associado.cpf}" >                    
+                    <h:outputText value="#{item.associado.cpf}" />
+                </p:column>
+                <p:column headerText="Nome:" style="width: 450px" filterBy="#{item.associado.nome}" filterMatchMode="contains" >
+                    <h:outputText value="#{item.associado.nome}"/>
+                </p:column>                       
+                <p:column  headerText="NIS" >                    
+                   <h:outputText value="#{item.associado.nis}"/>
+                </p:column>  
+                <p:column  headerText="Público" >                    
+                    <h:outputText value="#{item.associado.publico.nome}"/>
+                </p:column>  
+                <p:column style="text-align: center;" headerText="status" >                       
+                        <h:outputText value="#{item.associado.statuscid}"/>
+                    </p:column>  
+                <p:column  headerText="ações" style=" text-align: center; width: 210px" >     
+                    <p:commandButton   icon="ui-icon-close"  value="excluir" process="@this" update=":frmCoop:tabView:opdtAssociados" action="#{gruposBean.remAssociado()}" title="editar"  >
+                        <f:setPropertyActionListener value="#{item}"   target="#{gruposBean.cidassociados}" />        
+                    </p:commandButton>                                    
+<!--                   
+
+   <p:collector value="# {item}" removeFrom="# {cooperativaBean.cooperativa.associados}" />
+<p:commandButton icon="ui-icon-print"  value="imprimir" process="@this"  title="editar"  >
+                                             
+                    </p:commandButton>  -->
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>  
+        
+       
+            
+ </p:fieldset>
+</ui:component>
+

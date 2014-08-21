@@ -7,6 +7,7 @@ package entity.mci;
 import entity.Telefone;
 import entity.Cidade;
 import entity.Endereco;
+import entity.Usuario;
 import entity.mci.enumerator.EnumStatusBeneficio;
 import entity.mci.enumerator.EnumStatusCid;
 import entity.mci.enumerator.EnumTipoPessoa;
@@ -74,6 +75,8 @@ public class Cidadao implements Serializable {
     private String resumo;
      @ManyToOne
     private Cidadao representante;
+      @ManyToOne
+     private Usuario usuario;
     
     @ManyToOne
     private Publico publico;
@@ -147,6 +150,14 @@ public class Cidadao implements Serializable {
         //statuscid = EnumStatusCid.INDIVIDUAL;
        
 
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getAnodemanda() {

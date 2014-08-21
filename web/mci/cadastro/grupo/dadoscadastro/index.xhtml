@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body >
+
+        <p:fieldset id="fsCadastro"  legend="Identificação da Associação ou Cooperativa" >
+            <p:outputPanel id="coopdados" >
+            <p:panel >
+                <h:panelGrid  columns="4" >
+                    <h:panelGrid  columns="2"  >                               
+                        <h:outputLabel for="coopdata"  value="Data: " styleClass="titulos" />
+                        <p:message for="coopdata" display="icon"   />
+                    </h:panelGrid> 
+
+                    <h:panelGrid  columns="2"  >                               
+                        <h:outputLabel for="coopcnpj"  value="CNPJ: " styleClass="titulos" />
+                        <p:message for="coopcnpj" display="icon"   />
+                    </h:panelGrid> 
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="coopie" value="IE: " styleClass="titulos" />
+                        <p:message for="coopie" display="icon"  />
+                    </h:panelGrid>
+                    <h:panelGrid  columns="2">
+                        <h:outputLabel for="coopnome"  value="Nome :" styleClass="titulos" />
+                        <p:message for="coopnome" display="icon"   />
+                    </h:panelGrid>  
+
+
+                 <p:calendar id="coopdata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{gruposBean.cooperativa.datacreated}" showOn="button"  >
+                        
+                    </p:calendar>
+                    <p:inputText id="coopcnpj" autocomplete="off"  size="12" value="#{gruposBean.cooperativa.cpf}"    required="true" label="CNPJ"   style="background: #e8e1b5; color: #023401" />
+                    <p:inputText  id="coopie" autocomplete="off" size="10" value="#{gruposBean.cooperativa.rg}"  required="true" label="IE" />
+                    <p:inputText id="coopnome" autocomplete="off"  size="90"  value="#{gruposBean.cooperativa.nome}"   required="true" label="Nome" style="background: #e8e1b5; color: #023401"  />                                       
+
+                </h:panelGrid>
+            </p:panel  >  
+            <p:panel  >
+                 <h:panelGroup>
+                    <h:outputLabel for="coopreamo" value="Ramo de Empreendimento:" styleClass="titulos" />
+                    <p:message for="coopreamo" display="icon"  />
+                </h:panelGroup>
+                 <p:selectOneMenu label="Ramo do Empreendimento" style="width: 140px" id="coopreamo" value="#{gruposBean.cooperativa.ramoempreendimento}" converter="IndexedConverter" required="true" filter="true" filterMatchMode="startsWith" >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}" />     
+                    </p:selectOneMenu> 
+            </p:panel>
+            </p:outputPanel>
+          
+           <p:fieldset  legend="Telefones" style="height: 200px"  >
+                        <p:outputPanel id="addTel">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="" />
+                                <h:outputLabel value="Número: " />
+
+                                <p:commandButton value="+"  process="@this,addTel" update="dtTel,addTel" action="#{cidadaoBean.addTelefones()}" />
+                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cidadaoBean.telefone.numero}"  >
+                                    <f:validateLength minimum="9" />
+                                </p:inputMask>                            
+
+                            </h:panelGrid>
+                            <p:message for="tel"  />
+                        </p:outputPanel>
+                        <!--            <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: 60px"></div>-->
+                        <p:outputPanel id="opPanelTel">
+                            <p:dataTable id="dtTel"  var="tel" value="#{gruposBean.cooperativa.telefones}"
+                                         >
+                                <p:column  headerText="Telefone" >
+                                    <h:outputText value="#{tel.numero}" />
+                                </p:column>
+                                <p:column  headerText="ação" >
+                                    <p:commandButton icon="ui-icon-close" title="excluir" process="@this"   >
+                                        <p:collector removeFrom="#{gruposBean.cooperativa.telefones}" unique="true" value="#{tel}" />
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+                        
+                        </p:outputPanel>
+
+                    </p:fieldset>
+            <p:fieldset id="coopendereco" legend="Endereço">
+
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Localizar" process="@this" update=":frmBuscaEndCid" action="#{enderecoBean.enderecoClear()}" icon="-search" onclick="dlgBuscaEnd.show()" /> 
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="3" id="cidEnd"  >
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel for="cidlogr" value="Logradouro: " styleClass="titulos" />                                      
+                        <p:message for="cidendereco" showDetail="true"  /> 
+                    </h:panelGrid>
+
+                    <h:outputLabel for="ciduf" value="UF: " styleClass="titulos" />
+                    <h:outputLabel for="cidcid" value="Cidade: " styleClass="titulos"  />
+
+                    <p:inputText readonly="true" disabled="true" id="cidlogr" value="#{gruposBean.cooperativa.endereco.logradouro}" style="background: #e8e1b5; color: #023401" size="80" />
+                    <p:inputText readonly="true"  disabled="true" id="ciduf"  value="#{gruposBean.cooperativa.endereco.bairro.cidade.estado.sigla}" style="background: #e8e1b5; color: #023401" size="6"  />
+                    <p:inputText readonly="true"  disabled="true" id="cidcid" value="#{gruposBean.cooperativa.endereco.bairro.cidade.nome}" style="background: #e8e1b5; color: #023401"  />
+
+                </h:panelGrid>
+
+
+                <h:panelGrid columns="4" id="cidEnd2">
+                    <h:outputLabel for="cidbairro"  value="Bairro / Ramal: " styleClass="titulos"  />
+                    <h:outputLabel for="cidzona" value="Zona:" styleClass="titulos" />     
+
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel for="cidnum" value="Número:"  styleClass="titulos"  />
+                        <p:message for="cidnum" showDetail="true"  /> 
+                    </h:panelGrid>    
+
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel for="cidcomp" value="Complemento:" styleClass="titulos" /> 
+                        <p:message for="cidcomp" showDetail="true"  /> 
+                    </h:panelGrid>  
+
+
+                    <p:inputText readonly="true"  disabled="true" id="cidbairro" value="#{gruposBean.cooperativa.endereco.bairro.nome}" style="background: #e8e1b5; color: #023401"  />
+                    <p:inputText readonly="true"  disabled="true" id="cidzona"  value="#{gruposBean.cooperativa.endereco.bairro.zona}" style="background: #e8e1b5; color: #023401" />                        
+                    <p:inputText  id="cidnum" autocomplete="off" value="#{gruposBean.cooperativa.numero}" size="7" widgetVar="wvNumero" required="true"  />           
+                    <p:inputText  id="cidcomp" autocomplete="off" value="#{gruposBean.cooperativa.complemento}" size="60"  required="true"  />                                                        
+                    <h:inputHidden id="cidendereco"  value="#{gruposBean.cooperativa.endereco.logradouro}" required="true"  validatorMessage="Endereço não Selecionado"  />
+                </h:panelGrid>
+            </p:fieldset>
+
+            <p:spacer width="40" />
+        </p:fieldset  > 
+    </h:body>
+</html>
+

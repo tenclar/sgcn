@@ -10,7 +10,7 @@
 
         <h:panelGrid  columns="3"  >                               
             <h:outputLabel for="turcursonome"  value="Curso: " styleClass="titulos"/>
-            <p:inputText id="turcursonome" value="#{turmaBean.turma.curso.nome}" size="50" label="Nome do Curso" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
+            <p:inputText id="turcursonome" value="#{turmaBean.turma.curso.id} #{turmaBean.turma.curso.nome}" size="50" label="Nome do Curso" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
             <br/>
             <h:outputLabel for="turnome"  value="Turma: " styleClass="titulos"/>
             <p:inputText id="turnome" value="#{turmaBean.turma.nome}" size="50" label="Nome da Turma" readonly="true" disabled="true" style="background: #e8e1b5; color: #023401"/>
@@ -39,13 +39,22 @@
             <p:dataTable var="alunos" value="#{turmaBean.turma.turcidadaos}"
                          editable="true"
                          paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false"
-                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" 
+                         rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
+                         rowIndexVar="rowIx" 
+                         rowKey="#{alunos.id}"
+                          widgetVar="tbalunos"
                          rows="6" emptyMessage="Nenhum aluno cadastrado" >
+                 <f:facet name="header">  
+                         <p:outputPanel>  
+                                 <h:outputText value="Busca: " />  
+                                 <p:inputText id="globalFilter"  style="width:150px" onkeyup="tbalunos.filter();" /> 
+                      </p:outputPanel>  
+                    </f:facet>
 
-                <p:column headerText="CPF" style="text-align: center;width: 100px" > 
+                <p:column headerText="CPF" style="text-align: center;width: 100px"  > 
                     <h:outputText value="#{alunos.cidadao.cpf}" />
                 </p:column>
-                <p:column headerText="Nome:" style="text-align: center;width: 100px" >
+                <p:column headerText="Nome:" style="text-align: center;width: 100px" filterBy="#{alunos.cidadao.nome}" filterMatchMode="contains" >
                     <h:outputText value="#{alunos.cidadao.nome}"/>
                 </p:column> 
                 <p:column headerText="status:" style="text-align: center;width: 100px" >

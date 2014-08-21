@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+ <script type="text/javascript">
+
+        function verificadado(args) {
+
+
+            if (args.mon == false) {
+                dlgConfMon.show();
+                //dlgNewMon.hide();    
+                //cadlist.close(); 
+                //plancad.show();
+
+                // document.getElementById('planoEmpNome').focus();
+            }
+
+        }
+
+
+
+    </script> 
+    <h:form prependId="false" id="frmBuscaCoop" >    
+         <p:panel>
+            <h:selectOneRadio value="#{gruposBean.tipoBusca}"  >
+                <f:selectItem itemValue="cod"  itemLabel="Código do Grupo"  />
+                <f:selectItem itemValue="nome"  itemLabel="Nome do Grupo"  />
+                <f:selectItem itemValue="cpf"  itemLabel="CPF Responsável" />                
+                <f:selectItem itemValue="nomeresp"  itemLabel="Nome do Responsável"  />                
+                <p:ajax listener="#{gruposBean.handleSelectBusca}" update="@this, inTexBusca"  />          
+            </h:selectOneRadio>
+
+            <h:outputText value="Argumento: " />  
+            <h:panelGrid columns="2">
+                <p:outputPanel id="inTexBusca" >
+                    
+                      <p:inputText id="arcod" label="Campo Código" autocomplete="off"  
+                                 value="#{gruposBean.busca}"  size="6" 
+                                
+                                 required="true" 
+                                 onkeypress="mascara(this, soNumeros)"
+                                 rendered="#{gruposBean.buscacod}"> 
+                       
+                    </p:inputText>
+
+                    <p:inputText id="cbBuscanome" label="Nome Grupo"  autocomplete="off" 
+                                 value="#{gruposBean.busca}" 
+                                 size="70" onkeyup="this.value = this.value.toUpperCase();" 
+                                 required="true" rendered="#{gruposBean.buscanome}" />
+                    
+                    <p:inputText id="arCpf" label="Campo CPF" autocomplete="off"  
+                                 value="#{gruposBean.busca}"  size="11" 
+                                 onkeyup="this.value = this.value.toUpperCase();"  
+                                 required="true" maxlength="11" 
+                                 onkeypress="mascara(this, soNumeros)"
+                                 rendered="#{gruposBean.buscacpf}"> 
+                        <f:validator validatorId="cpfvalidator"  />
+                    </p:inputText>
+                     
+                    <p:inputText id="cbBuscaNomeEmp" label="Nome Representante" autocomplete="off" 
+                                 value="#{gruposBean.busca}" 
+                                 size="70" onkeyup="this.value = this.value.toUpperCase();" 
+                                 required="true" rendered="#{gruposBean.buscanomeresp}" /> 
+                </p:outputPanel>
+                <p:commandButton    action="#{gruposBean.localiza}"  value="Localizar" update="frmBuscaCoop, mes" 
+                                    icon="ui-icon-search"        
+                                    />
+            </h:panelGrid>
+            <p:messages id="mes" showDetail="true" showSummary="false"  />
+        </p:panel>
+                 
+        <p:separator   />   
+
+        <p:dataTable id="cptabela" var="item" 
+                     value="#{gruposBean.dataModelListaCoop}"  
+                     
+                     emptyMessage="Efetue uma Consulta"
+                     selectionMode="single"
+                     rowKey="#{item.id}"
+                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
+            
+            <p:column style="width: 30px; text-align: center;"  >       
+                <f:facet name="header" >
+                    <p:commandButton  icon="ui-icon-plus"  process="@this"  actionListener="#{gruposBean.novo}" oncomplete="dlgCoopNew.show()"  update=":frmCoopNew"   />                         
+                </f:facet>
+                <p:commandButton icon="ui-icon-refresh"  process="@this"  title="editar" oncomplete="coopins.show();cooplist.close();tbView.select(0);" update=":frmCoop"  actionListener="#{gruposBean.editCoop}" />                        
+                <p:commandButton icon="ui-icon-print" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{gruposBean.imprimir}" title="imprimir" />
+            </p:column>
+
+            <p:column headerText="Código" style="width: 20px; text-align: center;" >                    
+                <h:outputText value="#{item.id}" />
+            </p:column>
+          
+            <p:column headerText="Identificação" style="width: 400px; text-align: center;" >
+
+                <h:outputText value="#{item.nome}"/>
+            </p:column>
+            <p:column headerText="Representante" style="width: 60px; text-align: center;" >
+
+                <h:outputText value="#{item.nome}"/>
+            </p:column> 
+            <p:column headerText="CPF Rep." style="width: 40px; text-align: center;" >
+
+                <h:outputText value="#{item.representante.cpf}"/>
+            </p:column> 
+            <p:column headerText="Empreendimento" style="width: 80px;text-align: center;"  >
+
+                <h:outputText value="#{item.ramoempreendimento.nome}" style="text-align: center;"  />
+            </p:column>    
+            <p:column headerText="Status Benefício" style="width: 80px; text-align: center;" >
+
+                <h:outputText value="#{item.benstatus}"/>
+            </p:column>
+
+            <p:column  headerText="qtd grupo"  style="text-align: center; width: 30px;">                                           
+                <h:outputText value="#{item.associados.size()}"/>
+            </p:column>  
+            <p:column  headerText="equip" style="text-align: center;width: 30px;" >                                           
+                <h:outputText value="#{item.equipamentossecretarias.size()}"/>
+            </p:column>  
+
+        </p:dataTable>
+
+
+
+    </h:form>
+</ui:component>
+

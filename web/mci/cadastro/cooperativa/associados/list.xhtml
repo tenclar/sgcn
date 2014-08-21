@@ -13,7 +13,7 @@
                           paginator="true"  paginatorAlwaysVisible="false" rows="8"  
                            rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
                            rowIndexVar="rowIx" 
-                          widgetVar="tbass"
+                           widgetVar="tbass" rowKey="#{item.id}"
                           style="min-height: 300px"   >
                 <f:facet name="header">  
                          <p:outputPanel>  
