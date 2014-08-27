@@ -27,6 +27,9 @@ public class AnoDemandaDAO extends GenericDAO {
     public List<AnoDemanda> getList() {
         return getPureList(AnoDemanda.class, "from AnoDemanda anodemanda");
     }
+    public List<AnoDemanda> getListStatus() {
+        return getPureList(AnoDemanda.class, "from AnoDemanda a where a.status = true order by a.ano desc ");
+    }
 //    public AnoDemandaDAO(Session ses) {
 //        super(ses);
 //    }

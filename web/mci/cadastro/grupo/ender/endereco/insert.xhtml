@@ -36,7 +36,7 @@
                             <f:selectItems value="#{enderecoBean.selectItemsBairro}" />
                             
                         </h:selectOneMenu>  
-                            <p:commandButton  id="btaddbairro" value="+" process="@this, enduf, endcid" action="#{enderecoBean.newBairroEnd(enderecoBean.endereco.bairro.cidade.estado,enderecoBean.endereco.bairro.cidade)}" update="@this, enduf, endcid, :frmBairro, :messages" oncomplete="if(!args.validationFailed){dialogBairro.show();}" />    
+                            <p:commandButton value="+" process="@this, enduf, endcid" action="#{enderecoBean.newBairroEnd(enderecoBean.endereco.bairro.cidade.estado,enderecoBean.endereco.bairro.cidade)}" update="enduf,endcid, :frmBairro, :messages" oncomplete="if(!args.validationFailed){dialogBairro.show();}" />    
                         </h:panelGroup>                       
                         <h:outputLabel  value="Logradouro: " />    
                         <p:inputText id="endlog"  autocomplete="false" value="#{enderecoBean.endereco.logradouro}" onkeydown="this.value = this.value.toUpperCase();"   onkeyup="this.value = this.value.toUpperCase();"  size="80"  required="true" />                        
@@ -45,7 +45,7 @@
                        
                     </h:panelGrid>     
              <h:panelGroup>
-                 <p:commandButton id="btsalvaendinsert" value="Salvar" update="@this, :frmBuscaEndCid:dtListaEndereco, panelLocalidadeInsert,:frmBuscaEndCid:opBuscaEndInsert,:frmBuscaEndCid:listaloc,:messages" actionListener="#{enderecoBean.saveEndereco}" oncomplete="if(!args.validationFailed){dlgEndereco.hide();}" />
+                 <p:commandButton value="Salvar" update="@this panelLocalidadeInsert,:frmBuscaEndCid, :frmBuscaEndCid:listaloc,:messages" actionListener="#{enderecoBean.saveEndereco}" oncomplete="if(!args.validationFailed){dlgEndereco.hide();}" />
                  <p:commandButton  process="@this" value="Cancelar" oncomplete="dlgEndereco.hide();" immediate="true"   action="#{enderecoBean.cancelEndereco}" />
                         </h:panelGroup>
         </h:form>

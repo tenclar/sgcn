@@ -14,7 +14,7 @@
                 <h:panelGrid columns="2">
                     <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
-                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />
+<!--                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />-->
                         <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>

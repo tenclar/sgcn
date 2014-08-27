@@ -114,7 +114,281 @@ public class RelatorioBean implements Serializable {
 //        selectresumo.add("DEMANDA");
     }
 
-    public boolean isDisableGroup() {
+   
+    public String pesquisa() throws IOException, JRException {
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<Cidadao> lista;
+        String urlrelatorio;
+        String nomearquivo = "relatorio";
+        Map parameters = new HashMap();
+        parameters.put("grupo",selectonegroup);
+        parameters.put("tipobeneficio", statuscid.toString());
+        parameters.put("statusben", statusben.toString());        
+         parameters.put("possuicursossec", possuicursossec);
+         parameters.put("possuiequipsec",possuiequipsec);
+         parameters.put("publico",publico.getNome());
+         parameters.put("ramo", ramo.getNome());
+         parameters.put("genero", genero);
+         parameters.put("estadocivil", estadocivil.getDescricao());
+         parameters.put("cidade", pesquisaCidade.getNome());
+         parameters.put("bairro", pesquisaBairro.getNome());
+         parameters.put("escolaridade", escolaridade.getAno()+"/"+escolaridade.getGrau());
+ 
+        if (this.periodo == 1) {
+        
+
+            if (selectonegroup.equals("CIDADE")) {
+                
+//                System.out.println(" StatusBen: " + statusben);
+//                System.out.println(" StatusCid: " + statuscid);
+//                System.out.println(" Cursos: " + possuicursossec);
+//                System.out.println(" Equipamentos: " + possuiequipsec);
+//                System.out.println(" Publico: " + publico);
+//                System.out.println(" Ramo: " + ramo);
+//                System.out.println(" genero: " + genero);
+//                System.out.println(" estadocivil: " + estadocivil);
+//                System.out.println(" escolaridade: " + escolaridade);
+//                System.out.println(" cidade: " + pesquisaCidade);
+//                System.out.println(" bairro: " + pesquisaBairro);
+                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade,selectonegroup);
+                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade");
+                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
+            }
+            if (selectonegroup.equals("CIDADEBAIRRO")) {
+                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
+                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade_bairro");
+                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
+                
+            }
+            
+            
+            if (selectonegroup.equals("DEMANDACIDADEBAIRRO")) {
+                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
+                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_demanda_cidade_bairro");
+                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
+                
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public List<String> getSelectresumo() {
+        return selectresumo;
+    }
+
+    public void setSelectresumo(List<String> selectresumo) {
+        this.selectresumo = selectresumo;
+    }
+
+    public List<String> getSelectgroup() {
+        return selectgroup;
+    }
+
+    public void setSelectgroup(List<String> selectgroup) {
+        this.selectgroup = selectgroup;
+    }
+
+    public void handlePesquisaCidadeChange() {
+        BairroDAO bairroDAO = new BairroDAO();
+        if (pesquisaCidade.getId() != 0) {
+            this.listabairro = bairroDAO.getBairros(pesquisaCidade.getId());
+        } else {
+            listabairro = null;
+            getSelectItemsCidade().clear();
+            getSelectItemsBairro().clear();
+        }
+
+    }
+
+    public void handleSelectItemTipoRelatorio() {
+        int valor = this.getTiporelatorio();
+        if (valor == 1) {
+            panelresumo.setRendered(true);
+            paneldetalhado.setRendered(false);
+            paneldetalhadogeral.setRendered(false);
+
+        }
+        if (valor == 2) {
+            paneldetalhado.setRendered(true);
+            paneldetalhadogeral.setRendered(false);
+            panelresumo.setRendered(false);
+
+        }
+        if (valor == 3) {
+            paneldetalhadogeral.setRendered(true);
+            paneldetalhado.setRendered(false);
+            panelresumo.setRendered(false);
+
+        }
+    }
+
+    public void handleSelectItemPeriodo() {
+        int valor = this.getPeriodo();
+        if (valor == 1) {
+            panelperiodo.setRendered(false);
+
+        }
+        if (valor == 2) {
+            panelperiodo.setRendered(true);
+
+        }
+    }
+
+    public void listenerSelectGroup() {
+        if (selectgroup.size() >= 3) {
+            this.disableGroup = true;
+        }
+
+    }
+
+    public void ativagroup() {
+        this.disableGroup = false;
+        selectgroup.clear();
+    }
+
+    public List<Cidadao> getListaBeneficiarios() {
+        return listacidadao;
+    }
+
+    public List<SelectItem> getSelectItemStatusCid() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        for (EnumStatusCid c : EnumStatusCid.values()) {
+            toReturn.add(new SelectItem(c.toString(), c.toString()));
+        }
+        return toReturn;
+    }
+
+    public List<SelectItem> getSelectItemStatusBen() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        for (EnumStatusBeneficio c : EnumStatusBeneficio.values()) {
+            toReturn.add(new SelectItem(c.toString(), c.toString()));
+        }
+        return toReturn;
+    }
+
+    public List<SelectItem> getSelectItemsPublico() {
+        PublicoDAO publicoDAO = new PublicoDAO();
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Publico p = new Publico();
+        p.setId(0);
+        p.setNome("TODOS");
+        toReturn.add(new SelectItem(p, p.getNome()));
+        for (Publico pb : publicoDAO.getPublicos()) {
+            toReturn.add(new SelectItem(pb,pb.getId()+" | "+ pb.getNome()));
+        }
+        return toReturn;
+    }
+
+    public List<SelectItem> getSelectItemsCidade() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Cidade c = new Cidade();
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        c.setId(0);
+        c.setNome("TODOS");
+        toReturn.add(new SelectItem(c, c.getNome()));
+        if (this.listacidade == null) {
+            this.listacidade = cidadeDAO.getCidades(1);
+        }
+        if (this.listacidade != null) {
+            for (Cidade cid : listacidade) {
+                toReturn.add(new SelectItem(cid, cid.getNome()));
+            }
+
+        }
+        return toReturn;
+    }
+
+    public List<SelectItem> getSelectItemsBairro() {
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        Bairro b = new Bairro();
+        b.setId(0);
+        b.setNome("TODOS");
+        toReturn.add(new SelectItem(b, b.getNome()));
+
+        if (listabairro != null) {
+            for (Bairro ba : listabairro) {
+                toReturn.add(new SelectItem(ba, ba.getNome()));
+            }
+        }
+        return toReturn;
+    }
+
+    //relatorios
+    public void quadroQuantitativo() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<QuadroQuantitativo> lista = cidadaoDAO.getQuadroQuantitativo();
+        //String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlrelqq");
+        //String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomerelqq");
+        String urlrelatorio = "mci/relatorios/quantitativos/qtdstatus.jasper";
+        String nomerelatorio = "quadroquantitativo.pdf";
+        
+
+        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
+
+    }
+
+    public void imprimirequipind() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.CID);
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_ind");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
+    }
+
+    public void imprimirequipcol() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.COOP);
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_col");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
+
+    }
+
+//    if (selectresumo.contains("BAIRRO")) {
+//                    this.colunabairro = true;
+//                }
+//                if (selectresumo.contains("RAMO")) {
+//                    this.colunaramo = true;
+//                }
+//
+//                if (selectresumo.contains("LOGRADOURO")) {
+//                    this.colunalogradouro = true;
+//                }
+//                if (selectresumo.contains("RG")) {
+//                    this.colunarg = true;
+//                }
+//                if (selectresumo.contains("NIS")) {
+//                    this.colunanis = true;
+//                }
+//                if (selectresumo.contains("SEXO")) {
+//                    this.colunasexo = true;
+//                }
+//                if (selectresumo.contains("IDADE")) {
+//                    this.colunaidade = true;
+//                }
+//                if (selectresumo.contains("ESCOLARIDADE")) {
+//                    this.colunaescolaridade = true;
+//                }
+//                if (selectresumo.contains("TELEFONE")) {
+//                    this.colunatelefone = true;
+//                }
+//                if (selectresumo.contains("EQUIP")) {
+//                    this.colunaequip = true;
+//                }
+//                if (selectresumo.contains("PUBLICO")) {
+//                    this.colunapublico = true;
+//                }
+    
+    
+    
+     public boolean isDisableGroup() {
         return disableGroup;
     }
 
@@ -394,274 +668,4 @@ public class RelatorioBean implements Serializable {
         this.selectonegroup = selectonegroup;
     }
 
-    public String pesquisa() throws IOException, JRException {
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> lista;
-        String urlrelatorio;
-        String nomearquivo = "relatorio";
-        Map parameters = new HashMap();
-        parameters.put("grupo",selectonegroup);
-        parameters.put("tipobeneficio", statuscid.toString());
-        parameters.put("statusben", statusben.toString());        
-         parameters.put("possuicursossec", possuicursossec);
-         parameters.put("possuiequipsec",possuiequipsec);
-         parameters.put("publico",publico.getNome());
-         parameters.put("ramo", ramo.getNome());
-         parameters.put("genero", genero);
-         parameters.put("estadocivil", estadocivil.getDescricao());
-         parameters.put("cidade", pesquisaCidade.getNome());
-         parameters.put("bairro", pesquisaBairro.getNome());
-         parameters.put("escolaridade", escolaridade.getAno()+"/"+escolaridade.getGrau());
- 
-        if (this.periodo == 1) {
-        
-
-            if (selectonegroup.equals("CIDADE")) {
-                
-//                System.out.println(" StatusBen: " + statusben);
-//                System.out.println(" StatusCid: " + statuscid);
-//                System.out.println(" Cursos: " + possuicursossec);
-//                System.out.println(" Equipamentos: " + possuiequipsec);
-//                System.out.println(" Publico: " + publico);
-//                System.out.println(" Ramo: " + ramo);
-//                System.out.println(" genero: " + genero);
-//                System.out.println(" estadocivil: " + estadocivil);
-//                System.out.println(" escolaridade: " + escolaridade);
-//                System.out.println(" cidade: " + pesquisaCidade);
-//                System.out.println(" bairro: " + pesquisaBairro);
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade,selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
-            }
-            if (selectonegroup.equals("CIDADEBAIRRO")) {
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade_bairro");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
-                
-            }
-            
-            
-            if (selectonegroup.equals("DEMANDACIDADEBAIRRO")) {
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_demanda_cidade_bairro");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo,parameters);
-                
-            }
-
-        }
-
-        return null;
-
-    }
-
-    public List<String> getSelectresumo() {
-        return selectresumo;
-    }
-
-    public void setSelectresumo(List<String> selectresumo) {
-        this.selectresumo = selectresumo;
-    }
-
-    public List<String> getSelectgroup() {
-        return selectgroup;
-    }
-
-    public void setSelectgroup(List<String> selectgroup) {
-        this.selectgroup = selectgroup;
-    }
-
-    public void handlePesquisaCidadeChange() {
-        BairroDAO bairroDAO = new BairroDAO();
-        if (pesquisaCidade.getId() != 0) {
-            this.listabairro = bairroDAO.getBairros(pesquisaCidade.getId());
-        } else {
-            listabairro = null;
-            getSelectItemsCidade().clear();
-            getSelectItemsBairro().clear();
-        }
-
-    }
-
-    public void handleSelectItemTipoRelatorio() {
-        int valor = this.getTiporelatorio();
-        if (valor == 1) {
-            panelresumo.setRendered(true);
-            paneldetalhado.setRendered(false);
-            paneldetalhadogeral.setRendered(false);
-
-        }
-        if (valor == 2) {
-            paneldetalhado.setRendered(true);
-            paneldetalhadogeral.setRendered(false);
-            panelresumo.setRendered(false);
-
-        }
-        if (valor == 3) {
-            paneldetalhadogeral.setRendered(true);
-            paneldetalhado.setRendered(false);
-            panelresumo.setRendered(false);
-
-        }
-    }
-
-    public void handleSelectItemPeriodo() {
-        int valor = this.getPeriodo();
-        if (valor == 1) {
-            panelperiodo.setRendered(false);
-
-        }
-        if (valor == 2) {
-            panelperiodo.setRendered(true);
-
-        }
-    }
-
-    public void listenerSelectGroup() {
-        if (selectgroup.size() >= 3) {
-            this.disableGroup = true;
-        }
-
-    }
-
-    public void ativagroup() {
-        this.disableGroup = false;
-        selectgroup.clear();
-    }
-
-    public List<Cidadao> getListaBeneficiarios() {
-        return listacidadao;
-    }
-
-    public List<SelectItem> getSelectItemStatusCid() {
-        List<SelectItem> toReturn = new LinkedList<SelectItem>();
-        for (EnumStatusCid c : EnumStatusCid.values()) {
-            toReturn.add(new SelectItem(c.toString(), c.toString()));
-        }
-        return toReturn;
-    }
-
-    public List<SelectItem> getSelectItemStatusBen() {
-        List<SelectItem> toReturn = new LinkedList<SelectItem>();
-        for (EnumStatusBeneficio c : EnumStatusBeneficio.values()) {
-            toReturn.add(new SelectItem(c.toString(), c.toString()));
-        }
-        return toReturn;
-    }
-
-    public List<SelectItem> getSelectItemsPublico() {
-        PublicoDAO publicoDAO = new PublicoDAO();
-        List<SelectItem> toReturn = new LinkedList<SelectItem>();
-        Publico p = new Publico();
-        p.setId(0);
-        p.setNome("TODOS");
-        toReturn.add(new SelectItem(p, p.getNome()));
-        for (Publico pb : publicoDAO.getPublicos()) {
-            toReturn.add(new SelectItem(pb,pb.getId()+" | "+ pb.getNome()));
-        }
-        return toReturn;
-    }
-
-    public List<SelectItem> getSelectItemsCidade() {
-        List<SelectItem> toReturn = new LinkedList<SelectItem>();
-        Cidade c = new Cidade();
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        c.setId(0);
-        c.setNome("TODOS");
-        toReturn.add(new SelectItem(c, c.getNome()));
-        if (this.listacidade == null) {
-            this.listacidade = cidadeDAO.getCidades(1);
-        }
-        if (this.listacidade != null) {
-            for (Cidade cid : listacidade) {
-                toReturn.add(new SelectItem(cid, cid.getNome()));
-            }
-
-        }
-        return toReturn;
-    }
-
-    public List<SelectItem> getSelectItemsBairro() {
-        List<SelectItem> toReturn = new LinkedList<SelectItem>();
-        Bairro b = new Bairro();
-        b.setId(0);
-        b.setNome("TODOS");
-        toReturn.add(new SelectItem(b, b.getNome()));
-
-        if (listabairro != null) {
-            for (Bairro ba : listabairro) {
-                toReturn.add(new SelectItem(ba, ba.getNome()));
-            }
-        }
-        return toReturn;
-    }
-
-    //relatorios
-    public void quadroQuantitativo() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<QuadroQuantitativo> lista = cidadaoDAO.getQuadroQuantitativo();
-        //String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlrelqq");
-        //String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomerelqq");
-        String urlrelatorio = "mci/relatorios/quantitativos/qtdstatus.jasper";
-        String nomerelatorio = "quadroquantitativo.pdf";
-        
-
-        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
-
-    }
-
-    public void imprimirequipind() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.CID);
-
-        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_ind");
-        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
-        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
-    }
-
-    public void imprimirequipcol() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.COOP);
-        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_col");
-        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
-        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
-
-    }
-
-//    if (selectresumo.contains("BAIRRO")) {
-//                    this.colunabairro = true;
-//                }
-//                if (selectresumo.contains("RAMO")) {
-//                    this.colunaramo = true;
-//                }
-//
-//                if (selectresumo.contains("LOGRADOURO")) {
-//                    this.colunalogradouro = true;
-//                }
-//                if (selectresumo.contains("RG")) {
-//                    this.colunarg = true;
-//                }
-//                if (selectresumo.contains("NIS")) {
-//                    this.colunanis = true;
-//                }
-//                if (selectresumo.contains("SEXO")) {
-//                    this.colunasexo = true;
-//                }
-//                if (selectresumo.contains("IDADE")) {
-//                    this.colunaidade = true;
-//                }
-//                if (selectresumo.contains("ESCOLARIDADE")) {
-//                    this.colunaescolaridade = true;
-//                }
-//                if (selectresumo.contains("TELEFONE")) {
-//                    this.colunatelefone = true;
-//                }
-//                if (selectresumo.contains("EQUIP")) {
-//                    this.colunaequip = true;
-//                }
-//                if (selectresumo.contains("PUBLICO")) {
-//                    this.colunapublico = true;
-//                }
 }

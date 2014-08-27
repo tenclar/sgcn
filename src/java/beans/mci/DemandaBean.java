@@ -6,7 +6,9 @@ package beans.mci;
 
 import dao.mci.AnoDemandaDAO;
 import entity.mci.AnoDemanda;
+import entity.mci.EstadoCivil;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -22,7 +25,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @ViewScoped
-public class AnodemandaBean implements Serializable {
+public class DemandaBean implements Serializable {
 
     private FacesContext context;
     private DataModel listaAnoDemandas;
@@ -31,6 +34,18 @@ public class AnodemandaBean implements Serializable {
     
     private boolean edit=false;
 
+     public List<SelectItem> getSelectItems() {
+       AnoDemandaDAO  anodemandaDAO = new AnoDemandaDAO();
+        
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+      
+       
+        for (AnoDemanda p : anodemandaDAO.getListStatus()) {
+            Integer valor = p.getAno();
+            toReturn.add(new SelectItem(valor,valor.toString()));
+        }
+        return toReturn;
+    }
     @SuppressWarnings("unchecked")
     public DataModel getListaAnoDemandas() {
       AnoDemandaDAO  anodemandaDAO = new AnoDemandaDAO();

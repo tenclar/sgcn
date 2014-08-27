@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form id="frmDemanda" prependId="false">
+        <h:panelGrid id="panelDemandaInsert" columns="2" style="margin-bottom:10px">
+
+            <h:panelGrid columns="2"> 
+                <h:outputLabel for="demandaAno" value="Ano:" />
+                <p:message for="demandaAno" display="icon" />   
+            </h:panelGrid>
+            <p:inputText id="demandaAno" value="#{demandaBean.anoDemanda.ano}"   onkeypress="mascara(this, soNumeros)"   required="true" validatorMessage="Campo Requerido"/>
+            <h:panelGrid columns="2">  
+                <h:outputLabel for="demandaStatus" value="Status" />    
+                <p:message for="demandaStatus" display="icon" />           
+
+            </h:panelGrid>
+            <h:selectOneMenu id="demandaStatus" value="#{demandaBean.anoDemanda.status}" style="width: 100px" required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >                        
+                <f:selectItem itemLabel="Ativo"  itemValue="true" />
+                <f:selectItem itemLabel="Inativo"  itemValue="false" />                        
+            </h:selectOneMenu>
+
+
+
+
+        </h:panelGrid>
+        <p:column colspan="2">
+            <p:commandButton  update=":frmListaDemanda:tbDemanda,:messages"  oncomplete="dlgDemanda.hide();" actionListener="#{demandaBean.saveAnoDemanda}" value="Salvar"/>
+            <p:commandButton   oncomplete="dlgDemanda.hide();" immediate="true" actionListener="#{demandaBean.cancelAnoDemanda}" value="Cancelar"/>
+        </p:column>
+    </h:form>
+
+
+
+</ui:component>
+

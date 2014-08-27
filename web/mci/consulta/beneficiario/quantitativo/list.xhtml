@@ -14,7 +14,7 @@
                 <h:panelGrid columns="2">
                     <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
-                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />
+                        <!--                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />-->
                         <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
@@ -22,25 +22,34 @@
                 </h:panelGrid>
 
                 <p:separator />
-
-                <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}" >
+                <!--                 binding="# {relatorioBean.panelperiodo}"-->
+                <p:panel id="pdatas" widgetVar="pDatas"  >
                     <h:panelGrid id="pgdads" columns="2">
                         <p:outputPanel id="opdemanda">
                             <fieldset>
-                                <legend>Demanda</legend>
+                                <legend>Ano Demanda</legend>
+                                <h:panelGrid  columns="4">
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel for="cidanodemandainicial" value="Inicial" />  
 
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel for="cidanodemanda" value="Ano" />  
+                                        <p:selectOneMenu id="cidanodemandainicial"    converter="IndexedConverter" >
+                                            
+                                            <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
+                                        </p:selectOneMenu> 
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel for="cidanodemandafinal" value="Final" />  
 
-                                    <p:selectOneMenu id="cidanodemanda"    converter="IndexedConverter" >
-                                        <f:selectItem itemLabel="TODOS" noSelectionOption="true"  />
-                                        <f:selectItems value="#{cidadaoBean.listaAnoDemandas}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
-                                    </p:selectOneMenu> 
+                                        <p:selectOneMenu id="cidanodemandafinal"    converter="IndexedConverter" >
+                                         
+                                            <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
+                                        </p:selectOneMenu> 
+                                    </h:panelGrid>
                                 </h:panelGrid>
                             </fieldset>
                         </p:outputPanel>    
 
-
+<!--
                         <p:outputPanel id="opcadastro">
                             <fieldset>
                                 <legend>Data de Cadatro</legend>
@@ -60,7 +69,7 @@
                                 </h:panelGrid>
                             </fieldset>
                         </p:outputPanel>    
-
+-->
 
                     </h:panelGrid>
                 </p:panel>
@@ -96,7 +105,7 @@
             </p:outputPanel>
 
             <p:outputPanel id="opfiltros"  >
-                <fieldset style="height:  200px" >
+                <fieldset style="height:  150px" >
                     <legend>Informações Cadastrais para Filtro</legend>
                     <h:panelGrid columns="2"  >
                         <h:panelGrid columns="2"  >
@@ -143,24 +152,29 @@
                     </h:panelGrid>
                 </fieldset>
             </p:outputPanel>
-
-
-
-
-
-
-
-
-
-
         </p:panel>
         <p:panel id="pgrupo" header="Agrupar">
 
-            <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"  layout="pageDirection"  >
+            <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"   layout="pageDirection"  >
+
                 <f:selectItem itemLabel="NENHUM" itemValue="NENHUM"   />
                 <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
-                <f:selectItem itemLabel="CIDADE - BAIRRO" itemValue="CIDADEBAIRRO"   />                           
-                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO" itemValue="DEMANDACIDADEBAIRRO"   />       
+                <f:selectItem itemLabel="CIDADE - RAMO" itemValue="CIDADERAMO"   />
+                <f:selectItem itemLabel="CIDADE - RAMO - GENERO" itemValue="CIDADERAMOGENERO"   />
+                <f:selectItem itemLabel="CIDADE - GÊNERO" itemValue="CIDADEGENERO"   />
+                <f:selectItem itemLabel="CIDADE - BAIRRO" itemValue="CIDADEBAIRRO"   />   
+                <f:selectItem itemLabel="CIDADE - BAIRRO - RAMO" itemValue="CIDADEBAIRRORAMO"   />
+                <f:selectItem itemLabel="CIDADE - BAIRRO - GÊNERO" itemValue="CIDADEBAIRROGENERO"   />
+                <f:selectItem itemLabel="CIDADE - BAIRRO - RAMO - GÊNERO" itemValue="CIDADEBAIRRORAMOGENERO"   />
+                <f:selectItem itemLabel="DEMANDA" itemValue="DEMANDA"   />
+                <f:selectItem itemLabel="DEMANDA - GÊNERO" itemValue="DEMANDAGENERO"   />
+                <f:selectItem itemLabel="DEMANDA - CIDADE" itemValue="DEMANDACIDADE"   />                
+                <f:selectItem itemLabel="DEMANDA - CIDADE - RAMO" itemValue="DEMANDACIDADE"   />                
+                <f:selectItem itemLabel="DEMANDA - CIDADE - GENERO" itemValue="DEMANDACIDADE"   />                
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO" itemValue="DEMANDACIDADEBAIRRO"   /> 
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO - GÊNERO" itemValue="DEMANDACIDADEBAIRROGENERO"   /> 
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO - RAMO" itemValue="DEMANDACIDADEBAIRRORAMO"   /> 
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO - RAMO - GÊNERO" itemValue="DEMANDACIDADEBAIRRORAMOGENERO"   /> 
 
 
             </h:selectOneRadio>

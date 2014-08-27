@@ -60,6 +60,14 @@
 
 
                          >
+                  <p:column  headerText="ações" style=" text-align: center; width: 40px;"  >     
+
+                    <p:commandButton   value="Selecionar" process="@this"  title="Selecionar"  oncomplete="dlgRepresentante.hide();" update=":frmCoopNew:cooprep"    >
+                        <f:setPropertyActionListener value="#{item}"  target="#{gruposBean.cooperativa.representante}" />
+                    </p:commandButton>                                                                         
+
+
+                </p:column>
                 <p:column style="text-align: center; width: 80px" headerText="CPF" >                                                    
                     <h:outputText value="#{item.cpf}" />
                 </p:column  >
@@ -69,14 +77,7 @@
                 <p:column style="text-align: center;width: 120px" headerText="nome" >                       
                     <h:outputText value="#{item.nome}"/>
                 </p:column> 
-                <p:column  headerText="ações" style=" text-align: center;" >     
-
-                    <p:commandButton   value="Selecionar" process="@this"  title="Selecionar"  oncomplete="dlgRepresentante.hide();" update=":frmCoopNew:cooprep"    >
-                        <f:setPropertyActionListener value="#{item}"  target="#{gruposBean.cooperativa.representante}" />
-                    </p:commandButton>                                                                         
-
-
-                </p:column>
+              
 
             </p:dataTable>
         </p:outputPanel >

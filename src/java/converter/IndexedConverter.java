@@ -32,6 +32,7 @@ public class IndexedConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uicomp, String value) {
         List<SelectItem> items = new ArrayList<SelectItem>();
+        
         List<UIComponent> uicompList = uicomp.getChildren();
         for (UIComponent comp : uicompList) {
             if (comp instanceof UISelectItems) {

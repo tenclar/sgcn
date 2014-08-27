@@ -12,6 +12,7 @@ import entity.Cidade;
 
 import entity.Endereco;
 import entity.Telefone;
+import entity.mci.AnoDemanda;
 import entity.mci.CidAssociados;
 import entity.mci.RamoEmpreendimento;
 import entity.mci.enumerator.EnumStatusBeneficio;
@@ -62,6 +63,7 @@ public class GruposBean implements Serializable {
     private DataModel<Cidadao> dmLista = null;
     //private CidadaoDAO cidadaoDAO = new CidadaoDAO();        
     //private EnderecoDAO enderecoDAO = new EnderecoDAO();
+    private AnoDemanda anodemanda;
     private UIForm form;
     private Telefone telefone = new Telefone();
     private boolean buscacod = false;
@@ -75,6 +77,14 @@ public class GruposBean implements Serializable {
 
     public void setBuscacod(boolean buscacod) {
         this.buscacod = buscacod;
+    }
+
+    public AnoDemanda getAnodemanda() {
+        return anodemanda;
+    }
+
+    public void setAnodemanda(AnoDemanda anodemanda) {
+        this.anodemanda = anodemanda;
     }
 
     
@@ -351,6 +361,7 @@ public class GruposBean implements Serializable {
         public void novo(ActionEvent actionEvent) {
 
         this.cooperativa = new Cidadao();
+        this.anodemanda = new AnoDemanda();
         this.cooperativa.setBenstatus(EnumStatusBeneficio.RESERVA);
         this.cooperativa.setStatuscid(EnumStatusCid.COLETIVO);
         this.cidassociados = new CidAssociados();
@@ -360,21 +371,25 @@ public class GruposBean implements Serializable {
 
     }
 
-    public void salvarNovo(ActionEvent actionEvent) {
+    public void saveCoopNew(ActionEvent actionEvent) {
+        
         RequestContext requestContext = RequestContext.getCurrentInstance();
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         boolean success;
-        this.cooperativa.setCpf(this.cooperativa.getCpf());
+       // this.cooperativa.setCpf(this.cooperativa.getCpf());
+        
         if (cidadaoDAO.getListByCnp(this.cooperativa.getCpf(),EnumTipoPessoa.GRUPO).isEmpty()) {
 
             facesutils.cleanSubmittedValues(form);
             telefone = new Telefone();
             cooperativa.setEndereco(new Endereco());
             cooperativa.setTipopessoa(EnumTipoPessoa.GRUPO);
+            cooperativa.setCpf(this.cooperativa.getRepresentante().getCpf());
             
             this.cooperativa.setRamoempreendimento(new RamoEmpreendimento());
 
             this.cidassociados = new CidAssociados();
+            
             success = true;
 
         } else {
@@ -447,14 +462,14 @@ public class GruposBean implements Serializable {
 
         FacesContext fcontext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
-        String relJasper = scontext.getRealPath("/mci/cadastro/cooperativa/impressao/relcooperativa.jasper");
+        String relJasper = scontext.getRealPath("/mci/cadastro/grupo/impressao/relfichacadastro.jasper");
         //InputStream inputStream = getClass().getResourceAsStream(relJasper);
         HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
         ServletOutputStream responseStream = response.getOutputStream();
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listausr);
         Map parameters = new HashMap();
 
-        response.setHeader("Content-Disposition", "inline; filename=relcooperativa.pdf");
+        response.setHeader("Content-Disposition", "inline; filename=fichacadastro.pdf");
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("application/pdf");
 

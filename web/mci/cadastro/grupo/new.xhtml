@@ -30,16 +30,33 @@
     <h:body>
 
         <h:form id="frmCoopNew"  prependId="false">                
-           
+
             <p:fieldset legend="Identificação da Grupo ">
                 <p:messages showDetail="true" />
-                <h:panelGrid id="panelCoopInsert" columns="2" style="margin-bottom:10px">
+                <h:panelGrid id="panelCoopInsert" columns="3" style="margin-bottom:10px">
                    
+                     <h:panelGrid  columns="2"  >                               
+                        <h:outputLabel for="grupodemanda"  value="Ano Demanda: " styleClass="titulos" />
+                        <p:message for="grupodemanda" display="icon"   />
+                    </h:panelGrid>  
+                    <h:panelGrid  columns="2"  >                               
+                        <h:outputLabel for="coopdata"  value="Data Cadastro: " styleClass="titulos" />
+                        <p:message for="coopdata" display="icon"   />
+                    </h:panelGrid> 
+
                     <h:panelGrid  columns="2">      
-                        <h:outputLabel for="coopnewnome" value="Nome do Grupo: "  /><p:message for="coopnewnome" display="icon"  />                        
+                        <h:outputLabel for="coopnewnome" value="Nome do Grupo: " styleClass="titulos"  /><p:message for="coopnewnome" display="icon"  />                        
                     </h:panelGrid>
-                  
-                    <p:inputText id="coopnewnome" autocomplete="false" value="#{gruposBean.cooperativa.nome}" size="80"   required="true" label="Nome"
+<!--                    <p:inputText id="grupodemanda2" autocomplete="off"  value="# {gruposBean.cooperativa.anodemanda}" size="8" required="true" label="Ano Demanda" maxlength="4" onkeypress="mascara(this, soNumeros)"  />-->
+
+                   <p:selectOneMenu id="grupodemanda"  label="Ano Demanda"   converter="ComplexIndexConverter" value="#{gruposBean.cooperativa.anodemanda}" required="true" >
+                        <f:selectItem noSelectionOption="true" itemLabel="Selecione"   />
+                        <f:selectItems value="#{demandaBean.selectItems}"   />
+                        
+                    </p:selectOneMenu>  
+
+                    <p:calendar id="coopdata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{gruposBean.cooperativa.datacreated}" showOn="button"  />
+                    <p:inputText id="coopnewnome" autocomplete="false" value="#{gruposBean.cooperativa.nome}" size="60"   required="true" label="Nome"
                                  onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase();"  />                                       
                 </h:panelGrid>
                 <p:panel id="cooprep" header="Representante"  >

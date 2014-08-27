@@ -10,9 +10,9 @@
 
           
           
-    <h:form id="frmBuscaEndCid" >
+    <h:form prependId="false" id="frmBuscaEndCid" >
         <p:focus for="itBuscaend" />
-        <p:outputPanel  id="opbuscaend" >  
+        <p:outputPanel  id="opBuscaEnd" >  
             <p:outputPanel  id="opBuscaEndInsert" > 
                 <h:panelGrid columns="5">
                     <h:outputLabel  value="UF: " />                    
@@ -20,26 +20,22 @@
                     <h:outputLabel  value="Bairro / Ramal: " />    
                     <h:outputLabel  value="" />    
                     <h:outputLabel  value="" />    
-                    <p:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  
-                                     filter="true" filterMatchMode="startsWith" required="true" converter="IndexedConverter" >
+                    <h:selectOneMenu id="endbuscauf" label="Estado" value="#{enderecoBean.pesquisaEstado}"  styleClass="ui-inputfield ui-widget ui-corner-all" required="true" converter="IndexedConverter" >
                         <f:selectItems value="#{enderecoBean.selectItemsEstado}" />
                         <p:ajax update="endbuscacid, endbuscabairro" listener="#{enderecoBean.handlePesquisaEstadoChange}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
 
-                    <p:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}" 
-                                     filter="true" filterMatchMode="startsWith"
-                                      required="true" converter="IndexedConverter" >
+                    <h:selectOneMenu id="endbuscacid" label="Cidade" value="#{enderecoBean.pesquisaCidade}"  styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" converter="IndexedConverter" >
                         <f:selectItems value="#{enderecoBean.selectItemsCidade}" />
                         <p:ajax update="endbuscabairro" listener="#{enderecoBean.handlePesquisaCidadeChange}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
 
-                    <p:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  
-                                     filter="true" filterMatchMode="startsWith"
+                    <h:selectOneMenu id="endbuscabairro" value="#{enderecoBean.pesquisaBairro}"  styleClass="ui-inputfield ui-widget  ui-corner-all" 
                                      converter="IndexedConverter"   >
 
                         <f:selectItems value="#{enderecoBean.selectItemsBairro}" />                            
-                    </p:selectOneMenu> 
-                    <p:commandButton id="itBuscaend" tabindex="0" process="@this, opbuscaend , listaloc"   actionListener="#{enderecoBean.buscaEnderecoDetalhado}" update="@this, opBuscaEndInsert, listaloc,:messages" icon="ui-icon-search" /> 
+                    </h:selectOneMenu> 
+                    <p:commandButton id="itBuscaend" tabindex="0"   process="opBuscaEnd" actionListener="#{enderecoBean.buscaEnderecoDetalhado}" update="opBuscaEndInsert, listaloc,:messages" icon="ui-icon-search" /> 
                     <p:commandButton process="@this" tabindex="2" value="+"  oncomplete="dlgEndereco.show()" update=":frmLoc" action="#{enderecoBean.newEnd(enderecoBean.pesquisaEstado,enderecoBean.pesquisaCidade,enderecoBean.buscaendereco)}" />
                 </h:panelGrid>
 
@@ -62,7 +58,6 @@
         <p:outputPanel id="listaloc">
 
             <p:dataTable id="dtListaEndereco" var="item" value="#{enderecoBean.dataModelListaEndereco}"  
-                         rowKey="#{item.id}"
                          style=" text-align: center;" paginatorPosition="bottom"
                          pageLinks="5" selection="#{gruposBean.cooperativa.endereco}"
                          paginator="true"  paginatorAlwaysVisible="false" rows="10" 
@@ -91,7 +86,7 @@
                 </p:column>-->
             </p:dataTable>
             <p:separator />
-            <p:commandButton   action="#{enderecoBean.enderecoClear}" value="selecionar"   oncomplete="dlgBuscaEnd.hide();" 
+            <p:commandButton  action="#{gruposBean.selectEndereco()}" value="selecionar"    oncomplete="dlgBuscaEnd.hide();document.getElementById('cidnum').focus();" 
                                      update="frmBuscaEndCid, :frmCoop:tabView:cidEnd, :frmCoop:tabView:cidEnd2"   >  
                          
                     </p:commandButton> 

@@ -15,19 +15,15 @@
                 <h:panelGrid id="panelBairro" columns="2" style="margin-bottom:10px">
                        
                     <h:outputLabel for="bairroEstado" value="Estado: " />
-                    <p:selectOneMenu id="bairroEstado" value="#{enderecoBean.bairro.cidade.estado}"  
-                                     required="true" converter="IndexedConverter"
-                                     filter="true" filterMatchMode="startsWith" >
+                    <h:selectOneMenu id="bairroEstado" value="#{enderecoBean.bairro.cidade.estado}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all">
                         <f:selectItems value="#{bairroBean.selectItemsEstado}"/>
                         <p:ajax update="bairroCidade" listener="#{enderecoBean.handleEstadoChange}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                     
                     <h:outputLabel for="bairroCidade" value="Cidade: " />
-                    <p:selectOneMenu id="bairroCidade" value="#{enderecoBean.bairro.cidade}" 
-                                     required="true" converter="IndexedConverter" 
-                                     filter="true" filterMatchMode="startsWith" >                         
+                    <h:selectOneMenu id="bairroCidade" value="#{enderecoBean.bairro.cidade}"  required="true" converter="IndexedConverter" styleClass="ui-inputfield ui-widget  ui-corner-all" >                         
                         <f:selectItems value="#{enderecoBean.selectItemsCidade}"/>
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
                      <h:outputLabel  value="Zona:"  />                     
                      <h:selectOneMenu id="baizona" value="#{enderecoBean.bairro.zona}" styleClass="ui-inputfield ui-widget  ui-corner-all" >
                             <f:selectItem  itemLabel="selecione" />
@@ -39,7 +35,7 @@
                     
                 </h:panelGrid>
                 <p:column colspan="2">
-                    <p:commandButton id="btsavebairro" update=":frmLoc:enduf, :frmLoc:endcid, :frmLoc:endbairro, panelBairro, :messages "  oncomplete="if(!args.validationFailed){dialogBairro.hide();}if(args.validationFailed){dialogBairro.show();}" actionListener="#{enderecoBean.saveBairro}" value="salvar">
+                    <p:commandButton update=":frmLoc:enduf, :frmLoc:endcid, :frmLoc:endbairro, panelBairro, :messages "  oncomplete="if(!args.validationFailed){dialogBairro.hide();}if(args.validationFailed){dialogBairro.show();}" actionListener="#{enderecoBean.saveBairro}" value="salvar">
                           
                         
                     </p:commandButton>

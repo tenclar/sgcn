@@ -51,6 +51,7 @@
 
                                                 </p:submenu>  
                                                 <p:submenu label="Cad. Auxiliares" icon="ui-icon ui-icon-contact">   
+                                                     <p:menuitem value="Ano de Demanda" url="${request.contextPath}/../mci/cadastro/anodemanda/" target="_blank" rendered="#{p:ifGranted(msg.perm_view)}" />
                                                     <p:menuitem value="Atividades" url="${request.contextPath}/../mci/cadastro/atividade/" target="_blank" />
 
                                                     <p:menuitem value="Bem Durável" url="${request.contextPath}/../mci/cadastro/bemduravel/" target="_blank" />   

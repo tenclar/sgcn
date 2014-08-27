@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcooperativa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5acb32ac-019b-43bf-b564-e678dfbe2051">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="197"/>
+	<property name="ireport.y" value="0"/>
 	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<pen lineWidth="1.0"/>
 		<box leftPadding="2">
@@ -32,61 +32,94 @@
 	<queryString language="hql">
 		<![CDATA[from Cidadao]]>
 	</queryString>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="anodemanda" class="java.lang.Integer"/>
+	<field name="apelido" class="java.lang.String"/>
 	<field name="associados" class="java.util.List"/>
 	<field name="atividade" class="java.lang.String"/>
+	<field name="atividadeTotal" class="java.lang.Double"/>
+	<field name="beneficioSocial" class="java.lang.String"/>
+	<field name="beneficiohabitacional" class="java.lang.String"/>
 	<field name="benstatus" class="entity.mci.enumerator.EnumStatusBeneficio"/>
+	<field name="cidAtividades" class="java.util.List"/>
+	<field name="cidBenHabits" class="java.util.List"/>
+	<field name="cidbBenSociais" class="java.util.List"/>
 	<field name="cidbensduraveis" class="java.util.List"/>
 	<field name="complemento" class="java.lang.String"/>
 	<field name="cpf" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="cursos" class="java.util.List"/>
+	<field name="cursosSecretarias" class="java.util.List"/>
+	<field name="cursosecr" class="java.lang.String"/>
 	<field name="datacreated" class="java.util.Date"/>
 	<field name="datanasc" class="java.util.Date"/>
 	<field name="dataupdate" class="java.util.Date"/>
+	<field name="dependentes" class="java.util.List"/>
+	<field name="despesas" class="java.util.List"/>
+	<field name="despesasTotal" class="java.lang.Double"/>
 	<field name="endereco" class="entity.Endereco"/>
+	<field name="equipamento" class="java.lang.String"/>
+	<field name="equipamentosproprios" class="java.util.List"/>
+	<field name="equipamentossecretarias" class="java.util.List"/>
+	<field name="equipsecr" class="java.lang.String"/>
+	<field name="escolaridade" class="entity.mci.Escolaridade"/>
+	<field name="estadocivil" class="entity.mci.EstadoCivil"/>
+	<field name="expedidor" class="java.lang.String"/>
+	<field name="histdomicilio" class="java.util.List"/>
 	<field name="id" class="java.lang.Integer"/>
+	<field name="idade" class="java.lang.Integer"/>
+	<field name="instituicao" class="java.lang.String"/>
+	<field name="naturalidade" class="entity.Cidade"/>
+	<field name="necespecial" class="entity.mci.NecEspecial"/>
+	<field name="nis" class="java.lang.Long"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="numero" class="java.lang.String"/>
 	<field name="publico" class="entity.mci.Publico"/>
 	<field name="ramoempreendimento" class="entity.mci.RamoEmpreendimento"/>
+	<field name="representante" class="entity.mci.Cidadao"/>
 	<field name="resumo" class="java.lang.String"/>
 	<field name="rg" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
 	<field name="statuscid" class="entity.mci.enumerator.EnumStatusCid"/>
 	<field name="telefones" class="java.util.List"/>
+	<field name="tempomorada" class="java.lang.String"/>
 	<field name="tipopessoa" class="entity.mci.enumerator.EnumTipoPessoa"/>
+	<field name="trabFuncao" class="java.lang.String"/>
+	<field name="trabLocal" class="java.lang.String"/>
+	<field name="trabRem" class="java.lang.Double"/>
+	<field name="usuario" class="entity.Usuario"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70">
-			<rectangle>
-				<reportElement uuid="155ab706-c05b-4d67-b840-17f07acfc5ae" x="0" y="0" width="555" height="70"/>
-			</rectangle>
+		<band height="66">
 			<image>
 				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="9" y="1" width="64" height="64"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="142" y="1" width="265" height="14"/>
+				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="0" y="0" width="555" height="14"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="142" y="17" width="265" height="14"/>
+				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="0" y="13" width="555" height="14"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="135" y="33" width="278" height="14"/>
+				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="0" y="26" width="555" height="14"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+				<text><![CDATA[SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="135" y="50" width="278" height="14"/>
+				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="0" y="40" width="555" height="14"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
@@ -95,13 +128,13 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="27" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="c70ffb88-205c-4bcb-ba08-af728dfa7299" x="0" y="3" width="555" height="17"/>
+				<reportElement uuid="c70ffb88-205c-4bcb-ba08-af728dfa7299" x="0" y="2" width="555" height="17"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[FICHA DE CADASTRO COOPERATIVA]]></text>
+				<text><![CDATA[FICHA DE CADASTRO DE GRUPOS]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -113,7 +146,7 @@
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[Nome do Grupo]]></text>
 			</staticText>
 			<textField>
 				<reportElement uuid="1506daa5-01de-49d3-8b5a-cea6b1271d11" style="fields" x="0" y="71" width="555" height="15" backcolor="#FFFFFF"/>
@@ -123,44 +156,44 @@
 			<elementGroup/>
 			<elementGroup>
 				<staticText>
-					<reportElement uuid="de9552eb-9c2f-4cf5-941b-d05d5326599c" style="columnHeader" x="0" y="26" width="135" height="15"/>
+					<reportElement uuid="de9552eb-9c2f-4cf5-941b-d05d5326599c" style="columnHeader" x="0" y="26" width="82" height="15"/>
 					<textElement>
 						<font fontName="SansSerif" size="10" isBold="true"/>
 						<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 					</textElement>
-					<text><![CDATA[Data Cadastro:]]></text>
+					<text><![CDATA[Data Cadastro]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy">
-					<reportElement uuid="22d3b357-0089-442d-b7e6-a4e2a5974f51" style="fields" x="0" y="41" width="135" height="15" backcolor="#FFFFFF"/>
+					<reportElement uuid="22d3b357-0089-442d-b7e6-a4e2a5974f51" style="fields" x="0" y="41" width="82" height="15" backcolor="#FFFFFF"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{datacreated}]]></textFieldExpression>
 				</textField>
 			</elementGroup>
 			<staticText>
-				<reportElement uuid="1cf93809-3984-4981-9840-362979deef82" style="columnHeader" x="345" y="26" width="210" height="15"/>
+				<reportElement uuid="1cf93809-3984-4981-9840-362979deef82" style="columnHeader" x="232" y="26" width="323" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
-				<text><![CDATA[IE:]]></text>
+				<text><![CDATA[Nome do Representante]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="7eb870ee-eb3f-48a4-bb9e-f30f83c46230" style="fields" x="345" y="41" width="210" height="15" backcolor="#FFFFFF"/>
+				<reportElement uuid="7eb870ee-eb3f-48a4-bb9e-f30f83c46230" style="fields" x="232" y="41" width="323" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{representante}.getNome()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="c576a770-b6d9-4989-ae25-5531401e0da2" style="fields" x="135" y="41" width="210" height="15"/>
+				<reportElement uuid="c576a770-b6d9-4989-ae25-5531401e0da2" style="fields" x="82" y="41" width="75" height="15"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="28f9680b-4b75-4d31-a466-cc8f93f6f6e5" style="columnHeader" x="135" y="26" width="210" height="15"/>
+				<reportElement uuid="28f9680b-4b75-4d31-a466-cc8f93f6f6e5" style="columnHeader" x="82" y="26" width="75" height="15"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
-				<text><![CDATA[CNPJ]]></text>
+				<text><![CDATA[CI]]></text>
 			</staticText>
 			<textField>
 				<reportElement uuid="ab996fbe-faae-4008-9881-d50eec6f8354" style="fields" x="340" y="100" width="47" height="15" backcolor="#FFFFFF"/>
@@ -268,6 +301,19 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement uuid="0f91de15-fc50-48fd-a666-f9b5c627d61d" style="fields" x="157" y="41" width="75" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{representante}.getCpf()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ac5879d7-3ded-4d1c-80ac-f01c5718de03" style="columnHeader" x="157" y="26" width="75" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[CPF Rep.]]></text>
+			</staticText>
 		</band>
 		<band>
 			<subreport>
