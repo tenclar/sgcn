@@ -14,7 +14,7 @@
                 <h:panelGrid columns="2">
                     <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
-                        <!--                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />-->
+                                           <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />
                         <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
@@ -22,8 +22,8 @@
                 </h:panelGrid>
 
                 <p:separator />
-                <!--                 binding="# {relatorioBean.panelperiodo}"-->
-                <p:panel id="pdatas" widgetVar="pDatas"  >
+                
+                <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}"  >
                     <h:panelGrid id="pgdads" columns="2">
                         <p:outputPanel id="opdemanda">
                             <fieldset>
@@ -32,7 +32,7 @@
                                     <h:panelGrid columns="2">
                                         <h:outputLabel for="cidanodemandainicial" value="Inicial" />  
 
-                                        <p:selectOneMenu id="cidanodemandainicial"    converter="IndexedConverter" >
+                                        <p:selectOneMenu id="cidanodemandainicial" value="#{relatorioBean.demandainicio}"   converter="IndexedConverter" >
                                             
                                             <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
                                         </p:selectOneMenu> 
@@ -40,7 +40,7 @@
                                     <h:panelGrid columns="2">
                                         <h:outputLabel for="cidanodemandafinal" value="Final" />  
 
-                                        <p:selectOneMenu id="cidanodemandafinal"    converter="IndexedConverter" >
+                                        <p:selectOneMenu id="cidanodemandafinal"  var="#{relatorioBean.demandafinal}"   converter="IndexedConverter" >
                                          
                                             <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
                                         </p:selectOneMenu> 
@@ -157,7 +157,7 @@
 
             <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"   layout="pageDirection"  >
 
-                <f:selectItem itemLabel="NENHUM" itemValue="NENHUM"   />
+<!--                <f:selectItem itemLabel="NENHUM" itemValue="NENHUM"   />-->
                 <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
                 <f:selectItem itemLabel="CIDADE - RAMO" itemValue="CIDADERAMO"   />
                 <f:selectItem itemLabel="CIDADE - RAMO - GENERO" itemValue="CIDADERAMOGENERO"   />
@@ -184,7 +184,7 @@
         <p:separator />
 
 
-        <p:commandButton action="#{relatorioBean.pesquisa}"  update=":messages" ajax="false"
+        <p:commandButton action="#{relatorioBean.relatorioQuantitativo()}"  update=":messages" ajax="false"
                          icon="ui-icon-search" value="Pesquisar"  onclick="this.form.target = '_new'"   >
         </p:commandButton>
 

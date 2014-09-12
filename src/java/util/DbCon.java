@@ -11,7 +11,7 @@ public class DbCon {
 	{
 		if(con == null){
 			try {
-				String url = "jdbc:jtds:sqlserver://localhost/sgcn";
+				String url = "jdbc:mysql://localhost:3306/sgcn";
 				String usuario = "sgcn";
 				String senha = "sgcn";
 				Class.forName("com.mysql.jdbc.Driver");
