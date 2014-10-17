@@ -178,10 +178,13 @@ public class CidadaoDAO extends GenericDAO {
     public List<Cidadao> getListRelatorio(EnumTipoPessoa tipopessoa, EnumStatusBeneficio statusben,
             EnumStatusCid statuscid, String cursosec, String equipsec, Publico publico,
             RamoEmpreendimento ramo, String genero, EstadoCivil civil, Cidade cidade, Bairro bairro,
-            Escolaridade escolaridade, String selectonegroup) {
+            Escolaridade escolaridade, String selectonegroup,int periodo , int datainicio, int datafinal ) {
 
         String query = "from Cidadao c  where  c.tipopessoa = ?";
-
+        
+        if (periodo == 2 ){
+             query = query + " and c.anodemanda BETWEEN " + datainicio +" to "+ datafinal ;
+        }
         if (!statuscid.equals(EnumStatusCid.TODOS)) {
             query = query + " and cast(c.statuscid as string) = '" + statuscid.toString() + "'";
         }

@@ -40,9 +40,9 @@
                                     <h:panelGrid columns="2">
                                         <h:outputLabel for="cidanodemandafinal" value="Final" />  
 
-                                        <p:selectOneMenu id="cidanodemandafinal"  var="#{relatorioBean.demandafinal}"   converter="IndexedConverter" >
+                                        <p:selectOneMenu id="cidanodemandafinal"  value="#{relatorioBean.demandafinal}"   converter="IndexedConverter" >
                                          
-                                            <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
+                                              <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
                                         </p:selectOneMenu> 
                                     </h:panelGrid>
                                 </h:panelGrid>

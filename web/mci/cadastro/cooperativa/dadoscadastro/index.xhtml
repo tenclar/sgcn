@@ -67,8 +67,8 @@
                                 <h:outputLabel value="" />
                                 <h:outputLabel value="Número: " />
 
-                                <p:commandButton value="+"  process="@this,addTel" update="dtTel,addTel" action="#{cidadaoBean.addTelefones()}" />
-                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cidadaoBean.telefone.numero}"  >
+                                <p:commandButton value="+"  process="addTel" update="dtTel,addTel" action="#{cooperativaBean.addTelefones()}" />
+                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cooperativaBean.telefone.numero}"  >
                                     <f:validateLength minimum="9" />
                                 </p:inputMask>                            
 
@@ -96,7 +96,7 @@
             <p:fieldset id="coopendereco" legend="Endereço">
 
                 <h:panelGrid columns="2">
-                    <p:commandButton value="Localizar" process="@this" update=":frmBuscaEndCid" action="#{enderecoBean.enderecoClear()}" icon="-search" onclick="dlgBuscaEnd.show()" /> 
+                    <p:commandButton value="Localizar" process="@this" update=":frmBuscaEndCid" action="#{enderecoBean.enderecoClear()}" icon="ui-icon-search" onclick="dlgBuscaEnd.show()" /> 
 
                 </h:panelGrid>
 

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.8150000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="5"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Arial" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -44,6 +44,7 @@ order by c.tipopessoa desc, c.benstatus]]>
 							<font size="11" isBold="false"/>
 						</textElement>
 						<textFieldExpression><![CDATA["COOP".equals($F{tipopessoa}) ? "COOPERATIVA / ASSOCIAÇÃO":
+"GRUPO".equals($F{tipopessoa}) ? "GRUPO":
 $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					</textField>
 				</frame>
@@ -64,7 +65,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					<text><![CDATA[Tipo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="8382f5f9-9cb9-4f50-bd4f-f54b04826ae3" style="Column header" x="203" y="17" width="99" height="15"/>
+					<reportElement uuid="8382f5f9-9cb9-4f50-bd4f-f54b04826ae3" style="Column header" x="203" y="17" width="101" height="15"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
@@ -81,8 +82,9 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 		<groupFooter>
 			<band height="18">
 				<textField>
-					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="203" y="2" width="85" height="15"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="203" y="2" width="101" height="15"/>
+					<box rightPadding="30"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TotalBen}]]></textFieldExpression>
@@ -142,7 +144,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+				<text><![CDATA[SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="44" width="555" height="15"/>
@@ -159,9 +161,9 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="203" y="0" width="84" height="15"/>
-				<box leftPadding="5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="203" y="0" width="101" height="15"/>
+				<box leftPadding="5" rightPadding="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>

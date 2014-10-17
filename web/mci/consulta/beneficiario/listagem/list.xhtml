@@ -14,7 +14,7 @@
                 <h:panelGrid columns="2">
                     <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
-<!--                        <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />-->
+                        <f:selectItem   itemValue="2"  itemLabel="Período"  />
                         <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
@@ -25,25 +25,34 @@
 
                 <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}" >
                     <h:panelGrid id="pgdads" columns="2">
-                        <p:outputPanel id="opdemanda">
+                       <p:outputPanel id="opdemanda">
                             <fieldset>
-                                <legend>Demanda</legend>
+                                <legend>Ano Demanda</legend>
+                                <h:panelGrid  columns="4">
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel for="cidanodemandainicial" value="Inicial" />  
 
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel for="cidanodemanda" value="Ano" />  
-                             
-                                    <p:selectOneMenu id="cidanodemanda"    converter="IndexedConverter" >
-                                        <f:selectItem itemLabel="TODOS" noSelectionOption="true"  />
-                                        <f:selectItems value="#{cidadaoBean.listaAnoDemandas}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
-                                    </p:selectOneMenu> 
+                                        <p:selectOneMenu id="cidanodemandainicial" value="#{relatorioBean.demandainicio}"   converter="IndexedConverter" >
+                                            
+                                            <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
+                                        </p:selectOneMenu> 
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel for="cidanodemandafinal" value="Final" />  
+
+                                        <p:selectOneMenu id="cidanodemandafinal"  value="#{relatorioBean.demandafinal}"   converter="IndexedConverter" >
+                                         
+                                              <f:selectItems value="#{demandaBean.selectItems}"  var="anolista" itemLabel="#{anolista}" itemValue="#{anolista}" />
+                                        </p:selectOneMenu> 
+                                    </h:panelGrid>
                                 </h:panelGrid>
                             </fieldset>
-                        </p:outputPanel>    
+                        </p:outputPanel>   
 
 
-                        <p:outputPanel id="opcadastro">
+<!--                        <p:outputPanel id="opcadastro">
                             <fieldset>
-                                <legend>Data de Cadatro</legend>
+                                <legend>Ano Demanda</legend>
                                 <h:panelGrid columns="4">
                                     <h:outputLabel for="seldataInicial" value="Inicial" />                                                                                           
                                     <p:calendar id="seldataInicial" onkeyup="Formatadata(this, event);" 
@@ -59,7 +68,7 @@
                                     </p:calendar>
                                 </h:panelGrid>
                             </fieldset>
-                        </p:outputPanel>    
+                        </p:outputPanel>    -->
 
 
                     </h:panelGrid>

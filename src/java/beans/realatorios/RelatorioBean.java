@@ -140,8 +140,10 @@ public class RelatorioBean implements Serializable {
         parameters.put("escolaridade", escolaridade.getAno() + "/" + escolaridade.getGrau());
 
         if (this.periodo == 1) {
-
-            if (selectonegroup.equals("CIDADE")) {
+            this.demandainicio=2011;
+            this.demandafinal = 2014;
+        }
+        if (selectonegroup.equals("CIDADE")) {
 
 //                System.out.println(" StatusBen: " + statusben);
 //                System.out.println(" StatusCid: " + statuscid);
@@ -154,23 +156,21 @@ public class RelatorioBean implements Serializable {
 //                System.out.println(" escolaridade: " + escolaridade);
 //                System.out.println(" cidade: " + pesquisaCidade);
 //                System.out.println(" bairro: " + pesquisaBairro);
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
-            }
-            if (selectonegroup.equals("CIDADEBAIRRO")) {
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade_bairro");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
+            lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup,periodo, demandainicio, demandainicio);
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade");
+            new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
+        }
+        if (selectonegroup.equals("CIDADEBAIRRO")) {
+            lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup,periodo, demandainicio, demandainicio);
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade_bairro");
+            new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
 
-            }
+        }
 
-            if (selectonegroup.equals("DEMANDACIDADEBAIRRO")) {
-                lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup);
-                urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_demanda_cidade_bairro");
-                new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
-
-            }
+        if (selectonegroup.equals("DEMANDACIDADEBAIRRO")) {
+            lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup,periodo, demandainicio, demandainicio);
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_demanda_cidade_bairro");
+            new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
 
         }
 

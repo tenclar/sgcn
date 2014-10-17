@@ -189,7 +189,7 @@ public class CooperativaBean implements Serializable {
 
     }
 
-    public String addTelefones() {
+    public void addTelefones() {
         if (this.cooperativa.getTelefones() == null) {
             this.cooperativa.setTelefones(new ArrayList<Telefone>());
         }
@@ -198,7 +198,7 @@ public class CooperativaBean implements Serializable {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         //cidadaoDAO.save(cooperativa);
         this.telefone = new Telefone();
-        return null;
+       
     }
 
     public String cancelCoop() {
@@ -289,6 +289,7 @@ public class CooperativaBean implements Serializable {
             cooperativa.setTipopessoa(EnumTipoPessoa.COOP);
             this.cooperativa.setRepresentante(new Cidadao());
             this.cooperativa.setRamoempreendimento(new RamoEmpreendimento());
+           
 
             this.cidassociados = new CidAssociados();
             success = true;
