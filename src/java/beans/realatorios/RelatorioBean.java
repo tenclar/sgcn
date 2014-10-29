@@ -105,6 +105,9 @@ public class RelatorioBean implements Serializable {
         paneldetalhado.setRendered(false);
         paneldetalhadogeral.setRendered(false);
         panelperiodo.setRendered(false);
+        //this.ramo = new RamoEmpreendimento();
+        //this.publico = new Publico();
+        //this.estadocivil = new EstadoCivil();
 
 //        selectresumo.add("CIDADE");
 //        selectresumo.add("BAIRRO");
@@ -143,6 +146,8 @@ public class RelatorioBean implements Serializable {
             this.demandainicio=2011;
             this.demandafinal = 2014;
         }
+        parameters.put("demandainicio", demandainicio);
+        parameters.put("demandafinal", demandafinal);
         if (selectonegroup.equals("CIDADE")) {
 
 //                System.out.println(" StatusBen: " + statusben);
@@ -181,6 +186,7 @@ public class RelatorioBean implements Serializable {
     public void relatorioQuantitativo() throws IOException, JRException {
         Connection conn = DbCon.getConnection();
         Map parameters = new HashMap();
+        parameters.put("filtros"," ");
       //   CidadaoDAO cidadaoDAO = new CidadaoDAO();
         //List<Cidadao> lista = null;
 
@@ -207,20 +213,26 @@ public class RelatorioBean implements Serializable {
         }
         if (!genero.equals("T")) {
             parameters.put("genero", genero);
+            parameters.put("filtros","Filtro por gênero "+genero);
         } else {
             parameters.put("genero", "%");
+            
         }
 
         if (publico != null) {
-            if (!estadocivil.getId().equals(0)) {
+            if (!publico.getId().equals(0)) {
                 parameters.put("publico", publico.getId());
+                parameters.put("filtros", "FITRO POR PÚBLICO " + publico.getNome()+"");
             } else {
                 parameters.put("publico", "%");
             }
         }
         if (ramo != null) {
-            if (!estadocivil.getId().equals(0)) {
+            if (!ramo.getId().equals(0)) {
                 parameters.put("ramo", ramo.getId());
+                parameters.put("filtros", " FILTRO POR RAMO ATIVIDADE "+ramo.getNome()+"");
+                
+                System.out.println("Ramo: "+ramo.getId());
             } else {
                 parameters.put("ramo", "%");
             }
@@ -229,6 +241,7 @@ public class RelatorioBean implements Serializable {
         if (estadocivil != null) {
             if (!estadocivil.getId().equals(0)) {
                 parameters.put("estadocivil", estadocivil.getId());
+                parameters.put("filtros", "FILTRO POR ESTADO CIVIL " + estadocivil.getDescricao()+"");
             } else {
                 parameters.put("estadocivil", "%");
             }
@@ -257,34 +270,34 @@ public class RelatorioBean implements Serializable {
 
         if ("CIDADERAMO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - RAMO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_ramo");
 
         }
         if ("CIDADERAMOGENERO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - RAMO - GÊNERO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_ramo_genero");
 
         }
         if ("CIDADEGENERO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - GÊNERO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_genero");
 
         }
 
         if ("CIDADEBAIRRO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - BAIRRO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_bairro");
 
         }
         if ("CIDADEBAIRROGENERO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - BAIRRO - GÊNERO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_bairro_genero");
 
         }
 
         if ("CIDADEBAIRRORAMOGENERO".equals(selectonegroup)) {
             parameters.put("titulo", "BENEFICIÁRIOS " + statuscid.toString() + " - QUANTIDADE POR CIDADE - BAIRRO - RAMO - GÊNERO ");
-            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_invest_ben_cidade");
+            urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_qtd_ben_cidade_bairro_ramo_genero");
 
         }
         if ("DEMANDA".equals(selectonegroup)) {

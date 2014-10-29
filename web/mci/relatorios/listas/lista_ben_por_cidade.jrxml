@@ -28,6 +28,8 @@
 	<parameter name="cidade" class="java.lang.String"/>
 	<parameter name="bairro" class="java.lang.String"/>
 	<parameter name="escolaridade" class="java.lang.String"/>
+	<parameter name="demandainicio" class="java.lang.Integer"/>
+	<parameter name="demandafinal" class="java.lang.Integer"/>
 	<queryString language="hql">
 		<![CDATA[from Cidadao c]]>
 	</queryString>
@@ -98,7 +100,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+				<text><![CDATA[SGCN - SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="f84ef210-7c7d-4793-beb3-2efb09af7e74" x="3" y="92" width="65" height="15"/>
@@ -331,6 +333,13 @@
 			<line>
 				<reportElement uuid="a76f1fe0-a535-4351-be6a-5b4a6e1a7566" x="0" y="124" width="802" height="1"/>
 			</line>
+			<textField>
+				<reportElement uuid="59af81e1-5d7d-44f6-98bf-6245949f478f" x="0" y="44" width="802" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEMANDA "+$P{demandainicio}+" à "+$P{demandafinal}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
