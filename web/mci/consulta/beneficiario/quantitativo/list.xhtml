@@ -153,10 +153,13 @@
             </p:outputPanel>
         </p:panel>
         <p:panel id="pgrupo" header="Agrupar">
+ 
+<!--            layout="pageDirection" -->
+            <p:selectOneMenu  id="selagrupar" value="#{relatorioBean.selectonegroup}"  
+                                   filter="true" filterMatchMode="startsWith" 
+                              >
 
-            <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"   layout="pageDirection"  >
 
-<!--                <f:selectItem itemLabel="NENHUM" itemValue="NENHUM"   />-->
                 <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
                 <f:selectItem itemLabel="CIDADE - RAMO" itemValue="CIDADERAMO"   />
                 <f:selectItem itemLabel="CIDADE - RAMO - GENERO" itemValue="CIDADERAMOGENERO"   />
@@ -176,7 +179,7 @@
                 <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO - RAMO - GÊNERO" itemValue="DEMANDACIDADEBAIRRORAMOGENERO"   /> 
 
 
-            </h:selectOneRadio>
+            </p:selectOneMenu>
 
         </p:panel>
 
