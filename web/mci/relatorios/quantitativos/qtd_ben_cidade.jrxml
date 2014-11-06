@@ -3,11 +3,11 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
-	<style name="SubTitle" forecolor="#CCCCCC" fontName="Arial" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
-	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
-	<style name="Detail" mode="Transparent" fontName="Arial" fontSize="10" pdfFontName="Times-Roman"/>
-	<style name="Row" mode="Transparent" fontName="Arial" pdfFontName="Times-Roman">
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif" fontSize="10" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 			<style mode="Opaque" backcolor="#F0EFEF"/>
@@ -25,16 +25,16 @@
 	<parameter name="statusben" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="publico" class="java.lang.String" isForPrompting="false">
+	<parameter name="publico" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ramo" class="java.lang.String" isForPrompting="false">
+	<parameter name="ramo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="genero" class="java.lang.String" isForPrompting="false">
+	<parameter name="genero" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="estadocivil" class="java.lang.String" isForPrompting="false">
+	<parameter name="estadocivil" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="cidade" class="java.lang.String">
@@ -43,38 +43,9 @@
 	<parameter name="bairro" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="PARAM_SQL_QUERY" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="filtros" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select
-cid.nome as cidade,
-count(distinct c.id) as totalben
-from cidadao c
-inner join endereco e on e.id = c.endereco_id
-inner join bairro b on b.id = e.bairro_id
-inner join cidade cid on cid.id = b.cidade_id
-inner join mci_ramoempreendimento re on re.id = c.ramoempreendimento_id
-inner join mci_publico pu on pu.id = c.publico_id
-inner join estadocivil es on es.id = c.estadocivil_id
-where c.tipopessoa = 'CID'
-and c.benstatus like $P{statusben}
-and c.statuscid like $P{statuscid}
-and cid.id like $P{cidade}
-and b.id like $P{bairro}
-and re.id like $P{ramo}
-and pu.id like $P{publico}
-and es.id like $P{estadocivil}
-and c.sexo like $P{genero}
-AND cid.estado_id = 1
-and anodemanda BETWEEN $P{demandainicio} and  $P{demandafinal}
-
-GROUP BY
-      cid.nome
-
-ORDER BY
-       cid.nome asc
-
-;]]>
+		<![CDATA[select cid.nome as cidade, count(distinct c.id) as totalben from cidadao c inner join endereco e on e.id = c.endereco_id inner join bairro b on b.id = e.bairro_id inner join cidade cid on cid.id = b.cidade_id inner join mci_ramoempreendimento re on re.id = c.ramoempreendimento_id inner join mci_publico pu on pu.id = c.publico_id inner join estadocivil es on es.id = c.estadocivil_id where c.tipopessoa = 'CID' and c.benstatus like $P{statusben} and c.statuscid like $P{statuscid} and cid.id like $P{cidade} and b.id like $P{bairro} and re.id like $P{ramo} and pu.id like $P{publico} and es.id like $P{estadocivil} and c.sexo like $P{genero} AND cid.estado_id = 1 and anodemanda BETWEEN $P{demandainicio} and  $P{demandafinal} GROUP BY cid.nome ORDER BY cid.nome asc]]>
 	</queryString>
 	<field name="cidade" class="java.lang.String"/>
 	<field name="totalben" class="java.lang.Long"/>
@@ -200,7 +171,7 @@ ORDER BY
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1"/>
+				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>

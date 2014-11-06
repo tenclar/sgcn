@@ -1,0 +1,1 @@
+select c.id, c.statuscid from cidadao c where c.cpf = 294;

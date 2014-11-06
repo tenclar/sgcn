@@ -64,74 +64,18 @@ public class BeneficiadoBean implements Serializable {
     private String codgrp;
     private List<EquipamentosSecretaria> filterLista;
 
+    private String busca;
+    private boolean buscacod = false;
+    private boolean buscacpf = true;
+    private boolean buscanomeresp = false;
+    private boolean buscanome = false;
+    
     public BeneficiadoBean() {
         this.listacid = null;
         this.cidadao = null;
     }
 
-    public List<EquipamentosSecretaria> getFilterLista() {
-        return filterLista;
-    }
-
-    public void setFilterLista(List<EquipamentosSecretaria> filterLista) {
-        this.filterLista = filterLista;
-    }
-
-    public String getEnableQtd() {
-        return enableQtd;
-    }
-
-    public void setEnableQtd(String enableQtd) {
-        this.enableQtd = enableQtd;
-    }
-
-    public Cidadao getCidadao() {
-        return cidadao;
-    }
-
-    public UIForm getFormBen() {
-        return formBen;
-    }
-
-    public void setFormBen(UIForm formBen) {
-        this.formBen = formBen;
-    }
-
-    public String getCampoPesquisa() {
-        return campoPesquisa;
-    }
-
-    public void setCampoPesquisa(String campoPesquisa) {
-        this.campoPesquisa = campoPesquisa;
-    }
-
-    public String getTipoBusca() {
-        return tipoBusca;
-    }
-
-    public void setTipoBusca(String tipoBusca) {
-        this.tipoBusca = tipoBusca;
-    }
-
-    public void setCidadao(Cidadao cidadao) {
-        this.cidadao = cidadao;
-    }
-
-    public EquipamentosSecretaria getEquipamentosecretaria() {
-        return equipamentosecretaria;
-    }
-
-    public void setEquipamentosecretaria(EquipamentosSecretaria equipamentosecretaria) {
-        this.equipamentosecretaria = equipamentosecretaria;
-    }
-
-    public CursosSecretaria getCursosSecretaria() {
-        return cursosSecretaria;
-    }
-
-    public void setCursosSecretaria(CursosSecretaria cursosSecretaria) {
-        this.cursosSecretaria = cursosSecretaria;
-    }
+  
 
     public void equipSecrNew() {
         this.equipamentosecretaria = new EquipamentosSecretaria();
@@ -263,13 +207,36 @@ public class BeneficiadoBean implements Serializable {
             this.campoPesquisa = new String();
         }
     }
+    public void localizaGrupo(ActionEvent actionEvent) {
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        try {
+            if ("nome".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getList(this.busca, EnumTipoPessoa.GRUPO);
+            }
+            if ("cod".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getListById(Integer.parseInt(busca),EnumTipoPessoa.GRUPO);
+            }
+            if ("cpf".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getListByCnp(busca,EnumTipoPessoa.GRUPO);
+            }
+            
+             if ("nomeresp".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getListByNomeResp(this.busca, EnumTipoPessoa.GRUPO);
+            }
+            if (listacid.isEmpty()) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            facesutils.erro("Pesquisa não encontrada");
+        }
+    }
 
     public void editBen() {
         facesutils.cleanSubmittedValues(formBen);
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         Cidadao c = (Cidadao) (this.dmLista.getRowData());
         this.cidadao = cidadaoDAO.getEntity(c.getId());
-        if (cidadao.getTipopessoa() == EnumTipoPessoa.COOP) {
+        if (cidadao.getTipopessoa() != EnumTipoPessoa.CID) {
             this.cidadao.getAssociados().toString();
         }
         cidadao.getCidbBenSociais().toString();
@@ -279,7 +246,7 @@ public class BeneficiadoBean implements Serializable {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         Cidadao c = this.cidadao;
         this.cidadao = cidadaoDAO.getEntity(c.getId());
-        if (cidadao.getTipopessoa() == EnumTipoPessoa.COOP) {
+        if (cidadao.getTipopessoa() != EnumTipoPessoa.CID) {
             this.cidadao.getAssociados().toString();
         }
     }
@@ -289,6 +256,41 @@ public class BeneficiadoBean implements Serializable {
         this.campoPesquisa = null;
 
         //this.facesutils.cleanSubmittedValues(formBen);
+    }
+    
+    //GRUPOS
+      public void handleSelectBusca() {
+      
+        
+         if ("cod".equals(this.tipoBusca)) {
+            buscacod = true; 
+            buscacpf = false;
+            buscanome = false;
+            buscanomeresp = false;
+            this.busca = new String();
+        }
+         if ("nome".equals(this.tipoBusca)) {
+          buscacod = false; 
+            buscacpf = false;
+            buscanome = true;
+            buscanomeresp = false;
+            this.busca = new String();
+        }
+        if ("cpf".equals(this.tipoBusca)) {
+            buscacod = false; 
+            buscacpf = true;
+            buscanome = false;
+            buscanomeresp = false;
+            this.busca = new String();
+        }
+        if ("nomeresp".equals(this.tipoBusca)) {
+            buscacod = false; 
+            buscacpf = false;
+            buscanome = false;
+            buscanomeresp = true;
+            this.busca = new String();
+        }
+       
     }
 
     public void imprimir() throws IOException, JRException {
@@ -334,4 +336,111 @@ public class BeneficiadoBean implements Serializable {
 
     }
 
+    public String getBusca() {
+        return busca;
+    }
+
+    public void setBusca(String busca) {
+        this.busca = busca;
+    }
+
+    public boolean isBuscacod() {
+        return buscacod;
+    }
+
+    public void setBuscacod(boolean buscacod) {
+        this.buscacod = buscacod;
+    }
+
+    public boolean isBuscacpf() {
+        return buscacpf;
+    }
+
+    public void setBuscacpf(boolean buscacpf) {
+        this.buscacpf = buscacpf;
+    }
+
+    public boolean isBuscanomeresp() {
+        return buscanomeresp;
+    }
+
+    public void setBuscanomeresp(boolean buscanomeresp) {
+        this.buscanomeresp = buscanomeresp;
+    }
+
+    public boolean isBuscanome() {
+        return buscanome;
+    }
+
+    public void setBuscanome(boolean buscanome) {
+        this.buscanome = buscanome;
+    }
+
+      
+    
+      public List<EquipamentosSecretaria> getFilterLista() {
+        return filterLista;
+    }
+
+    public void setFilterLista(List<EquipamentosSecretaria> filterLista) {
+        this.filterLista = filterLista;
+    }
+    
+
+    public String getEnableQtd() {
+        return enableQtd;
+    }
+
+    public void setEnableQtd(String enableQtd) {
+        this.enableQtd = enableQtd;
+    }
+
+    public Cidadao getCidadao() {
+        return cidadao;
+    }
+
+    public UIForm getFormBen() {
+        return formBen;
+    }
+
+    public void setFormBen(UIForm formBen) {
+        this.formBen = formBen;
+    }
+
+    public String getCampoPesquisa() {
+        return campoPesquisa;
+    }
+
+    public void setCampoPesquisa(String campoPesquisa) {
+        this.campoPesquisa = campoPesquisa;
+    }
+
+    public String getTipoBusca() {
+        return tipoBusca;
+    }
+
+    public void setTipoBusca(String tipoBusca) {
+        this.tipoBusca = tipoBusca;
+    }
+
+    public void setCidadao(Cidadao cidadao) {
+        this.cidadao = cidadao;
+    }
+
+    public EquipamentosSecretaria getEquipamentosecretaria() {
+        return equipamentosecretaria;
+    }
+
+    public void setEquipamentosecretaria(EquipamentosSecretaria equipamentosecretaria) {
+        this.equipamentosecretaria = equipamentosecretaria;
+    }
+
+    public CursosSecretaria getCursosSecretaria() {
+        return cursosSecretaria;
+    }
+
+    public void setCursosSecretaria(CursosSecretaria cursosSecretaria) {
+        this.cursosSecretaria = cursosSecretaria;
+    }
+    
 }

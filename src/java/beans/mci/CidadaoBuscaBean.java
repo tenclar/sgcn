@@ -182,6 +182,21 @@ public class CidadaoBuscaBean {
             facesutils.erro("Pesquisa não encontrada");
         }
     }
+    public void localizaGrupo(ActionEvent actionEvent) {
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        listacid = null;
+        try {
+
+            if ("nome".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getList(this.campoPesquisa, EnumTipoPessoa.GRUPO, EnumStatusBeneficio.RESERVA);
+            }
+            if ("cpf".equals(this.tipoBusca)) {
+                listacid = cidadaoDAO.getListByCnp(this.campoPesquisa, EnumTipoPessoa.GRUPO, EnumStatusBeneficio.RESERVA);
+            }
+        } catch (Exception e) {
+            facesutils.erro("Pesquisa não encontrada");
+        }
+    }
 
     public void localizaCoopGeral(ActionEvent actionEvent) {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
