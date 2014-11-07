@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="85" bottomMargin="56" uuid="7181e925-eee1-4887-be3b-53b9bdc48e37">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="30" bottomMargin="56" uuid="7181e925-eee1-4887-be3b-53b9bdc48e37">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="336"/>
+	<property name="ireport.y" value="2409"/>
 	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<pen lineWidth="1.0"/>
 		<box leftPadding="2">
@@ -30,7 +30,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString language="hql">
-		<![CDATA[from Cidadao c where c.cpf = '04964957000109']]>
+		<![CDATA[from Cidadao c where c.id = 9178]]>
 	</queryString>
 	<field name="ano" class="java.lang.Integer"/>
 	<field name="apelido" class="java.lang.String"/>
@@ -90,20 +90,20 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="104">
+		<band height="105">
 			<image>
-				<reportElement uuid="19f1d87c-78d6-4d2e-a4d9-4db6c0e3d9e4" x="195" y="3" width="64" height="64"/>
+				<reportElement uuid="19f1d87c-78d6-4d2e-a4d9-4db6c0e3d9e4" x="195" y="2" width="64" height="64"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="dd88835d-606e-4c21-a8cd-a6add7901c5c" x="95" y="68" width="265" height="14"/>
+				<reportElement uuid="dd88835d-606e-4c21-a8cd-a6add7901c5c" x="95" y="65" width="265" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b7dc7356-556d-4b6e-bc70-949a97c039c4" x="95" y="83" width="265" height="14"/>
+				<reportElement uuid="b7dc7356-556d-4b6e-bc70-949a97c039c4" x="95" y="79" width="265" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
@@ -116,7 +116,7 @@
 			<elementGroup/>
 			<elementGroup/>
 			<staticText>
-				<reportElement uuid="3e0bb807-39f2-4a47-8604-f5a81d02f713" x="0" y="7" width="454" height="15"/>
+				<reportElement uuid="3e0bb807-39f2-4a47-8604-f5a81d02f713" x="0" y="4" width="454" height="15"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
@@ -126,12 +126,12 @@
 				<text><![CDATA[TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="951df82a-569f-4c06-ae0c-bb5a0b10e838" x="0" y="105" width="454" height="270"/>
+				<reportElement uuid="951df82a-569f-4c06-ae0c-bb5a0b10e838" x="0" y="88" width="454" height="287"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
 					<font fontName="Arial"/>
 					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' >O Estado do Acre</style>, através da <style isBold='true' >SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS-ACRE</style>, pessoa jurídica de direito público, CNPJ/MF nº. 13.127.442/0001-45, com sede na Avenida Ceará, 1624 – Centro – nesta Capital, neste ato regularmente representado pela Secretária de Estado de Pequenos Negócios a Senhora <style isBold='true' >SILVIA MONTEIRO E SILVA</style> nomeada pelo Decreto Estadual nº 7.271/2014, residente e domiciliada em Rio Branco–Acre, doravante  denominado <style isBold='true' >PERMITENTE</style>, do outro lado <style isBold='true' >"+$F{nome}+"</style>, CNPJ nº "+$F{cpf}+", com sede no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+", representado(a) por <style isBold='true' >"+$F{representante}.getNome()+"</style>, brasileiro(a), portador(a) do RG nº "+$F{representante}.getRg()+"/"+$F{representante}.getExpedidor()+", CPF nº "+$F{representante}.getCpf()+" residente e domiciliado(a) no Município de "+$F{representante}.getEndereco().getBairro().getCidade().getNome()+" - "+$F{representante}.getEndereco().getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+",   doravante denominado(a) <style isBold='true' >PERMISSIONÁRIO</style>, resolvem celebrar o presente <style isBold='true' >TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS</style>, mediante as cláusulas e condições a seguir:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<style isBold='true' >O Estado do Acre</style>, através da <style isBold='true' >SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS-ACRE</style>, pessoa jurídica de direito público, CNPJ/MF nº. 13.127.442/0001-45, com sede na Avenida Ceará, 1624 – Centro – nesta Capital, neste ato regularmente representado pela Secretária de Estado de Pequenos Negócios a Senhora <style isBold='true' >SILVIA MONTEIRO E SILVA</style> nomeada pelo Decreto Estadual nº 7.271/2014, residente e domiciliada em Rio Branco–Acre, doravante  denominado <style isBold='true' >PERMITENTE</style>, do outro lado "+$F{nome}+", CNPJ nº "+$F{cpf}+", com sede no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+", representado(a) por "+$F{representante}.getNome()+" brasileiro(a), portador(a) do RG nº "+$F{representante}.getRg()+"/"+$F{representante}.getExpedidor()+", CPF nº "+$F{representante}.getCpf()+" residente e domiciliado(a) no Município de "+$F{representante}.getEndereco().getBairro().getCidade().getNome()+" - "+$F{representante}.getEndereco().getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+",   doravante denominado(a) <style isBold='true' >PERMISSIONÁRIO</style>, resolvem celebrar o presente <style isBold='true' >TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS</style>, mediante as cláusulas e condições a seguir:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="dc494328-2329-4051-8a91-8849dbc47098" x="-1" y="389" width="455" height="64"/>
@@ -139,7 +139,7 @@
 					<font fontName="Arial"/>
 					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["O presente Termo tem por objetivo a permissão de uso dos equipamentos discriminados no Anexo I e no Termo de Transferência, para promover condições de investimentos, tais como capacitação, equipamentos, construção, e em caso coletivo, capital de giro para a criação e fortalecimento de empreendimentos urbanos, rurais individuais e coletivos."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["O presente Termo tem por objetivo a permissão de uso dos equipamentos discriminados no Anexo II e no Termo de Transferência, para promover condições de investimentos, tais como capacitação, equipamentos, construção, e em caso coletivo, capital de giro para a criação e fortalecimento de empreendimentos urbanos, rurais individuais e coletivos."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="dc494328-2329-4051-8a91-8849dbc47098" x="0" y="467" width="454" height="94"/>
@@ -164,7 +164,7 @@
 				<text><![CDATA[CLÁUSULA SEGUNDA - DA FINALIDADE:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="4e024a32-29db-4f94-a214-a699205d39ac" x="195" y="31" width="258" height="64"/>
+				<reportElement uuid="4e024a32-29db-4f94-a214-a699205d39ac" x="195" y="24" width="258" height="64"/>
 				<textElement textAlignment="Justified">
 					<font isBold="true"/>
 				</textElement>
@@ -509,7 +509,7 @@ Permitente
 				<text><![CDATA[Rio Branco,_______de______________________________ de ___________.]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="795d3635-df15-451b-98c5-94262d3c2b52" x="0" y="262" width="454" height="20"/>
+				<reportElement uuid="f1da4dce-b2b3-44ee-872f-78605a833da4" x="0" y="262" width="454" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{representante}.getNome()]]></textFieldExpression>
 			</textField>
@@ -519,9 +519,19 @@ Permitente
 				<reportElement uuid="fd25a564-40c1-4ef1-8900-6f42e2d39c6c" isPrintRepeatedValues="false" x="0" y="1" width="454" height="1"/>
 			</break>
 			<subreport>
-				<reportElement uuid="7de6856c-c743-482a-b18d-4e98d15da93e" x="2" y="23" width="454" height="0"/>
+				<reportElement uuid="7de6856c-c743-482a-b18d-4e98d15da93e" x="0" y="22" width="452" height="1"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{associados})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "termo_assoc.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="100">
+			<break>
+				<reportElement uuid="dbc73c08-4453-47ae-a626-4637fe7f9867" isPrintRepeatedValues="false" x="0" y="10" width="454" height="1"/>
+			</break>
+			<subreport>
+				<reportElement uuid="819f1b1f-745f-46b9-8004-6a4b174ae861" x="0" y="32" width="454" height="0"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{equipamentossecretarias})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "termo_equipsecr.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "termo_equipsecrgrupo.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

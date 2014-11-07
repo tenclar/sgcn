@@ -26,43 +26,40 @@
 
         <p:dataTable id="cptabela" var="item" 
                      value="#{cooperativaBean.dataModelListaCoop}"  
-                     paginator="true"  
-                     paginatorAlwaysVisible="false" rows="8"  
+                    
                      emptyMessage="Efetue uma Consulta"
                      selectionMode="single"
                      rowKey="#{item.id}"
                      rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx" >
-            <p:column  >       
+            <p:column style="width: 20px;text-align: center;"  >       
                 <f:facet name="header" >
-                    <p:commandButton  value="Adicionar" process="@this"  actionListener="#{cooperativaBean.newCoop}" oncomplete="dlgCoopNew.show()"  update=":frmCoopNew"   />                         
+                    <p:commandButton  icon="ui-icon-plus" process="@this"  actionListener="#{cooperativaBean.newCoop}" oncomplete="dlgCoopNew.show()"  update=":frmCoopNew"   />                         
                 </f:facet>
-                <p:commandButton icon="ui-icon-refresh"  value="editar" process="@this"  title="editar" oncomplete="coopins.show();cooplist.close();tbView.select(0);" update=":frmCoop"  actionListener="#{cooperativaBean.editCoop}" />                        
-                <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{cooperativaBean.imprimir}" title="imprimir" />
+                <p:commandButton icon="ui-icon-refresh"  process="@this"  title="editar" oncomplete="coopins.show();cooplist.close();tbView.select(0);" update=":frmCoop"  actionListener="#{cooperativaBean.editCoop}" />                        
+                <p:commandButton icon="ui-icon-print"  process="@this" onclick="this.form.target = '_blank'" ajax="false" immediate="true" action="#{cooperativaBean.imprimir}" title="imprimir" />
             </p:column>
 
-            <p:column headerText="id" >                    
-                <h:outputText value="#{item.id}" />
-            </p:column>
-            <p:column headerText="CNPJ" >                    
-                <h:outputText value="#{item.cpf}" style="text-align: center;" />
+           
+            <p:column headerText="CNPJ" style="width: 20px;text-align: center;" >                    
+                <h:outputText value="#{item.cpf}"  />
             </p:column>
             <p:column headerText="Nome" style="width: 400px; text-align: center;" >
 
                 <h:outputText value="#{item.nome}"/>
             </p:column>                                                                              
-            <p:column headerText="Empreendimento" style="width: 40px;text-align: center;"  >
+            <p:column headerText="Empreendimento" style="width: 80px;text-align: center;"  >
 
-                <h:outputText value="#{item.ramoempreendimento.nome}" style="text-align: center;"  />
+                <h:outputText value="#{item.ramoempreendimento.nome}"  />
             </p:column>    
-            <p:column headerText="Status Benefício" style="width: 80px; text-align: center;" >
+            <p:column headerText="Status Benefício" style="width: 40px; text-align: center;" >
 
                 <h:outputText value="#{item.benstatus}"/>
             </p:column>
 
-            <p:column  headerText="Associados"  style="text-align: center;">                                           
+            <p:column  headerText="Associados"  style="width:20px;text-align: center;">                                           
                 <h:outputText value="#{item.associados.size()}"/>
             </p:column>  
-            <p:column  headerText="Equipamentos" style="text-align: center;" >                                           
+            <p:column  headerText="Equipamentos" style="width:20px;text-align: center;" >                                           
                 <h:outputText value="#{item.equipamentossecretarias.size()}"/>
             </p:column>  
 

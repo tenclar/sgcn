@@ -68,6 +68,17 @@ public class RamoEmpreendimentoBean implements Serializable {
         }
         return toReturn;
     }
+    public List<SelectItem> getSelItemRamo() {
+        RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+        RamoEmpreendimento rr = new RamoEmpreendimento();
+        
+        toReturn.add(new SelectItem(rr, rr.getNome()));
+        for (RamoEmpreendimento r : ramoEmpreendimentoDAO.getRamoEmpreendimentos()) {
+            toReturn.add(new SelectItem(r, r.getNome()));
+        }
+        return toReturn;
+    }
 
     public RamoEmpreendimento getRamoEmpreendimento() {
         return ramoEmpreendimento;

@@ -330,8 +330,8 @@ public class BeneficiadoBean implements Serializable {
         this.cidadao.getTelefones().toString();
         lista.add(cidadao);
 
-        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urltermocoletivo");
-        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nometermocoletivo");
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_termo_coletivo");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_termo_coletivo");
         new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
 
     }
