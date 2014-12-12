@@ -96,7 +96,7 @@ public class RelatorioBean implements Serializable {
     private boolean colunaequip;
     private boolean colunapublico;
     private boolean colunaidade;
-    String urlrelatorio;
+    private String urlrelatorio;
 
     public RelatorioBean() {
         periodo = 1;
