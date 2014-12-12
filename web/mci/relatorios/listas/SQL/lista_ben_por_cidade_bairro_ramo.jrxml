@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="0.9330147604194674"/>
-	<property name="ireport.x" value="15"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -26,11 +26,14 @@
      c.nome as cidadao,
      c.cpf AS cpf,
      e.logradouro ,
-	c.numero,
-	  b.nome 'Bairro',
+      c.numero,
+      b.nome 'Bairro',
      pub.nome as publico,
      ( SELECT count(eq.cidadao_id) FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id =
  c.id ) as totalequipamento,
+ eq.dataentrega,
+  (YEAR(CURDATE())-YEAR(eq.dataentrega)) - (RIGHT(CURDATE(),5)<RIGHT(eq.dataentrega,5)) as anos,
+  (MOD(MONTH(CURDATE()), 12)+1 ) - (mod(month(eq.dataentrega),12)+1)  as meses,
 c.anodemanda
 FROM cidadao c
 inner join endereco e on e.id = c.endereco_id
@@ -39,12 +42,17 @@ inner join cidade cid on cid.id = b.cidade_id
 inner join estado uf on uf.id = cid.estado_id
 inner join mci_publico pub ON  pub.id = c.publico_id
 inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
+inner join mci_equipamentossecretaria eq on eq.cidadao_id = c.id
 
 WHERE
      c.tipopessoa = 'CID'
 and c.statuscid = 'INDIVIDUAL'
-and ( SELECT count(eq.cidadao_id) FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id )>0
-
+and c.benstatus = 'BENEFICIADO'
+#and ( SELECT count(eq.cidadao_id) FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id )>0
+#and c.anodemanda = 2012
+#and cid.id = 16
+#and b.id in (48533, 45,46, 53)
+and (YEAR(CURDATE())-YEAR(eq.dataentrega)) - (RIGHT(CURDATE(),5)<RIGHT(eq.dataentrega,5)) >= 2
 
 GROUP BY
      c.benstatus,  cid.nome, b.nome, c.id
@@ -72,6 +80,11 @@ ORDER BY
 	<field name="Bairro" class="java.lang.String"/>
 	<field name="publico" class="java.lang.String"/>
 	<field name="totalequipamento" class="java.lang.Long"/>
+	<field name="dataentrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="anos" class="java.lang.Integer"/>
+	<field name="meses" class="java.lang.Integer"/>
 	<field name="anodemanda" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -140,7 +153,7 @@ ORDER BY
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BENEFICIÁRIOS - QUANTIDADE DE EQUIPAMENTOS]]></text>
+				<text><![CDATA[BENEFICIÁRIOS - ANO DEMANDA 2012]]></text>
 			</staticText>
 		</band>
 	</title>

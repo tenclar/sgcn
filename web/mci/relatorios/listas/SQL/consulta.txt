@@ -1,0 +1,9 @@
+-- and c.benstatus like $P{statusben}
+-- and c.statuscid like $P{statuscid}
+-- and cid.id like $P{cidade}
+-- and b.id like $P{bairro}
+-- and ramo.id like $P{ramo}
+-- and pu.id like $P{publico}
+-- and es.id like $P{estadocivil}
+-- and c.sexo like $P{genero}
+-- and anodemanda BETWEEN $P{demandainicio} and  $P{demandafinal}
