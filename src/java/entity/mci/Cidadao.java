@@ -43,6 +43,7 @@ public class Cidadao implements Serializable {
     private String apelido;
     private String sexo;
     private int anodemanda;
+    private String situacao;
     @Temporal(TemporalType.DATE)
     private Date datanasc;
     private String numero;
@@ -159,6 +160,15 @@ public class Cidadao implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+    
 
     public int getAnodemanda() {
         return anodemanda;

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
@@ -9,49 +9,60 @@
 
         <p:fieldset id="fsCadastro"  legend="Identificação da Associação ou Cooperativa" >
             <p:outputPanel id="coopdados" >
-            <p:panel >
-                <h:panelGrid  columns="4" >
-                    <h:panelGrid  columns="2"  >                               
-                        <h:outputLabel for="coopdata"  value="Data: " styleClass="titulos" />
-                        <p:message for="coopdata" display="icon"   />
-                    </h:panelGrid> 
+                <p:panel >
+                    <h:panelGrid  columns="4" >
+                        <h:panelGrid  columns="2"  >                               
+                            <h:outputLabel for="coopdata"  value="Data: " styleClass="titulos" />
+                            <p:message for="coopdata" display="icon"   />
+                        </h:panelGrid> 
+                        <h:panelGrid  columns="2" >
+                            <h:outputLabel  value ="Situação: " styleClass="titulos" />
+                            <p:message for="coopsituacaoEquip" display="icon" />
+                        </h:panelGrid>
 
-                    <h:panelGrid  columns="2"  >                               
-                        <h:outputLabel for="coopcnpj"  value="CNPJ: " styleClass="titulos" />
-                        <p:message for="coopcnpj" display="icon"   />
-                    </h:panelGrid> 
-                    <h:panelGrid columns="2">
-                        <h:outputLabel for="coopie" value="IE: " styleClass="titulos" />
-                        <p:message for="coopie" display="icon"  />
+                        <h:panelGrid  columns="2"  >                               
+                            <h:outputLabel for="coopcnpj"  value="CNPJ: " styleClass="titulos" />
+                            <p:message for="coopcnpj" display="icon"   />
+                        </h:panelGrid> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="coopie" value="IE: " styleClass="titulos" />
+                            <p:message for="coopie" display="icon"  />
+                        </h:panelGrid>
+                        <h:panelGrid  columns="2">
+                            <h:outputLabel for="coopnome"  value="Nome :" styleClass="titulos" />
+                            <p:message for="coopnome" display="icon"   />
+                        </h:panelGrid>  
+
+
+                        <p:calendar id="coopdata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{cooperativaBean.cooperativa.datacreated}" showOn="button"  >
+
+                        </p:calendar>
+                        <h:selectOneMenu tabindex="2" id="coopsituacaoEquip" style="width: 150px" onkeydown="setaFoco(this)"  value="#{cooperativaBean.cooperativa.situacao}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Estado"  >
+                            <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItem  itemLabel="ATIVO" itemValue="ATIVO"  />
+                            <f:selectItem  itemLabel="INATIVO" itemValue="INATIVO"  />
+                            <f:selectItem  itemLabel="ENCERRADO" itemValue="ENCERRADO"  />
+
+                        </h:selectOneMenu>
+                        <p:inputText id="coopcnpj" autocomplete="off"  size="12" value="#{cooperativaBean.cooperativa.cpf}"    required="true" label="CNPJ"   style="background: #e8e1b5; color: #023401" />
+                        <p:inputText  id="coopie" autocomplete="off" size="10" value="#{cooperativaBean.cooperativa.rg}"  required="true" label="IE" />
+                        <p:inputText id="coopnome" autocomplete="off"  size="90"  value="#{cooperativaBean.cooperativa.nome}"   required="true" label="Nome" style="background: #e8e1b5; color: #023401"  />                                       
+
                     </h:panelGrid>
-                    <h:panelGrid  columns="2">
-                        <h:outputLabel for="coopnome"  value="Nome :" styleClass="titulos" />
-                        <p:message for="coopnome" display="icon"   />
-                    </h:panelGrid>  
-
-
-                 <p:calendar id="coopdata" onkeyup="Formatadata(this, event)" locale="pt" onchange="validaDat(this, this.value)" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{cooperativaBean.cooperativa.datacreated}" showOn="button"  >
-                        
-                    </p:calendar>
-                    <p:inputText id="coopcnpj" autocomplete="off"  size="12" value="#{cooperativaBean.cooperativa.cpf}"    required="true" label="CNPJ"   style="background: #e8e1b5; color: #023401" />
-                    <p:inputText  id="coopie" autocomplete="off" size="10" value="#{cooperativaBean.cooperativa.rg}"  required="true" label="IE" />
-                    <p:inputText id="coopnome" autocomplete="off"  size="90"  value="#{cooperativaBean.cooperativa.nome}"   required="true" label="Nome" style="background: #e8e1b5; color: #023401"  />                                       
-
-                </h:panelGrid>
-            </p:panel  >  
-            <p:panel  >
-                 <h:panelGroup>
-                    <h:outputLabel for="coopreamo" value="Ramo de Empreendimento:" styleClass="titulos" />
-                    <p:message for="coopreamo" display="icon"  />
-                </h:panelGroup>
-                 <p:selectOneMenu label="Ramo do Empreendimento" style="width: 140px" id="coopreamo" value="#{cooperativaBean.cooperativa.ramoempreendimento}" converter="IndexedConverter" required="true" filter="true" filterMatchMode="startsWith" >
+                </p:panel  >  
+                <p:panel  >
+                    <h:panelGroup>
+                        <h:outputLabel for="coopreamo" value="Ramo de Empreendimento:" styleClass="titulos" />
+                        <p:message for="coopreamo" display="icon"  />
+                    </h:panelGroup>
+                    <p:selectOneMenu label="Ramo do Empreendimento" style="width: 140px" id="coopreamo" value="#{cooperativaBean.cooperativa.ramoempreendimento}" converter="IndexedConverter" required="true" filter="true" filterMatchMode="startsWith" >
                         <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
                         <f:selectItems value="#{ramoEmpreendimentoBean.selItemRamo}" />     
                     </p:selectOneMenu> 
-            </p:panel>
+                </p:panel>
             </p:outputPanel>
             <p:panel id="cooprep" header="Representante"  >
-                 <p:message for="repcpf" display="icon"   />
+                <p:message for="repcpf" display="icon"   />
                 <h:panelGrid  columns="3" >
                     <h:outputLabel for="repcpf"  value="CPF: " styleClass="titulos" />
                     <h:outputLabel for="repnome"  value="NOME: " styleClass="titulos" />
@@ -61,38 +72,38 @@
                     <p:commandButton  icon="ui-icon-plus" process="@this" update=":frmListaRepresentante" action="#{cidadaoBuscaBean.clear()}" onclick="dlgRepresentante.show();"  />
                 </h:panelGrid>
             </p:panel>
-           <p:fieldset  legend="Telefones" style="height: 200px"  >
-                        <p:outputPanel id="addTel">
-                            <h:panelGrid columns="2">
-                                <h:outputLabel value="" />
-                                <h:outputLabel value="Número: " />
+            <p:fieldset  legend="Telefones" style="height: 200px"  >
+                <p:outputPanel id="addTel">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="" />
+                        <h:outputLabel value="Número: " />
 
-                                <p:commandButton value="+"  process="addTel" update="dtTel,addTel" action="#{cooperativaBean.addTelefones()}" />
-                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cooperativaBean.telefone.numero}"  >
-                                    <f:validateLength minimum="9" />
-                                </p:inputMask>                            
+                        <p:commandButton value="+"  process="addTel" update="dtTel,addTel" action="#{cooperativaBean.addTelefones()}" />
+                        <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cooperativaBean.telefone.numero}"  >
+                            <f:validateLength minimum="9" />
+                        </p:inputMask>                            
 
-                            </h:panelGrid>
-                            <p:message for="tel"  />
-                        </p:outputPanel>
-                        <!--            <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: 60px"></div>-->
-                        <p:outputPanel id="opPanelTel">
-                            <p:dataTable id="dtTel"  var="tel" value="#{cooperativaBean.cooperativa.telefones}"
-                                         >
-                                <p:column  headerText="Telefone" >
-                                    <h:outputText value="#{tel.numero}" />
-                                </p:column>
-                                <p:column  headerText="ação" >
-                                    <p:commandButton icon="ui-icon-close" title="excluir" process="@this"   >
-                                        <p:collector removeFrom="#{cooperativaBean.cooperativa.telefones}" unique="true" value="#{tel}" />
-                                    </p:commandButton>
-                                </p:column>
-                            </p:dataTable>
+                    </h:panelGrid>
+                    <p:message for="tel"  />
+                </p:outputPanel>
+                <!--            <div style=" overflow: auto ; WIDTH: 260px; HEIGHT: 60px"></div>-->
+                <p:outputPanel id="opPanelTel">
+                    <p:dataTable id="dtTel"  var="tel" value="#{cooperativaBean.cooperativa.telefones}"
+                                 >
+                        <p:column  headerText="Telefone" >
+                            <h:outputText value="#{tel.numero}" />
+                        </p:column>
+                        <p:column  headerText="ação" >
+                            <p:commandButton icon="ui-icon-close" title="excluir" process="@this"   >
+                                <p:collector removeFrom="#{cooperativaBean.cooperativa.telefones}" unique="true" value="#{tel}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
 
-                        
-                        </p:outputPanel>
 
-                    </p:fieldset>
+                </p:outputPanel>
+
+            </p:fieldset>
             <p:fieldset id="coopendereco" legend="Endereço">
 
                 <h:panelGrid columns="2">

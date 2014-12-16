@@ -26,7 +26,7 @@
                 <h:outputText value="#{cidadaoBean.cooper.nome}"/>
             </h:panelGrid>
 
-            <h:panelGrid columns="6" >
+            <h:panelGrid columns="7" >
                 <h:panelGrid  columns="2"  >                               
                     <h:outputLabel for="cidanodemanda"  value="Ano Demanda: " styleClass="titulos" />
                     <p:message for="cidanodemanda" display="icon"   />
@@ -35,6 +35,11 @@
                     <h:outputLabel for="ciddata"  value="Data: " styleClass="titulos" />
                     <p:message for="ciddata" display="icon"   />
                 </h:panelGrid> 
+                <h:panelGrid  columns="2" >
+                    <h:outputLabel  value ="Situação: " styleClass="titulos" />
+                    <p:message for="cidsituacaoEquip" display="icon" />
+                </h:panelGrid>
+                
 
                 <h:panelGrid  columns="2"  >                               
                     <h:outputLabel for="cidcpf"  value="CPF: " styleClass="titulos" />
@@ -58,6 +63,13 @@
                 <p:calendar id="ciddata" onkeyup="Formatadata(this, event)"  onchange="validaDat(this, this.value)" locale="pt_BR" maxlength="10" size="10" pattern="dd/MM/yyyy"  value="#{cidadaoBean.cidadao.datacreated}"  >
 
                 </p:calendar>
+                <h:selectOneMenu tabindex="2" id="cidsituacaoEquip" style="width: 150px" onkeydown="setaFoco(this)"  value="#{cidadaoBean.cidadao.situacao}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Estado"  >
+                    <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                    <f:selectItem  itemLabel="ATIVO" itemValue="ATIVO"  />
+                    <f:selectItem  itemLabel="INATIVO" itemValue="INATIVO"  />
+                    <f:selectItem  itemLabel="ENCERRADO" itemValue="ENCERRADO"  />
+
+                </h:selectOneMenu>
                 <h:panelGroup>
                     <p:inputText id="cidcpf" autocomplete="off" value="#{cidadaoBean.cidadao.cpf}" size="16" required="true" label="CPF" readonly="false" disabled="false" style="background: #e8e1b5; color: #023401" maxlength="11" onkeypress="mascara(this, soNumeros)" >
                         <f:validateRegex pattern="[0-9]{11,11}" />
@@ -76,7 +88,7 @@
 
 
                 <p:selectOneMenu label="Ramo do Empreendimento"  filter="true" filterMatchMode="startsWith" style="width: 140px" id="cidlistaRamoEmpreendimentos" value="#{cidadaoBean.cidadao.ramoempreendimento}"  converter="IndexedConverter" required="true"   >
-                    
+
                     <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}"  />     
                 </p:selectOneMenu> 
                 <!--                    <p:commandButton value="+" process="@this" oncomplete="dlgRamoEmpreendimento.show()" update="panelRamoEmpreendimentoInsert" actionListener="{ramoEmpreendimentoBean.newRamoEmpreendimento}" />-->
@@ -180,7 +192,7 @@
                 <p:inputText id="cidinst" size="30" value="#{cidadaoBean.cidadao.instituicao}" required="true" autocomplete="off" />
                 <h:panelGrid columns="4"  >                    
                     <p:outputLabel for="cidnatuf" value="UF: " />
-                    
+
                     <p:selectOneMenu id="cidnatuf" label="Estado Naturalidade"
                                      filter="true" filterMatchMode="startsWith"
                                      style="width: 160px;"  value="#{cidadaoBean.cidadao.naturalidade.estado}" converter="IndexedConverter" required="true"    >
@@ -198,7 +210,7 @@
                         <f:selectItems value="#{cidadaoBean.selectItemsCidade}" />                                
 
                     </p:selectOneMenu>
-                  
+
                 </h:panelGrid>
 
 
@@ -237,7 +249,7 @@
                                 </p:column>
                             </p:dataTable>
 
-                        
+
                         </p:outputPanel>
 
                     </p:fieldset>

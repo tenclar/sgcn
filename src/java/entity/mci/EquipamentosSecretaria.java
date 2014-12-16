@@ -27,6 +27,7 @@ public class EquipamentosSecretaria implements Serializable {
     private String patrimonio;   
     private int quantidade;
     private String estado;
+    private String situacao;
     private double valor;
     private String codgrp;
     
@@ -45,6 +46,14 @@ public class EquipamentosSecretaria implements Serializable {
 
     public void setTipoequipamento(EnumTipoEquipamento tipoequipamento) {
         this.tipoequipamento = tipoequipamento;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     

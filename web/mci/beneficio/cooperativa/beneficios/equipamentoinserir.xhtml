@@ -37,6 +37,14 @@
                             <f:selectItem  itemLabel="REGULAR" itemValue="REGULAR"  />
                             <f:selectItem  itemLabel="INSERVÍVEL" itemValue="INSERVIVEL"  />
                         </h:selectOneMenu>
+                          <h:outputLabel  value ="Situação: " styleClass="titulos" />
+                         <h:selectOneMenu tabindex="2" id="cidsituacaoEquip" style="width: 150px" onkeydown="setaFoco(this)"  value="#{beneficiadoBean.equipamentosecretaria.situacao}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Estado"  >
+                                  <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                            <f:selectItem  itemLabel="CEDIDO" itemValue="CEDIDO"  />
+                            <f:selectItem  itemLabel="DEVOLVIDO" itemValue="DEVOLVIDO"  />
+                            <f:selectItem  itemLabel="EXTRAVIADO" itemValue="ESTRAVIADO"  />
+                            
+                        </h:selectOneMenu>
                         <h:outputLabel  value ="Tipo: " styleClass="titulos" />
                         <h:selectOneMenu  id="cidEstadoTipo" style="width: 150px" onkeydown="setaFoco(this)"  value="#{beneficiadoBean.equipamentosecretaria.tipoequipamento}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Tipo"  >
                             <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
