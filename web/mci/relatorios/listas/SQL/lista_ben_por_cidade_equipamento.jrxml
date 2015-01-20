@@ -42,10 +42,10 @@ inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
 
 WHERE
      c.tipopessoa = 'CID'
-#and c.statuscid = 'INDIVIDUAL'
-and c.benstatus = 'RESERVA'
-and cid.id = 16
-#and ( SELECT count(eq.cidadao_id) FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id )>0
+and c.statuscid = 'INDIVIDUAL'
+and c.benstatus = 'BENEFICIADO'
+#nd cid.id = 16
+and ( SELECT count(eq.cidadao_id) FROM `mci_equipamentossecretaria` eq WHERE eq.cidadao_id = c.id )>0
 
 
 GROUP BY

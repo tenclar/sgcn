@@ -218,6 +218,13 @@ public class RelatorioBean implements Serializable {
             parameters.put("genero", "%");
             
         }
+//         if (!possuiequipsec.equals("T")) {
+//            parameters.put("equipamento", possuiequipsec);
+//            filtros = filtros + " | EQUIP: "+possuiequipsec;
+//        } else {
+//            parameters.put("equipamento", "%");
+//            
+//        }
 
         if (publico != null) {
             if (!publico.getId().equals(0)) {

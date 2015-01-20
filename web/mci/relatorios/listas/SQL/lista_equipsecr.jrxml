@@ -11,7 +11,8 @@
 from mci_equipamentossecretaria eq
 inner join mci_equipamento e on e.id = eq.equipamento_id
  where eq.cidadao_id = $P{cid}
-AND eq.situacao <> 'DEVOLVIDO']]>
+AND eq.situacao <> 'DEVOLVIDO'
+and (YEAR(CURDATE())-YEAR(eq.dataentrega)) - (RIGHT(CURDATE(),5)<RIGHT(eq.dataentrega,5)) >= 2]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -250,8 +251,13 @@ AND eq.situacao <> 'DEVOLVIDO']]>
 	<title>
 		<band height="11">
 			<staticText>
-				<reportElement uuid="909e3020-94f8-4769-83bc-6ce4ddca32ef" x="0" y="1" width="802" height="10"/>
-				<box leftPadding="5"/>
+				<reportElement uuid="909e3020-94f8-4769-83bc-6ce4ddca32ef" x="0" y="0" width="802" height="11"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>

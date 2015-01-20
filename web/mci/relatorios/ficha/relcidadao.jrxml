@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="360117f9-6159-430f-b19a-847c3c28c869">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="270"/>
+	<property name="ireport.y" value="0"/>
 	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<pen lineWidth="1.0"/>
 		<box leftPadding="2">
@@ -118,14 +118,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="135" y="50" width="278" height="14"/>
-				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[MCI - MÓDULO DE CADASTRO INDIVIDUAL]]></text>
+				<text><![CDATA[SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -139,7 +132,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CADASTRO INDIVIDUAL]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -654,12 +647,15 @@
 				<textFieldExpression><![CDATA[$F{resumo}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band>
+		<band height="3">
 			<subreport>
-				<reportElement uuid="ad1f45fb-d863-4269-a8f6-67a9717dd6a3" x="0" y="0" width="555" height="0"/>
+				<reportElement uuid="ad1f45fb-d863-4269-a8f6-67a9717dd6a3" x="0" y="2" width="555" height="0"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{equipamentossecretarias})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_equipsecr.jasper"]]></subreportExpression>
 			</subreport>
+			<break>
+				<reportElement uuid="55fb47d6-74ed-4c1e-8a94-ec97c83858b9" isPrintRepeatedValues="false" x="0" y="1" width="555" height="1"/>
+			</break>
 		</band>
 		<band>
 			<subreport>

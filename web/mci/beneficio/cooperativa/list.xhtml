@@ -39,7 +39,7 @@
                         <p:commandButton icon="ui-icon-refresh"   process="@this"  title="editar" oncomplete="cadBenInd.show();litBenInd.close();" update=":frmBen, :frmBuscaBen" actionListener="#{beneficiadoBean.editBen}"  >
                            
                         </p:commandButton>                                                                         
-<!--                        <p:commandButton icon="ui-icon-print" value="imprimir" process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true" action="# {cidadaoBean.imprimir}" title="imprimir" />-->
+                        <p:commandButton icon="ui-icon-print"  process="@this" onclick="this.form.target='_blank'" ajax="false" immediate="true" action="#{beneficiadoBean.imprimir}" title="imprimir" />
                        
                     </p:column>
                     

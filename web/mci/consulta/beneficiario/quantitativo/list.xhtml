@@ -125,6 +125,7 @@
                                              style="width: 130px"  >
                                 <f:selectItems value="#{relatorioBean.selectItemsPublico}"  />
                             </p:selectOneMenu> 
+                            <h:outputLabel  value="" /><h:outputLabel  value="" />
                         </h:panelGrid>
                         <h:panelGrid columns="2"  >
                             <h:outputLabel for="selRamo" value="Ramo" />
@@ -145,8 +146,12 @@
                                 <f:selectItems value="#{estadoCivilBean.selectItems}" />
 
                             </p:selectOneMenu> 
-
-
+<!--                             <h:outputLabel for="selEquipSec" value="Equipamentos"   />
+                            <p:selectOneMenu id="selEquipSec" style="width: 130px;" value="# {relatorioBean.possuiequipsec}" >
+                                <f:selectItem itemValue="T"  itemLabel="TODOS"   />
+                                <f:selectItem itemValue="S"  itemLabel="SIM" />                
+                                <f:selectItem itemValue="N"  itemLabel="NÃO" />                
+                            </p:selectOneMenu> -->
                         </h:panelGrid>
                     </h:panelGrid>
                 </fieldset>
