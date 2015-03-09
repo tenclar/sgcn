@@ -128,11 +128,11 @@
         </p:panel>
         <p:separator />
 
-        <p:panel>
+        <p:panel header="Desembolso" >
             <p:dataTable  value="#{convenioBean.convenio.concedentes}" var="concedente" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
                           rowIndexVar="rowIx"    >
                 <f:facet  name="header" >
-                    <h:outputText value=" Ministério / Contrapartida"/>
+                    <h:outputText value=" Concedente / Ministério"/>
                 </f:facet>
                
                 <p:column headerText="ordem" style="width: 20px" >
@@ -152,9 +152,8 @@
 
 
             </p:dataTable>    
-        </p:panel>
-        <p:separator />
-        <p:panel>
+            
+            <p:separator />
 
             <p:dataTable  value="#{convenioBean.convenio.contrapartidas}" var="contra" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
                           rowIndexVar="rowIx"    >

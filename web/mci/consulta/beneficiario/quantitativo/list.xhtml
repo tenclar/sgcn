@@ -132,7 +132,7 @@
                             <p:selectOneMenu id="selRamo" label="Ramo do Empreendimento" value="#{relatorioBean.ramo}" 
                                              converter="IndexedConverter" style="width: 130px" 
                                              filter="true" filterMatchMode="startsWith" >
-                                <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}" />
+                                <f:selectItems value="#{relatorioBean.selectItemsRamo}" />
                             </p:selectOneMenu> 
                             <h:outputLabel for="selGen" value="Gênero"  />                                
                             <p:selectOneMenu id="selGen"  style="width:130px" value="#{relatorioBean.genero}"   >

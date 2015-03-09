@@ -11,19 +11,19 @@
         <p:panel header="Filtro"   >
 
             <p:outputPanel id="outPeriodo" >
-                <h:panelGrid columns="2">
-                    <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
+<!--                <h:panelGrid columns="2">
+                    <h:selectOneRadio id="selperiodo" label="Período" required="true" value="# {relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
                         <f:selectItem   itemValue="2"  itemLabel="Período"  />
-                        <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
+                        <p:ajax listener="# {relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
                     <p:message for="selperiodo"  />
-                </h:panelGrid>
+                </h:panelGrid>-->
 
                 <p:separator />
 
-                <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}" >
+                <p:panel id="pdatas" widgetVar="pDatas"  >
                     <h:panelGrid id="pgdads" columns="2">
                        <p:outputPanel id="opdemanda">
                             <fieldset>
@@ -119,12 +119,15 @@
                                 
                                 <f:selectItems value="#{relatorioBean.selectItemsPublico}"  />
                             </p:selectOneMenu> 
-                            <h:outputLabel for="selRamo" value="Ramo" />
-                            <p:selectOneMenu id="selRamo" label="Ramo do Empreendimento" value="#{relatorioBean.ramo}" 
-                                             converter="IndexedConverter" style="width: 130px" 
+                            <h:outputLabel  value="Ramo" />
+                            
+                            <p:selectOneMenu id="selRamos" label="Ramo do Empreendimento" value="#{relatorioBean.ramo}" 
+                                             converter="IndexedConverter" 
+                                             style="width: 130px" 
                                               filter="true" filterMatchMode="startsWith" >
                                 
-                                <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}" />
+                                
+                                <f:selectItems value="#{relatorioBean.selectItemsRamo}" />
                             </p:selectOneMenu> 
 
                         </h:panelGrid>
@@ -206,8 +209,8 @@
         <p:separator />
 
 
-<p:commandButton action="#{relatorioBean.pesquisa}"  update=":messages" ajax="false"
-                 icon="ui-icon-search" value="Pesquisar"  onclick="this.form.target='_new'"   >
+<p:commandButton action="#{relatorioBean.pesquisa}"  update="frmrelatorio, :messages" ajax="false"
+                 icon="ui-icon-search" value="Pesquisar"  onclick="this.form.target='_blank'"   >
         </p:commandButton>
 
     </h:form>

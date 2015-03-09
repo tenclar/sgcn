@@ -14,7 +14,8 @@
             <p:dataTable  value="#{convenioBean.convenio.contrapartidas}" var="contra" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" 
                           rowIndexVar="rowIx"    >
                 <p:column style="text-align: center;width: 40px" >
-                    <f:facet name="header"> <p:commandButton icon="ui-icon-circle-plus" title="inserir" process="@this" update=":frmContraPartida" oncomplete="dlgContra.show();" action="#{convenioBean.contranew()}"  /></f:facet>
+                    <f:facet name="header"> 
+                        <p:commandButton icon="ui-icon-circle-plus" title="inserir" process="@this" update=":frmContraPartida" oncomplete="dlgContra.show();" action="#{convenioBean.contranew()}"  /></f:facet>
                     <p:commandButton icon="ui-icon-refresh" process="@this" update=":frmContraPartida" oncomplete="dlgContra.show();" action="#{convenioBean.contraedit()}" >
                         <f:setPropertyActionListener value="#{contra}" target="#{convenioBean.contrapartida}" />
                     </p:commandButton>

@@ -182,9 +182,8 @@ public class CidadaoDAO extends GenericDAO {
 
         String query = "from Cidadao c  where  c.tipopessoa = ?";
         
-        if (periodo == 2 ){
-             query = query + " and c.anodemanda between " + datainicio +" and "+ datafinal ;
-        }
+        query = query + " and c.anodemanda between " + datainicio +" and "+ datafinal ;
+        
         if (!statuscid.equals(EnumStatusCid.TODOS)) {
             query = query + " and cast(c.statuscid as string) = '" + statuscid.toString() + "'";
         }
@@ -242,7 +241,7 @@ public class CidadaoDAO extends GenericDAO {
         if("DEMANDACIDADEBAIRRO".equals(selectonegroup)){
          query = query + " group by c.anodemanda, c.endereco.bairro.cidade.nome,c.endereco.bairro.nome,c.ramoempreendimento.nome, c.nome ";
         }
-        System.out.println(query);
+        System.out.println("Consulta Gerada: " +query);
         return getPureList(Cidadao.class, query, tipopessoa);
     }
 

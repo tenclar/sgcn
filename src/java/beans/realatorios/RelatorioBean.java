@@ -8,6 +8,7 @@ import dao.BairroDAO;
 import dao.CidadeDAO;
 import dao.mci.CidadaoDAO;
 import dao.mci.PublicoDAO;
+import dao.mci.RamoEmpreendimentoDAO;
 import entity.Bairro;
 import entity.Cidade;
 import entity.mci.Cidadao;
@@ -63,7 +64,7 @@ public class RelatorioBean implements Serializable {
     private Bairro pesquisaBairro;
 
     private Publico publico;
-    private RamoEmpreendimento ramo;
+    private RamoEmpreendimento ramo ;
     private EstadoCivil estadocivil;
     private Escolaridade escolaridade;
 
@@ -121,6 +122,41 @@ public class RelatorioBean implements Serializable {
 //        selectresumo.add("EQUIP");
 //        selectresumo.add("DEMANDA");
     }
+    
+    
+      //relatorios
+    public void quadroQuantitativo() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<QuadroQuantitativo> lista = cidadaoDAO.getQuadroQuantitativo();
+        //String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlrelqq");
+        //String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomerelqq");
+        String urlrelatorio = "mci/relatorios/quantitativos/qtdstatus.jasper";
+        String nomerelatorio = "quadroquantitativo.pdf";
+
+        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
+
+    }
+
+    public void imprimirequipind() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.CID);
+
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_ind");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
+    }
+
+    public void imprimirequipcol() throws IOException, JRException {
+
+        CidadaoDAO cidadaoDAO = new CidadaoDAO();
+        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.COOP);
+        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_col");
+        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
+        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
+
+    }
 
     public String pesquisa() throws IOException, JRException {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
@@ -142,27 +178,14 @@ public class RelatorioBean implements Serializable {
         parameters.put("bairro", pesquisaBairro.getNome());
         parameters.put("escolaridade", escolaridade.getAno() + "/" + escolaridade.getGrau());
 
-        if (this.periodo == 1) {
-            this.demandainicio=2011;
-            this.demandafinal = 2014;
-        }
+        
         parameters.put("demandainicio", demandainicio);
         parameters.put("demandafinal", demandafinal);
+        
+        //System.out.println("ramo "+ ramo.getId());
         if (selectonegroup.equals("CIDADE")) {
-
-//                System.out.println(" StatusBen: " + statusben);
-//                System.out.println(" StatusCid: " + statuscid);
-//                System.out.println(" Cursos: " + possuicursossec);
-//                System.out.println(" Equipamentos: " + possuiequipsec);
-//                System.out.println(" Publico: " + publico);
-//                System.out.println(" Ramo: " + ramo);
-//                System.out.println(" genero: " + genero);
-//                System.out.println(" estadocivil: " + estadocivil);
-//                System.out.println(" escolaridade: " + escolaridade);
-//                System.out.println(" cidade: " + pesquisaCidade);
-//                System.out.println(" bairro: " + pesquisaBairro);
-            lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup,periodo, demandainicio, demandainicio);
             urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lista_ben_por_cidade");
+            lista = cidadaoDAO.getListRelatorio(EnumTipoPessoa.CID, statusben, statuscid, possuicursossec, possuiequipsec, publico, ramo, genero, estadocivil, pesquisaCidade, pesquisaBairro, escolaridade, selectonegroup,periodo, demandainicio, demandainicio);
             new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomearquivo, parameters);
         }
         if (selectonegroup.equals("CIDADEBAIRRO")) {
@@ -471,6 +494,19 @@ public class RelatorioBean implements Serializable {
         }
         return toReturn;
     }
+    
+     public List<SelectItem> getSelectItemsRamo() {
+        RamoEmpreendimentoDAO ramoEmpreendimentoDAO = new RamoEmpreendimentoDAO();
+        List<SelectItem> toReturn = new LinkedList<SelectItem>();
+       RamoEmpreendimento rr = new RamoEmpreendimento();
+        rr.setId(0); 
+        rr.setNome("TODOS");
+        toReturn.add(new SelectItem(rr, rr.getNome()));
+        for (RamoEmpreendimento r : ramoEmpreendimentoDAO.getRamoEmpreendimentos()) {
+            toReturn.add(new SelectItem(r, r.getNome()));
+        }
+        return toReturn;
+    }
 
     public List<SelectItem> getSelectItemsCidade() {
         List<SelectItem> toReturn = new LinkedList<SelectItem>();
@@ -506,39 +542,7 @@ public class RelatorioBean implements Serializable {
         return toReturn;
     }
 
-    //relatorios
-    public void quadroQuantitativo() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<QuadroQuantitativo> lista = cidadaoDAO.getQuadroQuantitativo();
-        //String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("urlrelqq");
-        //String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nomerelqq");
-        String urlrelatorio = "mci/relatorios/quantitativos/qtdstatus.jasper";
-        String nomerelatorio = "quadroquantitativo.pdf";
-
-        relatorioutil.criaRelatorio(lista, urlrelatorio, nomerelatorio);
-
-    }
-
-    public void imprimirequipind() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.CID);
-
-        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_ind");
-        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
-        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
-    }
-
-    public void imprimirequipcol() throws IOException, JRException {
-
-        CidadaoDAO cidadaoDAO = new CidadaoDAO();
-        List<Cidadao> lista = cidadaoDAO.getListEquipamentosSecretaria(EnumTipoPessoa.COOP);
-        String urlrelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("url_lita_equip_col");
-        String nomerelatorio = ResourceBundle.getBundle(FacesContext.getCurrentInstance().getApplication().getMessageBundle()).getString("nome_lista_equip");
-        new RelatorioUtil().criaRelatorio(lista, urlrelatorio, nomerelatorio);
-
-    }
+  
 
 //    if (selectresumo.contains("BAIRRO")) {
 //                    this.colunabairro = true;
