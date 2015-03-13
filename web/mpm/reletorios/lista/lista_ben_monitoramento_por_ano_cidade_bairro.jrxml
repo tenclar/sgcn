@@ -57,7 +57,7 @@ GROUP BY
      c.anodemanda, cid.nome, b.nome, p.id
 
 ORDER BY
-       cid.nome asc, b.nome asc
+       c.anodemanda asc, cid.nome asc, b.nome asc
 
 ;]]>
 	</queryString>
@@ -92,7 +92,7 @@ ORDER BY
 	<variable name="totaleqp" class="java.lang.Integer" resetType="Group" resetGroup="bairro" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalequipamento}]]></variableExpression>
 	</variable>
-	<group name="anodemanda">
+	<group name="anodemanda" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{anodemanda}]]></groupExpression>
 		<groupHeader>
 			<band height="23">
@@ -229,6 +229,9 @@ ORDER BY
 		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="5ccf81a0-34ac-4e2b-865e-28924a81fef3" style="Column header" x="0" y="0" width="166" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -236,6 +239,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="a67657b1-e4f1-4871-92dc-e18a4aeb1533" style="Column header" x="166" y="0" width="65" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -243,6 +249,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="0c729630-a66b-4bc3-9dec-046f2eae469a" style="Column header" x="231" y="0" width="250" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -250,6 +259,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="4a251b08-afe3-4ff7-9df9-6a85cbfb0f21" style="Column header" x="663" y="0" width="67" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -257,6 +269,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="5978d913-4b5e-4f83-8b4a-6e32dd629b0a" style="Column header" x="730" y="0" width="36" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -264,6 +279,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="169ace4c-44fa-47a6-91ff-5184b9db8fab" style="Column header" x="582" y="0" width="81" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -271,6 +289,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="43c616b0-6cb5-4acd-9a4a-c64749148eab" style="Column header" x="766" y="0" width="36" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -278,6 +299,9 @@ ORDER BY
 			</staticText>
 			<staticText>
 				<reportElement uuid="b9ca7002-b148-4a5d-a1f7-86937bc12f19" style="Column header" x="481" y="0" width="101" height="18" forecolor="#000000"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
