@@ -21,12 +21,12 @@
                 actionListener="#{equipamentoBean.localizar()}"  
                 update="frmBuscaEquip, opDataTableEquip, :messages" 
                 icon="ui-icon-search"   /> 
+             <p:commandButton  value="+"  process="@this" update=":frmEquipamento" onkeydown="setaFoco(this)"  actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show();document.getElementById('equipamentoNome').focus();" />                                    
         </p:outputPanel>
-        <p:commandButton  value="+"  process="@this" update=":frmEquipamento" onkeydown="setaFoco(this)"  actionListener="#{equipamentoBean.newEquipamento}" oncomplete="dlgEquipamento.show();document.getElementById('equipamentoNome').focus();" />                                    
+       
         <p:separator  />
 
-        <br />
-        <br />
+        
         <p:outputPanel id="opDataTableEquip" >
             <p:dataTable  var="item" value="#{equipamentoBean.listaEquipamentos}"  paginator="true"  
                           paginatorAlwaysVisible="false" rows="8"    rowKey="#{item.id}"

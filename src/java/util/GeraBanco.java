@@ -16,7 +16,7 @@ public class GeraBanco {
         
         //SchemaUpdate su = new SchemaUpdate(configuration);
         //su.execute(true, true);
-     SchemaUpdate su = new SchemaUpdate(configuration);
-        su.execute(true, true);
+     //SchemaUpdate su = new SchemaUpdate(configuration);
+       // su.execute(true, true);
     }
 }

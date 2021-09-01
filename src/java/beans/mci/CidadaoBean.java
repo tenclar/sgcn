@@ -999,14 +999,13 @@ public class CidadaoBean implements Serializable {
             //this.cidBenSocial = new CidBenSociais();
 
             this.cidadao.getTelefones().toString();
-            this.cidadao.getCursos().toString();
+            //this.cidadao.getCursos().toString();
             this.cidadao.getCidAtividades().toString();
             this.cidadao.getCidBenHabits().toString();
             this.cidadao.getCidbBenSociais().toString();
-            this.cidadao.getCidbensduraveis().toString();
-            this.cidadao.getCursosSecretarias().toString();
-            this.cidadao.getCursosSecretarias().toString();
-            this.cidadao.getEquipamentosproprios().toString();
+            //this.cidadao.getCidbensduraveis().toString();
+            this.cidadao.getCursosSecretarias().toString();          
+           // this.cidadao.getEquipamentosproprios().toString();
             this.cidadao.getHistdomicilio().toString();
             this.cidadao.getDependentes().toString();
             this.cidadao.getDespesas().toString();
@@ -1015,8 +1014,8 @@ public class CidadaoBean implements Serializable {
             this.handleSelectItemAtividade();
             this.handleSelectItemBeneficioHabitacional();
             this.handleSelectItemBeneficioSocial();
-            this.handleSelectItemCurso();
-            this.handleSelectItemEquip();
+            //this.handleSelectItemCurso();
+            //this.handleSelectItemEquip();
 
             this.cidadao.setBenstatus(EnumStatusBeneficio.RESERVA);
             this.cidadao.setStatuscid(EnumStatusCid.INDIVIDUAL);
@@ -1121,13 +1120,13 @@ public class CidadaoBean implements Serializable {
         }
 
         this.cidadao.getTelefones().toString();
-        this.cidadao.getCursos().toString();
+      //  this.cidadao.getCursos().toString();
         this.cidadao.getCidAtividades().toString();
         this.cidadao.getCidBenHabits().toString();
         this.cidadao.getCidbBenSociais().toString();
-        this.cidadao.getCidbensduraveis().toString();
+      //  this.cidadao.getCidbensduraveis().toString();
         this.cidadao.getCursosSecretarias().toString();
-        this.cidadao.getEquipamentosproprios().toString();
+      //  this.cidadao.getEquipamentosproprios().toString();
         this.cidadao.getHistdomicilio().toString();
         this.cidadao.getDependentes().toString();
         this.cidadao.getDespesas().toString();
@@ -1136,8 +1135,8 @@ public class CidadaoBean implements Serializable {
         this.handleSelectItemAtividade();
         this.handleSelectItemBeneficioHabitacional();
         this.handleSelectItemBeneficioSocial();
-        this.handleSelectItemCurso();
-        this.handleSelectItemEquip();
+       // this.handleSelectItemCurso();
+        //this.handleSelectItemEquip();
         this.cidDespesas = new CidDespesas();
         this.cursossecretaria = new CursosSecretaria();
         this.telefone = new Telefone();

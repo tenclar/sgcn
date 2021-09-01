@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="total_geral_ramo_ativid_ano" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73def93e-53d4-4c1a-8929-471eff90855b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[select
+ramo.nome as ramo,
+c.anodemanda as ano,
+
+count(distinct c.id) as qtd,
+
+sum(eq.valor) as totalinvest
+from cidade cid
+inner join bairro b on b.cidade_id = cid.id
+inner join endereco e on e.bairro_id = b.id
+inner join cidadao c ON c.endereco_id = e.id
+left JOIN   mci_equipamentossecretaria eq ON eq.cidadao_id = c.id
+inner join  mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
+
+where
+
+c.benstatus = 'BENEFICIADO'
+and c.tipopessoa = 'CID'
+and c.statuscid = 'INDIVIDUAL'
+
+and anodemanda  > 2011
+and anodemanda  < 2017
+
+group by   ano, ramo
+
+ORDER BY ano, ramo]]>
+	</queryString>
+	<field name="ramo" class="java.lang.String"/>
+	<field name="ano" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qtd" class="java.lang.Long"/>
+	<field name="totalinvest" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalqtd" class="java.lang.Integer" resetType="Group" resetGroup="faixa_idade" calculation="Sum">
+		<variableExpression><![CDATA[$F{qtd}]]></variableExpression>
+	</variable>
+	<variable name="totalinvest" class="java.lang.Double" resetType="Group" resetGroup="faixa_idade" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinvest}]]></variableExpression>
+	</variable>
+	<variable name="totalGeralqtd" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{qtd}]]></variableExpression>
+	</variable>
+	<variable name="totalGeralInvest" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinvest}]]></variableExpression>
+	</variable>
+	<variable name="tinvest" class="java.lang.Double" incrementType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{totalGeralInvest}]]></variableExpression>
+	</variable>
+	<variable name="tqtd" class="java.lang.Integer" incrementType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{totalGeralqtd}]]></variableExpression>
+	</variable>
+	<group name="faixa_idade" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="37" splitType="Stretch">
+				<staticText>
+					<reportElement style="Column header" mode="Opaque" x="12" y="10" width="121" height="18" forecolor="#000000" backcolor="#E3E3E3" uuid="c7417116-905a-4bb4-bcea-97870f3a9035"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ramo de Atividade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" mode="Opaque" x="271" y="10" width="38" height="18" forecolor="#000000" backcolor="#E3E3E3" uuid="6b6e55e3-2da7-4868-8d9c-45d8a0d4dee2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ano]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" mode="Opaque" x="331" y="10" width="78" height="18" forecolor="#000000" backcolor="#E3E3E3" uuid="974a58c5-0d72-49d6-b3d8-f1eae373701a"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" mode="Opaque" x="432" y="10" width="121" height="18" forecolor="#000000" backcolor="#E3E3E3" uuid="55e4d2bb-e770-438c-9e78-37363cb6f5d1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Investido]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="67" width="555" height="20" forecolor="#000000" backcolor="#FFFFCC" uuid="793a7d59-a286-47bf-94ad-a00bf911ffc3"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="409" y="0" width="144" height="20" forecolor="#000000" uuid="4cac7e2f-cf51-4e1e-85c6-b65fdee703ef"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="20" y="1" width="64" height="64" uuid="1d06cb54-53f6-4bc0-bdeb-7145c6d58086"/>
+				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="14" uuid="2cf10f74-1824-4970-a29f-447a2b09b20a"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="555" height="14" uuid="755cead3-0760-4d65-be43-987e685e4e13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="555" height="14" uuid="3f8a0394-efb5-4696-8e4d-cb58254f37ec"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="46" width="555" height="20" uuid="1577eaab-a47f-4319-a660-0b8962034924"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ TOTAL INVESTIDO POR  RAMO DE ATIVIDADE E ANO - 2016]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="12" y="0" width="541" height="18" uuid="32e500d6-9a7c-45aa-898e-d049bb7689b2"/>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="20" y="3" width="196" height="15" uuid="5d932437-85e5-47e8-989f-13230e174f17"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ramo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="231" y="4" width="78" height="15" uuid="3609c5d8-02c4-4fc5-a856-30c2d4de9c11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="319" y="3" width="78" height="15" uuid="35333d04-1925-48d6-8983-9ab8a8ff69ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement style="Detail" positionType="Float" x="460" y="0" width="93" height="18" uuid="12f6a649-f560-42dd-aede-b8b7953169b6"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalinvest}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="422" y="3" width="37" height="16" forecolor="#000000" uuid="a8cbb0d3-d920-45f6-8e12-affac9a7efc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24">
+			<staticText>
+				<reportElement style="Column header" x="50" y="0" width="84" height="20" forecolor="#000000" uuid="82082e0f-c204-474f-a88f-5eed92b6bfa2"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="3aba9d54-a6ac-4c81-baf3-9e786ce2f3b5"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="459" y="0" width="94" height="20" uuid="7ec2b4ad-f72f-4191-a1cf-6f414af3211b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tinvest}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="331" y="4" width="77" height="20" uuid="cd508985-9be0-4d42-96c5-de6767359bcb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tqtd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="25" forecolor="#D0B48E" backcolor="#99FFFF" uuid="4fb00635-399b-4442-907a-36e66a3f62a3"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="3" width="40" height="20" forecolor="#000000" uuid="d07c0eca-8528-48b5-b68b-b4822282cf55"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="3" width="80" height="20" forecolor="#000000" uuid="f3e74077-1674-4a11-80be-8d8880ab0916"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#000000" uuid="008e4ee4-c755-437d-878c-9b6676ec3b5e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

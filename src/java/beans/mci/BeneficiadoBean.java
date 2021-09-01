@@ -12,14 +12,12 @@ import entity.mci.EquipamentosSecretaria;
 import entity.mci.enumerator.EnumStatusBeneficio;
 import entity.mci.enumerator.EnumTipoEquipamento;
 import entity.mci.enumerator.EnumTipoPessoa;
+import entity.mci.enumerator.EnumTipoRecurso;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -28,14 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import util.FacesUtils;
 import util.RelatorioUtil;
 
@@ -54,11 +45,12 @@ public class BeneficiadoBean implements Serializable {
     private String campoPesquisa;
     private EquipamentosSecretaria equipamentosecretaria;
     private CursosSecretaria cursosSecretaria;
-    private FacesUtils facesutils = new FacesUtils();
+    private final FacesUtils facesutils = new FacesUtils();
     private List<EquipamentosSecretaria> listaEquip = null;
     private UIForm formBen;
     private DataModel dmLista = null;
     private String enableQtd = "false";
+    private String enableConv = "false";
     private boolean editEquip = false;
     private Date dataentrega;
     private String codgrp;
@@ -100,7 +92,7 @@ public class BeneficiadoBean implements Serializable {
                 this.cidadao.setBenstatus(EnumStatusBeneficio.BENEFICIADO);
                 cidadaoDAO.save(cidadao);
             } else {
-                if (cidadao.getTipopessoa() == EnumTipoPessoa.COOP) {
+                if ((cidadao.getTipopessoa() == EnumTipoPessoa.COOP) || (cidadao.getTipopessoa() == EnumTipoPessoa.GRUPO)) {
                     this.cidadao.setBenstatus(EnumStatusBeneficio.BENEFICIADO);
                     cidadaoDAO.save(cidadao);
                     for (CidAssociados a : this.cidadao.getAssociados()) {
@@ -114,7 +106,8 @@ public class BeneficiadoBean implements Serializable {
 
                 }
             }
-            this.equipamentosecretaria.setCidadao(cidadao);
+            Cidadao c = cidadaoDAO.getEntity(cidadao.getId());
+            this.equipamentosecretaria.setCidadao(c);
             this.cidadao.getEquipamentossecretarias().add(equipamentosecretaria);
             cidadaoDAO.save(cidadao);
             this.codgrp = this.equipamentosecretaria.getCodgrp();
@@ -138,6 +131,14 @@ public class BeneficiadoBean implements Serializable {
         }
         if (this.equipamentosecretaria.getTipoequipamento() == EnumTipoEquipamento.PERMANENTE) {
             this.enableQtd = "false";
+        }
+    }
+    public void handleTipoRecurso() {
+        if (this.equipamentosecretaria.getTipoRecurso() == EnumTipoRecurso.CONVENIO) {
+            this.enableConv = "true";
+        }
+        if (this.equipamentosecretaria.getTipoRecurso() == EnumTipoRecurso.RP) {
+            this.enableConv = "false";
         }
     }
 
@@ -207,7 +208,7 @@ public class BeneficiadoBean implements Serializable {
             this.campoPesquisa = new String();
         }
     }
-    public void localizaGrupo(ActionEvent actionEvent) {
+    public void localizaGrupo() {
         CidadaoDAO cidadaoDAO = new CidadaoDAO();
         try {
             if ("nome".equals(this.tipoBusca)) {
@@ -442,5 +443,14 @@ public class BeneficiadoBean implements Serializable {
     public void setCursosSecretaria(CursosSecretaria cursosSecretaria) {
         this.cursosSecretaria = cursosSecretaria;
     }
+
+    public String getEnableConv() {
+        return enableConv;
+    }
+
+    public void setEnableConv(String enableConv) {
+        this.enableConv = enableConv;
+    }
+    
     
 }

@@ -55,11 +55,16 @@
                         <p:message for="convprestacao" />
                     </h:panelGrid>
 
-                    <p:calendar id="convmon" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.relMonitoramento}" showOn="button" pattern="yyyy/MM/dd" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    <p:calendar id="convmon" onkeyup="Formatadata(this, event)" 
+                                onchange="validaDat(this, this.value)" maxlength="10" size="10" 
+                                value="#{convenioBean.convenio.relMonitoramento}" 
+                                showOn="button" 
+                                locale="pt_BR" pattern="dd/MM/yyyy"
+                                 >
+                      
                     </p:calendar>
-                    <p:calendar id="convprestacao" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.presContas}" showOn="button" pattern="yyyy/MM/dd" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                    <p:calendar id="convprestacao" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" maxlength="10" size="10" value="#{convenioBean.convenio.presContas}" showOn="button"  locale="pt_BR" pattern="dd/MM/yyyy" >
+                        
                     </p:calendar>
                 </h:panelGrid>   
             </h:panelGrid>

@@ -18,7 +18,7 @@
                 <p:commandButton value="próximo" process="@this, :frmCid:tabView:fieldIdent, :frmCid:tabView:fieldEndereco, :frmCid:tabView:panelEmprego" update=":frmCid:tabView, :frmCid:tabView:fieldIdent, :frmCid:tabView:fieldEndereco, :frmCid:tabView:panelEmprego,  :messages" oncomplete="if(!args.validationFailed){tabView.select(1);tabViewCarac.select(0);}" action="#{cidadaoBean.salva}" />                       
 
             </p:tab>
-            <p:tab title="Caracteríticas" id="tabcaracteristicas" disabled="#{cidadaoBean.inserircid}"  >
+            <p:tab title="Caracteríticas" id="tabcaracteristicas"   >
                 <ui:include src="caracteristicas/index.xhtml"  />                     
 
             </p:tab>
@@ -46,15 +46,11 @@
                     <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(5)" />                                                  
                 </h:panelGroup> 
             </p:tab>  
-            <p:tab title="bens duráveis" id="tabbensduraveis" >
-                <ui:include src="bensduraveis/list.xhtml"  />                    
-                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(4)" />                        
-                <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(6)" />                                                  
-            </p:tab>
+        
             <p:tab title="Cursos Secretaria" id="tabbeneficios">   
                 <ui:include src="beneficiosecretaria/list.xhtml"  />                    
-                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(5)" />                        
-                <p:commandButton value="próximo" process="@this" update=":messages, :frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(7)" />                                                  
+                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(4)" />                        
+                <p:commandButton value="próximo" process="@this" update=":messages, :frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(6)" />                                                  
             </p:tab>  
             <p:tab title="Resumo" id="tabresumos"> 
 
@@ -76,7 +72,7 @@
                                                                                    update="fieldident panelEmprego panelDomicilio panelGridDomicilio pResumo frmBuscaCid frmCid cptabela :messages"  
                                                                                       actionListener="# {cidadaoBean.save}"  />   -->
 
-                    <p:commandButton  value="imprimir" process="@this" onclick="this.form.target = '_blank'"  immediate="true" ajax="false"   action="#{cidadaoBean.saveImprimir}" /> 
+<!--                    <p:commandButton  value="imprimir" process="@this" onclick="this.form.target = '_blank'"  immediate="true" ajax="false"   action="# { cidadaoBean.saveImprimir}" /> -->
 
 
                 </h:panelGroup>

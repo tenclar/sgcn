@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form id="frmMciConvenio" prependId="false">
+        <h:panelGrid id="panelMciConvenioInsert" columns="2" style="margin-bottom:10px">
+
+            <h:panelGrid columns="2"> 
+                <h:outputLabel for="mciConvenioNome" value="Descrição:" />
+                <p:message for="mciConvenioNome" display="icon" />   
+            </h:panelGrid>
+            <p:inputText id="mciConvenioNome"  size="60"
+                         value="#{mciConvenioBean.mciConvenio.nome}" 
+                         onkeyup="this.value = this.value.toUpperCase();"   
+                         required="true" validatorMessage="Campo Requerido"/>
+            <h:panelGrid columns="2">  
+                <h:outputLabel for="mciConvenioStatus" value="Status" />    
+                <p:message for="mciConvenioStatus" display="icon" />           
+
+            </h:panelGrid>
+            <h:selectOneMenu id="mciConvenioStatus" value="#{mciConvenioBean.mciConvenio.status}" style="width: 100px" required="true" styleClass="ui-inputfield ui-widget  ui-corner-all" >                        
+                <f:selectItem itemLabel="Ativo"  itemValue="true" />
+                <f:selectItem itemLabel="Inativo"  itemValue="false" />                        
+            </h:selectOneMenu>
+
+
+
+
+        </h:panelGrid>
+        <p:column colspan="2">
+            <p:commandButton  
+                update=":frmListaConvenio:tbMciConvenio,:messages" 
+                oncomplete="dlgMciConvenio.hide();" 
+                actionListener="#{mciConvenioBean.saveMciConvenio}" 
+                value="Salvar"/>
+            <p:commandButton   
+                oncomplete="dlgMciConvenio.hide();" 
+                immediate="true" 
+                actionListener="#{mciConvenioBean.cancelMciConvenio}" 
+                value="Cancelar"/>
+        </p:column>
+    </h:form>
+
+
+
+</ui:component>
+

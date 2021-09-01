@@ -11,22 +11,23 @@
         <p:panel header="Filtros"   >
 
             <p:outputPanel id="outPeriodo" >
-                <h:panelGrid columns="2">
-                    <h:selectOneRadio id="selperiodo" label="Período" required="true" value="#{relatorioBean.periodo}"     >
+           <!--            <h:panelGrid columns="2">
+             <h:selectOneRadio id="selperiodo" label="Período" required="true" value="# {relatorioBean.periodo}"     >
                         <f:selectItem  itemValue="1" itemLabel="Geral"  />
                                            <f:selectItem   itemValue="2"  itemLabel="Período de cadastro"  />
-                        <p:ajax listener="#{relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
+                        <p:ajax listener="# {relatorioBean.handleSelectItemPeriodo()}" update="outPeriodo"    />
 
                     </h:selectOneRadio>
                     <p:message for="selperiodo"  />
                 </h:panelGrid>
-
-                <p:separator />
+            <p:separator />
                 
-                <p:panel id="pdatas" widgetVar="pDatas"  binding="#{relatorioBean.panelperiodo}"  >
-                    <h:panelGrid id="pgdads" columns="2">
+-->
+               
+<!--                <p:panel id="pdatas" widgetVar="pDatas"    >-->
+<!--                    <h:panelGrid id="pgdads" columns="2">-->
                         <p:outputPanel id="opdemanda">
-                            <fieldset>
+                            <fieldset >
                                 <legend>Ano Demanda</legend>
                                 <h:panelGrid  columns="4">
                                     <h:panelGrid columns="2">
@@ -71,13 +72,13 @@
                         </p:outputPanel>    
 -->
 
-                    </h:panelGrid>
-                </p:panel>
+<!--                    </h:panelGrid>-->
+<!--                </p:panel>-->
 
             </p:outputPanel>
 
             <p:outputPanel>
-                <fieldset>
+                <fieldset >
                     <legend>Localidade</legend>
 
                     <h:panelGrid columns="2"  >
@@ -105,7 +106,7 @@
             </p:outputPanel>
 
             <p:outputPanel id="opfiltros"  >
-                <fieldset style="height:  150px" >
+                <fieldset style="height:  170px" >
                     <legend>Informações Cadastrais para Filtro</legend>
                     <h:panelGrid columns="2"  >
                         <h:panelGrid columns="2"  >
@@ -125,7 +126,17 @@
                                              style="width: 130px"  >
                                 <f:selectItems value="#{relatorioBean.selectItemsPublico}"  />
                             </p:selectOneMenu> 
-                            <h:outputLabel  value="" /><h:outputLabel  value="" />
+                             <h:outputLabel for="selSituacao" value="Situação" />
+                             <p:selectOneMenu id="selSituacao" label="Situação" value="#{relatorioBean.situacao}" 
+                                            
+                                             style="width: 130px"  >
+                                <f:selectItem itemLabel="TODOS" itemValue="T" />
+                                <f:selectItem itemLabel="ATIVO" itemValue="ATIVO" />
+                                <f:selectItem itemLabel="INATIVO" itemValue="INATIVO" />
+                                <f:selectItem  itemLabel="ENCERRADO" itemValue="ENCERRADO"  />
+                                
+                            </p:selectOneMenu> 
+                            
                         </h:panelGrid>
                         <h:panelGrid columns="2"  >
                             <h:outputLabel for="selRamo" value="Ramo" />

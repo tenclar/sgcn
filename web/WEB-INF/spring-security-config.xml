@@ -37,14 +37,16 @@
 
        
     </http>
+      <!--<b:property name="url" value="jdbc:mysql://10.1.2.133:3306/sgcn?useSSL=false" />-->
      <!--   <session-management invalid-session-url="/login.jsf"    >  
        <concurrency-control expired-url="/login.jsf" max-sessions="1" error-if-maximum-exceeded="true"  /> invalidate-session="true" 
         </session-management> -->
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:mysql://localhost:3306/sgcn" />
+        <b:property name="url" value="jdbc:mysql://localhost:3306/sgcn?useSSL=false" />
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <b:property name="username" value="sgcn" />
-        <b:property name="password" value="sgcn" />
+        <b:property name="password" value="Sgcn@130" />
+        
         
     </b:bean>
     <authentication-manager>

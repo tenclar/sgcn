@@ -1,0 +1,92 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans;
+
+import dao.EstadoDAO;
+import entity.Estado;
+import java.io.Serializable;
+import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.model.DataModel;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.model.ListDataModel;
+
+
+/**
+ *
+ * @author tenclar
+ */
+@ManagedBean
+@SessionScoped
+public class EstadoBean implements Serializable {
+    
+    private FacesContext context;   
+    private DataModel listaEstados;
+    private Estado estado;
+    private List<Estado> listaEstado;
+    
+    
+    
+    public DataModel getListaEstados(){
+        listaEstado = new ArrayList<Estado>();
+        listaEstados = new ListDataModel(listaEstado); 
+        return listaEstados;
+    }
+    
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+    
+    public void NewEstado(ActionEvent actionEvent){
+        
+        this.estado = new Estado();
+       
+    }
+    
+    public void saveEstado(){
+        context = FacesContext.getCurrentInstance(); 
+        try {
+            if (listaEstado.contains(this.estado))
+                throw new Exception("Já Existe");
+            else{
+                
+                EstadoDAO estadoDAO = new EstadoDAO();
+                estadoDAO.saveEstado(this.estado);
+                context.addMessage(null, new FacesMessage("Sucesso", "Cadastro Efetuado!"));   
+            }
+          
+          
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro", "Cadastro Não Efetuado! "+e.getMessage()));  
+        }
+        
+       
+    }
+    
+    public void EditEstado(ActionEvent actionEvent){
+        this.estado = (Estado) this.listaEstados.getRowData();
+    }
+    
+    public void UpdateEstado(){
+        context = FacesContext.getCurrentInstance();
+        try {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            estadoDAO.updateEstado(estado);
+            context.addMessage(null, new FacesMessage("Sucesso", "Cadastro Efetuado!"));   
+        } catch (Exception e) {
+             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro", "Cadastro Não Efetuado! "+e.getMessage()));  
+        }
+            
+    }
+    
+}

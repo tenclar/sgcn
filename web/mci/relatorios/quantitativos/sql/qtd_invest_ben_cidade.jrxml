@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -18,8 +18,10 @@
 	</parameter>
 	<queryString>
 		<![CDATA[#total de monitoramento por beneficiário
+
 select
      cid.nome as cidade,
+     c.anodemanda as ano,
 
 count(distinct c.id) as totalben,
 sum(distinct eq.valor) as totalinvest
@@ -34,18 +36,25 @@ where c.tipopessoa = 'CID'
 and c.benstatus = 'BENEFICIADO'
 and c.statuscid = 'INDIVIDUAL'
 AND cid.estado_id = 1
+and c.anodemanda in (2011,2012,2013,2014,2015,2016)
 
 GROUP BY
-      cid.nome
+      c.anodemanda, cid.nome
 
 ORDER BY
-       cid.nome asc
-
+      c.anodemanda, cid.nome
 ;]]>
 	</queryString>
 	<field name="cidade" class="java.lang.String"/>
-	<field name="totalben" class="java.lang.Long"/>
-	<field name="totalinvest" class="java.lang.Double"/>
+	<field name="ano" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totalben" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totalinvest" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="TotalBen" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalben}]]></variableExpression>
 	</variable>
@@ -56,11 +65,11 @@ ORDER BY
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="95" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<frame>
-				<reportElement uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8" mode="Opaque" x="0" y="80" width="802" height="15" forecolor="#000000" backcolor="#CC0000"/>
+				<reportElement mode="Opaque" x="0" y="80" width="555" height="15" forecolor="#000000" backcolor="#CC0000" uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="707b9326-5f7b-473a-9d13-ff3d55846a18" x="647" y="0" width="144" height="15" forecolor="#FFFFFF"/>
+					<reportElement x="409" y="0" width="144" height="15" forecolor="#FFFFFF" uuid="707b9326-5f7b-473a-9d13-ff3d55846a18"/>
 					<textElement textAlignment="Right">
 						<font size="10"/>
 					</textElement>
@@ -68,43 +77,43 @@ ORDER BY
 				</textField>
 			</frame>
 			<image>
-				<reportElement uuid="3a5a2945-c9b6-4066-831a-ab645600620a" x="10" y="3" width="64" height="64"/>
+				<reportElement x="10" y="3" width="64" height="64" uuid="3a5a2945-c9b6-4066-831a-ab645600620a"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="878a03ec-ae25-4647-8691-77cc4a64087e" x="0" y="1" width="802" height="14"/>
+				<reportElement x="0" y="1" width="555" height="14" uuid="878a03ec-ae25-4647-8691-77cc4a64087e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c" x="0" y="15" width="802" height="14"/>
+				<reportElement x="0" y="15" width="555" height="14" uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147" x="0" y="29" width="802" height="14"/>
+				<reportElement x="0" y="29" width="555" height="14" uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="44" width="802" height="15"/>
+				<reportElement x="0" y="44" width="555" height="15" uuid="d6fea31e-820f-49e3-984b-00510649b163"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[BENEFICIÁRIOS INDIVIDUAL- QUANTIDADE E INVESTIMENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="db365117-ff94-4345-95e3-cc416f30ef62" x="0" y="59" width="802" height="15"/>
+				<reportElement x="0" y="59" width="555" height="15" uuid="db365117-ff94-4345-95e3-cc416f30ef62"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DEMANDA 2011 - 2014]]></text>
+				<text><![CDATA[DEMANDA 2011 - 2016]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -114,38 +123,46 @@ ORDER BY
 	<detail>
 		<band height="15" splitType="Stretch">
 			<frame>
-				<reportElement uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3" style="Row" mode="Opaque" x="2" y="0" width="444" height="15"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="505" height="15" uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3"/>
+				<textField isStretchWithOverflow="true" pattern="###0">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="61" height="15" uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4" style="Detail" positionType="Float" x="0" y="0" width="241" height="15"/>
+					<reportElement style="Detail" positionType="Float" x="61" y="0" width="236" height="15" uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="240" y="0" width="85" height="15"/>
+				<textField isStretchWithOverflow="true" pattern="###0">
+					<reportElement style="Detail" positionType="Float" x="297" y="0" width="84" height="15" uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b"/>
 					<box leftPadding="5" rightPadding="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{totalben}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
-					<reportElement uuid="9a3754b7-acec-4b7a-95f3-b6a150724f04" style="Detail" positionType="Float" x="353" y="0" width="57" height="15"/>
-					<box leftPadding="5"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="11"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{totalinvest}]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-					<reportElement uuid="5cf88890-2c7f-49b8-ba96-f3717d4b7aa5" style="Detail" positionType="Float" x="325" y="0" width="28" height="15"/>
+					<reportElement style="Detail" positionType="Float" x="381" y="0" width="28" height="15" uuid="5cf88890-2c7f-49b8-ba96-f3717d4b7aa5"/>
 					<box leftPadding="5"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement style="Detail" positionType="Float" x="410" y="0" width="95" height="15" uuid="9a3754b7-acec-4b7a-95f3-b6a150724f04"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalinvest}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -153,67 +170,67 @@ ORDER BY
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1" uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6" x="0" y="5" width="131" height="15"/>
+				<reportElement x="0" y="5" width="92" height="15" uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Geral:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a" x="243" y="5" width="84" height="15"/>
+				<reportElement x="299" y="5" width="84" height="15" uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a"/>
 				<box rightPadding="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{TotalBen}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="bebcfe89-9f2e-4c34-abb7-48b94f1af6b0" x="355" y="5" width="57" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{TotalInvest}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="bd2ad018-3fd0-4c37-99d0-13e7d7e4d0a5" style="Detail" positionType="Float" x="327" y="5" width="28" height="15"/>
+				<reportElement style="Detail" positionType="Float" x="384" y="5" width="28" height="15" uuid="bd2ad018-3fd0-4c37-99d0-13e7d7e4d0a5"/>
 				<box leftPadding="5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["R$"]]></textFieldExpression>
 			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="412" y="5" width="95" height="15" uuid="bebcfe89-9f2e-4c34-abb7-48b94f1af6b0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalInvest}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5" mode="Opaque" x="0" y="1" width="802" height="24" forecolor="#D0B48E" backcolor="#000000"/>
-				<textField evaluationTime="Report">
-					<reportElement uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667" style="Column header" x="756" y="2" width="40" height="20" forecolor="#FFFFFF"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5"/>
 				<textField>
-					<reportElement uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f" style="Column header" x="676" y="2" width="80" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="473" y="2" width="80" height="20" forecolor="#FFFFFF" uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="b60f88a0-8e27-44d4-8c54-481ef5686120" style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b60f88a0-8e27-44d4-8c54-481ef5686120"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="412" y="2" width="40" height="20" forecolor="#FFFFFF" uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

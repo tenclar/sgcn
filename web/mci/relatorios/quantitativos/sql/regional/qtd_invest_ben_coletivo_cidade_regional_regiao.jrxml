@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listabenporcidade2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
 	<property name="ireport.zoom" value="1.4641000000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -82,7 +82,7 @@ ORDER BY
 		<groupHeader>
 			<band height="24">
 				<textField>
-					<reportElement uuid="67fdf1b8-5538-4abb-ad8e-0c6b1f39f121" x="2" y="0" width="802" height="20"/>
+					<reportElement x="2" y="0" width="802" height="20" uuid="67fdf1b8-5538-4abb-ad8e-0c6b1f39f121"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -102,7 +102,7 @@ ORDER BY
 		<groupHeader>
 			<band height="36">
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="f1e5bb89-1391-49ff-8e0c-8ca5e49f6741" style="Detail" positionType="Float" x="0" y="1" width="242" height="15"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="1" width="242" height="15" uuid="f1e5bb89-1391-49ff-8e0c-8ca5e49f6741"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="11"/>
@@ -110,13 +110,13 @@ ORDER BY
 					<textFieldExpression><![CDATA["Bairro "+$F{bairro}]]></textFieldExpression>
 				</textField>
 				<line>
-					<reportElement uuid="36dd3830-bba8-4c72-87d7-b02c89269c82" positionType="FixRelativeToBottom" x="0" y="18" width="802" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="18" width="802" height="1" uuid="36dd3830-bba8-4c72-87d7-b02c89269c82"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
 				<staticText>
-					<reportElement uuid="f98cea53-77dc-4ae7-94ef-3d512b0b5dc7" style="Column header" x="0" y="20" width="243" height="15" forecolor="#000000"/>
+					<reportElement style="Column header" x="0" y="20" width="243" height="15" forecolor="#000000" uuid="f98cea53-77dc-4ae7-94ef-3d512b0b5dc7"/>
 					<box leftPadding="5">
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -124,7 +124,7 @@ ORDER BY
 					<text><![CDATA[NOME]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="386acfca-9149-44a8-907d-52a03167331e" style="Column header" x="393" y="20" width="259" height="15"/>
+					<reportElement style="Column header" x="393" y="20" width="259" height="15" uuid="386acfca-9149-44a8-907d-52a03167331e"/>
 					<box leftPadding="5">
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -132,7 +132,7 @@ ORDER BY
 					<text><![CDATA[ENDEREÇO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="721fae5d-d469-40ff-a977-0f0226754940" style="Column header" x="652" y="20" width="104" height="15"/>
+					<reportElement style="Column header" x="652" y="20" width="104" height="15" uuid="721fae5d-d469-40ff-a977-0f0226754940"/>
 					<box leftPadding="5">
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -140,7 +140,7 @@ ORDER BY
 					<text><![CDATA[TELEFONE]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="cc0b7ff4-735f-4f0b-bb75-03237b9514d6" style="Column header" x="756" y="20" width="46" height="15"/>
+					<reportElement style="Column header" x="756" y="20" width="46" height="15" uuid="cc0b7ff4-735f-4f0b-bb75-03237b9514d6"/>
 					<box leftPadding="5">
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -148,7 +148,7 @@ ORDER BY
 					<text><![CDATA[EQUIP]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="26f294b9-1e63-4ad2-afe6-8295f90f8095" style="Column header" x="243" y="20" width="150" height="15"/>
+					<reportElement style="Column header" x="243" y="20" width="150" height="15" uuid="26f294b9-1e63-4ad2-afe6-8295f90f8095"/>
 					<box leftPadding="5">
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -167,7 +167,7 @@ ORDER BY
 	<title>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="0" width="802" height="15"/>
+				<reportElement x="0" y="0" width="802" height="15" uuid="d6fea31e-820f-49e3-984b-00510649b163"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
@@ -181,9 +181,9 @@ ORDER BY
 	<detail>
 		<band height="18" splitType="Stretch">
 			<frame>
-				<reportElement uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3" style="Row" mode="Opaque" x="0" y="0" width="802" height="18"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="18" uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4" style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="393" y="0" width="259" height="18"/>
+					<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="393" y="0" width="259" height="18" uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="11"/>
@@ -191,7 +191,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{logradouro}+", "+$F{numero}]]></textFieldExpression>
 				</textField>
 				<subreport>
-					<reportElement uuid="6fdaaa30-bbb6-4cf0-9bbd-72af1c251820" stretchType="RelativeToTallestObject" x="652" y="0" width="102" height="18"/>
+					<reportElement stretchType="RelativeToTallestObject" x="652" y="0" width="102" height="18" uuid="6fdaaa30-bbb6-4cf0-9bbd-72af1c251820"/>
 					<subreportParameter name="cid">
 						<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
 					</subreportParameter>
@@ -199,7 +199,7 @@ ORDER BY
 					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "listabenporcidade_telefones.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="041eb685-fc5d-47ba-a78b-7f1cb6bd278a" style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="754" y="0" width="48" height="18"/>
+					<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="754" y="0" width="48" height="18" uuid="041eb685-fc5d-47ba-a78b-7f1cb6bd278a"/>
 					<box leftPadding="5" rightPadding="10"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="11"/>
@@ -207,7 +207,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{totalequip}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="">
-					<reportElement uuid="a51a2f99-eb5a-4c58-910e-deddd4c6e4a4" style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="243" y="0" width="150" height="18"/>
+					<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="243" y="0" width="150" height="18" uuid="a51a2f99-eb5a-4c58-910e-deddd4c6e4a4"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="11"/>
@@ -215,7 +215,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{ramoatividade}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="18e7c45e-3e1d-447e-b419-5dd2d5fecde2" x="0" y="0" width="243" height="18"/>
+					<reportElement x="0" y="0" width="243" height="18" uuid="18e7c45e-3e1d-447e-b419-5dd2d5fecde2"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{cidadao}]]></textFieldExpression>
 				</textField>
@@ -225,28 +225,28 @@ ORDER BY
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1" uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="62d36f19-ca0b-4dac-b67e-2027a55e6bc0" x="0" y="2" width="100" height="20"/>
+				<reportElement x="0" y="2" width="100" height="20" uuid="62d36f19-ca0b-4dac-b67e-2027a55e6bc0"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Total Beneficiados:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="dcda1677-ce00-4db9-be97-7af4e837b572" x="100" y="2" width="100" height="20"/>
+				<reportElement x="100" y="2" width="100" height="20" uuid="dcda1677-ce00-4db9-be97-7af4e837b572"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{totalben}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="ef478e37-1659-4f59-8920-3b5eed85fded" x="656" y="2" width="100" height="20"/>
+				<reportElement x="656" y="2" width="100" height="20" uuid="ef478e37-1659-4f59-8920-3b5eed85fded"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Total Equipamentos:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="7cb967fd-895e-4e5a-99d5-1cd057a81216" x="756" y="2" width="46" height="20"/>
+				<reportElement x="756" y="2" width="46" height="20" uuid="7cb967fd-895e-4e5a-99d5-1cd057a81216"/>
 				<box rightPadding="10"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{totalequip}]]></textFieldExpression>
@@ -256,23 +256,23 @@ ORDER BY
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5" mode="Opaque" x="0" y="1" width="802" height="24" forecolor="#D0B48E" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="0" y="1" width="802" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5"/>
 				<textField evaluationTime="Report">
-					<reportElement uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667" style="Column header" x="756" y="2" width="40" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="756" y="2" width="40" height="20" forecolor="#FFFFFF" uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f" style="Column header" x="676" y="2" width="80" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="676" y="2" width="80" height="20" forecolor="#FFFFFF" uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="b60f88a0-8e27-44d4-8c54-481ef5686120" style="Column header" x="0" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="0" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b60f88a0-8e27-44d4-8c54-481ef5686120"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>

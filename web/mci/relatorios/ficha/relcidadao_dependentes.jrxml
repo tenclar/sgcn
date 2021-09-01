@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao_dependentes" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="4beb980f-d786-4f52-a681-f9ddc0d01b35">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.815000000000002"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString language="hql">
@@ -25,9 +25,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="26">
+		<band height="20">
 			<staticText>
-				<reportElement uuid="8fc1ea6a-750f-4378-b2b6-9492680a9276" mode="Opaque" x="0" y="0" width="555" height="26" backcolor="#ECEAEA"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#ECEAEA" uuid="8fc1ea6a-750f-4378-b2b6-9492680a9276"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -35,7 +35,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Composição Familiar]]></text>
 			</staticText>
@@ -45,305 +45,285 @@
 		<band/>
 	</columnHeader>
 	<detail>
-		<band height="90" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="6b1e6a61-5ef5-4b1c-87d4-26219e3a72b7" x="0" y="0" width="89" height="15"/>
+				<reportElement mode="Opaque" x="0" y="0" width="89" height="15" backcolor="#ECEAEA" uuid="6b1e6a61-5ef5-4b1c-87d4-26219e3a72b7"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Grau:]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="ce78f73a-da17-43e5-8b40-c5ee318cafae" x="0" y="15" width="89" height="15"/>
-				<box leftPadding="5">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Top"/>
-				<textFieldExpression><![CDATA[$F{grau}.getNome()]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="f02cc0a2-5771-4141-ae1a-15af97577dd1" x="89" y="0" width="317" height="15"/>
+				<reportElement x="89" y="0" width="317" height="15" uuid="f02cc0a2-5771-4141-ae1a-15af97577dd1"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Nome:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6e49178f-a7b4-4a55-9b88-95e0d62485f0" x="406" y="0" width="39" height="15"/>
+				<reportElement x="406" y="0" width="39" height="15" uuid="6e49178f-a7b4-4a55-9b88-95e0d62485f0"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Sexo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cf8f6e64-64c0-4df8-a7bb-202324788599" x="0" y="60" width="175" height="15"/>
+				<reportElement x="445" y="0" width="71" height="15" uuid="13709b70-fc6b-4bf4-9439-bf01daffec91"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Naturalidade:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="6351cf45-5348-4738-aa02-f39af80223d8" x="89" y="15" width="317" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="42e05f2b-5c0f-4c56-8418-c086abd4c47d" x="406" y="15" width="39" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="f0c3d8e3-7298-4d67-a8f0-d07990489ad6" x="0" y="75" width="175" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{naturalidade}.getNome()+"-"+$F{naturalidade}.getEstado().getSigla()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="13709b70-fc6b-4bf4-9439-bf01daffec91" x="445" y="0" width="71" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Data Nasc.:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="9a18ccd6-9eef-4866-8056-3cd6ddeba7e4" x="445" y="15" width="71" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{dataNascimento}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="2e41b110-4e12-43c8-9f19-a2fb21314023" x="484" y="75" width="71" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{renda}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="543534b4-6aaa-4c91-bb01-008d85e7c779" x="348" y="75" width="136" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="beec748f-8eda-4163-b417-d4c55b94dcc4" x="348" y="60" width="136" height="15"/>
+				<reportElement x="516" y="0" width="39" height="15" uuid="6e49178f-a7b4-4a55-9b88-95e0d62485f0"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Função:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="b9029dcf-84ad-48ab-8e87-144dad5c9ff0" x="484" y="60" width="71" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Renda:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="e6cae406-b8d2-4e84-bd2c-cc66547c602b" x="195" y="30" width="38" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Ano:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="93845b1e-95a9-4fda-be97-106241114a82" x="195" y="45" width="38" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="2099a665-0d18-452a-b7d2-64fd7c587229" x="0" y="45" width="195" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{escolaridade}.getGrau()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="ffdf74ce-08f6-416b-9e30-829b02528ad7" x="175" y="60" width="173" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Local Trabalho:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="66707a84-e2eb-4b09-acf9-1f621adfb2cd" x="175" y="75" width="173" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{localTrabalho}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="d5b5d59c-8894-4ebe-a02c-b5382da72b30" x="0" y="30" width="195" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Escolaridade:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="e6cae406-b8d2-4e84-bd2c-cc66547c602b" x="233" y="30" width="38" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Freq:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="93845b1e-95a9-4fda-be97-106241114a82" x="233" y="45" width="38" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{frequenta}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="e6cae406-b8d2-4e84-bd2c-cc66547c602b" x="271" y="30" width="284" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Instituição de Ensino]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="93845b1e-95a9-4fda-be97-106241114a82" x="271" y="45" width="284" height="15"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{instituicao}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="6e49178f-a7b4-4a55-9b88-95e0d62485f0" x="516" y="0" width="39" height="15"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Idade:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="42e05f2b-5c0f-4c56-8418-c086abd4c47d" x="516" y="15" width="39" height="15"/>
+				<reportElement mode="Opaque" x="0" y="15" width="89" height="15" backcolor="#ECEAEA" uuid="ce78f73a-da17-43e5-8b40-c5ee318cafae"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grau}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="15" width="317" height="15" uuid="6351cf45-5348-4738-aa02-f39af80223d8"/>
 				<box leftPadding="3">
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="15" width="39" height="15" uuid="42e05f2b-5c0f-4c56-8418-c086abd4c47d"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="445" y="15" width="71" height="15" uuid="9a18ccd6-9eef-4866-8056-3cd6ddeba7e4"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataNascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="516" y="15" width="39" height="15" uuid="42e05f2b-5c0f-4c56-8418-c086abd4c47d"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="30">
+			<staticText>
+				<reportElement x="221" y="0" width="334" height="15" uuid="cf8f6e64-64c0-4df8-a7bb-202324788599"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Naturalidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="0" width="29" height="15" uuid="e6cae406-b8d2-4e84-bd2c-cc66547c602b"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Freq:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="192" height="15" uuid="d5b5d59c-8894-4ebe-a02c-b5382da72b30"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Escolaridade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="221" y="15" width="334" height="15" uuid="f0c3d8e3-7298-4d67-a8f0-d07990489ad6"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{naturalidade}.getNome()+"-"+$F{naturalidade}.getEstado().getSigla()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="15" width="29" height="15" uuid="93845b1e-95a9-4fda-be97-106241114a82"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frequenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="15" width="192" height="15" uuid="2099a665-0d18-452a-b7d2-64fd7c587229"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{escolaridade}.getGrau()]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="30">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="483" y="15" width="72" height="15" uuid="2e41b110-4e12-43c8-9f19-a2fb21314023"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{renda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="15" width="291" height="15" uuid="543534b4-6aaa-4c91-bb01-008d85e7c779"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="0" width="291" height="15" uuid="beec748f-8eda-4163-b417-d4c55b94dcc4"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Função:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="72" height="15" uuid="b9029dcf-84ad-48ab-8e87-144dad5c9ff0"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Renda:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="192" height="15" uuid="ffdf74ce-08f6-416b-9e30-829b02528ad7"/>
+				<box leftPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2" firstLineIndent="2" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Local Trabalho:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="15" width="192" height="15" uuid="66707a84-e2eb-4b09-acf9-1f621adfb2cd"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{localTrabalho}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

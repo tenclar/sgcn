@@ -15,12 +15,12 @@
             <p:inputText value="#{convenioBean.concedente.ordem}" size="4" />
             <h:outputLabel value="Data:" />
             <h:panelGroup>
-                <p:calendar id="convconcedente" label="Vigência"  locale="pt_BR" showButtonPanel="true"
+                <p:calendar id="convconcedente" label="Vigência"  locale="pt_BR" showOn="button"
                                     navigator="true" pattern="dd/MM/yyyy"
                                     onkeyup="Formatadata(this, event);" 
                                     onchange="validaDat(this, this.value);" 
                                     required="true" value="#{convenioBean.concedente.datacon}" maxlength="10" size="10"  >
-                    <f:convertDateTime  />   
+                    
                 </p:calendar> 
                 &nbsp;<p:message for="convconcedente" />                              
             </h:panelGroup>
@@ -39,7 +39,7 @@
             </h:panelGroup>
         </h:panelGrid>
         <p:commandButton value="Salvar"  update="frmConcedente, :frmConvenio:tabGeral:tbconcedente" oncomplete="dlgConcedente.hide();" action="#{convenioBean.concedenteSave()}" />
-        <p:commandButton value="Cancelar"  update="frmConcedente" oncomplete="dlgContra.hide();" immediate="true" />
+        <p:commandButton value="Cancelar"  update="frmConcedente" oncomplete="dlgConcedente.hide();" immediate="true" />
     </h:form>
 
 </ui:component>

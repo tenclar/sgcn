@@ -15,8 +15,8 @@
             <p:inputText value="#{convenioBean.contrapartida.ordem}" size="4" />
             <h:outputLabel value="Data:" />
             <h:panelGroup>
-                <p:calendar id="convcontra" label="Vigência" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value);" required="true" value="#{convenioBean.contrapartida.datacontra}" maxlength="10" size="10"  showOn="button" pattern="yyyy/MM/dd" >
-                    <f:convertDateTime pattern="dd/MM/yyyy" />   
+                <p:calendar id="convcontra" label="Vigência" onkeyup="Formatadata(this, event);" onchange="validaDat(this, this.value);" required="true" value="#{convenioBean.contrapartida.datacontra}" maxlength="10" size="10"  showOn="button" pattern="dd/MM/yyyy" >
+                    
                 </p:calendar> 
                 &nbsp;<p:message for="convcontra" />                              
             </h:panelGroup>

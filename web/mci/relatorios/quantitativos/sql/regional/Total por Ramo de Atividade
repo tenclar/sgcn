@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Total por Ramo de Atividade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="012d920b-93da-4830-9067-a53bf215f53a">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.layers" value="##Thu Apr 14 12:09:18 COT 2016\nlayer.1.name=Layer 1\nlayer.1.visible=true\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="40" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="14" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#000000" fontName="Arial" fontSize="9" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Arial" fontSize="9" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Arial" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+      c.anodemanda as anod,
+      ramo.nome AS ramoatividade,
+count(distinct c.id) as totalbenef,
+sum(distinct eq.valor) as totalinvest
+from cidadao c
+inner join mci_equipamentossecretaria eq on eq.cidadao_id = c.id
+inner join endereco e on e.id = c.endereco_id
+inner join mci_ramoempreendimento ramo ON ramo.id = c.ramoempreendimento_id
+inner join mpm_microcredito d ON d.id = c.id
+
+
+where
+     c.benstatus = 'BENEFICIADO'
+     and c.anodemanda  >= 2010
+     and c.anodemanda  <= 2011
+
+
+GROUP BY
+       ramoatividade
+
+ORDER BY
+       ramoatividade
+
+;]]>
+	</queryString>
+	<field name="anod" class="java.lang.Integer"/>
+	<field name="ramoatividade" class="java.lang.String"/>
+	<field name="totalbenef" class="java.lang.Long"/>
+	<field name="totalinvest" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalben" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{totalbenef}]]></variableExpression>
+	</variable>
+	<variable name="totalinvet" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinvest}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="81" y="0" width="449" height="15" uuid="d6fea31e-820f-49e3-984b-00510649b163"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Demanda 2011 - Totalizado por Ramo de Atividade ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<elementGroup>
+				<elementGroup>
+					<textField isStretchWithOverflow="true" pattern="">
+						<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="352" height="18" uuid="a51a2f99-eb5a-4c58-910e-deddd4c6e4a4"/>
+						<box leftPadding="5"/>
+						<textElement verticalAlignment="Middle">
+							<font size="11"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{ramoatividade}]]></textFieldExpression>
+					</textField>
+				</elementGroup>
+			</elementGroup>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="465" y="0" width="90" height="18" uuid="e8c50ff2-5ac4-4357-bfe3-2e25722d3657"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalinvest}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement style="Detail" positionType="Float" stretchType="RelativeToBandHeight" x="352" y="0" width="101" height="18" uuid="f0aca827-d04a-4800-b6aa-bd4706adf1e9"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalbenef}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="802" height="1" uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="62d36f19-ca0b-4dac-b67e-2027a55e6bc0"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Beneficiados:]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="100" y="2" width="100" height="20" uuid="dcda1677-ce00-4db9-be97-7af4e837b572"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalben}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="276" y="2" width="149" height="20" uuid="280b6e96-76a6-40e3-b660-5757a6f66e49"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Beneficiados:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="425" y="2" width="130" height="20" uuid="7cb967fd-895e-4e5a-99d5-1cd057a81216"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalinvet}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="802" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="756" y="2" width="40" height="20" forecolor="#FFFFFF" uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="676" y="2" width="80" height="20" forecolor="#FFFFFF" uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="0" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b60f88a0-8e27-44d4-8c54-481ef5686120"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50"/>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

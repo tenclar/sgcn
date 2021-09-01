@@ -16,7 +16,7 @@
             
             
             <h:outputLabel for="cidviewnome" value="Nome: " styleClass="titulos" /> 
-            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 200px"   />    
+            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;"   />    
             <p:commandButton process="@this" icon="ui-icon-search" oncomplete="dlgBuscaCid.show()" action="#{cidadaoBuscaBean.clear()}" update=":frmBuscaCid" />
             <p:message showDetail="true" for="ihNome" />
             <h:inputHidden id="ihNome" value="#{beneficiadoBean.cidadao.nome}" required="true" />
@@ -24,6 +24,10 @@
         <h:panelGrid columns="2" style="width: 100%" >
             <p:fieldset legend="Dados" style="height: 180px"   >
                 <h:panelGrid   >
+                     <h:outputLabel  value="Representante: " styleClass="titulos" />                                    
+                    <h:panelGroup>                    
+                        <h:outputText id="benRepresentante"   value="#{beneficiadoBean.cidadao.representante}"  />                    
+                    </h:panelGroup>
                     <h:panelGroup >
                                 <h:outputLabel for="cidviewrg" value="IE: " styleClass="titulos" />      
                                 <h:outputText id="cidviewrg" value="#{beneficiadoBean.cidadao.rg}"  />
@@ -45,6 +49,8 @@
             </p:fieldset>           
             <p:fieldset legend="Endereço" style="height: 180px" >            
                 <h:panelGrid columns="2" id="cidviewEnd" styleClass="end" >
+                   
+                     
                     <h:outputLabel  value="Logradouro: " styleClass="titulos" />                                    
                     <h:panelGroup>                    
                         <h:outputText id="cidviewlogr"   value="#{beneficiadoBean.cidadao.endereco.logradouro}"  />                    

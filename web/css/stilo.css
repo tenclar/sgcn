@@ -224,7 +224,7 @@ hover.botao{
 }
 .container .content .logo2 {
 	margin-top:20px;
-	background-image: url(../images/logosepn.png);
+/*	background-image: url(../images/logosepn.png);*/
 	background-repeat: no-repeat;
 	height: 86px;
 	width: 200px;
@@ -235,7 +235,7 @@ hover.botao{
 	margin-top:20px;
         
 	margin-right: 10px;
-	background-image: url(../images/logogoverno.png);
+/*	background-image: url(../images/logogoverno.png);*/
 	background-repeat: no-repeat;
 	height: 80px;
 	width: 220px;

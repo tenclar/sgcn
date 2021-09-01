@@ -99,15 +99,15 @@ ORDER BY
 		<groupHeader>
 			<band height="23">
 				<line>
-					<reportElement uuid="36dd3830-bba8-4c72-87d7-b02c89269c82" positionType="FixRelativeToBottom" x="0" y="20" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="555" height="1" uuid="36dd3830-bba8-4c72-87d7-b02c89269c82"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
 				<frame>
-					<reportElement uuid="880ddc15-381e-40e4-a5f8-816f21acd9c8" mode="Opaque" x="0" y="2" width="555" height="15" forecolor="#B89F7D" backcolor="#000000"/>
+					<reportElement mode="Opaque" x="0" y="2" width="555" height="15" forecolor="#B89F7D" backcolor="#000000" uuid="880ddc15-381e-40e4-a5f8-816f21acd9c8"/>
 					<textField isStretchWithOverflow="true">
-						<reportElement uuid="d2976a5d-b5db-4ee2-9d57-f101cd35fe09" style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#FFFFFF"/>
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#FFFFFF" uuid="d2976a5d-b5db-4ee2-9d57-f101cd35fe09"/>
 						<textElement verticalAlignment="Middle">
 							<font size="11" isBold="false"/>
 						</textElement>
@@ -119,14 +119,14 @@ ORDER BY
 		<groupFooter>
 			<band height="18">
 				<textField>
-					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="160" y="2" width="85" height="15"/>
+					<reportElement x="160" y="2" width="85" height="15" uuid="f3301643-f222-4d48-8b40-47d16d085f52"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TotalBen}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01" x="0" y="2" width="160" height="15"/>
+					<reportElement x="0" y="2" width="160" height="15" uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
@@ -134,7 +134,7 @@ ORDER BY
 					<text><![CDATA[Total:]]></text>
 				</staticText>
 				<line>
-					<reportElement uuid="985a8c6b-598e-40cc-9199-3e0781facde9" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="985a8c6b-598e-40cc-9199-3e0781facde9"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
@@ -147,12 +147,12 @@ ORDER BY
 		<groupHeader>
 			<band height="16">
 				<frame>
-					<reportElement uuid="69c96fb0-91c4-42ca-8926-3c35e7fc4080" mode="Opaque" x="0" y="0" width="555" height="15" forecolor="#B89F7D" backcolor="#FFFFFF"/>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="15" forecolor="#B89F7D" backcolor="#FFFFFF" uuid="69c96fb0-91c4-42ca-8926-3c35e7fc4080"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
 					<textField isStretchWithOverflow="true">
-						<reportElement uuid="28766f8d-0878-4db1-aaab-b5ae8a1858f2" style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#000000" backcolor="#000000"/>
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#000000" backcolor="#000000" uuid="28766f8d-0878-4db1-aaab-b5ae8a1858f2"/>
 						<textElement verticalAlignment="Middle">
 							<font size="11" isBold="false"/>
 						</textElement>
@@ -171,9 +171,9 @@ ORDER BY
 	<title>
 		<band height="95" splitType="Stretch">
 			<frame>
-				<reportElement uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8" mode="Opaque" x="0" y="80" width="555" height="15" forecolor="#000000" backcolor="#CC0000"/>
+				<reportElement mode="Opaque" x="0" y="80" width="555" height="15" forecolor="#000000" backcolor="#CC0000" uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="707b9326-5f7b-473a-9d13-ff3d55846a18" x="410" y="0" width="144" height="15" forecolor="#FFFFFF"/>
+					<reportElement x="410" y="0" width="144" height="15" forecolor="#FFFFFF" uuid="707b9326-5f7b-473a-9d13-ff3d55846a18"/>
 					<textElement textAlignment="Right">
 						<font size="10"/>
 					</textElement>
@@ -181,53 +181,53 @@ ORDER BY
 				</textField>
 			</frame>
 			<image>
-				<reportElement uuid="3a5a2945-c9b6-4066-831a-ab645600620a" x="10" y="1" width="39" height="36"/>
+				<reportElement x="10" y="1" width="39" height="36" uuid="3a5a2945-c9b6-4066-831a-ab645600620a"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="878a03ec-ae25-4647-8691-77cc4a64087e" x="0" y="1" width="555" height="12"/>
+				<reportElement x="0" y="1" width="555" height="12" uuid="878a03ec-ae25-4647-8691-77cc4a64087e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c" x="0" y="13" width="555" height="12"/>
+				<reportElement x="0" y="13" width="555" height="12" uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
+				<text><![CDATA[SECRETARIA DE ESTADO DE EMPREENDEDORISMO E TURISMO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147" x="0" y="25" width="555" height="12"/>
+				<reportElement x="0" y="25" width="555" height="12" uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SGCN - SISTEMA DE GESTÃO E CONTROLE DE NEGÓCIOS]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="a52f82c6-1e2a-4a21-9994-b093d329e680" x="0" y="65" width="555" height="12"/>
+				<reportElement x="0" y="65" width="555" height="12" uuid="a52f82c6-1e2a-4a21-9994-b093d329e680"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{filtros}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="76e37542-06ba-4114-ba68-bb1ac1676a34" x="0" y="41" width="555" height="12"/>
+				<reportElement x="0" y="41" width="555" height="12" uuid="76e37542-06ba-4114-ba68-bb1ac1676a34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["DEMANDA "+$P{demandainicio}+" à "+$P{demandafinal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b69d697c-c2eb-48c4-8a85-4a17488197ab" x="0" y="53" width="555" height="12"/>
+				<reportElement x="0" y="53" width="555" height="12" uuid="b69d697c-c2eb-48c4-8a85-4a17488197ab"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="0db2c5c8-80df-48e0-b606-d4216e4a0ce4" positionType="FixRelativeToBottom" x="0" y="39" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="39" width="555" height="1" uuid="0db2c5c8-80df-48e0-b606-d4216e4a0ce4"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -240,9 +240,9 @@ ORDER BY
 	<detail>
 		<band height="15" splitType="Stretch">
 			<frame>
-				<reportElement uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3" style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="223daf75-d1bc-4f61-b0ef-c3f60e5892e3"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="158" y="0" width="85" height="15"/>
+					<reportElement style="Detail" positionType="Float" x="158" y="0" width="85" height="15" uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b"/>
 					<box leftPadding="5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="8"/>
@@ -250,7 +250,7 @@ ORDER BY
 					<textFieldExpression><![CDATA[$F{totalben}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="092748a1-42c3-4929-920d-ceb1127e1414" style="Detail" positionType="Float" x="1" y="0" width="157" height="15"/>
+					<reportElement style="Detail" positionType="Float" x="1" y="0" width="157" height="15" uuid="092748a1-42c3-4929-920d-ceb1127e1414"/>
 					<box leftPadding="5"/>
 					<textElement verticalAlignment="Middle">
 						<font size="8" isBold="false"/>
@@ -263,20 +263,20 @@ ORDER BY
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6" x="0" y="5" width="131" height="15"/>
+				<reportElement x="0" y="5" width="131" height="15" uuid="361979c5-c7f7-4aa1-a032-8412f6be8ba6"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Geral:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a" x="161" y="5" width="84" height="15"/>
+				<reportElement x="161" y="5" width="84" height="15" uuid="a0dae43a-1d63-41c9-837f-bca65b443d6a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -287,23 +287,23 @@ ORDER BY
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5"/>
 				<textField evaluationTime="Report">
-					<reportElement uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667" style="Column header" x="514" y="2" width="40" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="514" y="2" width="40" height="20" forecolor="#FFFFFF" uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f" style="Column header" x="434" y="2" width="80" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="434" y="2" width="80" height="20" forecolor="#FFFFFF" uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="b60f88a0-8e27-44d4-8c54-481ef5686120" style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b60f88a0-8e27-44d4-8c54-481ef5686120"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>

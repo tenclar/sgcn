@@ -1,0 +1,6 @@
+
+<p:tab title="bens duráveis" id="tabbensduraveis" >
+                <ui:include src="bensduraveis/list.xhtml"  />                    
+                <p:commandButton value="voltar" process="@this" immediate="true" action="#{cidadaoBean.salva}" update=":frmCid:tabView"  oncomplete="tabView.select(4)" />                        
+                <p:commandButton value="próximo" process="@this" update=":frmCid:tabView" action="#{cidadaoBean.salva}"  oncomplete="tabView.select(6)" />                                                  
+            </p:tab>

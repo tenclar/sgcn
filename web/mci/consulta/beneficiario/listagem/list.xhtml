@@ -26,7 +26,7 @@
                 <p:panel id="pdatas" widgetVar="pDatas"  >
                     <h:panelGrid id="pgdads" columns="2">
                        <p:outputPanel id="opdemanda">
-                            <fieldset>
+                            <fieldset  >
                                 <legend>Ano Demanda</legend>
                                 <h:panelGrid  columns="4">
                                     <h:panelGrid columns="2">
@@ -78,7 +78,7 @@
 
             <h:panelGrid id="pgfiltros" columns="4" style="width: 100%"  >  
                 <p:outputPanel id="opfiltros"  >
-                    <fieldset style="height:  200px" >
+                    <fieldset style="height:  230px" >
                         <legend>Benefícios da Secretaria</legend>
 
                         <h:panelGrid columns="2"  >
@@ -103,15 +103,28 @@
                                 <f:selectItem itemValue="T"  itemLabel="TODOS"   />
                                 <f:selectItem itemValue="S"  itemLabel="SIM" />                
                                 <f:selectItem itemValue="N"  itemLabel="NÃO" />                
-                            </p:selectOneMenu> 
+                            </p:selectOneMenu>
+                            
+                            
+                            
 
                         </h:panelGrid>
                     </fieldset>
                 </p:outputPanel>
                 <p:outputPanel  >
-                    <fieldset style="height:  200px" >
+                    <fieldset style="height:  230px" >
                         <legend>Informações do Empreendimento</legend>
                         <h:panelGrid columns="2"  >
+                             <h:outputLabel for="selSituacao" value="Situação"   />
+                             <p:selectOneMenu id="selSituacao" label="Situação" value="#{relatorioBean.situacao}" 
+                                            
+                                             style="width: 130px"  >
+                                <f:selectItem itemLabel="TODOS" itemValue="T" />
+                                <f:selectItem itemLabel="ATIVO" itemValue="ATIVO" />
+                                <f:selectItem itemLabel="INATIVO" itemValue="INATIVO" />
+                                <f:selectItem  itemLabel="ENCERRADO" itemValue="ENCERRADO"  />
+                                
+                            </p:selectOneMenu> 
                             <h:outputLabel for="selPublico" value="Público Alvo" />
                             <p:selectOneMenu id="selPublico" label="Público" value="#{relatorioBean.publico}" 
                                              converter="IndexedConverter"
@@ -129,12 +142,24 @@
                                 
                                 <f:selectItems value="#{relatorioBean.selectItemsRamo}" />
                             </p:selectOneMenu> 
+                            <h:outputLabel  value="Convênio" />
+                            
+                            <p:selectOneMenu id="selConvenio" label="Convênio" value="#{relatorioBean.convenio}" 
+                                             filter="true"
+                                             filterMatchMode="contains"
+                                             converter="IndexedConverter" 
+                                             style="width: 130px" 
+                                               >
+                                
+                                
+                                <f:selectItems value="#{relatorioBean.selectItemsConvenio}" />
+                            </p:selectOneMenu> 
 
                         </h:panelGrid>
                     </fieldset >
                 </p:outputPanel>
                 <p:outputPanel >
-                    <fieldset style="height:  200px"  ><legend>Dados Cadastrais</legend>          
+                    <fieldset style="height:  230px"  ><legend>Dados Cadastrais</legend>          
                         <h:panelGrid columns="2">
                             <h:outputLabel for="selGen" value="Gênero"  />                                
                             <p:selectOneMenu id="selGen"  style="width:130px" value="#{relatorioBean.genero}"   >
@@ -175,7 +200,7 @@
                         <p:selectOneMenu id="endbuscacid" label="Cidade" value="#{relatorioBean.pesquisaCidade}"  
                                          filter="true" filterMatchMode="startsWith" converter="IndexedConverter" >
                             <f:selectItems value="#{relatorioBean.selectItemsCidade}" />
-                            <p:ajax update="endbuscabairro" listener="#{relatorioBean.handlePesquisaCidadeChange}" />
+                            <p:ajax update="endbuscabairro, selagrupar" listener="#{relatorioBean.handlePesquisaCidadeChange}" />
                         </p:selectOneMenu>
 
                         <p:selectOneMenu id="endbuscabairro" value="#{relatorioBean.pesquisaBairro}" 
@@ -198,8 +223,11 @@
 
             <h:selectOneRadio  id="selagrupar" value="#{relatorioBean.selectonegroup}"  layout="pageDirection"  >
                 <f:selectItem itemLabel="CIDADE" itemValue="CIDADE"   />
-                <f:selectItem itemLabel="CIDADE - BAIRRO" itemValue="CIDADEBAIRRO"   />                           
-                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO" itemValue="DEMANDACIDADEBAIRRO"   />       
+                <f:selectItem itemLabel="CIDADE - BAIRRO" itemValue="CIDADEBAIRRO"   />     
+                <f:selectItem itemLabel="DEMANDA - CIDADE - BAIRRO" itemValue="DEMANDACIDADEBAIRRO"   />      
+                <f:selectItem itemLabel="REGIONAL - BAIRRO" itemValue="REGIONALBAIRRO"  itemDisabled="#{relatorioBean.cidadeRioBranco()}"   />     
+                <f:selectItem itemLabel="REGIONAL - BAIRRO - RAMO DE ATIVIDADE " itemValue="REGIONALBAIRRORAMO"  itemDisabled="#{relatorioBean.cidadeRioBranco()}"   />     
+                 
 
 
             </h:selectOneRadio>

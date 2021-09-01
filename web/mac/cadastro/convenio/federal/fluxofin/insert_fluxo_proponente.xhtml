@@ -10,7 +10,7 @@
         <h:form id="formFluxofinprop" prependId="false"   >
              <h:panelGrid >
                 <h:outputLabel value="Data :" />
-                <p:calendar  value="#{fluxoFinBean.fluxofinprop.datavalor}" locale="pt" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" showOn="button" maxlength="10" size="10"   >
+                <p:calendar  value="#{fluxoFinBean.fluxofinprop.datavalor}" locale="pt" onkeyup="Formatadata(this, event)" onchange="validaDat(this, this.value)" showOn="button" maxlength="10" size="10" pattern="dd/MM/yyyy"  >
                     
                 </p:calendar>
                  <h:outputLabel value="Valor " />

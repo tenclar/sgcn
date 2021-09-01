@@ -50,9 +50,9 @@ order by c.tipopessoa desc, c.benstatus, c.statuscid desc]]>
 		<groupHeader>
 			<band height="36">
 				<frame>
-					<reportElement uuid="880ddc15-381e-40e4-a5f8-816f21acd9c8" mode="Opaque" x="0" y="2" width="555" height="15" forecolor="#B89F7D" backcolor="#000000"/>
+					<reportElement mode="Opaque" x="0" y="2" width="555" height="15" forecolor="#B89F7D" backcolor="#000000" uuid="880ddc15-381e-40e4-a5f8-816f21acd9c8"/>
 					<textField isStretchWithOverflow="true">
-						<reportElement uuid="d2976a5d-b5db-4ee2-9d57-f101cd35fe09" style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#FFFFFF"/>
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="15" forecolor="#FFFFFF" uuid="d2976a5d-b5db-4ee2-9d57-f101cd35fe09"/>
 						<textElement verticalAlignment="Middle">
 							<font size="11" isBold="false"/>
 						</textElement>
@@ -61,14 +61,14 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					</textField>
 				</frame>
 				<staticText>
-					<reportElement uuid="06e140b4-d760-4be6-a43d-8b83bf6fa85e" style="Column header" x="2" y="16" width="100" height="15"/>
+					<reportElement style="Column header" x="2" y="16" width="100" height="15" uuid="06e140b4-d760-4be6-a43d-8b83bf6fa85e"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
 					<text><![CDATA[Status]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="816a55af-91ad-4e02-bd76-074dcfccc53a" style="Column header" x="102" y="17" width="101" height="15">
+					<reportElement style="Column header" x="102" y="17" width="101" height="15" uuid="816a55af-91ad-4e02-bd76-074dcfccc53a">
 						<printWhenExpression><![CDATA[$F{tipopessoa}.equals("CID")]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -77,14 +77,14 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					<text><![CDATA[Tipo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="8382f5f9-9cb9-4f50-bd4f-f54b04826ae3" style="Column header" x="203" y="17" width="99" height="15"/>
+					<reportElement style="Column header" x="203" y="17" width="99" height="15" uuid="8382f5f9-9cb9-4f50-bd4f-f54b04826ae3"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11"/>
 					</textElement>
 					<text><![CDATA[Quantidade]]></text>
 				</staticText>
 				<line>
-					<reportElement uuid="f5390b54-e551-49ce-81a3-d33dcd9e7807" positionType="FixRelativeToBottom" x="0" y="31" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="31" width="555" height="1" uuid="f5390b54-e551-49ce-81a3-d33dcd9e7807"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
@@ -94,7 +94,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 		<groupFooter>
 			<band height="18">
 				<textField>
-					<reportElement uuid="f3301643-f222-4d48-8b40-47d16d085f52" x="203" y="2" width="85" height="15"/>
+					<reportElement x="203" y="2" width="85" height="15" uuid="f3301643-f222-4d48-8b40-47d16d085f52"/>
 					<box rightPadding="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -102,7 +102,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$V{TotalBen}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01" x="0" y="2" width="203" height="15"/>
+					<reportElement x="0" y="2" width="203" height="15" uuid="3af9e312-4e71-4fa7-9ad5-eba7ba40df01"/>
 					<box leftPadding="10"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -110,7 +110,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 					<text><![CDATA[Total:]]></text>
 				</staticText>
 				<line>
-					<reportElement uuid="985a8c6b-598e-40cc-9199-3e0781facde9" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="985a8c6b-598e-40cc-9199-3e0781facde9"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
@@ -124,9 +124,9 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 	<title>
 		<band height="82" splitType="Stretch">
 			<frame>
-				<reportElement uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8" mode="Opaque" x="0" y="67" width="555" height="15" forecolor="#000000" backcolor="#CC0000"/>
+				<reportElement mode="Opaque" x="0" y="67" width="555" height="15" forecolor="#000000" backcolor="#CC0000" uuid="57663ba3-6ce5-4137-a3e7-d2377d1f19d8"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="707b9326-5f7b-473a-9d13-ff3d55846a18" x="411" y="0" width="144" height="15" forecolor="#FFFFFF"/>
+					<reportElement x="411" y="0" width="144" height="15" forecolor="#FFFFFF" uuid="707b9326-5f7b-473a-9d13-ff3d55846a18"/>
 					<textElement textAlignment="Right">
 						<font size="10"/>
 					</textElement>
@@ -134,36 +134,36 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<image>
-				<reportElement uuid="3a5a2945-c9b6-4066-831a-ab645600620a" x="10" y="3" width="64" height="64"/>
+				<reportElement x="10" y="3" width="64" height="64" uuid="3a5a2945-c9b6-4066-831a-ab645600620a"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="878a03ec-ae25-4647-8691-77cc4a64087e" x="0" y="1" width="555" height="14"/>
+				<reportElement x="0" y="1" width="555" height="14" uuid="878a03ec-ae25-4647-8691-77cc4a64087e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c" x="0" y="15" width="555" height="14"/>
+				<reportElement x="0" y="15" width="555" height="14" uuid="2bc06e02-e7ba-45fa-a7fa-da1d85ec356c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147" x="0" y="29" width="555" height="14"/>
+				<reportElement x="0" y="29" width="555" height="14" uuid="46a7ea51-021a-42b2-9b8c-9afb6cc21147"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d6fea31e-820f-49e3-984b-00510649b163" x="0" y="44" width="555" height="15"/>
+				<reportElement x="0" y="44" width="555" height="15" uuid="d6fea31e-820f-49e3-984b-00510649b163"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[QUANTITATIVO GERAL POR TIPO DE BENEFICIÁRIO / DEMANDA 2011 - ATUAL]]></text>
+				<text><![CDATA[QUANTITATIVO GERAL POR TIPO DE BENEFICIÁRIO / DEMANDA 2011/2016 - ATUAL]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -173,7 +173,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b" style="Detail" positionType="Float" x="203" y="0" width="84" height="15"/>
+				<reportElement style="Detail" positionType="Float" x="203" y="0" width="84" height="15" uuid="3f267fdc-2f13-4ba0-9f3c-df89690eea0b"/>
 				<box leftPadding="5" rightPadding="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
@@ -181,7 +181,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4" style="Detail" positionType="Float" x="1" y="0" width="101" height="15"/>
+				<reportElement style="Detail" positionType="Float" x="1" y="0" width="101" height="15" uuid="cf548f07-e0db-45b2-8c25-7aea473f2db4"/>
 				<box leftPadding="5"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
@@ -189,7 +189,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 				<textFieldExpression><![CDATA[$F{benstatus}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="263061c2-339a-49ca-b4fb-bef155f35498" style="Detail" positionType="Float" x="102" y="0" width="101" height="15">
+				<reportElement style="Detail" positionType="Float" x="102" y="0" width="101" height="15" uuid="263061c2-339a-49ca-b4fb-bef155f35498">
 					<printWhenExpression><![CDATA[$F{tipopessoa}.equals("CID")]]></printWhenExpression>
 				</reportElement>
 				<box leftPadding="5"/>
@@ -203,7 +203,7 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 	<columnFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a" positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="becc98ff-cce3-438b-89d9-f50ad99ece5a"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -213,23 +213,23 @@ $F{tipopessoa}=="CID" ? "CIDADÃO" :"CIDADÃO"]]></textFieldExpression>
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="81494a7e-9013-4cdb-bf53-ed94a63745b5"/>
 				<textField evaluationTime="Report">
-					<reportElement uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667" style="Column header" x="515" y="4" width="40" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="515" y="4" width="40" height="20" forecolor="#FFFFFF" uuid="cd2a7863-3ccc-4691-aaf7-df638f6c6667"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f" style="Column header" x="435" y="4" width="80" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="435" y="4" width="80" height="20" forecolor="#FFFFFF" uuid="047ce637-4a75-45c3-8d63-9dba81c3ff8f"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="b60f88a0-8e27-44d4-8c54-481ef5686120" style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="b60f88a0-8e27-44d4-8c54-481ef5686120"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>

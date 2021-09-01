@@ -37,7 +37,7 @@ public class RelatorioUtil {
         //InputStream inputStream = getClass().getResourceAsStream(relJasper);
         HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
         ServletOutputStream responseStream = response.getOutputStream();
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas, false);
         
 
         response.setHeader("Content-Disposition", "inline; filename=" + nomerelatorio);
@@ -82,7 +82,7 @@ public class RelatorioUtil {
 
 
     }
-     public void criaRelatoriodb(Map parameters, String caminhorelatorio,Connection conn ) throws IOException, JRException {
+     public void criaRelatoriodb(Map parameters, String caminhorelatorio ) throws IOException, JRException {
 
         FacesContext fcontext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
@@ -90,15 +90,16 @@ public class RelatorioUtil {
         String relJasper = scontext.getRealPath(caminhorelatorio);
         //InputStream inputStream = getClass().getResourceAsStream(relJasper);
         HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
-        ServletOutputStream responseStream = response.getOutputStream();
+        
        // JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
         
         //Map parameters = new HashMap();
         response.setHeader("Content-Disposition", "inline; filename=rel_quantitativo");
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("application/pdf");
+        ServletOutputStream responseStream = response.getOutputStream();
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, conn);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, DbCon.getConnection());
         JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
         byte x1[] = JasperExportManager.exportReportToPdf(jasperPrint);
         response.getOutputStream().write(x1);
@@ -109,5 +110,35 @@ public class RelatorioUtil {
 
 
     }
+     
+      public void criaRelatoriodbNome(Map parameters, String caminhorelatorio,String arquivo ) throws IOException, JRException {
+        Connection connection = DbCon.getConnection();
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+        ServletContext scontext = (ServletContext) fcontext.getExternalContext().getContext();
+
+        String relJasper = scontext.getRealPath(caminhorelatorio);
+        //InputStream inputStream = getClass().getResourceAsStream(relJasper);
+        HttpServletResponse response = (HttpServletResponse) fcontext.getExternalContext().getResponse();
+        
+       // JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listas);
+        
+        //Map parameters = new HashMap();
+        response.setHeader("Content-Disposition", "inline; filename=rel_"+arquivo+".pdf");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setContentType("application/pdf");
+        ServletOutputStream responseStream = response.getOutputStream();
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(relJasper, parameters, connection);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, responseStream);
+        byte x1[] = JasperExportManager.exportReportToPdf(jasperPrint);
+        response.getOutputStream().write(x1);
+        responseStream.flush();
+        responseStream.close();
+        fcontext.renderResponse();
+        fcontext.responseComplete();
+
+
+    }
+    
     
 }

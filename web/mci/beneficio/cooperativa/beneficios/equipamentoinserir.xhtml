@@ -11,19 +11,55 @@
         <h:form id="frmNewEquip" prependId="false"  >
             <p:fieldset legend="Identificação" >
                 <p:outputPanel id="panelInsEquipSecr" >
-                    <h:panelGrid columns="2" id="insEquip" >                    
+                    <h:panelGrid columns="1" id="insEquip" >                    
                         <h:outputLabel value="Data de Entrega:" styleClass="titulos"  /> 
-                        <p:calendar id="dataEntregaEquip" onkeyup="Formatadata(this,event)" onchange="validaDat(this,this.value)" maxlength="10" value="#{beneficiadoBean.equipamentosecretaria.dataentrega}"  size="11" required="true"  requiredMessage="Informação necessária"  pattern="yyyy/MM/dd" >                                 
-                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                                
-                            </p:calendar> 
+                          <p:calendar id="dataEntregaEquip" 
+                                onkeyup="Formatadata(this, event)"
+                                onchange="validaDat(this, this.value)"
+                                maxlength="10" value="#{beneficiadoBean.equipamentosecretaria.dataentrega}"  
+                                size="11" required="true"  showOn="button" requiredMessage="Informação necessária"
+                                locale="pt_BR" pattern="dd/MM/yyyy" >                            
+                            </p:calendar>  
                         <h:outputLabel value="Equipamento:" styleClass="titulos"  /> 
                         
                         <h:panelGroup> 
                             <p:inputText id="equipsec" value="#{beneficiadoBean.equipamentosecretaria.equipamento.nome}" style="background: #e8e1b5; color: #023401" size="50" readonly="true" disabled="true" styleClass="ui-inputfield ui-widget  ui-corner-all" />
                             <p:commandButton icon="ui-icon-search" title="Localizar Equipamento" tabindex="-1" process="@this" update=":frmEquipamento" onkeydown="setaFoco(this)"   oncomplete="dlgBuscaEquip.show();" />                                    
+                         </h:panelGroup>
                             
-                        </h:panelGroup>
+                        
+                    <h:outputLabel value="Tipo Recurso:" styleClass="titulos"  /> 
+                    <h:selectOneMenu  id="cidTipoRecurso" style="width: 150px" onkeydown="setaFoco(this)"  value="#{beneficiadoBean.equipamentosecretaria.tipoRecurso}" styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" label="Tipo"  >
+                        <f:selectItem  itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItem  itemLabel="CONVENIO" itemValue="CONVENIO"  />
+                        <f:selectItem  itemLabel="RP" itemValue="RP"  />
+                        <p:ajax listener="#{beneficiadoBean.handleTipoRecurso()}" update="labelConvNumero, textConvNumero, labelConvPatrimonio, textConvPatrimonio" />
+                    </h:selectOneMenu>
+
+                    <p:outputPanel id="labelConvNumero" >
+                        <h:outputLabel  value ="Convênio: " styleClass="titulos"   rendered ="#{beneficiadoBean.enableConv}"  /> 
+                    </p:outputPanel>                         
+                    <p:outputPanel id="textConvNumero" >
+                           <p:inputText  rendered ="false"  value="#{beneficiadoBean.equipamentosecretaria.convenioNumero}"   size="10" />
+                          <p:selectOneMenu  id="EquipConvenio" style="width: 350px" rendered ="#{beneficiadoBean.enableConv}"                                      
+                                      value="#{beneficiadoBean.equipamentosecretaria.convenio}" 
+                                      filterMatchMode="contains"
+                                      filter="true"
+                                       converter="IndexedConverter" required="true"  
+                                       label="Convênio"  >
+                         <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                         <f:selectItems value="#{mciConvenioBean.selectItems}"  />     
+                    </p:selectOneMenu>
+                    </p:outputPanel>
+                    <p:outputPanel id="labelConvPatrimonio" >
+                        <h:outputLabel  value ="Nº do Patrimônio do Convênio: " styleClass="titulos"   rendered ="#{beneficiadoBean.enableConv}"  /> 
+                    </p:outputPanel>                         
+                    <p:outputPanel id="textConvPatrimonio" >
+                        <p:inputText  rendered ="#{beneficiadoBean.enableConv}"  value="#{beneficiadoBean.equipamentosecretaria.convenioPatrimonio}"   size="10" />
+                    </p:outputPanel>
+    
+                            
+                        
                         <h:outputLabel  value ="Patrimônio: " styleClass="titulos" />
                         <p:inputText tabindex="1" value="#{beneficiadoBean.equipamentosecretaria.patrimonio}" size="15"  />
                         

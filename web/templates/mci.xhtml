@@ -49,12 +49,12 @@
                                                     <p:menuitem icon="ui-icon ui-icon-document" value="Cursos" url="${request.contextPath}/../mgc/cadastro/turma/" target="_blank" />
 
 
-
+<!--rendered= " # { p:ifGranted(msg.perm_view) } " -->
                                                 </p:submenu>  
                                                 <p:submenu label="Cad. Auxiliares" icon="ui-icon ui-icon-contact">   
-                                                     <p:menuitem value="Ano de Demanda" url="${request.contextPath}/../mci/cadastro/anodemanda/" target="_blank" rendered="#{p:ifGranted(msg.perm_view)}" />
+                                                     <p:menuitem value="Ano de Demanda" url="${request.contextPath}/../mci/cadastro/anodemanda/" target="_blank"  />
                                                     <p:menuitem value="Atividades" url="${request.contextPath}/../mci/cadastro/atividade/" target="_blank" />
-
+                                                    <p:menuitem value="Convênio" url="${request.contextPath}/../mci/cadastro/convenio/" target="_blank" />
                                                     <p:menuitem value="Bem Durável" url="${request.contextPath}/../mci/cadastro/bemduravel/" target="_blank" />   
                                                     <p:menuitem value="Beneficios" url="${request.contextPath}/../mci/cadastro/beneficio/" target="_blank" />                                                                                            
 <!--                                                    <p:menuitem value="Cursos" url="${request.contextPath}/../mci/cadastro/curso/" target="_blank" />  -->
@@ -70,11 +70,14 @@
                                                     <p:menuitem value="Ramo de Atividade" url="${request.contextPath}/../mci/cadastro/ramo/" target="_blank" />  
                                                 </p:submenu>
                                                 <p:submenu label="Relatórios" icon="ui-icon ui-icon-print">   
-                                                    <p:menuitem value="Listagem"  url="${request.contextPath}/../mci/consulta/beneficiario/listagem" />  
-                                                    <p:menuitem value="Quantitativo"  url="${request.contextPath}/../mci/consulta/beneficiario/quantitativo" /> 
-                                                    <p:menuitem value="Quadro Quantitativo" process="@this" ajax="false"  actionListener="#{relatorioBean.quadroQuantitativo()}"   icon="ui-icon-print"/>  
+                                                    <p:menuitem value="Listagem de Cadastro"  url="${request.contextPath}/../mci/consulta/beneficiario/listagem" />  
+                                                    <p:menuitem value="Investimentos"  url="${request.contextPath}/../mci/consulta/beneficiario/investimentos" />                                                      
+                                                    <p:menuitem value="Quantitativo"  url="${request.contextPath}/../mci/consulta/beneficiario/quantitativo" />    
+                                                    <p:separator />
+                                                    <p:menuitem value="Quadro Quantitativo" process="@this" ajax="false"  action="#{relatorioBean.quadroQuantitativo}" target="_blank" onclick="this.target='_blank';"  icon="ui-icon-print"  />  
+                                                    <!--<p:menuitem value="Demanda Regional" process="@this" ajax="false"  actionListener="# { relatorioBean.demandaRegional()}"   icon="ui-icon-print"/>-->  
 <!--                                                    <p:menuitem value="Quadro Quantitativo"  url="$ {request.contextPath}/../mci/consulta/beneficiario/quantitativo" />  -->
-                                                    <p:menuitem value="Equipamentos"  url="${request.contextPath}/../mci/consulta/equipamentos/"  />  
+                                                    <!--<p:menuitem value="Equipamentos"  url="$ { request.contextPath}/../mci/consulta/equipamentos/"  />-->  
 
 
 

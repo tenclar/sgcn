@@ -6,6 +6,7 @@ import entity.Cidade;
 import entity.mci.Cidadao;
 import entity.mci.Escolaridade;
 import entity.mci.EstadoCivil;
+import entity.mci.MciConvenio;
 import entity.mci.Publico;
 import entity.mci.RamoEmpreendimento;
 import entity.mci.enumerator.EnumStatusBeneficio;
@@ -174,9 +175,94 @@ public class CidadaoDAO extends GenericDAO {
         }
 
     }
+    public List<Cidadao> getListRelatorioConvenio(EnumTipoPessoa tipopessoa, EnumStatusBeneficio statusben,
+            EnumStatusCid statuscid, String cursosec, String equipsec, Publico publico, String situacao,
+            RamoEmpreendimento ramo, String genero, EstadoCivil civil, Cidade cidade, Bairro bairro,
+            Escolaridade escolaridade,MciConvenio convenio, String selectonegroup,int periodo , int datainicio, int datafinal ) {
+       
+        String query = "select c from Cidadao c  ";
+        
+         if (convenio != null) {
+            if (!convenio.getId().equals(0)) {
+                query = query + " left outer join c.equipamentossecretarias as eq";
+                query = query + " where c.tipopessoa = ? and  eq.convenio.id = " + convenio.getId();
+            }else
+                query = query + " where c.tipopessoa = ?" ;
+        }
+        
+         
+        
+        query = query + " and c.anodemanda >= " + datainicio +" and c.anodemanda <= "+ datafinal ;
+        
+        if (!statuscid.equals(EnumStatusCid.TODOS)) {
+            query = query + " and cast(c.statuscid as string) = '" + statuscid.toString() + "'";
+        }
+        if (!statusben.equals(EnumStatusBeneficio.TODOS)) {
+            query = query + " and cast(c.benstatus as string)  = '" + statusben.toString() + "'";
+        }
+        if (!cursosec.equals("T")) {
+            query = query + " and c.curso = '" + cursosec+"'";
+        }
+         if (!situacao.equals("T")) {
+            query = query + " and c.situacao = '" + situacao+"'";
+        }
+        if (publico != null) {
+            if (!publico.getId().equals(0)) {
+                query = query + " and c.publico.id = " + publico.getId();
+            }
+        }
+        if (ramo != null) {
+            if (!ramo.getId().equals(0)) {
+                query = query + " and c.ramoempreendimento.id = " + ramo.getId();
+            }
+        }
+       
+        if (!genero.equals("T")) {
+            query = query + " and c.sexo = '" + genero+"'";
+        }
+        if (civil != null) {
+            if (!civil.getId().equals(0)) {
+                query = query + " and c.estadocivil.id = " + civil.getId();
+            }
+        }
+        if (escolaridade != null) {
+            if (!escolaridade.getId().equals(0)) {
+                query = query + " and c.escolaridade.id = " + escolaridade.getId();
+            }
+        }
+        if (cidade != null) {
+            if (!cidade.getId().equals(0)) {
+                query = query + " and c.endereco.bairro.cidade.id = " + cidade.getId();
+            }
+        }
+        if (bairro != null){ 
+            if(!bairro.getId().equals(0)) {
+            query = query + " and c.endereco.bairro.id = " + bairro.getId();
+            }
+        }
+        if ("S".equals(equipsec)) {
+            query = query + " and c.equipamentossecretarias.size > 0 ";
+        }
+        if ("N".equals(equipsec)) {
+            query = query + " and c.equipamentossecretarias.size = 0 ";
+        }
+        if("CIDADE".equals(selectonegroup)){
+        query = query + " group by c.endereco.bairro.cidade.nome, c.nome ";
+        }
+        if("CIDADEBAIRRO".equals(selectonegroup)){
+        query = query + " group by c.endereco.bairro.cidade.nome,c.endereco.bairro.nome, c.nome ";
+        }       
+        if("DEMANDACIDADEBAIRRO".equals(selectonegroup)){
+         query = query + " group by c.anodemanda, c.endereco.bairro.cidade.nome,c.endereco.bairro.nome,c.ramoempreendimento.nome, c.nome ";
+        }
+        
+        
+        // System.out.println("Consulta Gerada: " +query);
+        return getPureList(Cidadao.class, query, tipopessoa);
+    }
 
     public List<Cidadao> getListRelatorio(EnumTipoPessoa tipopessoa, EnumStatusBeneficio statusben,
-            EnumStatusCid statuscid, String cursosec, String equipsec, Publico publico,
+            EnumStatusCid statuscid, String cursosec, String equipsec, Publico publico, String situacao,
             RamoEmpreendimento ramo, String genero, EstadoCivil civil, Cidade cidade, Bairro bairro,
             Escolaridade escolaridade, String selectonegroup,int periodo , int datainicio, int datafinal ) {
 
@@ -191,7 +277,10 @@ public class CidadaoDAO extends GenericDAO {
             query = query + " and cast(c.benstatus as string)  = '" + statusben.toString() + "'";
         }
         if (!cursosec.equals("T")) {
-            query = query + " and c.curso = " + cursosec;
+            query = query + " and c.curso = '" + cursosec+"'";
+        }
+         if (!situacao.equals("T")) {
+            query = query + " and c.situacao = '" + situacao+"'";
         }
         if (publico != null) {
             if (!publico.getId().equals(0)) {
@@ -241,7 +330,99 @@ public class CidadaoDAO extends GenericDAO {
         if("DEMANDACIDADEBAIRRO".equals(selectonegroup)){
          query = query + " group by c.anodemanda, c.endereco.bairro.cidade.nome,c.endereco.bairro.nome,c.ramoempreendimento.nome, c.nome ";
         }
-        System.out.println("Consulta Gerada: " +query);
+       // System.out.println("Consulta Gerada: " +query);
+        return getPureList(Cidadao.class, query, tipopessoa);
+    }
+public List<Cidadao> getListRelatorioRegional(EnumTipoPessoa tipopessoa, EnumStatusBeneficio statusben,
+            EnumStatusCid statuscid, String cursosec, String equipsec, Publico publico, String situacao,
+            RamoEmpreendimento ramo, String genero, EstadoCivil civil, Cidade cidade, Bairro bairro,
+            Escolaridade escolaridade, String selectonegroup,int periodo , int datainicio, int datafinal ) {
+
+    
+
+
+
+
+    
+    
+        String query = "select c as beneficiario, "
+                + " c.equipamentossecretarias.size as totalequip, "
+                + " b.nome as bairro, r.nome as regional "
+                + " from Cidadao c"
+                + " inner join c.endereco e"
+                + " inner join e.bairro b"
+                + " inner join e.bairro b"
+                + " inner join b.regional r";
+        query = query + " where  c.tipopessoa = ?";
+        query = query + " and c.anodemanda between " + datainicio +" and "+ datafinal ;
+        
+        if (!statuscid.equals(EnumStatusCid.TODOS)) {
+            query = query + " and cast(c.statuscid as string) = '" + statuscid.toString() + "'";
+        }
+        if (!statusben.equals(EnumStatusBeneficio.TODOS)) {
+            query = query + " and cast(c.benstatus as string)  = '" + statusben.toString() + "'";
+        }
+        if (!cursosec.equals("T")) {
+            query = query + " and c.curso = '" + cursosec+"'";
+        }
+         if (!situacao.equals("T")) {
+            query = query + " and c.situacao = '" + situacao+"'";
+        }
+        if (publico != null) {
+            if (!publico.getId().equals(0)) {
+                query = query + " and c.publico.id = " + publico.getId();
+            }
+        }
+        if (ramo != null) {
+            if (!ramo.getId().equals(0)) {
+                query = query + " and c.ramoempreendimento.id = " + ramo.getId();
+            }
+        }
+        if (!genero.equals("T")) {
+            query = query + " and c.sexo = '" + genero+"'";
+        }
+        if (civil != null) {
+            if (!civil.getId().equals(0)) {
+                query = query + " and c.estadocivil.id = " + civil.getId();
+            }
+        }
+        if (escolaridade != null) {
+            if (!escolaridade.getId().equals(0)) {
+                query = query + " and c.escolaridade.id = " + escolaridade.getId();
+            }
+        }
+        if (cidade != null) {
+            if (!cidade.getId().equals(0)) {
+                query = query + " and c.endereco.bairro.cidade.id = " + cidade.getId();
+            }
+        }
+        if (bairro != null){ 
+            if(!bairro.getId().equals(0)) {
+            query = query + " and c.endereco.bairro.id = " + bairro.getId();
+            }
+        }
+        if ("S".equals(equipsec)) {
+            query = query + " and c.equipamentossecretarias.size > 0 ";
+        }
+        if ("N".equals(equipsec)) {
+            query = query + " and c.equipamentossecretarias.size = 0 ";
+        }
+        if("CIDADE".equals(selectonegroup)){
+        query = query + " group by c.endereco.bairro.cidade.nome, c.nome ";
+        }
+        if("CIDADEBAIRRO".equals(selectonegroup)){
+        query = query + " group by c.endereco.bairro.cidade.nome,c.endereco.bairro.nome, c.nome ";
+        }       
+        if("DEMANDACIDADEBAIRRO".equals(selectonegroup)){
+         query = query + " group by c.anodemanda, c.endereco.bairro.cidade.nome,c.endereco.bairro.nome,c.ramoempreendimento.nome, c.nome ";
+        }
+        
+         if("REGIONALBAIRRO".equals(selectonegroup)){
+         query = query + " group by b.nome, r.nome, c.nome ";
+        }
+        
+        query = query + "order by r.nome asc , b.nome asc , c.nome asc";
+       // System.out.println("Consulta Gerada: " +query);
         return getPureList(Cidadao.class, query, tipopessoa);
     }
 

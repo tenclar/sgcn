@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao_cursospro" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao_cursospro" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c6b6f803-1ca2-4f28-af1e-2549351ea4f8">
 	<property name="ireport.zoom" value="1.2100000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -19,7 +19,7 @@
 	<title>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#E6E4E4"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#E6E4E4" uuid="02b1edbe-ed29-42a8-85be-a54d1c70a0dd"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -35,7 +35,7 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="405" height="20"/>
+				<reportElement x="0" y="0" width="405" height="20" uuid="25d1072c-b5cc-4b2b-b559-5f0e7a0eca1b"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -48,7 +48,7 @@
 				<text><![CDATA[Benefício]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="405" y="0" width="150" height="20"/>
+				<reportElement x="405" y="0" width="150" height="20" uuid="c0d28278-ace2-49be-8735-49f0f1f1948c"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -65,7 +65,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="405" y="0" width="150" height="20"/>
+				<reportElement x="405" y="0" width="150" height="20" uuid="8b162490-2bcc-4e07-8df6-debda76f2a01"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -76,7 +76,7 @@
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="405" height="20"/>
+				<reportElement x="0" y="0" width="405" height="20" uuid="51d858cd-8e82-4840-b23a-51578b62b4a3"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -91,7 +91,7 @@
 	<columnFooter>
 		<band height="20">
 			<staticText>
-				<reportElement x="0" y="0" width="405" height="20"/>
+				<reportElement x="0" y="0" width="405" height="20" uuid="73c79929-04dc-4644-b682-562a1d0792b1"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -104,7 +104,7 @@
 				<text><![CDATA[Total:]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="405" y="0" width="150" height="20"/>
+				<reportElement x="405" y="0" width="150" height="20" uuid="dc20836a-f423-4702-98a7-73dfc6b5a3c3"/>
 				<box leftPadding="5">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>

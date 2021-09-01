@@ -87,7 +87,12 @@
                 </h:panelGroup>
 
 
-                <p:selectOneMenu label="Ramo do Empreendimento"  filter="true" filterMatchMode="startsWith" style="width: 140px" id="cidlistaRamoEmpreendimentos" value="#{cidadaoBean.cidadao.ramoempreendimento}"  converter="IndexedConverter" required="true"   >
+                <p:selectOneMenu label="Ramo do Empreendimento"  filter="true"
+                                 filterMatchMode="startsWith" style="width: 140px" 
+                                 id="cidlistaRamoEmpreendimentos" 
+                                 converter="IndexedConverter" required="true"  
+                                 value="#{cidadaoBean.cidadao.ramoempreendimento}" 
+                                  >
                     <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
                     <f:selectItems value="#{ramoEmpreendimentoBean.selectItemsRamo}"  />     
                 </p:selectOneMenu> 
@@ -150,7 +155,11 @@
 
 
             </h:panelGrid>
-            <h:panelGrid columns="5"  >
+            <h:panelGrid columns="4"  >
+                <h:panelGrid columns="2" >
+                    <h:outputLabel  value="Etnia:"  styleClass="titulos" />&nbsp;
+                    <p:message for="cidetnia" display="icon"  /> 
+                </h:panelGrid>
                 <h:panelGrid columns="2" >
                     <h:outputLabel  value="Necessidades Especiais:"  styleClass="titulos" />&nbsp;
                     <p:message for="cidnecesp" display="icon"  /> 
@@ -159,19 +168,23 @@
                     <h:outputLabel  value="Escolaridade: " styleClass="titulos" />
                     <p:message for="cidesc" display="icon"  /> 
                 </h:panelGrid>
-                <h:panelGrid columns="2" >
-                    <h:outputLabel  value="Ano"  styleClass="titulos" />
-                    <p:message for="cidano" display="icon"  /> 
-                </h:panelGrid>
-                <h:panelGrid columns="2" >
-                    <h:outputLabel  value="Instituição Ensino"  styleClass="titulos" />
-                    <p:message for="cidinst" display="icon"  /> 
-                </h:panelGrid>
+               
                 <h:panelGrid columns="2" >
                     <h:outputLabel  value="Naturalidade: " styleClass="titulos" />
                     <p:message for="cdnat" display="icon"  /> 
                 </h:panelGrid>
-
+                    
+                <p:selectOneMenu id="cidetnia"  value="#{cidadaoBean.cidadao.etnia}"
+                                     filter="true" filterMatchMode="startsWith"
+                                     required="true" style="width: 120px" >
+                        <f:selectItem   itemLabel="selecione" noSelectionOption="true" />
+                        <f:selectItem   itemLabel="BRANCO" itemValue="BRANCO" />
+                        <f:selectItem   itemLabel="AMARELO" itemValue="AMARELO" />
+                        <f:selectItem   itemLabel="INDÍGENA" itemValue="INDÍGENA" />
+                        <f:selectItem   itemLabel="NEGRO" itemValue="NEGRO" />
+                        <f:selectItem   itemLabel="PARDO" itemValue="PARDO" />
+                        <f:selectItem   itemLabel="NÃO DECLARADO" itemValue="NÃO DECLARADO" />
+                    </p:selectOneMenu> 
                 <h:panelGroup>
                     <p:selectOneMenu id="cidnecesp"  value="#{cidadaoBean.cidadao.necespecial}"
                                      filter="true" filterMatchMode="startsWith"
@@ -188,8 +201,8 @@
                     <f:selectItems value="#{cidadaoBean.selectItemsEscolaridade}" />
 
                 </p:selectOneMenu>
-                <p:inputText id="cidano" size="5" value="#{cidadaoBean.cidadao.ano}" required="true" autocomplete="off" />
-                <p:inputText id="cidinst" size="30" value="#{cidadaoBean.cidadao.instituicao}" required="true" autocomplete="off" />
+               
+                
                 <h:panelGrid columns="4"  >                    
                     <p:outputLabel for="cidnatuf" value="UF: " />
 
@@ -228,7 +241,7 @@
                                 <h:outputLabel value="Número: " />
 
                                 <p:commandButton value="+"  process="@this,addTel" update="dtTel,addTel" action="#{cidadaoBean.addTelefones()}" />
-                                <p:inputMask id="tel" mask="(99)9999-9999" label="número de telefone" size="10" value="#{cidadaoBean.telefone.numero}"  >
+                                <p:inputMask id="tel" mask="(99)99999-9999" label="número de telefone" size="12" value="#{cidadaoBean.telefone.numero}"  >
                                     <f:validateLength minimum="9" />
                                 </p:inputMask>                            
 
@@ -276,7 +289,7 @@
                             <p:inputText readonly="true"  disabled="true" id="cidcid" value="#{cidadaoBean.cidadao.endereco.bairro.cidade.nome}" style="background: #e8e1b5; color: #023401"  />
 
                         </h:panelGrid>
-                        <h:panelGrid columns="6" id="cidEnd2">
+                        <h:panelGrid columns="5" id="cidEnd2">
                             <h:outputLabel for="cidbairro"  value="Bairro / Ramal: " styleClass="titulos"  />
                             <h:outputLabel for="cidzona" value="Zona:" styleClass="titulos" />                                                          
                             <h:panelGrid columns="2" >
@@ -287,19 +300,14 @@
                                 <h:outputLabel for="cidcom"  value="Complemento:"  styleClass="titulos"  />
                                 <p:message for="cidcom" display="icon"  /> 
                             </h:panelGrid>
-                            <h:panelGrid columns="2" >
-                                <h:outputLabel for="cidtMor" value="Moradia:" style="width: 10px" styleClass="titulos"  /> 
-                                <p:message for="cidtMor" display="icon"  /> 
-                            </h:panelGrid>
+                          
                             <h:outputLabel  value=""  />
 
                             <p:inputText readonly="true"  disabled="true" id="cidbairro" value="#{cidadaoBean.cidadao.endereco.bairro.nome}" style="background: #e8e1b5; color: #023401"  />
                             <p:inputText readonly="true"  disabled="true" id="cidzona"  value="#{cidadaoBean.cidadao.endereco.bairro.zona}" style="background: #e8e1b5; color: #023401" />                        
                             <p:inputText  id="cidnum" autocomplete="off" value="#{cidadaoBean.cidadao.numero}" size="7" required="true"  />  
                             <p:inputText  id="cidcom"  label="Complemento" autocomplete="off" value="#{cidadaoBean.cidadao.complemento}" onblur="this.value = this.value.toUpperCase();"   size="45" required="true"  />  
-                            <p:inputText  id="cidtMor"  autocomplete="off" value="#{cidadaoBean.cidadao.tempomorada}" required="true" size="5"   >
-
-                            </p:inputText>                        
+                                         
                             <h:inputHidden id="cidendereco"  value="#{cidadaoBean.cidadao.endereco.logradouro}" required="true" validatorMessage="Endereço não Selecionado"  />
                         </h:panelGrid>
 

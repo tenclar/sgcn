@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
+  <session-factory name="hibernate.cfg.xml">
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sgcn</property>
+<!--    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.1.2.133:3306/sgcn?useSSL=false</property>
+    
     <property name="hibernate.connection.username">sgcn</property>
-    <property name="hibernate.connection.password">sgcn</property>
-    <!--        <property name="hibernate.hbm2ddl.auto">none</property>-->
-    <property name="hibernate.show_sql">false</property>
-    <property name="hibernate.format_sql">false</property>
-    <!--        <property name="hibernate.current_session_context_class">thread</property>-->
-    <!--        <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>-->
+    <property name="hibernate.connection.password">Sgcn@130</property>
+    
+    
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+   
     <property name="hibernate.c3p0.min_size">0</property>
     <property name="hibernate.c3p0.max_size">5</property>
     <property name="hibernate.c3p0.timeout">180</property>
-    <property name="hibernate.c3p0.idle_test_period">100</property>
-    <property name="hibernate.c3p0.max_statements">5</property>
-    <property name="hibernate.c3p0.acquire_increment">1</property>
-    <!--        <property name="c3p0.debug">false</property>-->
+    <property name="hibernate.c3p0.idle_test_period">170</property>
+    <property name="hibernate.c3p0.max_statements">1</property>
+    <property name="hibernate.c3p0.acquire_increment">1</property>-->
+    
+     <!--<property name="hibernate.current_session_context_class">thread</property>-->
+    <!--<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>-->
+   <!--<property name="hibernate.connection.pool_size">1</property>-->
+    <!--<property name="hibernate.hbm2ddl.auto">none</property>-->
+<!--    <property name="c3p0.debug">false</property>-->
+
+    <property name="hibernate.connection.datasource">jdbc/sgcn</property>
     <mapping class="entity.Usuario"/>
     <mapping class="entity.Permissao"/>
     <mapping class="entity.UsrPermissao"/>
     <mapping class="entity.Regional"/>
-    
     <mapping class="entity.Estado"/>
     <mapping class="entity.Cidade"/>
     <mapping class="entity.Bairro"/>
@@ -79,6 +86,7 @@
     <mapping class="entity.mci.Equipamento"/>
     <mapping class="entity.mci.EquipamentosProprios"/>
     <mapping class="entity.mci.EquipamentosSecretaria"/>
+    <mapping class="entity.mci.MciConvenio"/>
     <mapping class="entity.mgc.Curso"/>
     <mapping class="entity.mgc.TurCidadaos"/>
     <mapping class="entity.mgc.TurmaLocal"/>

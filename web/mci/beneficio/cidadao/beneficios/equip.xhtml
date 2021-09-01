@@ -9,13 +9,18 @@
           
         <h:form prependId="false" id="frmEquipamento" >
             <p:focus/>
-                <h:panelGrid id="panelEquipamentoInsert" columns="2" style="margin-bottom:10px">
+            <h:panelGrid columns="2" id="panelEquipamentoInsert"  style="margin-bottom:10px;width: 100%; ">
                        
                     <h:outputLabel for="equipamentoNome" value="Nome:" />
-                    <p:inputTextarea rows="10" cols="40" id="equipamentoNome" autoResize="false"   value="#{equipamentoBean.equipamento.nome}"  onkeyup="this.value = this.value.toUpperCase();"   required="true" validatorMessage="Campo Requerido"/>
+                    <p:inputTextarea  id="equipamentoNome" 
+                                      cols="60" rows="20"
+                                     autoResize="false"  
+                                     value="#{equipamentoBean.equipamento.nome}"  
+                                     onkeyup="this.value = this.value.toUpperCase();"   
+                                     required="true" validatorMessage="Campo Requerido"/>
                     
                    
-                </h:panelGrid>
+            </h:panelGrid>
                  <p:column colspan="2">
                      <!--cidlistaEquip,planolistaEquipamento,planolistaEquipSrc, ,-->
                      <p:commandButton  update="panelEquipamentoInsert, :messages"  oncomplete="dlgEquipamento.hide();" actionListener="#{equipamentoBean.saveEquipamento}" value="Salvar"/>

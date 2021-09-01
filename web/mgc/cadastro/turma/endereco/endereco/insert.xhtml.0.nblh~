@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>cadastro Endereço</title>
+    </h:head>
+    <h:body>
+        <h:form  prependId="false" >
+                <h:panelGrid id="panelLocalidade" columns="7"  >                        
+                        <h:outputLabel  value="Zona:"  />
+                        <h:outputLabel  value="Tempo Moradia:"  />                        
+                        <h:outputLabel  value="Logradouro: " />
+                        <h:outputLabel  value="Nº / Lote: " />
+                        <h:outputLabel  value="UF: " />
+                        <h:outputLabel  value="Cidade: " />
+                        <h:outputLabel  value="Bairro / Ramal: " />
+                        <h:selectOneMenu id="cidzona"  styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                            <f:selectItem  itemValue="" itemLabel="selecione" />
+                            <f:selectItem  itemValue="u" itemLabel="Urbana" />
+                            <f:selectItem  itemValue="r" itemLabel="Rural" />
+                        </h:selectOneMenu>
+                        <p:inputText id="cidtpmor" value="" size="5"  required="true" />
+                        <p:inputText id="cidlogr" value="" size="80"  required="true" />
+                        <p:inputText id="cidnum" value="" size="5"  required="true" />
+                        <h:selectOneMenu id="ciduf"  styleClass="ui-inputfield ui-widget ui-corner-all" >
+                            <f:selectItem  itemValue="" itemLabel="selecione" />
+                            <f:selectItem  itemValue="AC" itemLabel="AC" />
+                            <f:selectItem  itemValue="RO" itemLabel="RO" />
+                        </h:selectOneMenu>
+                        <h:selectOneMenu id="cidcid"   styleClass="ui-inputfield ui-widget  ui-corner-all" >
+                            <f:selectItem  itemValue="" itemLabel="selecione" />
+                            <f:selectItem  itemValue="1" itemLabel="Rio Branco" />
+                            <f:selectItem  itemValue="2" itemLabel="Porto Velho" />
+                        </h:selectOneMenu>
+                        <h:selectOneMenu id="cidbairro"   styleClass="ui-inputfield ui-widget  ui-corner-all" required="true" >
+                            <f:selectItem  itemValue="" itemLabel="selecione" />
+                            <f:selectItem  itemValue="1" itemLabel="Centro" />
+                            <f:selectItem  itemValue="2" itemLabel="Bosque" />
+                        </h:selectOneMenu>                        
+                    </h:panelGrid>                    
+        </h:form>
+    </h:body>
+</html>
+

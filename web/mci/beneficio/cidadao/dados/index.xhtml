@@ -18,7 +18,7 @@
             <p:inputText readonly="true" disabled="true" id="cidviewnis"  value="#{beneficiadoBean.cidadao.nis}" style="background: #e8e1b5; color: #023401;text-align: center;" />                        
             
             <h:outputLabel for="cidviewnome" value="Nome: " styleClass="titulos" /> 
-            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 200px"   />    
+            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 400px"   />    
             <p:commandButton process="@this" icon="ui-icon-search" oncomplete="dlgBuscaCid.show()" action="#{cidadaoBuscaBean.clear()}" />
             <p:message showDetail="true" for="ihNome" />
             <h:inputHidden id="ihNome" value="#{beneficiadoBean.cidadao.nome}" required="true" />

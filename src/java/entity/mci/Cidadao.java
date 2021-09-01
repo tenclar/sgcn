@@ -58,6 +58,7 @@ public class Cidadao implements Serializable {
     private String equipsecr;
     private String trabLocal;
     private String trabFuncao;
+    private String etnia;
     @Column(nullable=true)
     private double trabRem;
     @Column(nullable=true)
@@ -74,9 +75,12 @@ public class Cidadao implements Serializable {
     private EnumStatusCid statuscid;
     @Column(name="resumo", columnDefinition="TEXT")
     private String resumo;
+    
      @ManyToOne
     private Cidadao representante;
-      @ManyToOne
+     
+     @ManyToOne
+     @JoinColumn(name = "usuario_id")
      private Usuario usuario;
     
     @ManyToOne
@@ -111,6 +115,7 @@ public class Cidadao implements Serializable {
     @OneToMany(mappedBy = "cidadao", fetch = FetchType.LAZY, targetEntity = EquipamentosProprios.class)
     @Cascade(value = {org.hibernate.annotations.CascadeType.DELETE_ORPHAN, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<EquipamentosProprios> equipamentosproprios = new ArrayList<EquipamentosProprios>(0);
+    @OrderBy("id DESC")
     @OneToMany(mappedBy = "cidadao", fetch = FetchType.LAZY, targetEntity = EquipamentosSecretaria.class)
     @Cascade(value = {org.hibernate.annotations.CascadeType.DELETE_ORPHAN, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private List<EquipamentosSecretaria> equipamentossecretarias = new ArrayList<EquipamentosSecretaria>(0);
@@ -439,6 +444,15 @@ public class Cidadao implements Serializable {
         this.ramoempreendimento = ramoempreendimento;
     }
 
+    public String getEtnia() {
+        return etnia;
+    }
+
+    public void setEtnia(String etnia) {
+        this.etnia = etnia;
+    }
+    
+    
     public int getIdade() {
         int idade = 0;
         Calendar cData = Calendar.getInstance();

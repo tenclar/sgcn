@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="85" bottomMargin="56" uuid="7181e925-eee1-4887-be3b-53b9bdc48e37">
-	<property name="ireport.zoom" value="1.1000000000000005"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relcidadao" pageWidth="595" pageHeight="842" columnWidth="525" leftMargin="45" rightMargin="25" topMargin="20" bottomMargin="12" uuid="7181e925-eee1-4887-be3b-53b9bdc48e37">
+	<property name="ireport.zoom" value="1.2396694214876034"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="1072"/>
 	<style name="columnHeader" fill="Solid" hAlign="Left" vAlign="Middle" pattern="" fontName="SansSerif" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<pen lineWidth="1.0"/>
 		<box leftPadding="2">
@@ -30,7 +30,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString language="hql">
-		<![CDATA[from Cidadao c where c.cpf = '66888204200']]>
+		<![CDATA[from Cidadao c where c.cpf = '52363767268']]>
 	</queryString>
 	<field name="ano" class="java.lang.Integer"/>
 	<field name="anodemanda" class="java.lang.Integer"/>
@@ -80,6 +80,7 @@
 	<field name="resumo" class="java.lang.String"/>
 	<field name="rg" class="java.lang.String"/>
 	<field name="sexo" class="java.lang.String"/>
+	<field name="situacao" class="java.lang.String"/>
 	<field name="statuscid" class="entity.mci.enumerator.EnumStatusCid"/>
 	<field name="telefones" class="java.util.List"/>
 	<field name="tempomorada" class="java.lang.String"/>
@@ -87,204 +88,176 @@
 	<field name="trabFuncao" class="java.lang.String"/>
 	<field name="trabLocal" class="java.lang.String"/>
 	<field name="trabRem" class="java.lang.Double"/>
+	<field name="usuario" class="entity.Usuario"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="104">
-			<image>
-				<reportElement uuid="19f1d87c-78d6-4d2e-a4d9-4db6c0e3d9e4" x="195" y="3" width="64" height="64"/>
-				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
-			</image>
+		<band height="56">
 			<staticText>
-				<reportElement uuid="dd88835d-606e-4c21-a8cd-a6add7901c5c" x="95" y="69" width="265" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="true"/>
+				<reportElement x="311" y="14" width="213" height="15" uuid="c9a24bc5-5ed4-44c7-ab10-45ec9c2cf0ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="true" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b7dc7356-556d-4b6e-bc70-949a97c039c4" x="95" y="85" width="265" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="true"/>
+				<reportElement x="265" y="28" width="260" height="15" uuid="85ee0647-5c1b-43e2-a306-7f8efc7e6135"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="true" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="67" y="11" width="87" height="35" uuid="f9e40731-c696-4a04-9b03-4b6f8cc86c50"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="30" isBold="true" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[SEPN]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="67" height="54" uuid="93d41d29-defd-4b91-ba84-5edbcda184fc"/>
+				<imageExpression><![CDATA["brasao_4.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="562">
-			<elementGroup/>
-			<elementGroup/>
-			<staticText>
-				<reportElement uuid="3e0bb807-39f2-4a47-8604-f5a81d02f713" x="0" y="15" width="454" height="15"/>
-				<box>
-					<bottomPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="951df82a-569f-4c06-ae0c-bb5a0b10e838" x="0" y="117" width="454" height="207"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA["<style isBold='true' >O Estado do Acre</style>, através da <style isBold='true' >SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS-ACRE</style>, pessoa jurídica de direito público, CNPJ/MF nº. 13.127.442/0001-45, com sede na Avenida Ceará, 1624 – Centro – nesta Capital, neste ato regularmente representado pela Secretária de Estado de Pequenos Negócios a Senhora <style isBold='true' >SILVIA MONTEIRO E SILVA</style> nomeada pelo Decreto Estadual nº 8.574 de 30 de novembro de 2014, residente e domiciliada em Rio Branco–Acre, doravante  denominado <style isBold='true' >PERMITENTE</style>, do outro lado "+$F{nome}+", brasileiro(a), portador(a) do RG nº "+$F{rg}+" "+$F{expedidor}+", CPF nº "+$F{cpf}+", residente e domiciliado(a) no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+", doravante denominado(a) <style isBold='true' >PERMISSIONÁRIO</style>, resolvem celebrar o presente <style isBold='true' >TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS</style>, mediante as cláusulas e condições a seguir:"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="dc494328-2329-4051-8a91-8849dbc47098" x="-1" y="338" width="455" height="64"/>
-				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA["O presente Termo tem por objetivo a permissão de uso dos equipamentos discriminados no Anexo I e no Termo de Transferência, para promover condições de investimentos, tais como capacitação, equipamentos, construção, e em caso coletivo, capital de giro para a criação e fortalecimento de empreendimentos urbanos, rurais individuais e coletivos."]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="dc494328-2329-4051-8a91-8849dbc47098" x="0" y="416" width="454" height="94"/>
-				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Os bens móveis objeto desta permissão de uso, adquiridos pelo valor descrito no Anexo I e no Termo de Transferência, se destinarão exclusivamente para atividades de "+$F{ramoempreendimento}.getNome()+"  do projeto de apoio ao aumento da capacidade produtiva, especificamente no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", sendo vedada a sua utilização para quaisquer outros fins, sob pena de rescisão do presente Termo"]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="b4d30c6c-fde4-421d-97f5-93526e54234e" x="0" y="324" width="454" height="15"/>
-				<textElement verticalAlignment="Bottom">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[CLÁUSULA PRIMEIRA - DO OBJETIVO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="c7157369-795b-4426-8277-8393665efa15" x="0" y="402" width="454" height="15"/>
-				<textElement verticalAlignment="Bottom">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[CLÁUSULA SEGUNDA - DA FINALIDADE:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="4e024a32-29db-4f94-a214-a699205d39ac" x="168" y="50" width="285" height="64"/>
+		<band height="56">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="257" y="21" width="268" height="33" uuid="4e024a32-29db-4f94-a214-a699205d39ac"/>
 				<textElement textAlignment="Justified">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["TERMO DE PERMISSÃO DE USO QUE ENTRE SI CELEBRAM DE UM LADO O ESTADO DO ACRE, ATRAVÉS DA SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS, E DE OUTRO LADO " + $F{nome}.trim() + " ."]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="525" height="15" uuid="c49c02b1-c2e0-441d-a9df-29173058fafa"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="true" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS Nº]]></text>
+			</staticText>
 		</band>
-		<band height="366" splitType="Immediate">
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="86" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CLÁUSULA QUINTA – DAS OBRIGAÇÕES]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="60" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CLÁUSULA QUARTA – DA GRATUIDADE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="16" width="454" height="14"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="false"/>
-				</textElement>
-				<text><![CDATA[O presente Termo de Permissão terá validade por 2 anos.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="103" width="454" height="14"/>
+		<band height="140">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="525" height="140" uuid="951df82a-569f-4c06-ae0c-bb5a0b10e838"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
-					<font fontName="Arial" isBold="false"/>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold='true' >O Estado do Acre</style>, através da <style isBold='true' >SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS-ACRE</style>, pessoa jurídica de direito público, CNPJ/MF nº. 13.127.442/0001-45, com sede na Avenida Getúlio Vargas,748 – Centro – nesta Capital, neste ato regularmente representada pelo Secretário de Estado de Pequenos Negócios a Senhora <style isBold='true' >HENRY ANTÔNIO SILVA NOGUEIRA</style> nomeadO pelo Decreto Estadual nº 013/2015, residente e domiciliado em Rio Branco - Acre, doravante  denominado <style isBold='true' >PERMITENTE</style>, do outro lado <style isBold='true' >"+$F{nome}+"</style>, brasileiro(a), portador(a) do RG nº "+$F{rg}+" "+$F{expedidor}+", CPF nº "+$F{cpf}+", residente e domiciliado(a) no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", na "+$F{endereco}.getLogradouro()+", nº "+$F{numero}+", bairro "+$F{endereco}.getBairro().getNome()+", doravante denominado(a) <style isBold='true' >PERMISSIONÁRIO</style>, resolvem celebrar o presente <style isBold='true' >TERMO DE PERMISSÃO DE USO DE BENS MÓVEIS</style>, mediante as cláusulas e condições a seguir:"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="30">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="525" height="30" uuid="dc494328-2329-4051-8a91-8849dbc47098"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold='true' >CLÁUSULA PRIMEIRA -  DO OBJETIVO:</style> O presente Termo tem por objetivo a permissão de uso dos equipamentos discriminados no Anexo I, para promover a estruturação básica inicial, tais como: capacitação e equipamentos, objetivando a criação e fortalecimento de empreendimentos urbanos e rurais individuais."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="71">
+			<textField>
+				<reportElement x="0" y="0" width="525" height="70" uuid="dc494328-2329-4051-8a91-8849dbc47098"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2" tabStopWidth="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold='true' >CLÁUSULA SEGUNDA - DA FINALIDADE: </style> Os bens móveis objeto desta permissão de uso, adquiridos pelo valor descrito no Anexo I, se destinarão exclusivamente para atividades de <style isBold='true' >"+$F{ramoempreendimento}.getNome()+"</style>  do projeto de apoio ao aumento da capacidade produtiva, especificamente no Município de "+$F{endereco}.getBairro().getCidade().getNome()+" - "+$F{endereco}.getBairro().getCidade().getEstado().getSigla()+", sendo vedada a sua utilização para quaisquer outros fins, sob pena de rescisão do presente Termo."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="63">
+			<staticText>
+				<reportElement x="0" y="-1" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' >CLÁUSULA TERCEIRA - DA VIGÊNCIA: </style> O presente Termo de Permissão terá validade por 2 anos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="524" height="30" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' >SUBCLAUSULA ÚNICA</style> - O prazo previsto no  <style isItalic='true' >caput</style> desta Cláusula poderá ser prorrogado, mediante aditamento, caso haja interesse e justificativa pela Administração.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="47" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' >CLÁUSULA QUARTA - DA GRATUIDADE:</style> A PERMISSÃO objeto do presente Termo se operará a titulo gratuito.]]></text>
+			</staticText>
+		</band>
+		<band height="349">
+			<staticText>
+				<reportElement x="0" y="0" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLÁUSULA QUINTA – DAS OBRIGAÇÕES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[O <style isBold='true' >PERMISSIONÁRIO</style> é obrigado a:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="29" width="454" height="32"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="styled">
-					<font fontName="Arial" isBold="false"/>
+				<reportElement x="0" y="318" width="525" height="30" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[ <style isBold='true' >SUBCLAUSULA ÚNICA</style> - O prazo previsto no caput desta Cláusula poderá ser prorrogado, mediante aditamento, caso haja interesse e justificativa pela Administração.]]></text>
+				<text><![CDATA[I – autorizar a utilização do bem móvel para que sejam desenvolvidas as atividades definidas neste Termo;
+II – fiscalizar a execução deste Termo, podendo solicitar informações e exigir providências necessárias ao seu bom cumprimento.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="74" width="454" height="15"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="false"/>
-				</textElement>
-				<text><![CDATA[A PERMISSÃO objeto do presente Termo se operará a titulo gratuito.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="2" width="454" height="15"/>
+				<reportElement x="0" y="303" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CLÁUSULA TERCEIRA – DA VIGÊNCIA]]></text>
+				<text><![CDATA[O PERMITENTE obriga-se a:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="1" y="147" width="454" height="30"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+				<reportElement x="0" y="31" width="525" height="178" uuid="8143062f-8ac5-4f45-a3d8-379548a3e3b4"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[II – não alienar, arrendar, locar ou emprestar a terceiros, no todo ou em parte, inclusive a seus eventuais sucessores, salvo expressa e prévia anuência;
-]]></text>
+				<text><![CDATA[I – utilizar os bens exclusivamente para os fins previstos neste Termo, devendo instalá-los em local apropriado e que ofereça condições técnicas e necessárias a sua correta utilização;
+II – não alienar, arrendar, locar ou emprestar a terceiros, no todo ou em parte, inclusive a seus eventuais sucessores, salvo expressa e prévia anuência;
+III – responsabilizar-se por qualquer dano ocasionado pelo uso indevido dos bens previstos neste Termo, obrigando-se pela conservação, limpeza e a boa manutenção dos mesmos, que deverá ser feita sempre em rede autorizada, devendo comunicar formalmente ao Permitente em até 48hs antes da prestação de serviço;
+IV – não praticar, nem permitir que se pratiquem atos predatórios e de comercialização contra o objeto deste Termo;
+V – responder cível, jurídica e administrativamente, por danos ou prejuízos causados à Administração ou a terceiros por si, seus prepostos e empregados;
+VI – permitir que a Secretaria de Estado de Pequenos Negócios divulgue sua imagem (fotos, vídeos, etc) em cartazes, banners, outdoors e outras mídias existentes todos os trabalhos realizados por esta Secretaria, desde a prospecção ou cadastro dos beneficiários até o posterior processo de acompanhamento realizado pela SEPN.
+VII – Permitir a realização de visitas técnicas de monitoramento/incubação.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="fc468530-45e9-4470-ab7d-936b4ec8cee1" x="0" y="117" width="455" height="30"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[I – utilizar os bens exclusivamente para os fins previstos neste Termo, devendo instalá-los em local apropriado e que ofereça condições técnicas e necessárias a sua correta utilização;]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="83800a28-373e-4ce8-9630-cf57cf639fb8" x="0" y="302" width="454" height="62"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[VI – permitir que a Secretaria de Estado de Pequenos Negócios divulgue sua imagem (fotos, vídeos, etc) em cartazes, banners, outdoors e outras mídias existentes todos os trabalhos realizados por esta Secretaria, desde a prospecção ou cadastro dos beneficiários até o posterior processo de acompanhamento realizado pela SEPN.
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="044123cc-b5fa-42a7-9365-964f5059bfda" x="0" y="177" width="454" height="62"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[III – responsabilizar-se por qualquer dano ocasionado pelo uso indevido dos bens previstos neste Termo, obrigando-se pela conservação, limpeza e a boa manutenção dos mesmos, que deverá ser feita sempre em rede autorizada, devendo comunicar formalmente ao Permitente em até 48hs antes da prestação de serviço;]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="3bf6ac4d-d3be-40a3-a4ff-fa88254e928e" x="0" y="239" width="454" height="32"/>
-				<textElement textAlignment="Justified">
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[IV – não praticar, nem permitir que se pratiquem atos predatórios e de comercialização contra o objeto deste Termo;]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="5b7a300c-0357-46f7-985e-fcce790c5d6b" x="0" y="271" width="454" height="30"/>
-				<textElement>
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[V – responder cível, jurídica e administrativamente, por danos ou prejuízos causados à Administração ou a terceiros por si, seus prepostos e empregados;]]></text>
-			</staticText>
-		</band>
-		<band height="420">
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="1" y="0" width="454" height="15"/>
+				<reportElement x="0" y="210" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[COMPROMISSOS/CONDICIONALIDADES:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="14" width="452" height="125"/>
+				<reportElement x="0" y="226" width="525" height="77" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[I – manter atualizado o calendário vacinal, do crescimento e do desenvolvimento dos menores que estiverem sob sua guarda;
@@ -292,230 +265,199 @@ II – realizar, quando gestante, ou acompanhar, quando tiver sob sua guarda ges
 III – manter matriculado na escola com freqüência mínima de 85%, as crianças e adolescentes que estiverem sob sua guarda e responsabilidade;
 IV – proporcionar atividades sócio-educativas e de convivência às crianças e adolescentes de até 16 anos de idade;]]></text>
 			</staticText>
+		</band>
+		<band height="109">
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="154" width="454" height="28"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[I – autorizar a utilização do bem móvel para que sejam desenvolvidas as atividades definidas neste Termo;
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="138" width="454" height="15"/>
+				<reportElement x="0" y="0" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[O PERMITENTE obriga-se a:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="220" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLÁUSULA SEXTA – DA RESCISÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="234" width="454" height="111"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="16" width="525" height="92" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[O presente Termo pode ser rescindido:
 I – por convergência de interesses entre as partes contratantes, desde que notificado com antecedência mínima de 30 (trinta) dias; ou
-II – unilateralmente a cargo do Permitente, desde que não ocorra o fiel cumprimento desta permissão, com a notificação prévia do Permissionário para efetuar a devolução, devendo o bem ser devolvido em bom estado de uso e conservação, sob pena de ser ressarcido o valor correspondente devidamente atualizado
-]]></text>
+II – unilateralmente a cargo do Permitente, desde que não ocorra o fiel cumprimento desta permissão, com a notificação prévia do Permissionário para efetuar a devolução, devendo o bem ser devolvido em bom estado de uso e conservação, sob pena de ser ressarcido o valor correspondente devidamente atualizado.]]></text>
+			</staticText>
+		</band>
+		<band height="172">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="109" width="525" height="31" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' >SUBCLAUSULA SEGUNDA - </style>A presente PERMISSÃO tornar-se-á nula de pleno direito, independente de interpelação judicial ou extrajudicial, se o Permissionário der outra finalidade aos móveis, revertendo-o ao patrimônio do Permitente.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="358" width="454" height="62"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="140" width="525" height="30" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[<style isBold='true' >SUBCLAUSULA TERCEIRA - </style>Findo o prazo da permissão de uso, ou nas hipóteses das Subcláusulas anteriores da presente Cláusula, as benfeitorias existentes incorporar-se-ão aos móveis, sem direito a qualquer indenização.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLÁUSULA SÉTIMA – DA RESTITUIÇÃO DO BEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="18" width="525" height="46" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[O Permissionário reconhece o caráter precário da presente permissão e obriga-se a devolver os móveis e restituí-los ao Permitente, nas condições em que lhe foram entregues, no prazo de 30 (trinta) dias, contados do aviso que lhe for dirigido, sem necessidade de qualquer interpelação ou notificação judicial, sob pena de  busca compulsória, por via administrativa.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="345" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="64" width="525" height="45" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[CLÁUSULA SÉTIMA – DA RESTITUIÇÃO DO BEM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="f696f780-f45e-4b2d-bce6-4411bd99f2dc" x="2" y="193" width="450" height="27"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Arial"/>
-				</textElement>
-				<text><![CDATA[II – fiscalizar a execução deste Termo, podendo solicitar informações e exigir providências necessárias ao seu bom cumprimento.]]></text>
+				<text><![CDATA[<style isBold='true' >SUBCLAUSULA PRIMEIRA - </style>Fica terminantemente proibida a retirada do numero do patrimônio e da logomarca do PERMITENTE (SEPN) afixados no bem móvel, bem como cobrir o mesmo, haja vista que se faz necessário que permaneça visível, sob pena de ser responsabilizado civil e criminalmente, além das demais leis aplicáveis ao caso em tela; ]]></text>
 			</staticText>
 		</band>
-		<band height="327">
+		<band height="398">
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="14" width="454" height="62"/>
+				<reportElement stretchType="RelativeToBandHeight" x="-1" y="16" width="525" height="30" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Fica terminantemente proibida a retirada do numero do patrimônio e da logomarca do PERMITENTE (SEPN) afixados no bem móvel, bem como cobrir o mesmo, haja vista que se faz necessário que permaneça visível, sob pena de ser responsabilizado civil e criminalmente, além das demais leis aplicáveis ao caso em tela; ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="89" width="454" height="45"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[A presente PERMISSÃO tornar-se-á nula de pleno direito, independente de interpelação judicial ou extrajudicial, se o Permissionário der outra finalidade aos móveis, revertendo-o ao patrimônio do Permitente.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="74" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SUBCLÁUSULA SEGUNDA -]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="134" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SUBCLÁUSULA TERCEIRA -]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="-1" y="148" width="454" height="29"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Findo o prazo da permissão de uso, ou nas hipóteses das Subcláusulas anteriores da presente Cláusula, as benfeitorias existentes incorporar-se-ão aos móveis, sem direito a qualquer indenização]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="191" width="454" height="45"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[O Permitente não será responsável, a qualquer título, por quaisquer danos ou indenizações a terceiros, em decorrência de ato do Permissionário ou de seus empregados, subordinados, prepostos ou contratantes.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="177" width="454" height="15"/>
+				<reportElement stretchType="RelativeToTallestObject" x="-1" y="0" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLÁUSULA OITAVA – DOS DANOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="-1" y="235" width="454" height="15"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="46" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLÁUSULA NONA – DA ALTERAÇÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="249" width="454" height="45"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="61" width="525" height="29" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Este Termo de Permissão de Uso poderá ser modificado quanto à sua abrangência ou conteúdo, por iniciativa de qualquer uma das partes signatárias, mediante Termo Aditivo por elas assinados e com a aprovação prévia e por escrito do PERMITENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="-2" y="309" width="454" height="15"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="105" width="525" height="15" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[Os resultados obtidos pela realização do projeto serão revertidos em prol do PERMISSIONÁRIO. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="294" width="454" height="15"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="90" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLÁUSULA DÉCIMA – DOS RESULTADOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="0" width="454" height="15"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="120" width="525" height="15" uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SUBCLÁUSULA PRIMEIRA -]]></text>
-			</staticText>
-		</band>
-		<band height="514">
-			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="23" width="454" height="15"/>
-				<textElement textAlignment="Justified">
-					<font fontName="Arial"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Elege-se o foro da Comarca de Rio Branco/AC para dirimir quaisquer dúvidas sobre o presente Termo.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0d7a0ca9-c47c-4238-8080-f87cb794c614" x="0" y="6" width="454" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLÁUSULA DÉCIMA PRIMEIRA – DO FORO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="48" width="454" height="15"/>
-				<box rightPadding="0"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="135" width="525" height="15" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Rio Branco,_______de______________________________ de ___________.]]></text>
+				<text><![CDATA[Elege-se o foro da Comarca de Rio Branco/AC para dirimir quaisquer dúvidas sobre o presente Termo.]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="130" width="454" height="51"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+			<textField>
+				<reportElement x="0" y="162" width="526" height="15" uuid="b3c4515c-6b5d-4915-bc96-8bb1ab3309f7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="10"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Silvia Monteiro e Silva
-Secretária de Estado de Pequenos Negócios
-Permitente
+				<textFieldExpression><![CDATA[$F{endereco}.getBairro().getCidade().getNome()+",_______de______________________________ de ___________."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="207" width="524" height="29" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Henry Antônio Silva Nogueira
+Secretário de Estado de Pequenos Negócios
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238" x="0" y="302" width="454" height="15"/>
+				<reportElement x="-1" y="301" width="525" height="15" uuid="6cbba7e5-80a5-474a-a2ac-e575e9244238"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[Permissionáro(a)]]></text>
+				<text><![CDATA[PERMISSIONÁRIO(A)]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="f55de548-3d40-47db-be60-3893569d80b2" x="0" y="282" width="454" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="0" y="286" width="525" height="15" uuid="f55de548-3d40-47db-be60-3893569d80b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51" x="0" y="404" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="1" y="332" width="100" height="15" uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<text><![CDATA[Testemunhas:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51" x="0" y="437" width="284" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="351" width="369" height="20" uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<text><![CDATA[1)________________________________________________]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51" x="0" y="480" width="284" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="377" width="369" height="20" uuid="15cf7f6e-03c5-43bb-9f70-f1ff07d42f51"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<text><![CDATA[2)________________________________________________]]></text>
 			</staticText>
-			<break>
-				<reportElement uuid="fd25a564-40c1-4ef1-8900-6f42e2d39c6c" isPrintRepeatedValues="false" x="0" y="1" width="454" height="1"/>
-			</break>
+			<staticText>
+				<reportElement x="0" y="236" width="524" height="15" uuid="16ac9fd1-5a23-429f-b173-e670b7ea002f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[PERMITENTE
+]]></text>
+			</staticText>
 		</band>
-		<band height="100">
+		<band height="31">
 			<break>
-				<reportElement uuid="fd25a564-40c1-4ef1-8900-6f42e2d39c6c" isPrintRepeatedValues="false" x="0" y="1" width="454" height="1"/>
+				<reportElement isPrintRepeatedValues="false" x="0" y="1" width="454" height="1" uuid="fd25a564-40c1-4ef1-8900-6f42e2d39c6c"/>
 			</break>
 			<subreport>
-				<reportElement uuid="7de6856c-c743-482a-b18d-4e98d15da93e" x="2" y="23" width="454" height="0"/>
+				<reportElement x="0" y="23" width="525" height="2" uuid="7de6856c-c743-482a-b18d-4e98d15da93e"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{equipamentossecretarias})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "termo_equipsecr.jasper"]]></subreportExpression>
 			</subreport>
@@ -524,12 +466,14 @@ Permitente
 	<pageFooter>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="e3299b6c-a90f-47be-bb80-05d2cdadfd06" x="0" y="1" width="454" height="16"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Av. Ceará, nº. 1.624 – Centro – Rio Branco – AC – sepn@ac.gov.br – (68) 3224-2548/3224-6387]]></text>
+				<reportElement x="0" y="4" width="526" height="15" uuid="e3299b6c-a90f-47be-bb80-05d2cdadfd06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Avenida Getúlio Vargas, nº. 748 – Centro – Rio Branco – AC – sepn@ac.gov.br – (68) 3215-2890 / 3215-2891]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="adf38866-bccd-4555-8d3c-f3724000b759" x="0" y="0" width="454" height="1"/>
+				<reportElement x="0" y="0" width="525" height="1" uuid="adf38866-bccd-4555-8d3c-f3724000b759"/>
 			</line>
 		</band>
 	</pageFooter>

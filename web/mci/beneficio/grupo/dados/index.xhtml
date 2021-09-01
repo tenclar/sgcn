@@ -16,7 +16,7 @@
 
 
             <h:outputLabel for="cidviewnome" value="Nome Grupo: " styleClass="titulos" /> 
-            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 200px"   />    
+            <p:inputText readonly="true" disabled="true" id="cidviewnome" value="#{beneficiadoBean.cidadao.nome}" style="background: #e8e1b5; color: #023401;min-width: 300px"   />    
             <p:commandButton process="@this" icon="ui-icon-search" oncomplete="dlgBuscaCid.show()" action="#{cidadaoBuscaBean.clear()}" update=":frmBuscaCid" />
             <p:message showDetail="true" for="ihNome" />
             <h:inputHidden id="ihNome" value="#{beneficiadoBean.cidadao.nome}" required="true" />

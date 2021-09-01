@@ -83,21 +83,21 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 		<groupHeader>
 			<band height="50">
 				<line>
-					<reportElement uuid="d6d87dfc-9532-4416-b16a-290d316147d7" positionType="FixRelativeToBottom" x="0" y="49" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="49" width="555" height="1" uuid="d6d87dfc-9532-4416-b16a-290d316147d7"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
 				<frame>
-					<reportElement uuid="df1d128b-cac4-40fb-8836-c4b29196eb06" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<reportElement mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="df1d128b-cac4-40fb-8836-c4b29196eb06"/>
 					<rectangle>
-						<reportElement uuid="38fccb1a-4db1-423a-8bd2-462a9dc8034c" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<reportElement mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343" uuid="38fccb1a-4db1-423a-8bd2-462a9dc8034c"/>
 						<graphicElement>
 							<pen lineWidth="0.0"/>
 						</graphicElement>
 					</rectangle>
 					<textField>
-						<reportElement uuid="4a781a2f-cbc2-4b97-b88b-b17c3acce90f" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<reportElement style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343" uuid="4a781a2f-cbc2-4b97-b88b-b17c3acce90f"/>
 						<textElement>
 							<font isBold="true"/>
 						</textElement>
@@ -115,59 +115,50 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 		<groupHeader>
 			<band height="46">
 				<textField>
-					<reportElement uuid="44935f90-f006-4c58-b645-0c6e03af30ea" style="Detail" isPrintRepeatedValues="false" x="61" y="16" width="495" height="15"/>
-					<textElement/>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="61" y="16" width="495" height="15" uuid="44935f90-f006-4c58-b645-0c6e03af30ea"/>
 					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="b71c8249-96eb-4ea0-bd4d-1a216e42b627" style="Detail" x="36" y="1" width="123" height="15"/>
-					<textElement/>
+					<reportElement style="Detail" x="36" y="1" width="123" height="15" uuid="b71c8249-96eb-4ea0-bd4d-1a216e42b627"/>
 					<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="40cb7948-764d-4733-ad14-33d770c52722" style="Column header" x="1" y="16" width="60" height="15" forecolor="#736343"/>
-					<textElement/>
+					<reportElement style="Column header" x="1" y="16" width="60" height="15" forecolor="#736343" uuid="40cb7948-764d-4733-ad14-33d770c52722"/>
 					<text><![CDATA[Empresa:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="6b29a755-a30f-43f5-ab68-e7ee9138b21f" style="Column header" x="1" y="1" width="36" height="15" forecolor="#736343"/>
-					<textElement/>
+					<reportElement style="Column header" x="1" y="1" width="36" height="15" forecolor="#736343" uuid="6b29a755-a30f-43f5-ab68-e7ee9138b21f"/>
 					<text><![CDATA[CNPJ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="b8b19506-d59c-464d-b133-723888c77318" style="Column header" x="2" y="30" width="35" height="15" forecolor="#736343"/>
-					<textElement/>
+					<reportElement style="Column header" x="2" y="30" width="35" height="15" forecolor="#736343" uuid="b8b19506-d59c-464d-b133-723888c77318"/>
 					<text><![CDATA[End.:]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="49aa2086-e267-47ad-bab8-aab8062c61e4" style="Detail" x="37" y="30" width="278" height="15"/>
-					<textElement/>
+					<reportElement style="Detail" x="37" y="30" width="278" height="15" uuid="49aa2086-e267-47ad-bab8-aab8062c61e4"/>
 					<textFieldExpression><![CDATA[$F{endereco}.getLogradouro()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="23d4c149-a188-4e92-b78e-c1df9709ffed" style="Detail" x="332" y="30" width="27" height="15"/>
+					<reportElement style="Detail" x="332" y="30" width="27" height="15" uuid="23d4c149-a188-4e92-b78e-c1df9709ffed"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="1fca5172-2ffb-495d-b6c3-24fd61d4bbcc" style="Column header" x="359" y="30" width="45" height="15" forecolor="#736343"/>
-					<textElement/>
+					<reportElement style="Column header" x="359" y="30" width="45" height="15" forecolor="#736343" uuid="1fca5172-2ffb-495d-b6c3-24fd61d4bbcc"/>
 					<text><![CDATA[Bairro:]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement uuid="11d3da8e-2740-4264-af43-3982c7066840" style="Detail" x="405" y="30" width="151" height="15"/>
-					<textElement/>
+					<reportElement style="Detail" x="405" y="30" width="151" height="15" uuid="11d3da8e-2740-4264-af43-3982c7066840"/>
 					<textFieldExpression><![CDATA[$F{endereco}.getBairro().getNome()]]></textFieldExpression>
 				</textField>
 				<line>
-					<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="0" y="45" width="555" height="1"/>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="45" width="555" height="1" uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
 				<staticText>
-					<reportElement uuid="8a709c41-b11d-45b7-8366-779cc0dd191b" style="Column header" x="315" y="30" width="17" height="15" forecolor="#736343"/>
-					<textElement/>
+					<reportElement style="Column header" x="315" y="30" width="17" height="15" forecolor="#736343" uuid="8a709c41-b11d-45b7-8366-779cc0dd191b"/>
 					<text><![CDATA[Nº]]></text>
 				</staticText>
 			</band>
@@ -182,39 +173,39 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 	<pageHeader>
 		<band height="89" splitType="Stretch">
 			<image>
-				<reportElement uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06" x="10" y="4" width="64" height="64"/>
+				<reportElement x="10" y="4" width="64" height="64" uuid="0e8fcb25-b04f-4d76-a062-0f57fb5a8d06"/>
 				<imageExpression><![CDATA["brasao2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f" x="0" y="5" width="555" height="14"/>
+				<reportElement x="0" y="5" width="555" height="14" uuid="f9c07b60-e1b8-41d3-8bc6-b36d12cb3d7f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO ACRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d" x="0" y="21" width="555" height="14"/>
+				<reportElement x="0" y="21" width="555" height="14" uuid="46c6cb63-3408-4635-a1a8-fa1e467b4f3d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SECRETARIA DE ESTADO DE PEQUENOS NEGÓCIOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9" x="0" y="37" width="555" height="14"/>
+				<reportElement x="0" y="37" width="555" height="14" uuid="c73a103a-7e52-4b66-b197-7f3f2f6749b9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SISTEMA GERAL DE CONTROLE DE NEGÓCIOS - SGCN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320" x="0" y="53" width="555" height="16"/>
+				<reportElement x="0" y="53" width="555" height="16" uuid="256f30a8-a19d-4ea5-abad-2aeeb3884320"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[EQUIPAMENTOS DE BENEFICIÁRIOS COLETIVO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="281280b1-8860-467f-a7c4-284ab300ccda" x="105" y="69" width="344" height="16"/>
+				<reportElement x="105" y="69" width="344" height="16" uuid="281280b1-8860-467f-a7c4-284ab300ccda"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -225,7 +216,7 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 	<columnHeader>
 		<band height="2" splitType="Stretch">
 			<line>
-				<reportElement uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740" positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1" uuid="9a421fcc-1ed4-4075-98fc-431b8e2de740"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -235,7 +226,7 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 	<detail>
 		<band height="1" splitType="Immediate">
 			<subreport>
-				<reportElement uuid="7304d377-2dff-4567-ab20-34a6e9c1a0de" stretchType="RelativeToTallestObject" x="1" y="0" width="555" height="1"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="555" height="1" uuid="7304d377-2dff-4567-ab20-34a6e9c1a0de"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{equipamentossecretarias})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relcidadao_equipsecr.jasper"]]></subreportExpression>
 			</subreport>
@@ -244,7 +235,7 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 	<columnFooter>
 		<band height="20" splitType="Stretch">
 			<line>
-				<reportElement uuid="8639ab5c-68f3-47c4-b9f0-081fbaef9c20" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="8639ab5c-68f3-47c4-b9f0-081fbaef9c20"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -254,16 +245,16 @@ order by  cid.endereco.bairro.cidade.nome, cid.nome asc]]>
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement uuid="82f5cc36-334b-4358-9be6-bfa4dda94dce" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="82f5cc36-334b-4358-9be6-bfa4dda94dce"/>
 				<textField>
-					<reportElement uuid="5b3477e0-289f-44b9-b44c-38f44f2cab2c" style="Column header" x="496" y="1" width="80" height="20" forecolor="#736343"/>
+					<reportElement style="Column header" x="496" y="1" width="80" height="20" forecolor="#736343" uuid="5b3477e0-289f-44b9-b44c-38f44f2cab2c"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="bb6020b0-a567-479f-baad-74d174997514" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="bb6020b0-a567-479f-baad-74d174997514"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>

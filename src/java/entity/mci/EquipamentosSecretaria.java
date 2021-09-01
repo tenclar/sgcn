@@ -5,9 +5,11 @@
 package entity.mci;
 
 import entity.mci.enumerator.EnumTipoEquipamento;
+import entity.mci.enumerator.EnumTipoRecurso;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,21 +24,31 @@ public class EquipamentosSecretaria implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataentrega;
     @ManyToOne
+    @NotNull
     @JoinColumn(name="equipamento_id")
-    private Equipamento equipamento;    
+    private Equipamento equipamento;   
+    
+     @Enumerated(EnumType.STRING)
+    private EnumTipoRecurso tipoRecurso;
+    private String convenioNumero;
+    private String convenioPatrimonio;
     private String patrimonio;   
-    private int quantidade;
+    private Integer quantidade;
     private String estado;
     private String situacao;
-    private double valor;
+    private Double valor;
     private String codgrp;
     
     @Enumerated(EnumType.STRING)
     private EnumTipoEquipamento tipoequipamento;
     
-    
+     @ManyToOne
+    @NotNull
+    @JoinColumn(name="convenio_id")
+    private MciConvenio convenio;
     
     @ManyToOne
+    @NotNull
     @JoinColumn(name="cidadao_id")
     private Cidadao cidadao;
 
@@ -98,19 +110,19 @@ public class EquipamentosSecretaria implements Serializable {
         this.patrimonio = patrimonio;
     }
 
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -129,6 +141,41 @@ public class EquipamentosSecretaria implements Serializable {
     public void setDataentrega(Date dataentrega) {
         this.dataentrega = dataentrega;
     }
+
+    public EnumTipoRecurso getTipoRecurso() {
+        return tipoRecurso;
+    }
+
+    public void setTipoRecurso(EnumTipoRecurso tipoRecurso) {
+        this.tipoRecurso = tipoRecurso;
+    }
+
+    public String getConvenioNumero() {
+        return convenioNumero;
+    }
+
+    public void setConvenioNumero(String convenioNumero) {
+        this.convenioNumero = convenioNumero;
+    }
+
+    public String getConvenioPatrimonio() {
+        return convenioPatrimonio;
+    }
+
+    public void setConvenioPatrimonio(String convenioPatrimonio) {
+        this.convenioPatrimonio = convenioPatrimonio;
+    }
+
+    public MciConvenio getConvenio() {
+        return convenio;
+    }
+
+    public void setConvenio(MciConvenio convenio) {
+        this.convenio = convenio;
+    }
+    
+    
+    
     
     @Override
     public boolean equals(Object obj) {

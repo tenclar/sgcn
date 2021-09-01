@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Cadastro de Bairro</title>
+    </h:head>
+    <h:body>
+          
+            <h:form prependId="false">
+                <h:panelGrid id="panelBairro" columns="2" style="margin-bottom:10px">
+                       
+                    <h:outputLabel for="bairroEstado" value="Estado: " />
+                    <h:selectOneMenu id="bairroEstado" value="#{bairroBean.bairro.cidade.estado}" required="true" converter="IndexedConverter">
+                        <f:selectItem itemLabel="Selecione" noSelectionOption="true" /> 
+                        <f:selectItems value="#{cidadeBean.selectItemsEstado}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel for="bairroCidade" value="Estado: " />
+                    <h:selectOneMenu id="bairroCidade" value="#{bairroBean.bairro.cidade}" required="true" converter="IndexedConverter">
+                        <f:selectItem itemLabel="Selecione" noSelectionOption="true" /> 
+                        <f:selectItems value="#{bairroBean.selectItemsCidade}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel for="bairroNome" value="Sigla Estado:" />
+                    <h:inputText id="bairroNome" value="#{bairroBean.bairro.nome}" required="true" validatorMessage="Campo Requerido"/>
+                    
+                </h:panelGrid>
+                <p:column colspan="2">
+                        <p:commandButton update="panelBairro,messages,tabelaBairro"  oncomplete="dialogBairro.hide();" actionListener="#{estadoBean.saveEstado}" value="salvar"/>
+                    <p:commandButton   oncomplete="dialogBairro.hide();" immediate="true" actionListener="#{estadoBean.cancelEstado}" value="Cancelar"/>
+                    </p:column>
+            </h:form>
+       
+        
+    </h:body>
+</ui:component>
+
